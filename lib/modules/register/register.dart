@@ -1,28 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/shared/components/component.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  @override
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+
   var registerNameControl = TextEditingController();
+
   var registerEmailControl = TextEditingController();
+
   var registerPhoneControl = TextEditingController();
+
   var registerPasswordControl = TextEditingController();
+
   var registerConfirmPasswordControl = TextEditingController();
+
+  bool isVisible = false;
+  bool confirmIsVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              "assets/images/lost.svg",
-            ),
-            Form(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Container(
+                height: 150,
+                width: double.infinity,
+                child: Image.asset(
+                  "assets/images/lost.svg",
+                ),
+              ),
+              Form(
                 key: _formKey,
                 child: Padding(
-                  padding: const EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -41,6 +62,7 @@ class RegisterScreen extends StatelessWidget {
                             textHint: 'ادخل رقم هاتفك',
                             hintColor: Colors.black38,
                             controller: registerPhoneControl,
+                            keyboardType: TextInputType.numberWithOptions(),
                             validator: (value) {
                               if (value!.isEmpty)
                                 return 'من فضلك ادخل رقم هاتفك';
@@ -68,7 +90,16 @@ class RegisterScreen extends StatelessWidget {
                           textHint: 'ادخل كلمه المرور',
                           hintColor: Colors.black38,
                           controller: registerPasswordControl,
-                          suffixIcon: Icon(Icons.visibility),
+                          obscureText: isVisible,
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isVisible = !isVisible;
+                                });
+                              },
+                              icon: isVisible
+                                  ? Icon(Icons.visibility)
+                                  : Icon(Icons.visibility_off)),
                           validator: (value) {
                             if (value!.isEmpty)
                               return 'من فضلك ادخل كلمه المرور';
@@ -84,12 +115,23 @@ class RegisterScreen extends StatelessWidget {
                           textHint: ' اعد تأكيد ادخل كلمه المرور',
                           hintColor: Colors.black38,
                           controller: registerConfirmPasswordControl,
-                          suffixIcon: Icon(Icons.visibility_off),
+                          obscureText: confirmIsVisible,
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  confirmIsVisible = !confirmIsVisible;
+                                });
+                              },
+                              icon: confirmIsVisible
+                                  ? Icon(Icons.visibility)
+                                  : Icon(Icons.visibility_off)),
                           validator: (value) {
-                            if (registerConfirmPasswordControl !=
-                                registerPasswordControl)
-                              return 'كلمه المرور غير متطابقه';
-                            return null;
+                            if (value!.isEmpty)
+                              return 'من فضلك ادخل كلمه المرور';
+                            else if (value.length < 8)
+                              return 'كلمه المرور اقل من 8 احرف';
+                            else
+                              return null;
                           },
                         ),
                         SizedBox(height: 30),
@@ -106,14 +148,19 @@ class RegisterScreen extends StatelessWidget {
                             )),
                         SizedBox(height: 10),
                         FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            //not work
+                            // navigatorAndFinish(context, LoginScreen());
+                          },
                           child: defaultText(
                               text: 'هل لديك حساب بالفعل ؟',
                               textColor: Color.fromRGBO(42, 185, 237, 1)),
                         )
                       ]),
-                )),
-          ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
