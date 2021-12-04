@@ -78,12 +78,11 @@ Widget defaultTextFromField({
   //Text Input Type (keyboard Type)
   TextInputType? keyboardType,
   //label
-  String? label, InputDecoration? decoration,
+  String? label,
+  InputDecoration? decoration,
   TextStyle? textStyel,
-
 }) =>
     TextFormField(
-
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,
@@ -159,5 +158,4 @@ Widget defaultSmoothPageIndicator({required count, controller}) =>
       count: count,
       controller: controller,
       effect: WormEffect(activeDotColor: const Color.fromRGBO(42, 185, 237, 1)),
-
     );

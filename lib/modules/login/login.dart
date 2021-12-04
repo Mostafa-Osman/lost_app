@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/modules/register/register.dart';
 import 'package:lost_app/shared/components/component.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -99,7 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             defaultText(text: 'ليس لديك حساب ؟'),
                             FlatButton(
-                                onPressed: () {},
+                                onPressed: () => navigatorAndFinish(
+                                    context, RegisterScreen()),
                                 child: defaultText(
                                   text: 'إنشاء حساب',
                                   textColor: Color.fromRGBO(42, 185, 237, 1),
