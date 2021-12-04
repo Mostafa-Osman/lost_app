@@ -95,7 +95,7 @@ Widget defaultTextFromField({
         filled: true,
         fillColor: backgroundColor,
         labelText: label,
-        contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         helperStyle: textStyel,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(roundedRectangleBorder),

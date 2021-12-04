@@ -3,8 +3,6 @@ import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/modules/on_boarding/on_boarding.dart';
 import 'package:lost_app/modules/register/register.dart';
 
-import 'modules/login/forget_password.dart';
-
 void main() {
   runApp(MyApp());
 }
@@ -20,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       builder: (context, child) {
         return Directionality(
-            textDirection: TextDirection.rtl, child: RegisterScreen());
+            textDirection: TextDirection.rtl, child: LoginScreen());
       },
     );
   }

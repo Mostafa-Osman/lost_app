@@ -23,17 +23,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   List<OnBoardingModel> splash = [
     OnBoardingModel(
-        image: 'assets/images/splash_1.png',
+        image: 'assets/images/welcome_1.png',
         title: 'هل تبحث عن احد المفقودين ',
         body:
             "اذا كنت تبحث عن احد الأشخاص المفقودين يمكنك ارفاق صوره لهذا الشخص و سوف نساعدك في ايجاده"),
     OnBoardingModel(
-        image: 'assets/images/splash_2.png',
+        image: 'assets/images/welcome_2.png',
         title: 'ام وجدت احد المفقودين ',
         body:
             "اما اذا كنت قد وجدت شخصا مفقوداو لا تستطيع الوصول الى ذويه فيمكنك ارفاق صورة له وسوف نساعدك في الوصول الى اقربائه"),
     OnBoardingModel(
-        image: 'assets/images/splash_3.png',
+        image: 'assets/images/welcome_3.png',
         title: 'كل ما عليك هو ارفاق صورة وسنقوم بالبحث بدلا عنك ',
         body:
             "نقوم بتحليل الصورة عن طريق احدى تقنيات الذكاء الاصطناعي ومن ثم البحث في قاعدة البيانات التي تحتوي على العديد من الصور لاشخاص مفقودين  "),
@@ -44,7 +44,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
               Expanded(
