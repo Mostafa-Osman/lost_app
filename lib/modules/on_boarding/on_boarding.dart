@@ -39,50 +39,45 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             "نقوم بتحليل الصورة عن طريق احدى تقنيات الذكاء الاصطناعي ومن ثم البحث في قاعدة البيانات التي تحتوي على العديد من الصور لاشخاص مفقودين  "),
   ];
 
-  void submit() {
-    navigatorAndFinish(context, LoginScreen());
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          children: [
-            Expanded(
-                child: PageView.builder(
-              itemCount: splash.length,
-              itemBuilder: (context, index) => buildBoardingItem(
-                  splash[index], splash.length, boardingController),
-              controller: boardingController,
-              onPageChanged: (index) {
-                (index == splash.length - 1)
-                    ? setState(() {
-                        changeButtonText = 'هيا نبدأ';
-                        isLogin = true;
-                      })
-                    : setState(() {
-                        changeButtonText = 'التالي';
-                        isLogin = false;
-                      });
-              },
-            )),
-            SizedBox(
-              height: 15,
-            ),
-            defaultRaisedButton(
-                onPressed: () {
-                  print(isLogin);
-                  isLogin
-                      ? submit()
-                      : boardingController.nextPage(
-                          duration: Duration(microseconds: 700),
-                          curve: Curves.easeIn);
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Expanded(
+                  child: PageView.builder(
+                itemCount: splash.length,
+                itemBuilder: (context, index) => buildBoardingItem(
+                    splash[index], splash.length, boardingController),
+                controller: boardingController,
+                onPageChanged: (index) {
+                  (index == splash.length - 1)
+                      ? setState(() {
+                          changeButtonText = 'هيا نبدأ';
+                          isLogin = true;
+                        })
+                      : setState(() {
+                          changeButtonText = 'التالي';
+                          isLogin = false;
+                        });
                 },
-                text: changeButtonText,
-                textColor: Colors.white),
-          ],
+              )),
+              defaultRaisedButton(
+                  onPressed: () {
+                    print(isLogin);
+                    isLogin
+                        ? navigateTo(context, LoginScreen())
+                        : boardingController.nextPage(
+                            duration: Duration(microseconds: 700),
+                            curve: Curves.easeIn);
+                  },
+                  text: changeButtonText,
+                  textColor: Colors.white),
+            ],
+          ),
         ),
       ),
     );
