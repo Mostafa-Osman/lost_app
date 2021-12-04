@@ -1,0 +1,121 @@
+import 'package:flutter/material.dart';
+import 'package:lost_app/shared/components/component.dart';
+
+class RegisterScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+  var registerNameControl = TextEditingController();
+  var registerEmailControl = TextEditingController();
+  var registerPhoneControl = TextEditingController();
+  var registerPasswordControl = TextEditingController();
+  var registerConfirmPasswordControl = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset(
+              "assets/images/lost.svg",
+            ),
+            Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        defaultText(text: 'الاسم', fontSize: 15),
+                        defaultTextFromField(
+                            textHint: 'ادخل اسمك',
+                            hintColor: Colors.black38,
+                            controller: registerNameControl,
+                            validator: (value) {
+                              if (value!.isEmpty) return 'من فضلك ادخل اسمك';
+                              return null;
+                            }),
+                        SizedBox(height: 20),
+                        defaultText(text: 'رقم الهاتف', fontSize: 15),
+                        defaultTextFromField(
+                            textHint: 'ادخل رقم هاتفك',
+                            hintColor: Colors.black38,
+                            controller: registerPhoneControl,
+                            validator: (value) {
+                              if (value!.isEmpty)
+                                return 'من فضلك ادخل رقم هاتفك';
+                              else if (value.length != 11)
+                                return 'رقم الهاتف غير صحيح';
+                              return null;
+                            }),
+                        SizedBox(height: 20),
+                        defaultText(
+                            text: 'البريد الالكتروني (اختياري)', fontSize: 15),
+                        defaultTextFromField(
+                            textHint: 'ادخل بريدك الالكتروني',
+                            hintColor: Colors.black38,
+                            controller: registerEmailControl,
+                            validator: (value) {
+                              if (value!.isEmpty)
+                                return 'من فضلك ادخل البريد الالكتروني';
+                              else if (!value.contains('@'))
+                                return 'البريد الالكتروني الذي ادخلته غير صحيح';
+                              return null;
+                            }),
+                        SizedBox(height: 20),
+                        defaultText(text: 'كلمه المرور', fontSize: 15),
+                        defaultTextFromField(
+                          textHint: 'ادخل كلمه المرور',
+                          hintColor: Colors.black38,
+                          controller: registerPasswordControl,
+                          suffixIcon: Icon(Icons.visibility),
+                          validator: (value) {
+                            if (value!.isEmpty)
+                              return 'من فضلك ادخل كلمه المرور';
+                            else if (value.length < 8)
+                              return 'كلمه المرور اقل من 8 احرف';
+                            else
+                              return null;
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        defaultText(text: 'تأكيد كلمه المرور ', fontSize: 15),
+                        defaultTextFromField(
+                          textHint: ' اعد تأكيد ادخل كلمه المرور',
+                          hintColor: Colors.black38,
+                          controller: registerConfirmPasswordControl,
+                          suffixIcon: Icon(Icons.visibility_off),
+                          validator: (value) {
+                            if (registerConfirmPasswordControl !=
+                                registerPasswordControl)
+                              return 'كلمه المرور غير متطابقه';
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 30),
+                        ButtonTheme(
+                            minWidth: double.infinity,
+                            height: 50,
+                            child: defaultRaisedButton(
+                              text: 'إنشاء',
+                              textColor: Colors.white,
+                              onPressed: () {
+                                if (_formKey.currentState!.validate())
+                                  print('okey');
+                              },
+                            )),
+                        SizedBox(height: 10),
+                        FlatButton(
+                          onPressed: () {},
+                          child: defaultText(
+                              text: 'هل لديك حساب بالفعل ؟',
+                              textColor: Color.fromRGBO(42, 185, 237, 1)),
+                        )
+                      ]),
+                )),
+          ],
+        ),
+      ),
+    );
+  }
+}
