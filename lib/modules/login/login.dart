@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
           child: SafeArea(
             child: Container(
-              height: 650,
+              height: 700,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                        height: 380,
+                        height:450,
                         child: Form(
                           key: _formKey,
                           child: Padding(
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  defaultText(text: 'رقم الهاتف'),
+                                  defaultText(text: 'رقم الهاتف',fontWeight: FontWeight.normal),
                                   defaultTextFromField(
                                       textHint: 'ادخل رقم هاتفك',
                                       hintColor: Colors.black38,
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         return null;
                                       }),
                                   SizedBox(height: 10),
-                                  defaultText(text: 'كلمه المرور'),
+                                  defaultText(text: 'كلمه المرور',fontWeight: FontWeight.normal),
                                   defaultTextFromField(
                                     textHint: 'ادخل كلمه المرور',
                                     hintColor: Colors.black38,
