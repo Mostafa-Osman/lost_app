@@ -37,8 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: Expanded(
-                      child: Container(
+                    child: Container(
                         height: 380,
                         child: Form(
                           key: _formKey,
@@ -122,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                    ),
+
                   ),
                 ],
               ),
