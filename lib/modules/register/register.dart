@@ -160,7 +160,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           SizedBox(height: 10),
                           FlatButton(
                             onPressed: () {
-                              //not work
                               navigatorAndFinish(context, LoginScreen());
                             },
                             child: defaultText(
