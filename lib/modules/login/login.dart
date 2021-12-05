@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/modules/login/forget_password.dart';
 import 'package:lost_app/modules/register/register.dart';
 import 'package:lost_app/shared/components/component.dart';
 
@@ -86,7 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     },
                                   ),
                                   FlatButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => ForgetPassword(),
+                                            ));                                      },
                                       child: defaultText(
                                         text: 'هل نسيت كلمه المرور ؟ ',
                                         textColor: Color.fromRGBO(42, 185, 237, 1),

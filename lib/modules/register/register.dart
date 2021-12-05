@@ -161,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           FlatButton(
                             onPressed: () {
                               //not work
-                              // navigatorAndFinish(context, LoginScreen());
+                              navigatorAndFinish(context, LoginScreen());
                             },
                             child: defaultText(
                                 text: 'هل لديك حساب بالفعل ؟',
