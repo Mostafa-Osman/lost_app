@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -62,9 +63,9 @@ Widget defaultTextFromField({
   //Hint text
   String? textHint,
   //Hint color (initial color black)
-  Color hintColor = Colors.black,
+  Color hintColor = Colors.black38,
   //Text color (initial color black)
-  Color textColor = Colors.black,
+  Color textColor =const Color.fromRGBO(4, 15, 15, 1),
   //background color (initial color white)
   Color backgroundColor = Colors.white,
   // prefix Icon

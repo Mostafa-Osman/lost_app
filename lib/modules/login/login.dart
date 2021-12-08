@@ -52,7 +52,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontWeight: FontWeight.normal),
                                 defaultTextFromField(
                                     textHint: 'ادخل رقم هاتفك',
-                                    hintColor: Colors.black38,
                                     controller: loginPhoneControl,
                                     keyboardType:
                                         TextInputType.numberWithOptions(),
@@ -69,7 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontWeight: FontWeight.normal),
                                 defaultTextFromField(
                                   textHint: 'ادخل كلمه المرور',
-                                  hintColor: Colors.black38,
                                   controller: loginPasswordControl,
                                   suffixIcon: IconButton(
                                       onPressed: () {
@@ -113,7 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Expanded(child: defaultText(text: 'ليس لديك حساب ؟')),
+                                    Expanded(
+                                        child: defaultText(
+                                            text: 'ليس لديك حساب ؟')),
                                     Expanded(
                                       child: FlatButton(
                                           onPressed: () => navigatorAndFinish(
@@ -121,12 +121,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                           child: defaultText(
                                             text: 'إنشاء حساب',
                                             textColor:
-                                            Color.fromRGBO(42, 185, 237, 1),
+                                                Color.fromRGBO(42, 185, 237, 1),
                                           )),
                                     ),
                                   ],
                                 ),
-
                               ]),
                         ),
                       ),

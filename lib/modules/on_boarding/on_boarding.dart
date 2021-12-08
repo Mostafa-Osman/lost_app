@@ -99,7 +99,7 @@ Widget buildBoardingItem(OnBoardingModel model, splashLength, controller) =>
             text: model.title,
             fontSize: 25,
             fontWeight: FontWeight.normal,
-            textColor: Colors.black),
+        ),
         SizedBox(height: 50),
         defaultText(text: model.body, textColor: Colors.black38),
       ],

@@ -37,19 +37,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Form(
                   key: _formKey,
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding:
+                        const EdgeInsets.only(right: 10,left: 10),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           defaultText(text: 'الاسم', fontSize: 15),
                           defaultTextFromField(
-                              // structStyle:StrutStyle(height: 0.001) ,
-                              decoration: InputDecoration(
-                                contentPadding: new EdgeInsets.symmetric(
-                                    vertical: 25.0, horizontal: 5.0),
-                              ),
                               textHint: 'ادخل اسمك',
-                              hintColor: Colors.black38,
                               controller: registerNameControl,
                               validator: (value) {
                                 if (value!.isEmpty) return 'من فضلك ادخل اسمك';
@@ -59,7 +54,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           defaultText(text: 'رقم الهاتف', fontSize: 15),
                           defaultTextFromField(
                               textHint: 'ادخل رقم هاتفك',
-                              hintColor: Colors.black38,
                               controller: registerPhoneControl,
                               keyboardType: TextInputType.numberWithOptions(),
                               validator: (value) {
@@ -75,7 +69,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               fontSize: 15),
                           defaultTextFromField(
                               textHint: 'ادخل بريدك الالكتروني',
-                              hintColor: Colors.black38,
                               controller: registerEmailControl,
                               validator: (value) {
                                 if (value!.isEmpty)
@@ -88,7 +81,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           defaultText(text: 'كلمه المرور', fontSize: 15),
                           defaultTextFromField(
                             textHint: 'ادخل كلمه المرور',
-                            hintColor: Colors.black38,
                             controller: registerPasswordControl,
                             obscureText: isVisible,
                             suffixIcon: IconButton(
@@ -113,7 +105,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           defaultText(text: 'تأكيد كلمه المرور ', fontSize: 15),
                           defaultTextFromField(
                             textHint: ' اعد تأكيد ادخل كلمه المرور',
-                            hintColor: Colors.black38,
                             controller: registerConfirmPasswordControl,
                             obscureText: confirmIsVisible,
                             suffixIcon: IconButton(
