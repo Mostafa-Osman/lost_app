@@ -113,17 +113,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    defaultText(text: 'ليس لديك حساب ؟'),
-                                    FlatButton(
-                                        onPressed: () => navigatorAndFinish(
-                                            context, RegisterScreen()),
-                                        child: defaultText(
-                                          text: 'إنشاء حساب',
-                                          textColor:
-                                              Color.fromRGBO(42, 185, 237, 1),
-                                        )),
+                                    Expanded(child: defaultText(text: 'ليس لديك حساب ؟')),
+                                    Expanded(
+                                      child: FlatButton(
+                                          onPressed: () => navigatorAndFinish(
+                                              context, RegisterScreen()),
+                                          child: defaultText(
+                                            text: 'إنشاء حساب',
+                                            textColor:
+                                            Color.fromRGBO(42, 185, 237, 1),
+                                          )),
+                                    ),
                                   ],
                                 ),
+
                               ]),
                         ),
                       ),
