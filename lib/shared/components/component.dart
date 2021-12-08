@@ -80,7 +80,8 @@ Widget defaultTextFromField({
   //label
   String? label,
   InputDecoration? decoration,
-  TextStyle? textStyel,
+  TextStyle? textStyle,
+  StrutStyle? structStyle,
 }) =>
     TextFormField(
       controller: controller,
@@ -90,13 +91,14 @@ Widget defaultTextFromField({
         color: textColor,
         fontFamily: 'Tajawal',
       ),
+      strutStyle: structStyle,
       decoration: InputDecoration(
         hintText: textHint,
         filled: true,
         fillColor: backgroundColor,
         labelText: label,
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        helperStyle: textStyel,
+        helperStyle: textStyle,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(roundedRectangleBorder),
         ),
