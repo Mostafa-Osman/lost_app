@@ -7,39 +7,43 @@ class ForgetPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-            children: [
-              SizedBox(height: 50),
-              defaultText(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
-              SizedBox(height: 10),
-              defaultText(
-                  text:
-                      'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
-                  fontSize: 18,
-                  textColor: Colors.black38),
-              SizedBox(height: 50),
-              VerificationCode(
-                textStyle: TextStyle(fontSize: 20.0, color: Colors.grey[900]),
-                keyboardType: TextInputType.number,
-                underlineColor: const Color.fromRGBO(42, 185, 237, 1),
-                length: 4,
-                itemSize: 50,
-                onCompleted: (String value) {},
-                onEditing: (bool value) {},
-              ),
-              SizedBox(height: 300),
-              ButtonTheme(
-                  minWidth: double.infinity,
-                  height: 50,
-                  child: defaultRaisedButton(
-                    text: 'التالي',
-                    textColor: Colors.white,
-                    onPressed: () {},
-                  )),
-              SizedBox(height: 10),
-              Expanded(
-                child: Row(
+        padding: const EdgeInsets.all(30.0),
+        child: SafeArea(
+          child: Container(
+            child: Column(
+              children: [
+                defaultText(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
+                SizedBox(height: 10),
+                defaultText(
+                    text:
+                        'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
+                    fontSize: 18,
+                    textColor: Colors.black38),
+                SizedBox(height: 50),
+                VerificationCode(
+                  textStyle: TextStyle(fontSize: 20.0, color: Colors.grey[900]),
+                  keyboardType: TextInputType.number,
+                  underlineColor: const Color.fromRGBO(42, 185, 237, 1),
+                  length: 4,
+                  itemSize: 50,
+                  onCompleted: (String value) {},
+                  onEditing: (bool value) {},
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ButtonTheme(
+                        minWidth: double.infinity,
+                        height: 50,
+                        child: defaultRaisedButton(
+                          text: 'التالي',
+                          textColor: Colors.white,
+                          onPressed: () {},
+                        )),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     defaultText(text: 'لم يصلك الرمز ؟'),
@@ -51,11 +55,11 @@ class ForgetPassword extends StatelessWidget {
                         )),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-
+      ),
     );
   }
 }
