@@ -65,7 +65,7 @@ Widget defaultTextFromField({
   //Hint color (initial color black)
   Color hintColor = Colors.black38,
   //Text color (initial color black)
-  Color textColor =const Color.fromRGBO(4, 15, 15, 1),
+  Color textColor = const Color.fromRGBO(4, 15, 15, 1),
   //background color (initial color white)
   Color backgroundColor = Colors.white,
   // prefix Icon
@@ -159,6 +159,19 @@ void navigatorAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
 Widget defaultSmoothPageIndicator({required count, controller}) =>
     SmoothPageIndicator(
       count: count,
+      textDirection: TextDirection.ltr,
       controller: controller,
-      effect: WormEffect(activeDotColor: const Color.fromRGBO(42, 185, 237, 1)),
+      effect: ExpandingDotsEffect(
+          activeDotColor: const Color.fromRGBO(42, 185, 237, 1)),
     );
+
+Widget defaultAlertDialog({content, backgroundColor = Colors.transparent}) =>
+    AlertDialog(
+      backgroundColor: backgroundColor,
+      contentPadding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+      insetPadding: EdgeInsets.symmetric(vertical: 50),
+      content: content,
+    );
+
+Widget myDivider({color = const Color.fromRGBO(42, 185, 237, 1), thickness}) =>
+    Divider(color: color, thickness: thickness);

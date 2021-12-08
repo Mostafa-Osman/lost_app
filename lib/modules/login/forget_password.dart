@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:lost_app/shared/components/component.dart';
@@ -48,15 +49,59 @@ class ForgetPassword extends StatelessWidget {
                   children: [
                     defaultText(text: 'لم يصلك الرمز ؟'),
                     FlatButton(
-                        onPressed: () => {},
-                        child: defaultText(
-                          text: 'اعادة الارسال',
-                          textColor: Color.fromRGBO(42, 185, 237, 1),
-                        )),
+                      onPressed: () => showAlertDialog(context),
+                      child: defaultText(
+                        text: 'اعادة الارسال',
+                        textColor: Color.fromRGBO(42, 185, 237, 1),
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => defaultAlertDialog(
+        content: Container(
+          height: 235,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.rectangle,
+            borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 25),
+              defaultText(
+                  text: 'تم اعاده ارسال رمز التاكيد',
+                  fontWeight: FontWeight.normal),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Image.asset(
+                  'assets/icons/done.png',
+                ),
+              ),
+              myDivider(
+                  color: Color.fromRGBO(200, 218, 245, 1), thickness: 2.0),
+              Container(
+                width: double.infinity,
+                child: defaultTextButton(
+                  onPress: () {
+                    Navigator.pop(context);
+                  },
+                  text: 'تم',
+                  fontSize: 20,
+                  textColor: Color.fromRGBO(42, 185, 237, 1),
+                ),
+              )
+            ],
           ),
         ),
       ),

@@ -49,6 +49,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             children: [
               Expanded(
                   child: PageView.builder(
+                reverse: true,
                 itemCount: splash.length,
                 itemBuilder: (context, index) => buildBoardingItem(
                     splash[index], splash.length, boardingController),
@@ -96,9 +97,9 @@ Widget buildBoardingItem(OnBoardingModel model, splashLength, controller) =>
         defaultSmoothPageIndicator(count: splashLength, controller: controller),
         SizedBox(height: 30),
         defaultText(
-            text: model.title,
-            fontSize: 25,
-            fontWeight: FontWeight.normal,
+          text: model.title,
+          fontSize: 25,
+          fontWeight: FontWeight.normal,
         ),
         SizedBox(height: 50),
         defaultText(text: model.body, textColor: Colors.black38),
