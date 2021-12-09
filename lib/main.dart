@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:lost_app/home/bottom_navigation_bar.dart';
 
 import 'modules/login/forget_password.dart';
 import 'modules/login/login.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar', ''),
       ],
-      home: OnBoardingScreen(),
+      home: HomeScreen(),
     );
   }
 }
