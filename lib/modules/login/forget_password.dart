@@ -106,7 +106,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             text: 'تم اعاده ارسال رمز التاكيد',
                             textColor: mainColor),
                         bottomWidget: TextButtonClass(
-                          text: 'تم',
+                          text: 'تم',textColor: mainColor,
                           onPress: () {
                             if (resend) return;
                             setState(() {
