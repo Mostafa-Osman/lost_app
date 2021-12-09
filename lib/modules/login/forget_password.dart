@@ -1,81 +1,215 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
+import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
-class ForgetPassword extends StatelessWidget {
+class ForgetPassword extends StatefulWidget {
+  @override
+  _ForgetPasswordState createState() => _ForgetPasswordState();
+}
+
+class _ForgetPasswordState extends State<ForgetPassword> {
+  final _formKey = GlobalKey<FormState>();
+
+  StreamController<ErrorAnimationType>? errorController;
+
+  TextEditingController textEditingController = TextEditingController();
+  String currentText = "";
+  bool resend = false;
+  String reSendCode = 'اعادة الارسال';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: SafeArea(
-          child: Container(
-            child: Column(
-              children: [
-                TextClass(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
-                SizedBox(height: 10),
-                TextClass(
-                    text:
-                        'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
-                    fontSize: 18,
-                    textColor: Colors.black38),
-                SizedBox(height: 50),
-                VerificationCode(
-                  textStyle: TextStyle(fontSize: 20.0, color: Colors.grey[900]),
-                  keyboardType: TextInputType.number,
-                  underlineColor: const Color.fromRGBO(42, 185, 237, 1),
-                  length: 4,
-                  itemSize: 50,
-                  onCompleted: (String value) {},
-                  onEditing: (bool value) {},
+          child: Column(
+            children: [
+              TextClass(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
+              SizedBox(height: 10),
+              TextClass(
+                  text:
+                      'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
+                  textColor: Colors.black38),
+              SizedBox(height: 50),
+              pinCodeFields(context),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ButtonTheme(
+                      minWidth: double.infinity,
+                      height: 50,
+                      child: RaisedButtonClass(
+                        text: 'التالي',
+                        textColor: Colors.white,
+                        onPressed: () {
+                          return showAlertDialog(
+                            context: context,
+                            height: 260.0,
+                            widget: Column(
+                              children: [
+                                TextClass(
+                                    text: 'تهانينا لقد اتممت إنشاء',
+                                    fontWeight: FontWeight.normal),
+                                TextClass(
+                                    text: 'الحساب بنجاح',
+                                    fontWeight: FontWeight.normal),
+                              ],
+                            ),
+                            bottomWidget: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButtonClass(
+                                  onPress: () =>
+                                      navigateTo(context, LoginScreen()),
+                                  text: 'الي الصفحه الرئيسيه',
+                                  fontSize: 20,
+                                  textColor: mainColor,
+                                ),
+                                timer(context, 5,
+                                    () => navigateTo(context, LoginScreen())),
+                              ],
+                            ),
+                          );
+                        },
+                      )),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: ButtonTheme(
-                        minWidth: double.infinity,
-                        height: 50,
-                        child: RaisedButtonClass(
-                          text: 'التالي',
-                          textColor: Colors.white,
-                          onPressed: () {},
-                        )),
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (!resend)
+                    TextClass(
+                        text: 'لم يصلك الرمز ؟', textColor: Colors.black54),
+                  TextButtonClass(
+                    text: reSendCode,
+                    textColor: mainColor,
+                    onPress: () {
+                      if (resend) return;
+                      showAlertDialog(
+                        context: context,
+                        height: 235.0,
+                        widget: TextClass(
+                            text: 'تم اعاده ارسال رمز التاكيد',
+                            textColor: mainColor),
+                        bottomWidget: TextButtonClass(
+                          text: 'تم',
+                          onPress: () {
+                            if (resend) return;
+                            setState(() {
+                              resend = true;
+                              reSendCode =
+                                  'لارسال الرمز مره اخري برجاء الانتظار';
+                            });
+                            Navigator.pop(context);
+                          },
+                        ),
+                      );
+                    },
                   ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextClass(text: 'لم يصلك الرمز ؟'),
-                    FlatButton(
-                      onPressed: () => showAlertDialog(context),
-                      child: TextClass(
-                        text: 'اعادة الارسال',
-                        textColor: Color.fromRGBO(42, 185, 237, 1),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  if (resend)
+                    timer(context, 59, () {
+                      setState(() {
+                        resend = false;
+                        reSendCode = 'اعادة الارسال';
+                      });
+                    })
+                ],
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  showAlertDialog(BuildContext context) {
+  Countdown timer(context, seconds, onFinished) {
+    return Countdown(
+        seconds: seconds,
+        build: (_, time) => TextClass(
+              text: '(${time.toInt().toString()})',
+              textColor: mainColor,
+            ),
+        interval: Duration(milliseconds: 1000),
+        onFinished: onFinished);
+  }
+
+  Form pinCodeFields(context) {
+    return Form(
+      key: _formKey,
+      child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
+          child: PinCodeTextField(
+            appContext: context,
+            hintCharacter: '*',
+            pastedTextStyle: TextStyle(
+              color: mainColor,
+              fontWeight: FontWeight.bold,
+            ),
+            length: 6,
+            animationType: AnimationType.fade,
+            pinTheme: PinTheme(
+              shape: PinCodeFieldShape.box,
+              borderRadius: BorderRadius.circular(10),
+              fieldHeight: 50,
+              fieldWidth: 43,
+              inactiveColor: Colors.grey,
+              // activeColor: Colors.grey,
+              selectedFillColor: mainColor,
+              selectedColor: Colors.grey,
+              activeFillColor: Colors.white,
+              inactiveFillColor: Colors.white,
+            ),
+            cursorColor: Colors.black,
+            animationDuration: Duration(milliseconds: 300),
+            enableActiveFill: true,
+            errorAnimationController: errorController,
+            controller: textEditingController,
+            keyboardType: TextInputType.number,
+            boxShadows: [
+              BoxShadow(
+                offset: Offset(0, 1),
+                color: Colors.black12,
+                blurRadius: 10,
+              )
+            ],
+            onCompleted: (v) {
+              print("Completed");
+            },
+            onChanged: (value) {
+              print(value);
+              setState(() {
+                currentText = value;
+              });
+            },
+            beforeTextPaste: (text) {
+              print("Allowing to paste $text");
+              return true;
+            },
+          )),
+    );
+  }
+
+  showAlertDialog({context, height, widget, bottomWidget}) {
     return showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialogClass(
         content: Container(
-          height: 235,
+          width: 300,
+          height: height,
           decoration: BoxDecoration(
             color: Colors.white,
             shape: BoxShape.rectangle,
@@ -84,9 +218,7 @@ class ForgetPassword extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 25),
-              TextClass(
-                  text: 'تم اعاده ارسال رمز التاكيد',
-                  fontWeight: FontWeight.normal),
+              widget,
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Image.asset(
@@ -95,17 +227,7 @@ class ForgetPassword extends StatelessWidget {
               ),
               DividerClass(
                   color: Color.fromRGBO(200, 218, 245, 1), thickness: 2.0),
-              Container(
-                width: double.infinity,
-                child: TextButtonClass(
-                  onPress: () {
-                    Navigator.pop(context);
-                  },
-                  text: 'تم',
-                  fontSize: 20,
-                  textColor: Color.fromRGBO(42, 185, 237, 1),
-                ),
-              )
+              Container(width: double.infinity, child: bottomWidget)
             ],
           ),
         ),

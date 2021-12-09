@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar', ''),
       ],
-      home: OnBoardingScreen(),
+      home: ForgetPassword(),
     );
   }
 }

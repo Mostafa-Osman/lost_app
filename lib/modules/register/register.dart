@@ -40,8 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Form(
                   key: _formKey,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(right: 10,left: 10),
+                    padding: const EdgeInsets.only(right: 10, left: 10),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
