@@ -7,4 +7,5 @@ convert all component file methods to class:
   defaultSmoothPageIndicator -> SmoothPageIndicatorClass
   defaultAlertDialog -> AlertDialogClass
   myDivider -> DividerClass
+
  */
