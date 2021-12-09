@@ -21,7 +21,6 @@ class TextButtonClass extends StatefulWidget {
   Color textColor = Colors.black;
 
   TextButtonClass({
-    // required text
     required this.text,
     required this.onPress,
     this.fontSize = 15,

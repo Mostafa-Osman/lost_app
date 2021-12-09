@@ -15,6 +15,7 @@ class OnBoardingModel {
 }
 
 class OnBoardingScreen extends StatefulWidget {
+
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
 }

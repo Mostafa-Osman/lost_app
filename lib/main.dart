@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:lost_app/home/home.dart';
+
 
 import 'modules/login/forget_password.dart';
 import 'modules/login/login.dart';
 import 'modules/on_boarding/on_boarding.dart';
+import 'modules/splash/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar', ''),
       ],
-      home: OnBoardingScreen(),
+      home: SplashScreen(),
     );
   }
 }
