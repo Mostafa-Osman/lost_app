@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/modules/login/login.dart';
+import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/text_class.dart';
+import 'package:lost_app/shared/components/text_form_field_class.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -42,8 +45,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          defaultText(text: 'الاسم', fontSize: 15),
-                          defaultTextFromField(
+                          TextClass(text: 'الاسم', fontSize: 15),
+                          TextFormFieldClass(
                               textHint: 'ادخل اسمك',
                               controller: registerNameControl,
                               validator: (value) {
@@ -51,8 +54,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 return null;
                               }),
                           SizedBox(height: 20),
-                          defaultText(text: 'رقم الهاتف', fontSize: 15),
-                          defaultTextFromField(
+                          TextClass(text: 'رقم الهاتف', fontSize: 15),
+                          TextFormFieldClass(
                               textHint: 'ادخل رقم هاتفك',
                               controller: registerPhoneControl,
                               keyboardType: TextInputType.numberWithOptions(),
@@ -64,10 +67,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 return null;
                               }),
                           SizedBox(height: 20),
-                          defaultText(
+                          TextClass(
                               text: 'البريد الالكتروني (اختياري)',
                               fontSize: 15),
-                          defaultTextFromField(
+                          TextFormFieldClass(
                               textHint: 'ادخل بريدك الالكتروني',
                               controller: registerEmailControl,
                               validator: (value) {
@@ -78,8 +81,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 return null;
                               }),
                           SizedBox(height: 20),
-                          defaultText(text: 'كلمه المرور', fontSize: 15),
-                          defaultTextFromField(
+                          TextClass(text: 'كلمه المرور', fontSize: 15),
+                          TextFormFieldClass(
                             textHint: 'ادخل كلمه المرور',
                             controller: registerPasswordControl,
                             obscureText: isVisible,
@@ -102,8 +105,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                           SizedBox(height: 20),
-                          defaultText(text: 'تأكيد كلمه المرور ', fontSize: 15),
-                          defaultTextFromField(
+                          TextClass(text: 'تأكيد كلمه المرور ', fontSize: 15),
+                          TextFormFieldClass(
                             textHint: ' اعد تأكيد ادخل كلمه المرور',
                             controller: registerConfirmPasswordControl,
                             obscureText: confirmIsVisible,
@@ -129,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ButtonTheme(
                               minWidth: double.infinity,
                               height: 50,
-                              child: defaultRaisedButton(
+                              child: RaisedButtonClass(
                                 text: 'إنشاء',
                                 textColor: Colors.white,
                                 onPressed: () {
@@ -142,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onPressed: () {
                               navigatorAndFinish(context, LoginScreen());
                             },
-                            child: defaultText(
+                            child: TextClass(
                                 text: 'هل لديك حساب بالفعل ؟',
                                 textColor: Color.fromRGBO(42, 185, 237, 1)),
                           )

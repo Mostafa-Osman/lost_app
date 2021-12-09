@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
+import 'package:lost_app/shared/components/raised_button_class.dart';
+import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/divider_class.dart';
+import 'package:lost_app/shared/components/text_button_class.dart';
+import 'package:lost_app/shared/components/text_class.dart';
 
 class ForgetPassword extends StatelessWidget {
   @override
@@ -13,9 +18,9 @@ class ForgetPassword extends StatelessWidget {
           child: Container(
             child: Column(
               children: [
-                defaultText(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
+                TextClass(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
                 SizedBox(height: 10),
-                defaultText(
+                TextClass(
                     text:
                         'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
                     fontSize: 18,
@@ -36,7 +41,7 @@ class ForgetPassword extends StatelessWidget {
                     child: ButtonTheme(
                         minWidth: double.infinity,
                         height: 50,
-                        child: defaultRaisedButton(
+                        child: RaisedButtonClass(
                           text: 'التالي',
                           textColor: Colors.white,
                           onPressed: () {},
@@ -47,10 +52,10 @@ class ForgetPassword extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    defaultText(text: 'لم يصلك الرمز ؟'),
+                    TextClass(text: 'لم يصلك الرمز ؟'),
                     FlatButton(
                       onPressed: () => showAlertDialog(context),
-                      child: defaultText(
+                      child: TextClass(
                         text: 'اعادة الارسال',
                         textColor: Color.fromRGBO(42, 185, 237, 1),
                       ),
@@ -68,7 +73,7 @@ class ForgetPassword extends StatelessWidget {
   showAlertDialog(BuildContext context) {
     return showDialog(
       context: context,
-      builder: (BuildContext context) => defaultAlertDialog(
+      builder: (BuildContext context) => AlertDialogClass(
         content: Container(
           height: 235,
           decoration: BoxDecoration(
@@ -79,7 +84,7 @@ class ForgetPassword extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 25),
-              defaultText(
+              TextClass(
                   text: 'تم اعاده ارسال رمز التاكيد',
                   fontWeight: FontWeight.normal),
               Padding(
@@ -88,11 +93,11 @@ class ForgetPassword extends StatelessWidget {
                   'assets/icons/done.png',
                 ),
               ),
-              myDivider(
+              DividerClass(
                   color: Color.fromRGBO(200, 218, 245, 1), thickness: 2.0),
               Container(
                 width: double.infinity,
-                child: defaultTextButton(
+                child: TextButtonClass(
                   onPress: () {
                     Navigator.pop(context);
                   },

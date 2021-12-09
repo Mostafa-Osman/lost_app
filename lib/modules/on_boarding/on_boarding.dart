@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/modules/login/login.dart';
+import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/smooth_page_indicator_class.dart';
+import 'package:lost_app/shared/components/text_class.dart';
 
 class OnBoardingModel {
   final String image;
@@ -66,7 +69,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         });
                 },
               )),
-              defaultRaisedButton(
+              RaisedButtonClass(
                   onPressed: () {
                     print(isLogin);
                     isLogin
@@ -94,14 +97,14 @@ Widget buildBoardingItem(OnBoardingModel model, splashLength, controller) =>
             height: 270,
             child: Image(image: AssetImage(model.image))),
         SizedBox(height: 10),
-        defaultSmoothPageIndicator(count: splashLength, controller: controller),
+        SmoothPageIndicatorClass(count: splashLength, controller: controller),
         SizedBox(height: 30),
-        defaultText(
+        TextClass(
           text: model.title,
           fontSize: 25,
           fontWeight: FontWeight.normal,
         ),
         SizedBox(height: 50),
-        defaultText(text: model.body, textColor: Colors.black38),
+        TextClass(text: model.body, textColor: Colors.black38),
       ],
     );

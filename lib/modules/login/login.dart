@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/modules/login/forget_password.dart';
 import 'package:lost_app/modules/register/register.dart';
+import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/text_class.dart';
+import 'package:lost_app/shared/components/text_form_field_class.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -47,10 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                defaultText(
+                                TextClass(
                                     text: 'رقم الهاتف',
                                     fontWeight: FontWeight.normal),
-                                defaultTextFromField(
+                                TextFormFieldClass(
                                     textHint: 'ادخل رقم هاتفك',
                                     controller: loginPhoneControl,
                                     keyboardType:
@@ -63,10 +66,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       return null;
                                     }),
                                 SizedBox(height: 10),
-                                defaultText(
+                                TextClass(
                                     text: 'كلمه المرور',
                                     fontWeight: FontWeight.normal),
-                                defaultTextFromField(
+                                TextFormFieldClass(
                                   textHint: 'ادخل كلمه المرور',
                                   controller: loginPasswordControl,
                                   suffixIcon: IconButton(
@@ -91,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 FlatButton(
                                     onPressed: () =>
                                         navigateTo(context, ForgetPassword()),
-                                    child: defaultText(
+                                    child: TextClass(
                                       text: 'هل نسيت كلمه المرور ؟ ',
                                       textColor:
                                           Color.fromRGBO(42, 185, 237, 1),
@@ -100,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ButtonTheme(
                                     minWidth: double.infinity,
                                     height: 50,
-                                    child: defaultRaisedButton(
+                                    child: RaisedButtonClass(
                                         onPressed: () {
                                           if (_formKey.currentState!.validate())
                                             print('okey');
@@ -112,13 +115,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Expanded(
-                                        child: defaultText(
+                                        child: TextClass(
                                             text: 'ليس لديك حساب ؟')),
                                     Expanded(
                                       child: FlatButton(
                                           onPressed: () => navigatorAndFinish(
                                               context, RegisterScreen()),
-                                          child: defaultText(
+                                          child: TextClass(
                                             text: 'إنشاء حساب',
                                             textColor:
                                                 Color.fromRGBO(42, 185, 237, 1),
