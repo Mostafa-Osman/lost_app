@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lost_app/home/home.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
       elevation: 0.0,
       toolbarHeight: 80,
       title: Container(
-
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -46,9 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: appbar(),
 
-      body: Container(
-        color: Colors.white,
-      ),
+      body: HomePageClass(),
 
       floatingActionButton: FloatingActionButton(
         backgroundColor: HexColor('#2DC7FF'),
