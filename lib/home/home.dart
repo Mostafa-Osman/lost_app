@@ -17,7 +17,7 @@ class _HomePageClassState extends State<HomePageClass> {
         return Padding(
           padding: const EdgeInsets.all(10.0),
           child: Container(
-            height: 287.0,
+            height: 273.0,
             decoration: BoxDecoration(
               color: HexColor('#E3F0FF'),
               borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -59,56 +59,57 @@ class _HomePageClassState extends State<HomePageClass> {
                       TextClass(
                         text: 'مفقود منذ 3 ايام فى القاهره',
                         textAlign: TextAlign.right,
+                        fontSize: 15,
                       ),
                       SizedBox(height: 20.0),
-                      Row(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextClass(
-                                text: 'الاسم : محمد احمد محمد',
-                                textAlign: TextAlign.right,
-                              ),
-                              TextClass(
-                                text: 'السن : ٢٢',
-                                textAlign: TextAlign.right,
-                              ),
-                              TextClass(
-                                text: 'الجنس : ذكر',
-                                textAlign: TextAlign.right,
-                              ),
-                              TextClass(
-                                text: 'العنوان : المعادي - القاهره',
-                                textAlign: TextAlign.right,
-                              ),
-                              TextClass(
-                                text: 'هاتف التواصل : 04444444444',
-                                textAlign: TextAlign.right,
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    height: 86,
-                                    width: 86,
-                                    child: Image.asset(
-                                      'assets/images/lost_person_image.png',
-                                      //color: Colors.white,
-                                    ),
+                      Container(
+                        height: 100,
+                        child: Row(
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextClass(
+                                  text: 'الاسم : محمد احمد محمد',
+                                  textAlign: TextAlign.right,
+                                  fontSize: 15,
+                                ),
+                                TextClass(
+                                  text: 'السن : ٢٢',
+                                  textAlign: TextAlign.right,
+                                  fontSize: 15,
+                                ),
+                                TextClass(
+                                  text: 'الجنس : ذكر',
+                                  textAlign: TextAlign.right,
+                                  fontSize: 15,
+                                ),
+                                TextClass(
+                                  text: 'العنوان : المعادي - القاهره',
+                                  textAlign: TextAlign.right,
+                                  fontSize: 15,
+                                ),
+                                TextClass(
+                                  text: 'هاتف التواصل : 04444444444',
+                                  textAlign: TextAlign.right,
+                                  fontSize: 15,
+                                ),
+                              ],
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child:  Container(
+                                  child: Image.asset(
+                                    'assets/images/lost_person_image.png',
+                                    //color: Colors.white,
                                   ),
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -132,7 +133,9 @@ class _HomePageClassState extends State<HomePageClass> {
                           child: FlatButton(
                             onPressed: () {},
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),),
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(15),
+                              ),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +169,9 @@ class _HomePageClassState extends State<HomePageClass> {
                         child: FlatButton(
                           onPressed: () {},
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                            ),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

@@ -16,6 +16,7 @@ class TextClass extends StatelessWidget {
   //initial Text color black
   late Color textColor;
 
+
   //initial Text backgroundColor white
   // Color backgroundColor = Colors.white,
 
