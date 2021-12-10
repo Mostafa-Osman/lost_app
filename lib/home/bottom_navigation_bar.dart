@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/home/home.dart';
+import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: IconButton(
           iconSize: 0.5,
           icon: Image.asset(
-          'assets/icons/notification.png',
-          color: Colors.black,
-        ),
+            'assets/icons/notification.png',
+            color: Colors.black,
+          ),
           onPressed: () {},
         ),
       ),
@@ -63,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       //floating action button position to center
 
-
       bottomNavigationBar: BottomAppBar(
         //bottom navigation bar on scaffold
         color: Colors.white,
@@ -73,38 +73,56 @@ class _HomeScreenState extends State<HomeScreen> {
         notchMargin: 8,
         //notche margin between floating button and bottom appbar
         child: Container(
-          height: 60,
+          height: 70,
           child: Row(
             //children inside bottom appbar
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              IconButton(
-                icon: Image.asset(
-                  'assets/icons/account.png',
-                  color: bottomNavBarAccColor,
-                ),
-                onPressed: () {
-                  setState(() {
-                    bottomNavBarAccColor = HexColor('#2DC7FF');
-                    bottomNavBarHomeColor = Colors.grey;
-                  });
-                },
+              Column(
+                children: [
+                  IconButton(
+                    icon: Image.asset(
+                      'assets/icons/account.png',
+                      color: bottomNavBarAccColor,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        bottomNavBarAccColor = HexColor('#2DC7FF');
+                        bottomNavBarHomeColor = Colors.grey;
+                      });
+                    },
+                  ),
+                  TextClass(
+                    text: 'حسابي',
+                    textColor: bottomNavBarAccColor,
+                    fontSize: 16,
+                  ),
+                ],
               ),
               SizedBox(
                 width: 0,
               ),
-              IconButton(
-                icon: Image.asset(
-                  'assets/icons/home.png',
-                  color: bottomNavBarHomeColor,
-                ),
-                onPressed: () {
-                  setState(() {
-                    bottomNavBarHomeColor = HexColor('#2DC7FF');
-                    bottomNavBarAccColor = Colors.grey;
-                  });
-                },
+              Column(
+                children: [
+                  IconButton(
+                    icon: Image.asset(
+                      'assets/icons/home.png',
+                      color: bottomNavBarHomeColor,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        bottomNavBarHomeColor = HexColor('#2DC7FF');
+                        bottomNavBarAccColor = Colors.grey;
+                      });
+                    },
+                  ),
+                  TextClass(
+                    text: 'الرئيسيه',
+                    textColor: bottomNavBarHomeColor,
+                    fontSize: 16,
+                  ),
+                ],
               ),
             ],
           ),

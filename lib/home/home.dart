@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:lost_app/shared/components/divider_class.dart';
-import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 
 class HomePageClass extends StatefulWidget {
@@ -42,13 +40,6 @@ class _HomePageClassState extends State<HomePageClass> {
                               //color: Colors.white,
                             ),
                           ),
-                          // CircleAvatar(
-                          //   radius: 25.0,
-                          //   child: Image.asset(
-                          //     'assets/images/lost_person_image.png',
-                          //     //color: Colors.white,
-                          //   ),
-                          // ),
                           SizedBox(width: 10.0),
                           TextClass(text: 'احمد محمد'),
                           Expanded(
@@ -93,7 +84,7 @@ class _HomePageClassState extends State<HomePageClass> {
                                 textAlign: TextAlign.right,
                               ),
                               TextClass(
-                                text: 'هاتف التواصل : 0110001111',
+                                text: 'هاتف التواصل : 04444444444',
                                 textAlign: TextAlign.right,
                               ),
                             ],
@@ -106,8 +97,8 @@ class _HomePageClassState extends State<HomePageClass> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Container(
-                                    height: 90,
-                                    width: 90,
+                                    height: 86,
+                                    width: 86,
                                     child: Image.asset(
                                       'assets/images/lost_person_image.png',
                                       //color: Colors.white,
@@ -140,6 +131,9 @@ class _HomePageClassState extends State<HomePageClass> {
                         child: Container(
                           child: FlatButton(
                             onPressed: () {},
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),),
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -171,6 +165,9 @@ class _HomePageClassState extends State<HomePageClass> {
                       Expanded(
                         child: FlatButton(
                           onPressed: () {},
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),),
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
