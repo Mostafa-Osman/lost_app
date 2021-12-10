@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/login/forget_password.dart';
+import 'package:lost_app/modules/login/Verify_mobile.dart';
 import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -137,18 +139,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 textColor: Colors.white,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate())
-                                    navigateTo(context,ForgetPasswordScreen());
+                                    navigateTo(context,VerifyMobileScreen(false));
                                 },
                               )),
                           SizedBox(height: 10),
-                          TextButton(
+                          TextButtonClass(
                             onPressed: () {
                               navigatorAndFinish(context, LoginScreen());
                             },
-                            child: TextClass(
-                                text: 'هل لديك حساب بالفعل ؟',
-                                textColor: Color.fromRGBO(42, 185, 237, 1)),
-                          )
+                            text: 'هل لديك حساب بالفعل ؟',
+                                textColor: mainColor),
+
                         ]),
                   ),
                 )

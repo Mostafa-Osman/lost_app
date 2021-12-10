@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lost_app/home/bottom_navigation_bar.dart';
 
 import 'modules/login/enter_phone_number.dart';
-import 'modules/login/forget_password.dart';
+import 'modules/login/Verify_mobile.dart';
 import 'modules/login/login.dart';
 import 'modules/login/reset_password.dart';
 import 'modules/on_boarding/on_boarding.dart';

@@ -108,7 +108,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   TextButtonClass(
                     text: 'لست اسم المستخدم؟',
                     textColor: Colors.black26,
-                    onPress: () => navigateTo(context, PhoneNumberScreen()),
+                    onPressed: () => navigateTo(context, PhoneNumberScreen()),
                   ),
                 ],
               ),

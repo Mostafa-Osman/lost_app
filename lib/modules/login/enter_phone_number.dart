@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/login/forget_password.dart';
+import 'package:lost_app/modules/login/Verify_mobile.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -61,7 +61,7 @@ class PhoneNumberScreen extends StatelessWidget {
                               textColor: Colors.white,
                               onPressed: () {
                                 if (_formKey.currentState!.validate())
-                                  navigateTo(context, ForgetPasswordScreen());
+                                  navigateTo(context, VerifyMobileScreen(true));
                               },
                             )),
                       ),
