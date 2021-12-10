@@ -34,6 +34,7 @@ class TextFormFieldClass extends StatelessWidget {
   //Text Input Type (keyboard Type)
   TextInputType? keyboardType;
 
+  EdgeInsetsGeometry contentPadding;
   //label
   String? label;
   InputDecoration? decoration;
@@ -55,6 +56,7 @@ class TextFormFieldClass extends StatelessWidget {
     this.label,
     this.decoration,
     this.textStyle,
+    this.contentPadding = const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
   });
 
   @override
@@ -73,7 +75,7 @@ class TextFormFieldClass extends StatelessWidget {
         filled: true,
         fillColor: backgroundColor,
         labelText: label,
-        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        contentPadding: contentPadding,
         helperStyle: textStyle,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(roundedRectangleBorder),
@@ -84,6 +86,7 @@ class TextFormFieldClass extends StatelessWidget {
         suffixIcon: suffixIcon,
       ),
       obscureText: obscureText,
+
     );
   }
 }

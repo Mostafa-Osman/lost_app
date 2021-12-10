@@ -18,20 +18,27 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0.0,
-      toolbarHeight: 80,
+      toolbarHeight: 55,
       title: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            //borderRadius: BorderRadius.circular(15),
           ),
-          child: TextFormFieldClass(
-            controller: controller,
-            textHint: 'البحث...',
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: ConstrainedBox(
+                constraints: BoxConstraints.tightFor(height: 40),
+                child: TextFormFieldClass(
+                controller: controller,
+                roundedRectangleBorder: 6,
+                textHint: 'البحث...',
+              ),
+            ),
           )),
       leading: Padding(
         padding: const EdgeInsets.only(right: 10.0),
         child: IconButton(
-          iconSize: 0.5,
+          iconSize: 2,
           icon: Image.asset(
             'assets/icons/notification.png',
             color: Colors.black,
@@ -82,9 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 children: [
                   IconButton(
+                    iconSize: 10,
                     icon: Image.asset(
                       'assets/icons/account.png',
                       color: bottomNavBarAccColor,
+
                     ),
                     onPressed: () {
                       setState(() {
@@ -96,33 +105,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   TextClass(
                     text: 'حسابي',
                     textColor: bottomNavBarAccColor,
-                    fontSize: 16,
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
                   ),
                 ],
               ),
               SizedBox(
                 width: 0,
               ),
-              Column(
-                children: [
-                  IconButton(
-                    icon: Image.asset(
-                      'assets/icons/home.png',
-                      color: bottomNavBarHomeColor,
+              Container(
+                child: Column(
+                  children: [
+                    IconButton(
+                      iconSize: 10,
+                      icon: Image.asset(
+                        'assets/icons/home.png',
+                        color: bottomNavBarHomeColor,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          bottomNavBarHomeColor = HexColor('#2DC7FF');
+                          bottomNavBarAccColor = Colors.grey;
+                        });
+                      },
                     ),
-                    onPressed: () {
-                      setState(() {
-                        bottomNavBarHomeColor = HexColor('#2DC7FF');
-                        bottomNavBarAccColor = Colors.grey;
-                      });
-                    },
-                  ),
-                  TextClass(
-                    text: 'الرئيسيه',
-                    textColor: bottomNavBarHomeColor,
-                    fontSize: 16,
-                  ),
-                ],
+                    TextClass(
+                      text: 'الرئيسيه',
+                      textColor: bottomNavBarHomeColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
