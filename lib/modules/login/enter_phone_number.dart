@@ -4,6 +4,7 @@ import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 class PhoneNumberScreen extends StatelessWidget {
   TextEditingController textEditingController = TextEditingController();
@@ -58,7 +59,7 @@ class PhoneNumberScreen extends StatelessWidget {
                             height: 50,
                             child: RaisedButtonClass(
                               text: 'التالي',
-                              textColor: Colors.white,
+                              textColor: white,
                               onPressed: () {
                                 if (_formKey.currentState!.validate())
                                   navigateTo(context, VerifyMobileScreen(true));

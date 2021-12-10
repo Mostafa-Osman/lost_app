@@ -59,7 +59,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                       height: 50,
                       child: RaisedButtonClass(
                           text: 'التالي',
-                          textColor: Colors.white,
+                          textColor: white,
                           onPressed: () {
                             if (isForget)
                               navigateTo(context, ResetPassword());
@@ -153,18 +153,6 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
       ),
     );
   }
-
-  // Countdown timer(context, seconds, onFinished) {
-  //   return Countdown(
-  //       seconds: seconds,
-  //       build: (_, time) => TextClass(
-  //             text: '(${time.toInt().toString()})',
-  //             textColor: mainColor,
-  //           ),
-  //       interval: Duration(milliseconds: 1000),
-  //       onFinished: onFinished);
-  // }
-
   Form pinCodeFields(context) {
     return Form(
       key: _formKey,
@@ -187,8 +175,8 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               inactiveColor: Colors.grey,
               selectedFillColor: mainColor,
               selectedColor: Colors.grey,
-              activeFillColor: Colors.white,
-              inactiveFillColor: Colors.white,
+              activeFillColor: white,
+              inactiveFillColor:white,
             ),
             cursorColor: Colors.black,
             animationDuration: Duration(milliseconds: 300),

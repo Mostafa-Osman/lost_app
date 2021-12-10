@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/home/bottom_navigation_bar.dart';
 import 'package:lost_app/modules/register/register.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
@@ -24,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
@@ -106,10 +107,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: RaisedButtonClass(
                                         onPressed: () {
                                           if (_formKey.currentState!.validate())
-                                            print('okey');
+                                            navigateTo(context,HomeScreen());
                                         },
                                         text: 'تسجيل الدخول',
-                                        textColor: Colors.white)),
+                                        textColor: white)),
                                 SizedBox(height: 30),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,

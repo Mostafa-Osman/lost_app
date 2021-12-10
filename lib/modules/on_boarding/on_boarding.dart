@@ -4,6 +4,7 @@ import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/smooth_page_indicator_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 class OnBoardingModel {
   final String image;
@@ -15,7 +16,6 @@ class OnBoardingModel {
 }
 
 class OnBoardingScreen extends StatefulWidget {
-
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
 }
@@ -80,7 +80,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             curve: Curves.easeIn);
                   },
                   text: changeButtonText,
-                  textColor: Colors.white),
+                  textColor: white),
             ],
           ),
         ),

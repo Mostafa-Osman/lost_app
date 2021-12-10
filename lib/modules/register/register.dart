@@ -136,20 +136,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               height: 50,
                               child: RaisedButtonClass(
                                 text: 'إنشاء',
-                                textColor: Colors.white,
+                                textColor: white,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate())
-                                    navigateTo(context,VerifyMobileScreen(false));
+                                    navigateTo(
+                                        context, VerifyMobileScreen(false));
                                 },
                               )),
                           SizedBox(height: 10),
                           TextButtonClass(
-                            onPressed: () {
-                              navigatorAndFinish(context, LoginScreen());
-                            },
-                            text: 'هل لديك حساب بالفعل ؟',
-                                textColor: mainColor),
-
+                              onPressed: () {
+                                navigatorAndFinish(context, LoginScreen());
+                              },
+                              text: 'هل لديك حساب بالفعل ؟',
+                              textColor: mainColor),
                         ]),
                   ),
                 )
