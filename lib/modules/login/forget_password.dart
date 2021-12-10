@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_app/home/bottom_navigation_bar.dart';
 import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
@@ -72,13 +73,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               children: [
                                 TextButtonClass(
                                   onPress: () =>
-                                      navigateTo(context, LoginScreen()),
+                                      navigateTo(context, HomeScreen()),
                                   text: 'الي الصفحه الرئيسيه',
                                   fontSize: 20,
                                   textColor: mainColor,
                                 ),
                                 timer(context, 5,
-                                    () => navigateTo(context, LoginScreen())),
+                                    () => navigateTo(context, HomeScreen())),
                               ],
                             ),
                           );
@@ -105,7 +106,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             text: 'تم اعاده ارسال رمز التاكيد',
                             textColor: mainColor),
                         bottomWidget: TextButtonClass(
-                          text: 'تم',
+                          text: 'تم',textColor: mainColor,
                           onPress: () {
                             if (resend) return;
                             setState(() {
