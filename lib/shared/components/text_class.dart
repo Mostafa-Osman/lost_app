@@ -23,7 +23,7 @@ class TextClass extends StatelessWidget {
     required this.text,
     this.fontSize = 18,
     this.textAlign = TextAlign.center,
-    this.fontWeight = FontWeight.bold,
+    this.fontWeight = FontWeight.normal,
     this.textColor = Colors.black,
   });
 

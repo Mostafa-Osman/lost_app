@@ -5,6 +5,9 @@ import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
+
+import 'enter_phone_number.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -22,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
@@ -52,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 TextClass(
                                     text: 'رقم الهاتف',
-                                    fontWeight: FontWeight.normal),
+                                ),
                                 TextFormFieldClass(
                                     textHint: 'ادخل رقم هاتفك',
                                     controller: loginPhoneControl,
@@ -68,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SizedBox(height: 10),
                                 TextClass(
                                     text: 'كلمه المرور',
-                                    fontWeight: FontWeight.normal),
+                                ),
                                 TextFormFieldClass(
                                   textHint: 'ادخل كلمه المرور',
                                   controller: loginPasswordControl,
@@ -91,13 +93,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       return null;
                                   },
                                 ),
-                                FlatButton(
+                                TextButton(
                                     onPressed: () =>
-                                        navigateTo(context, ForgetPassword()),
+                                        navigateTo(context, PhoneNumberScreen()),
                                     child: TextClass(
                                       text: 'هل نسيت كلمه المرور ؟ ',
-                                      textColor:
-                                          Color.fromRGBO(42, 185, 237, 1),
+                                      textColor:mainColor,
                                     )),
                                 SizedBox(height: 10),
                                 ButtonTheme(
@@ -115,16 +116,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Expanded(
-                                        child: TextClass(
-                                            text: 'ليس لديك حساب ؟')),
+                                        child:
+                                            TextClass(text: 'ليس لديك حساب ؟')),
                                     Expanded(
-                                      child: FlatButton(
+                                      child: TextButton(
                                           onPressed: () => navigatorAndFinish(
                                               context, RegisterScreen()),
                                           child: TextClass(
                                             text: 'إنشاء حساب',
-                                            textColor:
-                                                Color.fromRGBO(42, 185, 237, 1),
+                                            textColor:mainColor
+                                            ,
                                           )),
                                     ),
                                   ],

@@ -14,12 +14,12 @@ import 'package:lost_app/shared/styles/color.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-class ForgetPassword extends StatefulWidget {
+class ForgetPasswordScreen extends StatefulWidget {
   @override
-  _ForgetPasswordState createState() => _ForgetPasswordState();
+  _ForgetPasswordScreenState createState() => _ForgetPasswordScreenState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
 
   StreamController<ErrorAnimationType>? errorController;
@@ -62,10 +62,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               children: [
                                 TextClass(
                                     text: 'تهانينا لقد اتممت إنشاء',
-                                    fontWeight: FontWeight.normal),
+                                ),
                                 TextClass(
                                     text: 'الحساب بنجاح',
-                                    fontWeight: FontWeight.normal),
+                                ),
                               ],
                             ),
                             bottomWidget: Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/modules/login/forget_password.dart';
 import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
@@ -136,11 +137,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 textColor: Colors.white,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate())
-                                    print('okey');
+                                    navigateTo(context,ForgetPasswordScreen());
                                 },
                               )),
                           SizedBox(height: 10),
-                          FlatButton(
+                          TextButton(
                             onPressed: () {
                               navigatorAndFinish(context, LoginScreen());
                             },
