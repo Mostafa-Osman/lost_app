@@ -17,14 +17,14 @@ class _HomePageClassState extends State<HomePageClass> {
     return ListView.builder(
       itemBuilder: (ctx, index) {
         return Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(10.0),
           child: Container(
-            color: HexColor('#E3F0FF'),
-            height: 302.0,
-            width: 303.0,
+            height: 287.0,
+            decoration: BoxDecoration(
+              color: HexColor('#E3F0FF'),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -34,13 +34,21 @@ class _HomePageClassState extends State<HomePageClass> {
                     children: [
                       Row(
                         children: [
-                          CircleAvatar(
-                            radius: 25.0,
+                          ClipOval(
                             child: Image.asset(
-                              'assets/icons/post.png',
-                              color: Colors.white,
+                              'assets/images/lost_person_image.png',
+                              height: 40,
+                              width: 40,
+                              //color: Colors.white,
                             ),
                           ),
+                          // CircleAvatar(
+                          //   radius: 25.0,
+                          //   child: Image.asset(
+                          //     'assets/images/lost_person_image.png',
+                          //     //color: Colors.white,
+                          //   ),
+                          // ),
                           SizedBox(width: 10.0),
                           TextClass(text: 'احمد محمد'),
                           Expanded(
@@ -92,10 +100,20 @@ class _HomePageClassState extends State<HomePageClass> {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(
-                                'assets/images/lost_person_image.png',
-                                //color: Colors.white,
+                              padding: const EdgeInsets.all(5.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    height: 90,
+                                    width: 90,
+                                    child: Image.asset(
+                                      'assets/images/lost_person_image.png',
+                                      //color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -112,72 +130,71 @@ class _HomePageClassState extends State<HomePageClass> {
                   width: double.infinity,
                   color: Colors.white,
                 ),
-                Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 171.5,
-                      child: FlatButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            TextClass(
-                              text: 'التعليق',
-                              fontSize: 22,
+                Container(
+                  height: 48,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: FlatButton(
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                TextClass(
+                                  text: 'التعليق',
+                                  fontSize: 22,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 2.0),
+                                  child: Image.asset(
+                                    'assets/icons/comment_icon.png',
+                                    //color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 2.0),
-                              child: Image.asset(
-                                'assets/icons/comment_icon.png',
-                                //color: Colors.white,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 2,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 50,
-                      width: 171.5,
-                      child: FlatButton(
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            TextClass(
-                              text: 'مشاركه',
-                              fontSize: 22,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5.0),
-                              child: Image.asset(
-                                'assets/icons/share_icon.png',
-                                //color: Colors.white,
+                      Container(
+                        height: 48,
+                        width: 2,
+                        color: Colors.white,
+                      ),
+                      Expanded(
+                        child: FlatButton(
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              TextClass(
+                                text: 'مشاركه',
+                                fontSize: 22,
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5.0),
+                                child: Image.asset(
+                                  'assets/icons/share_icon.png',
+                                  //color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
