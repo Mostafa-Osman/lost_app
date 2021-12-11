@@ -52,7 +52,7 @@ class _AccountPageClassState extends State<AccountPageClass> {
                   ),
                   Expanded(
                     child: TextClass(
-                      text: 'محمد احمد',
+                      text: ' محمد احمد',
                       fontSize: 30,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -64,7 +64,7 @@ class _AccountPageClassState extends State<AccountPageClass> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       height: 55,
-                      //padding: EdgeInsets.all(20.0),
+
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
@@ -75,28 +75,33 @@ class _AccountPageClassState extends State<AccountPageClass> {
                         ),
                         shape: BoxShape.rectangle,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 7.0),
-                            child: TextClass(
-                              text: '01149589134',
-                              fontSize: 18,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 10, right: 10),
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          reverse: true,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 7.0),
+                                  child: TextClass(
+                                    text: '01149589134',
+                                    fontSize: 18,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                IconButton(
+                                  iconSize: 25,
+                                  icon: Icon(Icons.phone),
+                                  onPressed: () {},
+                                ),
+                              ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 5.0,
-                            ),
-                            child: IconButton(
-                              iconSize: 25,
-                              icon: Icon(Icons.phone),
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -107,7 +112,6 @@ class _AccountPageClassState extends State<AccountPageClass> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       height: 55,
-                      //padding: EdgeInsets.all(20.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
@@ -118,28 +122,32 @@ class _AccountPageClassState extends State<AccountPageClass> {
                         ),
                         shape: BoxShape.rectangle,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 7.0),
-                            child: TextClass(
-                              text: 'mansourtarek100@gmail.com',
-                              fontSize: 18,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 5.0,
-                            ),
-                            child: IconButton(
-                              iconSize: 25,
-                              icon: Icon(Icons.email),
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
+                      child: Container(
+                        margin: EdgeInsets.only(left: 10, right: 10),
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          reverse: true,
+                          children: [
+                            Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 7.0,),
+                                child: TextClass(
+                                  text: 'mansourtarek@gmail.com',
+                                  fontSize: 18,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              IconButton(
+                                iconSize: 25,
+                                icon: Icon(Icons.email),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),],
+                        ),
                       ),
                     ),
                   ),
