@@ -48,7 +48,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               TextClass(
                   text:
                       'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
-                  textColor: Colors.black38),
+                  textColor: whiteBlack),
               SizedBox(height: 50),
               pinCodeFields(context),
               Expanded(
@@ -87,7 +87,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                                             navigateTo(context, HomeScreen()),
                                         text: 'الي الصفحه الرئيسيه',
                                         fontSize: 20,
-                                        textColor: mainColor,
+                                        textColor: black,
                                       ),
                                       TimerClass(
                                           5,
@@ -107,8 +107,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (!resend)
-                    TextClass(
-                        text: 'لم يصلك الرمز ؟', textColor: Colors.black54),
+                    TextClass(text: 'لم يصلك الرمز ؟', textColor: whiteBlack),
                   TextButtonClass(
                     text: reSendCode,
                     textColor: mainColor,
@@ -117,12 +116,14 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) => AlertDialogClass(
-                          height: 235.0,
+                          height: 240.0,
                           widget: TextClass(
                               text: 'تم اعاده ارسال رمز التاكيد',
-                              textColor: mainColor),
+                              fontSize: 20,
+                              textColor: black),
                           bottomWidget: TextButtonClass(
                             text: 'تم',
+                            fontSize: 25,
                             textColor: mainColor,
                             onPressed: () {
                               if (resend) return;
@@ -153,6 +154,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
       ),
     );
   }
+
   Form pinCodeFields(context) {
     return Form(
       key: _formKey,
@@ -172,13 +174,13 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               borderRadius: BorderRadius.circular(10),
               fieldHeight: 50,
               fieldWidth: 43,
-              inactiveColor: Colors.grey,
+              inactiveColor: grey,
               selectedFillColor: mainColor,
-              selectedColor: Colors.grey,
+              selectedColor: grey,
               activeFillColor: white,
-              inactiveFillColor:white,
+              inactiveFillColor: white,
             ),
-            cursorColor: Colors.black,
+            cursorColor: black,
             animationDuration: Duration(milliseconds: 300),
             enableActiveFill: true,
             errorAnimationController: errorController,
@@ -187,7 +189,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
             boxShadows: [
               BoxShadow(
                 offset: Offset(0, 1),
-                color: Colors.black12,
+                color:whiteBlack,
                 blurRadius: 10,
               )
             ],
