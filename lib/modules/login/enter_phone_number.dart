@@ -28,7 +28,7 @@ class PhoneNumberScreen extends StatelessWidget {
                     TextClass(
                       text: 'ادخا رقم هاتفك لنتمكن من ارسال رمز التاكيد اليك',
                       fontSize: 20.0,
-                      textColor: Colors.black26,
+                      textColor: whiteBlack,
                     ),
                     SizedBox(height: 50),
                     Container(
