@@ -16,6 +16,7 @@ class TextClass extends StatelessWidget {
   //initial Text color black
   late Color textColor;
 
+  TextOverflow? overflow;
 
   //initial Text backgroundColor white
   // Color backgroundColor = Colors.white,
@@ -26,6 +27,7 @@ class TextClass extends StatelessWidget {
     this.textAlign = TextAlign.center,
     this.fontWeight = FontWeight.normal,
     this.textColor = Colors.black,
+    this.overflow,
   });
 
   @override
@@ -33,6 +35,7 @@ class TextClass extends StatelessWidget {
     return Text(
       text,
       textAlign: textAlign,
+      overflow: overflow,
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,

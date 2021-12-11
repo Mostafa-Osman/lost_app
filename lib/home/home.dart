@@ -15,7 +15,7 @@ class _HomePageClassState extends State<HomePageClass> {
     return ListView.builder(
       itemBuilder: (ctx, index) {
         return Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(20.0),
           child: Container(
             height: 273.0,
             decoration: BoxDecoration(
@@ -161,7 +161,7 @@ class _HomePageClassState extends State<HomePageClass> {
                         ),
                       ),
                       Container(
-                        height: 48,
+                        //height: 60,
                         width: 2,
                         color: Colors.white,
                       ),
