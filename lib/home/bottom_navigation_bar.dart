@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lost_app/home/account.dart';
 import 'package:lost_app/home/home.dart';
+import 'package:lost_app/home/appbar_widget.dart';
+import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 
@@ -10,51 +13,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController controller = TextEditingController();
   Color bottomNavBarAccColor = Colors.grey;
   Color bottomNavBarHomeColor = HexColor('#2DC7FF');
-
-  PreferredSizeWidget appbar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0.0,
-      toolbarHeight: 55,
-      title: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            //borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: ConstrainedBox(
-                constraints: BoxConstraints.tightFor(height: 40),
-                child: TextFormFieldClass(
-                controller: controller,
-                roundedRectangleBorder: 6,
-                textHint: 'البحث...',
-              ),
-            ),
-          )),
-      leading: Padding(
-        padding: const EdgeInsets.only(right: 10.0),
-        child: IconButton(
-          iconSize: 2,
-          icon: Image.asset(
-            'assets/icons/notification.png',
-            color: Colors.black,
-          ),
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
+  int indexPage = 0;
+  Map<int, PreferredSizeWidget> appBar = {
+    0: homeAppBar(),
+    1: accountAppBar(),
+  };
+  Map<int, Widget> page = {
+    0: HomePageClass(),
+    1: AccountPageClass(),
+  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(),
-
-      body: HomePageClass(),
+      appBar: appBar[indexPage],
+      body: page[indexPage],
 
       floatingActionButton: FloatingActionButton(
         backgroundColor: HexColor('#2DC7FF'),
@@ -77,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: CircularNotchedRectangle(),
         elevation: 10.0,
         //shape of notch
-        notchMargin: 8,
+        notchMargin: 10,
         //notche margin between floating button and bottom appbar
         child: Container(
           height: 70,
@@ -86,56 +61,75 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Column(
-                children: [
-                  IconButton(
-                    iconSize: 10,
-                    icon: Image.asset(
-                      'assets/icons/account.png',
-                      color: bottomNavBarAccColor,
+              Expanded(
+                child: FlatButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Column(
+                      children: [
+                        IconButton(
+                          iconSize: 10,
+                          highlightColor: Colors.black,
+                          icon: Image.asset(
+                            'assets/icons/account.png',
+                            color: bottomNavBarAccColor,
+                          ),
+                          onPressed: null,
 
+                        ),
+                        TextClass(
+                          text: 'حسابي',
+                          textColor: bottomNavBarAccColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ],
                     ),
-                    onPressed: () {
-                      setState(() {
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (indexPage != 1) {
                         bottomNavBarAccColor = HexColor('#2DC7FF');
                         bottomNavBarHomeColor = Colors.grey;
-                      });
-                    },
-                  ),
-                  TextClass(
-                    text: 'حسابي',
-                    textColor: bottomNavBarAccColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ],
+                        indexPage = 1;
+                      }
+                    });
+                  },
+                ),
               ),
-              SizedBox(
-                width: 0,
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    IconButton(
-                      iconSize: 10,
-                      icon: Image.asset(
-                        'assets/icons/home.png',
-                        color: bottomNavBarHomeColor,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          bottomNavBarHomeColor = HexColor('#2DC7FF');
-                          bottomNavBarAccColor = Colors.grey;
-                        });
-                      },
+              SizedBox(width: 80,),
+              Expanded(
+                child: FlatButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Column(
+                      children: [
+                        IconButton(
+                          iconSize: 10,
+                          icon: Image.asset(
+                            'assets/icons/home.png',
+                            color: bottomNavBarHomeColor,
+                          ),
+                          onPressed: null,
+                        ),
+                        TextClass(
+                          text: 'الرئيسيه',
+                          textColor: bottomNavBarHomeColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ],
                     ),
-                    TextClass(
-                      text: 'الرئيسيه',
-                      textColor: bottomNavBarHomeColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ],
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (indexPage != 0) {
+                        bottomNavBarHomeColor = HexColor('#2DC7FF');
+                        bottomNavBarAccColor = Colors.grey;
+                        indexPage = 0;
+                      }
+                    });
+                  },
                 ),
               ),
             ],
