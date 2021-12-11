@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/login/forget_password.dart';
+import 'package:lost_app/modules/login/Verify_mobile.dart';
 import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -134,21 +136,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               height: 50,
                               child: RaisedButtonClass(
                                 text: 'إنشاء',
-                                textColor: Colors.white,
+                                textColor: white,
                                 onPressed: () {
                                   if (_formKey.currentState!.validate())
-                                    navigateTo(context,ForgetPasswordScreen());
+                                    navigateTo(
+                                        context, VerifyMobileScreen(false));
                                 },
                               )),
                           SizedBox(height: 10),
-                          TextButton(
-                            onPressed: () {
-                              navigatorAndFinish(context, LoginScreen());
-                            },
-                            child: TextClass(
-                                text: 'هل لديك حساب بالفعل ؟',
-                                textColor: Color.fromRGBO(42, 185, 237, 1)),
-                          )
+                          TextButtonClass(
+                              onPressed: () {
+                                navigatorAndFinish(context, LoginScreen());
+                              },
+                              text: 'هل لديك حساب بالفعل ؟',
+                              textColor: mainColor),
                         ]),
                   ),
                 )

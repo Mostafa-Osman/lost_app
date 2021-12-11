@@ -3,24 +3,30 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_app/home/bottom_navigation_bar.dart';
-import 'package:lost_app/modules/login/login.dart';
+import 'package:lost_app/modules/login/reset_password.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/component.dart';
-import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
+import 'package:lost_app/shared/components/timer.dart';
 import 'package:lost_app/shared/styles/color.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:timer_count_down/timer_count_down.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
+class VerifyMobileScreen extends StatefulWidget {
+  final bool isForget;
+
+  const VerifyMobileScreen(this.isForget);
+
   @override
-  _ForgetPasswordScreenState createState() => _ForgetPasswordScreenState();
+  _VerifyMobileScreenState createState() => _VerifyMobileScreenState(isForget);
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
   final _formKey = GlobalKey<FormState>();
+  final bool isForget;
+
+  _VerifyMobileScreenState(this.isForget);
 
   StreamController<ErrorAnimationType>? errorController;
 
@@ -52,39 +58,48 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       minWidth: double.infinity,
                       height: 50,
                       child: RaisedButtonClass(
-                        text: 'التالي',
-                        textColor: Colors.white,
-                        onPressed: () {
-                          return showAlertDialog(
-                            context: context,
-                            height: 260.0,
-                            widget: Column(
-                              children: [
-                                TextClass(
-                                    text: 'تهانينا لقد اتممت إنشاء',
+                          text: 'التالي',
+                          textColor: white,
+                          onPressed: () {
+                            if (isForget)
+                              navigateTo(context, ResetPassword());
+                            else {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    AlertDialogClass(
+                                  height: 260.0,
+                                  widget: Column(
+                                    children: [
+                                      TextClass(
+                                        text: 'تهانينا لقد اتممت إنشاء',
+                                      ),
+                                      TextClass(
+                                        text: 'الحساب بنجاح',
+                                      ),
+                                    ],
+                                  ),
+                                  bottomWidget: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButtonClass(
+                                        onPressed: () =>
+                                            navigateTo(context, HomeScreen()),
+                                        text: 'الي الصفحه الرئيسيه',
+                                        fontSize: 20,
+                                        textColor: mainColor,
+                                      ),
+                                      TimerClass(
+                                          5,
+                                          Duration(milliseconds: 1000),
+                                          () =>
+                                              navigateTo(context, HomeScreen()))
+                                    ],
+                                  ),
                                 ),
-                                TextClass(
-                                    text: 'الحساب بنجاح',
-                                ),
-                              ],
-                            ),
-                            bottomWidget: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButtonClass(
-                                  onPress: () =>
-                                      navigateTo(context, HomeScreen()),
-                                  text: 'الي الصفحه الرئيسيه',
-                                  fontSize: 20,
-                                  textColor: mainColor,
-                                ),
-                                timer(context, 5,
-                                    () => navigateTo(context, HomeScreen())),
-                              ],
-                            ),
-                          );
-                        },
-                      )),
+                              );
+                            }
+                          })),
                 ),
               ),
               SizedBox(height: 10),
@@ -97,36 +112,39 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   TextButtonClass(
                     text: reSendCode,
                     textColor: mainColor,
-                    onPress: () {
+                    onPressed: () {
                       if (resend) return;
-                      showAlertDialog(
+                      showDialog(
                         context: context,
-                        height: 235.0,
-                        widget: TextClass(
-                            text: 'تم اعاده ارسال رمز التاكيد',
-                            textColor: mainColor),
-                        bottomWidget: TextButtonClass(
-                          text: 'تم',textColor: mainColor,
-                          onPress: () {
-                            if (resend) return;
-                            setState(() {
-                              resend = true;
-                              reSendCode =
-                                  'لارسال الرمز مره اخري برجاء الانتظار';
-                            });
-                            Navigator.pop(context);
-                          },
+                        builder: (BuildContext context) => AlertDialogClass(
+                          height: 235.0,
+                          widget: TextClass(
+                              text: 'تم اعاده ارسال رمز التاكيد',
+                              textColor: mainColor),
+                          bottomWidget: TextButtonClass(
+                            text: 'تم',
+                            textColor: mainColor,
+                            onPressed: () {
+                              if (resend) return;
+                              setState(() {
+                                resend = true;
+                                reSendCode =
+                                    'لارسال الرمز مره اخري برجاء الانتظار';
+                              });
+                              Navigator.pop(context);
+                            },
+                          ),
                         ),
                       );
                     },
                   ),
                   if (resend)
-                    timer(context, 59, () {
+                    TimerClass(59, Duration(milliseconds: 1000), () {
                       setState(() {
                         resend = false;
                         reSendCode = 'اعادة الارسال';
                       });
-                    })
+                    }),
                 ],
               ),
             ],
@@ -135,18 +153,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       ),
     );
   }
-
-  Countdown timer(context, seconds, onFinished) {
-    return Countdown(
-        seconds: seconds,
-        build: (_, time) => TextClass(
-              text: '(${time.toInt().toString()})',
-              textColor: mainColor,
-            ),
-        interval: Duration(milliseconds: 1000),
-        onFinished: onFinished);
-  }
-
   Form pinCodeFields(context) {
     return Form(
       key: _formKey,
@@ -167,11 +173,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               fieldHeight: 50,
               fieldWidth: 43,
               inactiveColor: Colors.grey,
-              // activeColor: Colors.grey,
               selectedFillColor: mainColor,
               selectedColor: Colors.grey,
-              activeFillColor: Colors.white,
-              inactiveFillColor: Colors.white,
+              activeFillColor: white,
+              inactiveFillColor:white,
             ),
             cursorColor: Colors.black,
             animationDuration: Duration(milliseconds: 300),
@@ -200,38 +205,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               return true;
             },
           )),
-    );
-  }
-
-  showAlertDialog({context, height, widget, bottomWidget}) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialogClass(
-        content: Container(
-          width: 300,
-          height: height,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.rectangle,
-            borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: 25),
-              widget,
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Image.asset(
-                  'assets/icons/done.png',
-                ),
-              ),
-              DividerClass(
-                  color: Color.fromRGBO(200, 218, 245, 1), thickness: 2.0),
-              Container(width: double.infinity, child: bottomWidget)
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

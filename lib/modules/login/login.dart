@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/login/forget_password.dart';
+import 'package:lost_app/home/bottom_navigation_bar.dart';
 import 'package:lost_app/modules/register/register.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -24,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextClass(
-                                    text: 'رقم الهاتف',
+                                  text: 'رقم الهاتف',
                                 ),
                                 TextFormFieldClass(
                                     textHint: 'ادخل رقم هاتفك',
@@ -69,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }),
                                 SizedBox(height: 10),
                                 TextClass(
-                                    text: 'كلمه المرور',
+                                  text: 'كلمه المرور',
                                 ),
                                 TextFormFieldClass(
                                   textHint: 'ادخل كلمه المرور',
@@ -93,13 +94,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       return null;
                                   },
                                 ),
-                                TextButton(
-                                    onPressed: () =>
-                                        navigateTo(context, PhoneNumberScreen()),
-                                    child: TextClass(
-                                      text: 'هل نسيت كلمه المرور ؟ ',
-                                      textColor:mainColor,
-                                    )),
+                                TextButtonClass(
+                                  onPressed: () =>
+                                      navigateTo(context, PhoneNumberScreen()),
+                                  text: 'هل نسيت كلمه المرور ؟ ',
+                                  textColor: mainColor,
+                                ),
                                 SizedBox(height: 10),
                                 ButtonTheme(
                                     minWidth: double.infinity,
@@ -107,10 +107,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: RaisedButtonClass(
                                         onPressed: () {
                                           if (_formKey.currentState!.validate())
-                                            print('okey');
+                                            navigateTo(context,HomeScreen());
                                         },
                                         text: 'تسجيل الدخول',
-                                        textColor: Colors.white)),
+                                        textColor: white)),
                                 SizedBox(height: 30),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -124,8 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               context, RegisterScreen()),
                                           child: TextClass(
                                             text: 'إنشاء حساب',
-                                            textColor:mainColor
-                                            ,
+                                            textColor: mainColor,
                                           )),
                                     ),
                                   ],

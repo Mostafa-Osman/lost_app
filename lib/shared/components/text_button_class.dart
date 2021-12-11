@@ -6,7 +6,7 @@ class TextButtonClass extends StatefulWidget {
   late String text;
 
   // required Function (Action happen when press in text)
-  late Function onPress;
+  late Function onPressed;
 
   //initial font size 15
   double fontSize;
@@ -22,7 +22,7 @@ class TextButtonClass extends StatefulWidget {
 
   TextButtonClass({
     required this.text,
-    required this.onPress,
+    required this.onPressed,
     this.fontSize = 15,
     this.textAlign = TextAlign.center,
     this.fontWeight = FontWeight.bold,
@@ -44,7 +44,7 @@ class _TextButtonClassState extends State<TextButtonClass> {
         textColor: widget.textColor,
         textAlign: widget.textAlign,
       ),
-      onPressed: () => widget.onPress(),
+      onPressed: () => widget.onPressed(),
     );
   }
 }
