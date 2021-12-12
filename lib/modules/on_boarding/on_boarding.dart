@@ -6,15 +6,6 @@ import 'package:lost_app/shared/components/smooth_page_indicator_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class OnBoardingModel {
-  final String image;
-  final String title;
-  final String body;
-
-  OnBoardingModel(
-      {required this.image, required this.title, required this.body});
-}
-
 class OnBoardingScreen extends StatefulWidget {
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
@@ -90,22 +81,33 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 }
 
 Widget buildBoardingItem(OnBoardingModel model, splashLength, controller) =>
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-            width: 370,
-            height: 270,
-            child: Image(image: AssetImage(model.image))),
-        SizedBox(height: 10),
-        SmoothPageIndicatorClass(count: splashLength, controller: controller),
-        SizedBox(height: 30),
-        TextClass(
-          text: model.title,
-          fontSize: 25,
-          fontWeight: FontWeight.normal,
-        ),
-        SizedBox(height: 50),
-        TextClass(text: model.body, textColor: whiteBlack),
-      ],
+    SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              width: 370,
+              height: 270,
+              child: Image(image: AssetImage(model.image))),
+          SizedBox(height: 10),
+          SmoothPageIndicatorClass(count: splashLength, controller: controller),
+          SizedBox(height: 30),
+          TextClass(
+            text: model.title,
+            fontSize: 25,
+            fontWeight: FontWeight.normal,
+          ),
+          SizedBox(height: 50),
+          TextClass(text: model.body, textColor: whiteBlack),
+        ],
+      ),
     );
+
+class OnBoardingModel {
+  final String image;
+  final String title;
+  final String body;
+
+  OnBoardingModel(
+      {required this.image, required this.title, required this.body});
+}

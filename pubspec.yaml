@@ -29,6 +29,8 @@ dependencies:
   pin_code_fields: ^7.3.0
   timer_count_down: ^2.2.0
   hexcolor: ^2.0.5
+  flutter_switch: ^0.3.2
+
 
 
 

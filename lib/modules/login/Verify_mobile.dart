@@ -37,9 +37,9 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: SafeArea(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
               TextClass(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
@@ -49,7 +49,8 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                       'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
                   textColor: whiteBlack),
               SizedBox(height: 50),
-              pinCodeFields(context),
+             pinCodeFields(context),
+
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -60,44 +61,43 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                           text: 'التالي',
                           textColor: white,
                           onPressed: () {
-                            if (isForget)
-                              navigateTo(context, ResetPassword());
-                            else {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    AlertDialogClass(
-                                  height: 260.0,
-                                  widget: Column(
-                                    children: [
-                                      TextClass(
-                                        text: 'تهانينا لقد اتممت إنشاء',
+                            (isForget)
+                                ? navigateTo(context, ResetPassword())
+                                : showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialogClass(
+                                      height: 260.0,
+                                      widget: Column(
+                                        children: [
+                                          TextClass(
+                                            text: 'تهانينا لقد اتممت إنشاء',
+                                          ),
+                                          TextClass(
+                                            text: 'الحساب بنجاح',
+                                          ),
+                                        ],
                                       ),
-                                      TextClass(
-                                        text: 'الحساب بنجاح',
+                                      bottomWidget: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          TextButtonClass(
+                                            onPressed: () => navigateTo(
+                                                context, HomeScreen()),
+                                            text: 'الي الصفحه الرئيسيه',
+                                            fontSize: 20,
+                                            textColor: black,
+                                          ),
+                                          TimerClass(
+                                              5,
+                                              Duration(milliseconds: 1000),
+                                              () => navigateTo(
+                                                  context, HomeScreen()))
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  bottomWidget: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      TextButtonClass(
-                                        onPressed: () =>
-                                            navigateTo(context, HomeScreen()),
-                                        text: 'الي الصفحه الرئيسيه',
-                                        fontSize: 20,
-                                        textColor: black,
-                                      ),
-                                      TimerClass(
-                                          5,
-                                          Duration(milliseconds: 1000),
-                                          () =>
-                                              navigateTo(context, HomeScreen()))
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }
+                                    ),
+                                  );
                           })),
                 ),
               ),
@@ -154,56 +154,86 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
     );
   }
 
-  Form pinCodeFields(context) {
+  pinCodeFields(context) {
     return Form(
       key: _formKey,
       child: PinCodeTextField(
-            appContext: context,
-            hintCharacter: '*',
-            pastedTextStyle: TextStyle(
-              color: mainColor,
-              fontWeight: FontWeight.bold,
-            ),
-            length: 6,
-            animationType: AnimationType.fade,
-            pinTheme: PinTheme(
-              shape: PinCodeFieldShape.box,
-              borderRadius: BorderRadius.circular(10),
-              fieldHeight: 50,
-              fieldWidth: 43,
-              inactiveColor: grey,
-              selectedFillColor: mainColor,
-              selectedColor: grey,
-              activeFillColor: white,
-              inactiveFillColor: white,
-            ),
-            cursorColor: black,
-            animationDuration: Duration(milliseconds: 300),
-            enableActiveFill: true,
-            errorAnimationController: errorController,
-            controller: textEditingController,
-            keyboardType: TextInputType.number,
-            boxShadows: [
-              BoxShadow(
-                offset: Offset(0, 1),
-                color:whiteBlack,
-                blurRadius: 10,
-              )
-            ],
-            onCompleted: (v) {
-              print("Completed");
-            },
-            onChanged: (value) {
-              print(value);
-              setState(() {
-                currentText = value;
-              });
-            },
-            beforeTextPaste: (text) {
-              print("Allowing to paste $text");
-              return true;
-            },
+        appContext: context,
+        hintCharacter: '*',
+        pastedTextStyle: TextStyle(
+          color: mainColor,
+          fontWeight: FontWeight.bold,
+        ),
+        length: 5,
+        animationType: AnimationType.fade,
+        pinTheme: PinTheme(
+          shape: PinCodeFieldShape.box,
+          borderRadius: BorderRadius.circular(10),
+          fieldHeight: 50,
+          fieldWidth: 43,
+          inactiveColor: grey,
+          selectedFillColor: mainColor,
+          selectedColor: grey,
+          activeFillColor: white,
+          inactiveFillColor: white,
+        ),
+        cursorColor: black,
+        animationDuration: Duration(milliseconds: 300),
+        enableActiveFill: true,
+        errorAnimationController: errorController,
+        controller: textEditingController,
+        keyboardType: TextInputType.number,
+        boxShadows: [
+          BoxShadow(
+            offset: Offset(0, 1),
+            color: whiteBlack,
+            blurRadius: 10,
           )
+        ],
+        onCompleted: (v) {
+          (isForget)
+              ? navigateTo(context, ResetPassword())
+              : showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialogClass(
+                    height: 260.0,
+                    widget: Column(
+                      children: [
+                        TextClass(
+                          text: 'تهانينا لقد اتممت إنشاء',
+                        ),
+                        TextClass(
+                          text: 'الحساب بنجاح',
+                        ),
+                      ],
+                    ),
+                    bottomWidget: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButtonClass(
+                          onPressed: () => navigateTo(context, HomeScreen()),
+                          text: 'الي الصفحه الرئيسيه',
+                          fontSize: 20,
+                          textColor: black,
+                        ),
+                        TimerClass(5, Duration(milliseconds: 1000),
+                            () => navigateTo(context, HomeScreen()))
+                      ],
+                    ),
+                  ),
+                );
+        },
+        onChanged: (value) {
+          print(value);
+          setState(() {
+            currentText = value;
+          });
+        },
+        beforeTextPaste: (text) {
+          print("Allowing to paste $text");
+          return true;
+        },
+      ),
     );
   }
 }
