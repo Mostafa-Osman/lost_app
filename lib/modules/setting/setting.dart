@@ -17,13 +17,14 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: white,
-          elevation: 0,
-          centerTitle: true,
-          title: TextClass(text: 'الاعدادات', fontSize: 25),
-          leading: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.arrow_back_ios_sharp, color: black))),
+        backgroundColor: white,
+        elevation: 0,
+        centerTitle: true,
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+        title: TextClass(text: 'الاعدادات', fontSize: 25),
+      ),
       body: Container(
           color: white,
           width: double.infinity,

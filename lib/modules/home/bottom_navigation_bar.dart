@@ -19,8 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Color bottomNavBarHomeColor = HexColor('#2DC7FF');
   int indexPage = 0;
   Map<int, PreferredSizeWidget> appBar = {
-    0: homeAppBar(),
-    1: accountAppBar(),
+    0: HomePageAppBar(),
+    1: AccountPageAppBar(),
   };
   Map<int, Widget> page = {
     0: HomePageClass(),

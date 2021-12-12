@@ -14,7 +14,6 @@ class PostScreen extends StatelessWidget {
           color: Colors.black, //change your color here
         ),
         backgroundColor: white,
-
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -67,7 +66,6 @@ class CardPostPage extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Image.asset(
                   image,
-                  //color: Colors.white,
                 ),
               ),
               SizedBox(
