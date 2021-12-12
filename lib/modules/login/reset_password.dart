@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/home/bottom_navigation_bar.dart';
+import 'package:lost_app/modules/home/bottom_navigation_bar.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';

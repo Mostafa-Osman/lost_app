@@ -143,7 +143,7 @@ class _HomePageClassState extends State<HomePageClass> {
                               children: [
                                 TextClass(
                                   text: 'التعليق',
-                                  fontSize: 22,
+                                  fontSize: 20,
                                 ),
                                 SizedBox(
                                   width: 10,
@@ -179,7 +179,7 @@ class _HomePageClassState extends State<HomePageClass> {
                             children: [
                               TextClass(
                                 text: 'مشاركه',
-                                fontSize: 22,
+                                fontSize: 20,
                               ),
                               SizedBox(
                                 width: 10,
