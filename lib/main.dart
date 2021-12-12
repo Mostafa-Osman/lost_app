@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:lost_app/home/bottom_navigation_bar.dart';
+import 'package:lost_app/modules/home/bottom_navigation_bar.dart';
 
 import 'modules/login/enter_phone_number.dart';
 import 'modules/login/Verify_mobile.dart';
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar', ''),
       ],
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }

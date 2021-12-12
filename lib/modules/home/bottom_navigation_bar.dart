@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:lost_app/home/account.dart';
-import 'package:lost_app/home/home.dart';
-import 'package:lost_app/home/appbar_widget.dart';
+import 'package:lost_app/modules/home/account.dart';
+import 'package:lost_app/modules/home/appbar_widget.dart';
+import 'package:lost_app/modules/home/home.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';

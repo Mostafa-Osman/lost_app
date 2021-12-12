@@ -170,7 +170,7 @@ class _AccountPageClassState extends State<AccountPageClass> {
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (ctx, index) {
               return Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Container(
                   height: 273.0,
                   decoration: BoxDecoration(
