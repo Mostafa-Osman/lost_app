@@ -3,6 +3,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/modules/home/account.dart';
 import 'package:lost_app/modules/home/appbar_widget.dart';
 import 'package:lost_app/modules/home/home.dart';
+import 'package:lost_app/modules/home/post.dart';
+import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -35,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: HexColor('#2DC7FF'),
         //Floating action button on Scaffold
         onPressed: () {
-          //code to execute on button press
+          navigateTo(context, PostScreen());
         },
         child: Image.asset(
           'assets/icons/post.png',
