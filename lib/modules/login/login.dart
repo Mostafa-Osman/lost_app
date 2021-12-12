@@ -24,124 +24,127 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isVisible = false;
 
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
-          child: SafeArea(
-            child:  Container(
-                height:MediaQuery.of(context).size.height, //770,
-                width: double.infinity,
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 400,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/login.png',
-                      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              height: size.height, //770,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  Container(
+                    height: size.height / 1.75,
+                    width: double.infinity,
+                    child: Image.asset(
+                      'assets/images/login.png',
                     ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 450,
-                        child: Form(
-                          key: _formKey,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextClass(
-                                    text: 'رقم الهاتف',
-                                  ),
-                                  TextFormFieldClass(
-                                      textHint: 'ادخل رقم هاتفك',
-                                      controller: loginPhoneControl,
-                                      keyboardType:
-                                          TextInputType.numberWithOptions(),
-                                      validator: (value) {
-                                        if (value!.isEmpty)
-                                          return 'من فضلك ادخل رقم هاتفك';
-                                        else if (value.length != 11)
-                                          return 'رقم الهاتف غير صحيح';
-                                        return null;
-                                      }),
-                                  SizedBox(height: 10),
-                                  TextClass(
-                                    text: 'كلمه المرور',
-                                  ),
-                                  TextFormFieldClass(
-                                    textHint: 'ادخل كلمه المرور',
-                                    controller: loginPasswordControl,
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            isVisible = !isVisible;
-                                          });
-                                        },
-                                        icon: isVisible
-                                            ? Icon(Icons.visibility)
-                                            : Icon(Icons.visibility_off)),
-                                    obscureText: isVisible,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: size.height / 1.7,
+                      child: Form(
+                        key: _formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextClass(
+                                  text: 'رقم الهاتف',
+                                ),
+                                TextFormFieldClass(
+                                    textHint: 'ادخل رقم هاتفك',
+                                    controller: loginPhoneControl,
+                                    keyboardType:
+                                        TextInputType.numberWithOptions(),
                                     validator: (value) {
                                       if (value!.isEmpty)
-                                        return 'من فضلك ادخل كلمه المرور';
-                                      else if (value.length < 8)
-                                        return 'كلمه المرور اقل من 8 احرف';
-                                      else
-                                        return null;
-                                    },
-                                  ),
-                                  TextButtonClass(
-                                    onPressed: () => navigateTo(
-                                        context, PhoneNumberScreen()),
-                                    text: 'هل نسيت كلمه المرور ؟ ',
-                                    textColor: whiteBlack,
-                                  ),
-                                  SizedBox(height: 10),
-                                  ButtonTheme(
-                                      minWidth: double.infinity,
-                                      height: 50,
-                                      child: RaisedButtonClass(
-                                          onPressed: () {
-                                            if (_formKey.currentState!
-                                                .validate())
-                                              navigateTo(context, HomeScreen());
-                                          },
-                                          text: 'تسجيل الدخول',
-                                          textColor: white)),
-                                  SizedBox(height: 50),
-                                  Row(
+                                        return 'من فضلك ادخل رقم هاتفك';
+                                      else if (value.length != 11)
+                                        return 'رقم الهاتف غير صحيح';
+                                      return null;
+                                    }),
+                                SizedBox(height: 15),
+                                TextClass(
+                                  text: 'كلمه المرور',
+                                ),
+                                TextFormFieldClass(
+                                  textHint: 'ادخل كلمه المرور',
+                                  controller: loginPasswordControl,
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          isVisible = !isVisible;
+                                        });
+                                      },
+                                      icon: isVisible
+                                          ? Icon(Icons.visibility)
+                                          : Icon(Icons.visibility_off)),
+                                  obscureText: isVisible,
+                                  validator: (value) {
+                                    if (value!.isEmpty)
+                                      return 'من فضلك ادخل كلمه المرور';
+                                    else if (value.length < 8)
+                                      return 'كلمه المرور اقل من 8 احرف';
+                                    else
+                                      return null;
+                                  },
+                                ),
+                                TextButtonClass(
+                                  onPressed: () =>
+                                      navigateTo(context, PhoneNumberScreen()),
+                                  text: 'هل نسيت كلمه المرور ؟ ',
+                                  textColor: whiteBlack,
+                                ),
+                                SizedBox(height: 10),
+                                ButtonTheme(
+                                    minWidth: double.infinity,
+                                    height: 50,
+                                    child: RaisedButtonClass(
+                                        onPressed: () {
+                                          if (_formKey.currentState!.validate())
+                                            navigateTo(context, HomeScreen());
+                                        },
+                                        text: 'تسجيل الدخول',
+                                        textColor: white)),
+                                Expanded(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                       TextClass(
-                                        text: 'ليس لديك حساب ؟',
-                                        textColor: whiteBlack,
+                                      Expanded(
+                                        child: TextClass(
+                                          text: 'ليس لديك حساب ؟',
+                                          textColor: whiteBlack,
+                                        ),
                                       ),
-                                       TextButton(
+                                      Expanded(
+                                        child: TextButton(
                                             onPressed: () => navigatorAndFinish(
                                                 context, RegisterScreen()),
                                             child: TextClass(
                                               text: 'إنشاء حساب',
                                               textColor: mainColor,
-                                            )
+                                            )),
                                       ),
                                     ],
                                   ),
-                                ]),
-                          ),
+                                ),
+                              ]),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
         ),
-
+      ),
     );
   }
 }

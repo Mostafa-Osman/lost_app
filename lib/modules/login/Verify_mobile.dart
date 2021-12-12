@@ -158,9 +158,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
   Form pinCodeFields(context) {
     return Form(
       key: _formKey,
-      child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
-          child: PinCodeTextField(
+      child: PinCodeTextField(
             appContext: context,
             hintCharacter: '*',
             pastedTextStyle: TextStyle(
@@ -206,7 +204,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               print("Allowing to paste $text");
               return true;
             },
-          )),
+          )
     );
   }
 }
