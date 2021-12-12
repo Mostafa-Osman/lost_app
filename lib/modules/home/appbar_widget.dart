@@ -5,51 +5,6 @@ import 'package:lost_app/shared/components/text_form_field_class.dart';
 TextEditingController homeAppBarController = TextEditingController();
 TextEditingController accAppBarController = TextEditingController();
 
-class HomeAppBar extends StatelessWidget implements PreferredSizeWidget{
-
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0.0,
-      toolbarHeight: 55,
-      title: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            //borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: ConstrainedBox(
-              constraints: BoxConstraints.tightFor(height: 40),
-              child: TextFormFieldClass(
-                controller: homeAppBarController,
-                roundedRectangleBorder: 6,
-                textHint: 'البحث...',
-              ),
-            ),
-          )),
-      leading: Padding(
-        padding: const EdgeInsets.only(right: 10.0),
-        child: IconButton(
-          iconSize: 2,
-          icon: Image.asset(
-            'assets/icons/notification.png',
-            color: Colors.black,
-          ),
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => throw UnimplementedError();
-
-}
-
 
 PreferredSizeWidget homeAppBar() {
   return AppBar(
