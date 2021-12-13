@@ -240,11 +240,20 @@ class CommentScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(0.0),
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: Card(
-                      elevation: 10,
+                    child: Container(
                       child: Container(
-                        height: 90,
+                        height: 80,
                         width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.0, 1.0), //(x,y)
+                              blurRadius: 6.0,
+                            ),
+                          ],
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -252,7 +261,7 @@ class CommentScreen extends StatelessWidget {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 15, left: 15),
+                                const EdgeInsets.only(right: 15, left: 15),
                                 child: Container(
                                   child: TextFormFieldClass(
                                     controller: commentController,
