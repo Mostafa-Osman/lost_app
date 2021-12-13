@@ -17,6 +17,7 @@ class TextClass extends StatelessWidget {
   late Color textColor;
 
   TextOverflow? overflow;
+  int? maxLines;
 
   //initial Text backgroundColor white
   // Color backgroundColor = Colors.white,
@@ -28,6 +29,7 @@ class TextClass extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.textColor = Colors.black,
     this.overflow,
+    this.maxLines,
   });
 
   @override
@@ -42,6 +44,7 @@ class TextClass extends StatelessWidget {
         color: textColor,
         fontFamily: 'Tajawal',
       ),
+      maxLines: maxLines,
     );
   }
 }

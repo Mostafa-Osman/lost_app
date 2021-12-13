@@ -45,7 +45,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       child: TextClass(
                           text: 'الاشعارات',
                           fontSize: 20,
-                          textColor: whiteBlack)),
+                          textColor: lightGrey)),
                   trailing: Icon(Icons.arrow_back_ios_new_outlined),
                 ),
                 ListTile(
@@ -53,7 +53,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   title: Align(
                       alignment: Alignment.topRight,
                       child: TextClass(
-                          text: 'اللغه', fontSize: 20, textColor: whiteBlack)),
+                          text: 'اللغه', fontSize: 20, textColor: lightGrey)),
                   trailing: Icon(Icons.arrow_back_ios_new_outlined),
                 ),
                 SizedBox(height: 10),
@@ -64,7 +64,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       child: TextClass(
                           text: 'الوضع الداكن',
                           fontSize: 20,
-                          textColor: whiteBlack),
+                          textColor: lightGrey),
                     ),
                     Spacer(),
                     Padding(
