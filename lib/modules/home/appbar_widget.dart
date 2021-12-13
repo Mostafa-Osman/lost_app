@@ -1,15 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:lost_app/modules/setting/setting.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 
-TextEditingController homeAppBarController = TextEditingController();
-TextEditingController accAppBarController = TextEditingController();
+
+
 
 class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
   HomePageAppBar({Key? key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+  TextEditingController homeAppBarController = TextEditingController();
 
   @override
   final Size preferredSize; // default is 56.0
@@ -36,7 +36,7 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
             child: ConstrainedBox(
               constraints: BoxConstraints.tightFor(height: 40),
               child: TextFormFieldClass(
-                controller: homeAppBarController,
+                controller: widget.homeAppBarController,
                 roundedRectangleBorder: 6,
                 textHint: 'البحث...',
 
@@ -60,7 +60,7 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
 
 class AccountPageAppBar extends StatefulWidget implements PreferredSizeWidget {
   AccountPageAppBar({Key? key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
-
+  TextEditingController accAppBarController = TextEditingController();
   @override
   final Size preferredSize; // default is 56.0
 
@@ -102,7 +102,6 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
               'assets/icons/profile_acc_ic.png',
             ),
             onPressed: () {
-
             },
           ),
         ),
