@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 

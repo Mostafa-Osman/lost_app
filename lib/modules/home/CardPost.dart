@@ -11,6 +11,7 @@ class CardPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (ctx, index) {
         return Padding(
           padding: const EdgeInsets.all(20.0),

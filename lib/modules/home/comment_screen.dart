@@ -104,54 +104,51 @@ class CommentScreen extends StatelessWidget {
                                       children: [
                                         Container(
                                           height: 100,
-                                          child: Container(
-                                            width: 200,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                              children: [
-                                                TextClass(
-                                                  text:
-                                                  'الاسم : محمد محمد محمد احمد محمد',
-                                                  textAlign: TextAlign.right,
-                                                  fontSize: 15,
-                                                  overflow:
-                                                  TextOverflow.ellipsis,
-                                                ),
-                                                TextClass(
-                                                  text: 'السن : ٢٢',
-                                                  textAlign: TextAlign.right,
-                                                  fontSize: 15,
-                                                  overflow:
-                                                  TextOverflow.ellipsis,
-                                                ),
-                                                TextClass(
-                                                  text: 'الجنس : ذكر',
-                                                  textAlign: TextAlign.right,
-                                                  fontSize: 15,
-                                                  overflow:
-                                                  TextOverflow.ellipsis,
-                                                ),
-                                                TextClass(
-                                                  text:
-                                                  'العنوان : المعادي - القاهره',
-                                                  textAlign: TextAlign.right,
-                                                  fontSize: 15,
-                                                  overflow:
-                                                  TextOverflow.ellipsis,
-                                                ),
-                                                TextClass(
-                                                  text:
-                                                  'هاتف التواصل : 04444444444',
-                                                  textAlign: TextAlign.right,
-                                                  fontSize: 15,
-                                                  overflow:
-                                                  TextOverflow.ellipsis,
-                                                ),
-                                              ],
-                                            ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              TextClass(
+                                                text:
+                                                'الاسم : محمد محمد محمد احمد محمد',
+                                                textAlign: TextAlign.right,
+                                                fontSize: 15,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              TextClass(
+                                                text: 'السن : ٢٢',
+                                                textAlign: TextAlign.right,
+                                                fontSize: 15,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              TextClass(
+                                                text: 'الجنس : ذكر',
+                                                textAlign: TextAlign.right,
+                                                fontSize: 15,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              TextClass(
+                                                text:
+                                                'العنوان : المعادي - القاهره',
+                                                textAlign: TextAlign.right,
+                                                fontSize: 15,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              TextClass(
+                                                text:
+                                                'هاتف التواصل : 04444444444',
+                                                textAlign: TextAlign.right,
+                                                fontSize: 15,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Row(
@@ -257,11 +254,14 @@ class CommentScreen extends StatelessWidget {
                                     prefix: Transform(
                                       alignment: Alignment.center,
                                       transform: Matrix4.rotationY(math.pi),
-                                      child: IconButton(
-                                        icon: Icon(Icons.send_rounded),
-                                        iconSize: 30.0,
-                                        color: Colors.blue,
-                                        onPressed: () {},
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 4.0),
+                                        child: IconButton(
+                                          icon: Icon(Icons.send_rounded),
+                                          iconSize: 30.0,
+                                          color: HexColor('#a8d1ff'),
+                                          onPressed: () {},
+                                        ),
                                       ),
                                     ),
                                   ),

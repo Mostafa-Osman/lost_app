@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar', ''),
       ],
-      home: CommentScreen(details: {},),
+      home: HomeScreen(),
     );
   }
 }
