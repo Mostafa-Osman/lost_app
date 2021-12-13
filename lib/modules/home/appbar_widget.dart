@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/modules/notification/notification.dart';
 import 'package:lost_app/modules/setting/setting.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -51,7 +52,7 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
             'assets/icons/notification.png',
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () =>navigateTo(context, NotificationScreen()),
         ),
       ),
     );
