@@ -17,8 +17,15 @@ class CommentScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: white,
         elevation: 0.0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_sharp, color: black),
+        ),
         iconTheme: IconThemeData(
-          color: black, //change your color here
+          color: black,
+          //change your color here
         ),
       ),
       body: Container(

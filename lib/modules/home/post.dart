@@ -10,6 +10,12 @@ class PostScreen extends StatelessWidget {
         title: TextClass(
           text: 'اختر نوع المنشور',
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_sharp, color: black),
+        ),
         iconTheme: IconThemeData(
           color: Colors.black, //change your color here
         ),
