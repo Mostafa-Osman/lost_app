@@ -23,6 +23,9 @@ class _SettingScreenState extends State<SettingScreen> {
         iconTheme: IconThemeData(
           color: Colors.black, //change your color here
         ),
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back_ios_sharp, color: black)),
         title: TextClass(text: 'الاعدادات', fontSize: 25),
       ),
       body: Container(
