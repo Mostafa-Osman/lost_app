@@ -78,14 +78,7 @@ class _AccountPageClassState extends State<AccountPageClass> {
               ),
             ),
           ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (ctx, index) {
-              return CardPost();
-            },
-            itemCount: 10,
-          ),
+          CardPost(),
         ],
       ),
     );

@@ -20,7 +20,7 @@ class TextFormFieldClass extends StatelessWidget {
   late Color backgroundColor;
 
   // prefix Icon
-  Icon? prefix;
+  Widget? prefix;
 
   //Rounded Rectangle Border (initial 25.0)
   late double roundedRectangleBorder;

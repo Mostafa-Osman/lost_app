@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -54,6 +55,9 @@ class CardPostPage extends StatelessWidget {
     return Container(
       width: 400,
       height: 310,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+      ),
       child: Card(
         elevation: 6,
         child: FlatButton(

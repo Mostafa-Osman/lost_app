@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 10.0,
         //shape of notch
         notchMargin: 10,
-        //notche margin between floating button and bottom appbar
+
         child: Container(
           height: 70,
           child: Row(

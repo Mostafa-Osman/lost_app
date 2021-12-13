@@ -39,6 +39,7 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
                 controller: homeAppBarController,
                 roundedRectangleBorder: 6,
                 textHint: 'البحث...',
+
               ),
             ),
           )),
