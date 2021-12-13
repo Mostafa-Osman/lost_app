@@ -8,5 +8,6 @@ Color white= Colors.white;
 Color black=Colors.black;
 Color grey=Colors.grey;
 Color red=Colors.red;
-Color whiteBlack=HexColor('#7D7C83');
+Color lightGrey=HexColor('#7D7C83');
 Color blue=HexColor('#005CE6');
+Color lightBlue= HexColor('#E3F0FF');

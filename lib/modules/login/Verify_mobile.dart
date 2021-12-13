@@ -47,7 +47,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               TextClass(
                   text:
                       'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
-                  textColor: whiteBlack),
+                  textColor: lightGrey),
               SizedBox(height: 50),
              pinCodeFields(context),
 
@@ -106,7 +106,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (!resend)
-                    TextClass(text: 'لم يصلك الرمز ؟', textColor: whiteBlack),
+                    TextClass(text: 'لم يصلك الرمز ؟', textColor: lightGrey),
                   TextButtonClass(
                     text: reSendCode,
                     textColor: mainColor,
@@ -164,7 +164,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
           color: mainColor,
           fontWeight: FontWeight.bold,
         ),
-        length: 5,
+        length: 6,
         animationType: AnimationType.fade,
         pinTheme: PinTheme(
           shape: PinCodeFieldShape.box,
@@ -186,7 +186,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
         boxShadows: [
           BoxShadow(
             offset: Offset(0, 1),
-            color: whiteBlack,
+            color: lightGrey,
             blurRadius: 10,
           )
         ],

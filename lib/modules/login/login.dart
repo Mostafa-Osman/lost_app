@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: () =>
                                       navigateTo(context, PhoneNumberScreen()),
                                   text: 'هل نسيت كلمه المرور ؟ ',
-                                  textColor: whiteBlack,
+                                  textColor: lightGrey,
                                 ),
                                 SizedBox(height: 10),
                                 ButtonTheme(
@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Expanded(
                                         child: TextClass(
                                           text: 'ليس لديك حساب ؟',
-                                          textColor: whiteBlack,
+                                          textColor: lightGrey,
                                         ),
                                       ),
                                       Expanded(
