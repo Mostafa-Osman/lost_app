@@ -14,7 +14,7 @@ class NotificationScreen extends StatelessWidget {
           centerTitle: true,
           title: TextClass(text: 'الاشعارات', fontSize: 25),
           leading: IconButton(
-              onPressed: () {},
+              onPressed: ()=>Navigator.pop(context),
               icon: Icon(Icons.arrow_back_ios_sharp, color: black))),
       body: ListView.builder(
         itemBuilder: (ctx, index) {
