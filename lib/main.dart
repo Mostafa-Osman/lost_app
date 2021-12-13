@@ -8,6 +8,7 @@ import 'modules/login/Verify_mobile.dart';
 import 'modules/login/login.dart';
 import 'modules/login/reset_password.dart';
 import 'modules/on_boarding/on_boarding.dart';
+import 'modules/posts_found/posts_found.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar', ''),
       ],
-      home: HomeScreen(),
+      home: PostsFoundScreen(),
     );
   }
 }

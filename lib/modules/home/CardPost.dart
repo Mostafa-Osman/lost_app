@@ -222,6 +222,5 @@ class CardPost extends StatelessWidget {
       },
       itemCount: 10,
     );
-
   }
 }
