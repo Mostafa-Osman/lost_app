@@ -21,8 +21,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var registerPasswordControl = TextEditingController();
   var registerConfirmPasswordControl = TextEditingController();
 
-  bool isVisible = false;
-  bool confirmIsVisible = false;
+  bool notVisible = true;
+  bool confirmNotVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -49,86 +49,77 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           TextClass(text: 'الاسم', fontSize: 15),
                           TextFormFieldClass(
-                              textHint: 'ادخل اسمك',
-                              controller: registerNameControl,
-                              validator: (value) {
-                                if (value!.isEmpty) return 'من فضلك ادخل اسمك';
-                                return null;
-                              }),
+                            textHint: 'ادخل اسمك',
+                            controller: registerNameControl,
+                            validator: (value) =>
+                                value!.isEmpty ? 'من فضلك ادخل اسمك' : null,
+                          ),
                           SizedBox(height: 20),
                           TextClass(text: 'رقم الهاتف', fontSize: 15),
                           TextFormFieldClass(
-                              textHint: 'ادخل رقم هاتفك',
-                              controller: registerPhoneControl,
-                              keyboardType: TextInputType.numberWithOptions(),
-                              validator: (value) {
-                                if (value!.isEmpty)
-                                  return 'من فضلك ادخل رقم هاتفك';
-                                else if (value.length != 11)
-                                  return 'رقم الهاتف غير صحيح';
-                                return null;
-                              }),
+                            textHint: 'ادخل رقم هاتفك',
+                            controller: registerPhoneControl,
+                            keyboardType: TextInputType.numberWithOptions(),
+                            validator: (value) => value!.isEmpty
+                                ? 'من فضلك ادخل رقم هاتفك'
+                                : (value.length != 11)
+                                    ? 'رقم الهاتف غير صحيح'
+                                    : null,
+                          ),
                           SizedBox(height: 20),
                           TextClass(
                               text: 'البريد الالكتروني (اختياري)',
                               fontSize: 15),
                           TextFormFieldClass(
-                              textHint: 'ادخل بريدك الالكتروني',
-                              controller: registerEmailControl,
-                              validator: (value) {
-                                if (value!.isEmpty)
-                                  return 'من فضلك ادخل البريد الالكتروني';
-                                else if (!value.contains('@'))
-                                  return 'البريد الالكتروني الذي ادخلته غير صحيح';
-                                return null;
-                              }),
+                            textHint: 'ادخل بريدك الالكتروني',
+                            controller: registerEmailControl,
+                            validator: (value) => value!.isEmpty
+                                ? 'من فضلك ادخل البريد الالكتروني'
+                                : (!value.contains('@'))
+                                    ? 'البريد الالكتروني الذي ادخلته غير صحيح'
+                                    : null,
+                          ),
                           SizedBox(height: 20),
                           TextClass(text: 'كلمه المرور', fontSize: 15),
                           TextFormFieldClass(
                             textHint: 'ادخل كلمه المرور',
                             controller: registerPasswordControl,
-                            obscureText: isVisible,
+                            obscureText: notVisible,
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    isVisible = !isVisible;
+                                    notVisible = !notVisible;
                                   });
                                 },
-                                icon: isVisible
+                                icon: notVisible
                                     ? Icon(Icons.visibility)
                                     : Icon(Icons.visibility_off)),
-                            validator: (value) {
-                              if (value!.isEmpty)
-                                return 'من فضلك ادخل كلمه المرور';
-                              else if (value.length < 8)
-                                return 'كلمه المرور اقل من 8 احرف';
-                              else
-                                return null;
-                            },
+                            validator: (value) => value!.isEmpty
+                                ? 'من فضلك ادخل كلمه المرور'
+                                : (value.length < 8)
+                                    ? 'كلمه المرور اقل من 8 احرف'
+                                    : null,
                           ),
                           SizedBox(height: 20),
                           TextClass(text: 'تأكيد كلمه المرور ', fontSize: 15),
                           TextFormFieldClass(
                             textHint: ' اعد تأكيد ادخل كلمه المرور',
                             controller: registerConfirmPasswordControl,
-                            obscureText: confirmIsVisible,
+                            obscureText: confirmNotVisible,
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    confirmIsVisible = !confirmIsVisible;
+                                    confirmNotVisible = !confirmNotVisible;
                                   });
                                 },
-                                icon: confirmIsVisible
+                                icon: confirmNotVisible
                                     ? Icon(Icons.visibility)
                                     : Icon(Icons.visibility_off)),
-                            validator: (value) {
-                              if (value!.isEmpty)
-                                return 'من فضلك ادخل كلمه المرور';
-                              else if (value.length < 8)
-                                return 'كلمه المرور اقل من 8 احرف';
-                              else
-                                return null;
-                            },
+                            validator: (value) => value!.isEmpty
+                                ? 'من فضلك اعد ادخال كلمه المرور'
+                                : (value != registerPasswordControl.text)
+                                    ? 'كلمه المرور غير متطابق'
+                                    : null,
                           ),
                           SizedBox(height: 30),
                           ButtonTheme(

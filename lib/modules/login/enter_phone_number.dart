@@ -26,7 +26,7 @@ class PhoneNumberScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     TextClass(
-                      text: 'ادخا رقم هاتفك لنتمكن من ارسال رمز التاكيد اليك',
+                      text: 'ادخل رقم هاتفك لنتمكن من ارسال رمز التاكيد اليك',
                       fontSize: 20.0,
                       textColor: lightGrey,
                     ),
@@ -44,11 +44,11 @@ class PhoneNumberScreen extends StatelessWidget {
                         controller: textEditingController,
                         textHint: 'ادخل رقم هاتفك',
                         keyboardType: TextInputType.phone,
-                        validator: (value) {
-                          if (value!.isEmpty) return 'من فضلك ادخل رقم هاتفك';
-                          if (value.length != 11) return 'رقم الهاتف غير صحيح';
-                          return null;
-                        },
+                        validator: (value) => value!.isEmpty
+                            ? 'من فضلك ادخل رقم هاتفك'
+                            : (value.length != 11)
+                                ? 'رقم الهاتف غير صحيح'
+                                : null,
                       ),
                     ),
                     Expanded(

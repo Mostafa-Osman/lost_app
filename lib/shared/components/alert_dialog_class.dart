@@ -20,6 +20,7 @@ class AlertDialogClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: backgroundColor,
+
       contentPadding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       insetPadding: EdgeInsets.symmetric(vertical: 50),
       content: Container(
@@ -34,12 +35,13 @@ class AlertDialogClass extends StatelessWidget {
           children: [
             SizedBox(height: 25),
             widget,
-            Padding(
+        Padding(
               padding: const EdgeInsets.all(15.0),
               child: Image.asset(
                 'assets/icons/done.png',
               ),
             ),
+
             DividerClass(
                 color: Color.fromRGBO(200, 218, 245, 1), thickness: 2.0),
             Container(width: double.infinity, child: bottomWidget)

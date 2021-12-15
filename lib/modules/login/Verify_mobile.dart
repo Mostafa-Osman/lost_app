@@ -62,7 +62,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                           textColor: white,
                           onPressed: () {
                             (isForget)
-                                ? navigateTo(context, ResetPassword())
+                                ? navigateTo(context, ResetPasswordScreen())
                                 : showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
@@ -192,7 +192,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
         ],
         onCompleted: (v) {
           (isForget)
-              ? navigateTo(context, ResetPassword())
+              ? navigateTo(context, ResetPasswordScreen())
               : showDialog(
                   context: context,
                   builder: (BuildContext context) => AlertDialogClass(

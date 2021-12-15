@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   var loginPhoneControl = TextEditingController();
 
   var loginPasswordControl = TextEditingController();
-  bool isVisible = false;
+  bool notVisible = true;
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -62,13 +62,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     controller: loginPhoneControl,
                                     keyboardType:
                                         TextInputType.numberWithOptions(),
-                                    validator: (value) {
-                                      if (value!.isEmpty)
-                                        return 'من فضلك ادخل رقم هاتفك';
-                                      else if (value.length != 11)
-                                        return 'رقم الهاتف غير صحيح';
-                                      return null;
-                                    }),
+                                    validator: (value) => value!.isEmpty
+                                        ? 'من فضلك ادخل رقم هاتفك'
+                                        : (value.length != 11)
+                                        ? 'رقم الهاتف غير صحيح'
+                                        : null,
+                                    ),
                                 SizedBox(height: 15),
                                 TextClass(
                                   text: 'كلمه المرور',
@@ -79,21 +78,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                   suffixIcon: IconButton(
                                       onPressed: () {
                                         setState(() {
-                                          isVisible = !isVisible;
+                                          notVisible = !notVisible;
                                         });
                                       },
-                                      icon: isVisible
+                                      icon: notVisible
                                           ? Icon(Icons.visibility)
                                           : Icon(Icons.visibility_off)),
-                                  obscureText: isVisible,
-                                  validator: (value) {
-                                    if (value!.isEmpty)
-                                      return 'من فضلك ادخل كلمه المرور';
-                                    else if (value.length < 8)
-                                      return 'كلمه المرور اقل من 8 احرف';
-                                    else
-                                      return null;
-                                  },
+                                  obscureText: notVisible,
+                                  validator: (value) =>value!.isEmpty
+                                      ? 'من فضلك ادخل كلمه المرور'
+                                      : (value.length < 8)
+                                      ? 'كلمه المرور اقل من 8 احرف'
+                                      : null,
+
                                 ),
                                 TextButtonClass(
                                   onPressed: () =>

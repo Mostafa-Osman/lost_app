@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextFormFieldClass extends StatelessWidget {
   //required controller
-  late final TextEditingController controller;
+  final TextEditingController controller;
 
   //validator
   FormFieldValidator<String>? validator;
@@ -10,23 +10,24 @@ class TextFormFieldClass extends StatelessWidget {
   //Hint text
   String? textHint;
 
-  //Hint color (initial color black)
-  late Color hintColor;
-
+  // //Hint color (initial color black)
+  Color hintColor;
+  TextStyle? hintStyle;
+   TextAlign textAlign;
   //Text color (initial color black)
-  late Color textColor;
+  Color textColor;
 
   //background color (initial color white)
-  late Color backgroundColor;
+  Color backgroundColor;
 
   // prefix Icon
   Widget? prefix;
 
-  //Rounded Rectangle Border (initial 25.0)
-  late double roundedRectangleBorder;
+  //Rounded Rectangle Border (initial 15.0)
+  double roundedRectangleBorder;
 
   //obscure Text
-  late bool obscureText;
+  bool obscureText;
 
   //Widget suffix Icon
   Widget? suffixIcon;
@@ -35,6 +36,7 @@ class TextFormFieldClass extends StatelessWidget {
   TextInputType? keyboardType;
 
   EdgeInsetsGeometry contentPadding;
+
   //label
   String? label;
   InputDecoration? decoration;
@@ -45,7 +47,9 @@ class TextFormFieldClass extends StatelessWidget {
     required this.controller,
     this.validator,
     this.textHint,
+    this.hintStyle,
     this.hintColor = Colors.black38,
+    this.textAlign=TextAlign.start,
     this.textColor = const Color.fromRGBO(4, 15, 15, 1),
     this.backgroundColor = Colors.white,
     this.prefix,
@@ -56,7 +60,8 @@ class TextFormFieldClass extends StatelessWidget {
     this.label,
     this.decoration,
     this.textStyle,
-    this.contentPadding = const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+    this.contentPadding =
+        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
   });
 
   @override
@@ -65,8 +70,10 @@ class TextFormFieldClass extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,
+      textAlign: textAlign,
       style: TextStyle(
         color: textColor,
+
         fontFamily: 'Tajawal',
       ),
       strutStyle: structStyle,
@@ -81,12 +88,11 @@ class TextFormFieldClass extends StatelessWidget {
           borderRadius: BorderRadius.circular(roundedRectangleBorder),
         ),
         prefixIcon: prefix,
-        hintStyle: TextStyle(color: hintColor),
+        hintStyle: hintStyle,
         // icon: icon,
         suffixIcon: suffixIcon,
       ),
       obscureText: obscureText,
-
     );
   }
 }

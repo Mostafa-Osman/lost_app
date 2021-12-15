@@ -11,12 +11,12 @@ import 'package:lost_app/shared/styles/color.dart';
 
 import 'enter_phone_number.dart';
 
-class ResetPassword extends StatefulWidget {
+class ResetPasswordScreen extends StatefulWidget {
   @override
-  _ResetPasswordState createState() => _ResetPasswordState();
+  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
 
-class _ResetPasswordState extends State<ResetPassword> {
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   var resetPasswordControl = TextEditingController();
 
   var resetConfirmPasswordControl = TextEditingController();
@@ -57,14 +57,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                                 icon: isVisible
                                     ? Icon(Icons.visibility)
                                     : Icon(Icons.visibility_off)),
-                            validator: (value) {
-                              if (value!.isEmpty)
-                                return 'من فضلك ادخل كلمه المرور';
-                              else if (value.length < 8)
-                                return 'كلمه المرور اقل من 8 احرف';
-                              else
-                                return null;
-                            },
+                            validator: (value) => value!.isEmpty
+                                ? 'من فضلك ادخل كلمه المرور'
+                                : (value.length < 8)
+                                    ? 'كلمه المرور اقل من 8 احرف'
+                                    : null,
                           ),
                           SizedBox(height: 20),
                           TextClass(text: 'تأكيد كلمه المرور ', fontSize: 15),
@@ -81,14 +78,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                                 icon: confirmIsVisible
                                     ? Icon(Icons.visibility)
                                     : Icon(Icons.visibility_off)),
-                            validator: (value) {
-                              if (value!.isEmpty)
-                                return 'من فضلك ادخل كلمه المرور';
-                              else if (value.length < 8)
-                                return 'كلمه المرور اقل من 8 احرف';
-                              else
-                                return null;
-                            },
+                            validator: (value) => value!.isEmpty
+                                ? 'من فضلك اعد ادخال كلمه المرور'
+                                : (value != resetPasswordControl.text)
+                                    ? 'كلمه المرور غير متطابق'
+                                    : null,
                           ),
                         ],
                       ),
@@ -109,6 +103,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   context: context,
                                   builder: (BuildContext context) =>
                                       AlertDialogClass(
+
                                     height: 260.0,
                                     widget: Column(
                                       children: [

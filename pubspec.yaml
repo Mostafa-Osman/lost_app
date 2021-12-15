@@ -30,6 +30,8 @@ dependencies:
   timer_count_down: ^2.2.0
   hexcolor: ^2.0.5
   flutter_switch: ^0.3.2
+  flutter_form_builder: ^7.0.0
+  countries_utils: ^1.0.1
 
 
 
