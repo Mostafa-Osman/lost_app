@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/modules/posts_found/posts_found.dart';
+import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -33,11 +35,16 @@ class PostScreen extends StatelessWidget {
               color: white,
               child: Column(
                 children: [
-                  CardPostPage(image: 'assets/images/founded_post.png', text: 'ابحث عن احد المفقودين'),
+                  CardPostPage(
+                      image: 'assets/images/founded_post.png',
+                      text: 'ابحث عن احد المفقودين'),
                   SizedBox(
                     height: 20,
                   ),
-                  CardPostPage(image: 'assets/images/lost_post.png', text: 'وجدت احد المفقودين'),
+                  CardPostPage(
+                    image: 'assets/images/lost_post.png',
+                    text: 'وجدت احد المفقودين',
+                  ),
                 ],
               ),
             ),
@@ -48,12 +55,12 @@ class PostScreen extends StatelessWidget {
   }
 }
 
-
 class CardPostPage extends StatelessWidget {
   final String image;
   final String text;
+  Widget? page;
 
-  CardPostPage({required this.image, required this.text});
+  CardPostPage({required this.image, required this.text, this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +73,9 @@ class CardPostPage extends StatelessWidget {
       child: Card(
         elevation: 6,
         child: FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            //navigateTo(context, null);
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

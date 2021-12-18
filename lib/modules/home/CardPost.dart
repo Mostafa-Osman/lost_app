@@ -48,7 +48,7 @@ class CardPost extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
                               child: TextClass(
-                                text: 'Mansour Tarek',
+                                text: 'منصور طارق',
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
