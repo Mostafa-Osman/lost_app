@@ -32,7 +32,7 @@ dependencies:
   flutter_switch: ^0.3.2
   flutter_form_builder: ^7.0.0
   countries_utils: ^1.0.1
-
+  lottie: ^1.2.1
 
 
 
@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/lottie/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
