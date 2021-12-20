@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/home/bottom_navigation_bar.dart';
+import 'package:lost_app/modules/home_layout/home_layout.dart';
 import 'package:lost_app/modules/login/reset_password.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
@@ -84,7 +84,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                                         children: [
                                           TextButtonClass(
                                             onPressed: () => navigateTo(
-                                                context, HomeScreen()),
+                                                context, HomeLayout()),
                                             text: 'الي الصفحه الرئيسيه',
                                             fontSize: 20,
                                             textColor: black,
@@ -93,7 +93,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                                               5,
                                               Duration(milliseconds: 1000),
                                               () => navigateTo(
-                                                  context, HomeScreen()))
+                                                  context, HomeLayout()))
                                         ],
                                       ),
                                     ),
@@ -211,13 +211,13 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButtonClass(
-                          onPressed: () => navigateTo(context, HomeScreen()),
+                          onPressed: () => navigateTo(context, HomeLayout()),
                           text: 'الي الصفحه الرئيسيه',
                           fontSize: 20,
                           textColor: black,
                         ),
                         TimerClass(5, Duration(milliseconds: 1000),
-                            () => navigateTo(context, HomeScreen()))
+                            () => navigateTo(context, HomeLayout()))
                       ],
                     ),
                   ),

@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:lost_app/modules/home/account.dart';
-import 'package:lost_app/modules/home/appbar_widget.dart';
+import 'package:lost_app/modules/profile/profile.dart';
+import 'package:lost_app/shared/components/appbar_widget.dart';
 import 'package:lost_app/modules/home/home.dart';
-import 'package:lost_app/modules/home/post.dart';
+import 'package:lost_app/modules/post/post.dart';
 import 'package:lost_app/shared/components/component.dart';
-import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
-import 'package:lost_app/shared/components/text_form_field_class.dart';
 
-class HomeScreen extends StatefulWidget {
+
+class HomeLayout extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeLayoutState createState() => _HomeLayoutState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeLayoutState extends State<HomeLayout> {
   Color bottomNavBarAccColor = Colors.grey;
   Color bottomNavBarHomeColor = HexColor('#2DC7FF');
   int indexPage = 0;
@@ -23,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
     1: AccountPageAppBar(),
   };
   Map<int, Widget> page = {
-    0: HomePageClass(),
-    1: AccountPageClass(),
+    0: HomeClass(),
+    1: ProfileClass(),
   };
 
   @override

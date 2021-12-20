@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/home/bottom_navigation_bar.dart';
+import 'package:lost_app/modules/home_layout/home_layout.dart';
 import 'package:lost_app/modules/register/register.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: RaisedButtonClass(
                                         onPressed: () {
                                           if (_formKey.currentState!.validate())
-                                            navigateTo(context, HomeScreen());
+                                            navigateTo(context, HomeLayout());
                                         },
                                         text: 'تسجيل الدخول',
                                         textColor: white)),

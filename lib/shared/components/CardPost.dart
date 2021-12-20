@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/home/comment_screen.dart';
+import 'package:lost_app/modules/comment/comment_screen.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:hexcolor/hexcolor.dart';

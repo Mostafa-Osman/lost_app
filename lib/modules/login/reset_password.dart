@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/home/bottom_navigation_bar.dart';
+import 'package:lost_app/modules/home_layout/home_layout.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
@@ -121,7 +121,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                       children: [
                                         TextButtonClass(
                                           onPressed: () =>
-                                              navigateTo(context, HomeScreen()),
+                                              navigateTo(context, HomeLayout()),
                                           text: 'الي الصفحه الرئيسيه',
                                           fontSize: 20,
                                           textColor: mainColor,
@@ -130,7 +130,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                             5,
                                             Duration(milliseconds: 1000),
                                             () => navigatorAndFinish(
-                                                context, HomeScreen()))
+                                                context, HomeLayout()))
                                       ],
                                     ),
                                   ),

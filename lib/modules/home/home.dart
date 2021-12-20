@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/home/CardPost.dart';
+import 'package:lost_app/shared/components/CardPost.dart';
 
-class HomePageClass extends StatelessWidget {
+class HomeClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

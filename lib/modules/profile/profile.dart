@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/home/CardPost.dart';
+import 'package:lost_app/shared/components/CardPost.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 
-class AccountPageClass extends StatefulWidget {
-  const AccountPageClass({Key? key}) : super(key: key);
+class ProfileClass extends StatefulWidget {
+  const ProfileClass({Key? key}) : super(key: key);
 
   @override
-  _AccountPageClassState createState() => _AccountPageClassState();
+  _ProfileClassState createState() => _ProfileClassState();
 }
 
-class _AccountPageClassState extends State<AccountPageClass> {
+class _ProfileClassState extends State<ProfileClass> {
   TextEditingController controller = TextEditingController();
 
   @override

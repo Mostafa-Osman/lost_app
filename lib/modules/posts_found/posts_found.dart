@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/home/CardPost.dart';
-import 'package:lost_app/modules/home/bottom_navigation_bar.dart';
+import 'package:lost_app/modules/home_layout/home_layout.dart';
+import 'package:lost_app/shared/components/CardPost.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -14,7 +14,7 @@ class PostsFoundScreen extends StatelessWidget {
           backgroundColor: white,
           elevation: 0,
           leading: IconButton(
-              onPressed: () => navigatorAndFinish(context, HomeScreen()),
+              onPressed: () => navigatorAndFinish(context, HomeLayout()),
               icon: Icon(Icons.arrow_back_ios_sharp, color: black))),
       body: SingleChildScrollView(
         child: Container(

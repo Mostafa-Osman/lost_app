@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:lost_app/modules/home/bottom_navigation_bar.dart';
+import 'package:lost_app/modules/home_layout/home_layout.dart';
 import 'package:lost_app/modules/processing/processing_page.dart';
-import 'package:lost_app/modules/splash/splash_screen.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('ar', ''),
       ],
-      home: ProcessingPage(),
+      home: HomeLayout(),
     );
   }
 }
