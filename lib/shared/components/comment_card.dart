@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 class CommentCard extends StatelessWidget {
   const CommentCard({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class CommentCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
       child: Container(
         decoration: BoxDecoration(
-          color: HexColor('#E3F0FF'),
+          color: lightBlue,
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Padding(

@@ -11,3 +11,4 @@ Color red=Colors.red;
 Color lightGrey=HexColor('#7D7C83');
 Color blue=HexColor('#005CE6');
 Color lightBlue= HexColor('#E3F0FF');
+Color BottomNavBarBlue= HexColor('#2DC7FF');

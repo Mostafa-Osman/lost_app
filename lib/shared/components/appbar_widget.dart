@@ -4,6 +4,7 @@ import 'package:lost_app/modules/setting/setting.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 
 
@@ -24,12 +25,12 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: white,
       elevation: 0.0,
       toolbarHeight: 55,
       title: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: white,
             //borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -50,7 +51,7 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
           iconSize: 2,
           icon: Image.asset(
             'assets/icons/notification.png',
-            color: Colors.black,
+            color: black,
           ),
           onPressed: () =>navigateTo(context, NotificationScreen()),
         ),
@@ -74,7 +75,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: white,
       elevation: 0.0,
       toolbarHeight: 55,
       title: TextClass(
@@ -86,7 +87,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
         padding: const EdgeInsets.only(right: 15.0),
         child: IconButton(
           iconSize: 28,
-          color: Colors.black,
+          color: black,
           icon: Icon(Icons.settings_rounded,),
           onPressed: () {
             navigateTo(context, SettingScreen());
@@ -98,7 +99,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
           padding: const EdgeInsets.only(left: 15.0),
           child: IconButton(
             iconSize: 28,
-            color: Colors.black,
+            color: black,
             icon: Image.asset(
               'assets/icons/profile_acc_ic.png',
             ),

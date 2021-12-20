@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/shared/components/CardPost.dart';
 import 'package:lost_app/shared/components/text_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 class ProfileClass extends StatefulWidget {
   const ProfileClass({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class _ProfileClassState extends State<ProfileClass> {
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.black,
+                              color: black,
                               width: 1,
                             ),
                             shape: BoxShape.circle,
@@ -109,7 +110,7 @@ class AccountTextFormField extends StatelessWidget {
             Radius.circular(10),
           ),
           border: Border.all(
-            color: Colors.black,
+            color: black,
             width: 1,
           ),
           shape: BoxShape.rectangle,

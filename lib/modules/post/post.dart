@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/posts_found/posts_found.dart';
-import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 

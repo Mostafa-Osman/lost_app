@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lost_app/modules/comment/comment_screen.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 class CardPost extends StatelessWidget {
   const CardPost({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class CardPost extends StatelessWidget {
           child: Container(
             height: 273.0,
             decoration: BoxDecoration(
-              color: HexColor('#E3F0FF'),
+              color: lightBlue,
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
             child: Column(
@@ -137,7 +137,7 @@ class CardPost extends StatelessWidget {
                 Container(
                   height: 2,
                   width: double.infinity,
-                  color: Colors.white,
+                  color: white,
                 ),
                 Container(
                   height: 48,
@@ -180,7 +180,7 @@ class CardPost extends StatelessWidget {
                       Container(
                         //height: 60,
                         width: 2,
-                        color: Colors.white,
+                        color: white,
                       ),
                       Expanded(
                         child: FlatButton(

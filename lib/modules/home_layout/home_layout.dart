@@ -6,6 +6,7 @@ import 'package:lost_app/modules/home/home.dart';
 import 'package:lost_app/modules/post/post.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
+import 'package:lost_app/shared/styles/color.dart';
 
 
 class HomeLayout extends StatefulWidget {
@@ -14,8 +15,8 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> {
-  Color bottomNavBarAccColor = Colors.grey;
-  Color bottomNavBarHomeColor = HexColor('#2DC7FF');
+  Color bottomNavBarAccColor = grey;
+  Color bottomNavBarHomeColor = BottomNavBarBlue;
   int indexPage = 0;
   Map<int, PreferredSizeWidget> appBar = {
     0: HomePageAppBar(),
@@ -33,14 +34,14 @@ class _HomeLayoutState extends State<HomeLayout> {
       body: page[indexPage],
 
       floatingActionButton: FloatingActionButton(
-        backgroundColor: HexColor('#2DC7FF'),
+        backgroundColor: BottomNavBarBlue,
         //Floating action button on Scaffold
         onPressed: () {
           navigateTo(context, PostScreen());
         },
         child: Image.asset(
           'assets/icons/post.png',
-          color: Colors.white,
+          color: white,
         ), //icon inside button
       ),
 
@@ -49,7 +50,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
       bottomNavigationBar: BottomAppBar(
         //bottom navigation bar on scaffold
-        color: Colors.white,
+        color: white,
         shape: CircularNotchedRectangle(),
         elevation: 10.0,
         //shape of notch
@@ -70,7 +71,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                       children: [
                         IconButton(
                           iconSize: 10,
-                          highlightColor: Colors.black,
+                          highlightColor: black,
                           icon: Image.asset(
                             'assets/icons/account.png',
                             color: bottomNavBarAccColor,
@@ -90,8 +91,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                   onPressed: () {
                     setState(() {
                       if (indexPage != 1) {
-                        bottomNavBarAccColor = HexColor('#2DC7FF');
-                        bottomNavBarHomeColor = Colors.grey;
+                        bottomNavBarAccColor = BottomNavBarBlue;
+                        bottomNavBarHomeColor = grey;
                         indexPage = 1;
                       }
                     });
@@ -125,8 +126,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                   onPressed: () {
                     setState(() {
                       if (indexPage != 0) {
-                        bottomNavBarHomeColor = HexColor('#2DC7FF');
-                        bottomNavBarAccColor = Colors.grey;
+                        bottomNavBarHomeColor = BottomNavBarBlue;
+                        bottomNavBarAccColor = grey;
                         indexPage = 0;
                       }
                     });

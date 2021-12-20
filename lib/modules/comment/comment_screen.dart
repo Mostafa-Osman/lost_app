@@ -30,7 +30,7 @@ class CommentScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        color: Colors.white,
+        color: white,
         child: Align(
           alignment: Alignment.center,
           child: Container(
@@ -193,7 +193,7 @@ class CommentScreen extends StatelessWidget {
                                     Container(
                                       height: 2,
                                       width: double.infinity,
-                                      color: Colors.white,
+                                      color: white,
                                     ),
                                     Container(
                                       height: 55,
@@ -260,7 +260,7 @@ class CommentScreen extends StatelessWidget {
                                 color: white,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey,
+                                    color: grey,
                                     offset: Offset(0.0, 1.0), //(x,y)
                                     blurRadius: 6.0,
                                   ),
@@ -287,7 +287,7 @@ class CommentScreen extends StatelessWidget {
                                               child: IconButton(
                                                 icon: Icon(Icons.send_rounded),
                                                 iconSize: 30.0,
-                                                color: HexColor('#a8d1ff'),
+                                                color: BottomNavBarBlue,
                                                 onPressed: () {},
                                               ),
                                             ),
