@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/shared/components/comment_card.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -56,7 +55,7 @@ class CommentScreen extends StatelessWidget {
                               child: Container(
                                 //height: 1000.0,
                                 decoration: BoxDecoration(
-                                  color: HexColor('#E3F0FF'),
+                                  color: lightBlue,
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(15)),
                                 ),
