@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/modules/home_layout/home_layout.dart';
-import 'package:lost_app/shared/components/CardPost.dart';
+import 'package:lost_app/shared/components/PostCard.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -35,7 +35,7 @@ class PostsFoundScreen extends StatelessWidget {
               TextButtonClass(
                   text: 'اليس كذالك ؟', textColor: mainColor, onPressed: () {}),
               SizedBox(height: 30),
-              CardPost(),
+              PostCard(),
             ],
           ),
         ),

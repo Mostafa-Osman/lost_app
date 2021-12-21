@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/shared/components/CardPost.dart';
+import 'package:lost_app/shared/components/PostCard.dart';
 
 class HomeClass extends StatelessWidget {
   @override
@@ -9,7 +9,7 @@ class HomeClass extends StatelessWidget {
         alignment: Alignment.center,
         child: Container(
           width: 500,
-          child: CardPost(),
+          child: PostCard(),
         ),
       ),
     );
