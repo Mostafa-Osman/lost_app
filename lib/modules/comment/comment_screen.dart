@@ -176,10 +176,13 @@ class CommentScreen extends StatelessWidget {
                                                   Expanded(
                                                     child: Container(
                                                       alignment: Alignment.center,
-                                                      child: Image.asset(
-                                                        'assets/images/IMG20201115111300.jpg',
-                                                        fit: BoxFit.cover,
-                                                        //color: Colors.white,
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.circular(8.0),
+                                                        child: Image.asset(
+                                                          'assets/images/IMG20201115111300.jpg',
+                                                          fit: BoxFit.cover,
+                                                          //color: Colors.white,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
