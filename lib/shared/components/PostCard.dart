@@ -49,9 +49,12 @@ class PostCard extends StatelessWidget {
                             SizedBox(width: 10.0),
                             Padding(
                               padding: const EdgeInsets.only(top: 10.0),
-                              child: TextClass(
-                                text: 'منصور طارق',
-                                overflow: TextOverflow.ellipsis,
+                              child: FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: TextClass(
+                                  text: 'منصور طارق',
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ),
                             Spacer(),
@@ -82,36 +85,45 @@ class PostCard extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   SizedBox(height: 20.0),
-                                  TextClass(
-                                    text: 'الاسم : مصطفى عثمان',
-                                    textAlign: TextAlign.right,
-                                    fontSize: 15,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  TextClass(
-                                    text: 'السن : ٢٢',
-                                    textAlign: TextAlign.right,
-                                    fontSize: 15,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  TextClass(
-                                    text: 'الجنس : ذكر',
-                                    textAlign: TextAlign.right,
-                                    fontSize: 15,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  TextClass(
-                                    text: 'العنوان : المعادي - القاهره',
-                                    textAlign: TextAlign.right,
-                                    fontSize: 15,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  TextClass(
-                                    text: 'هاتف التواصل : 01149589134',
-                                    textAlign: TextAlign.right,
-                                    fontSize: 15,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                                  Container(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        TextClass(
+                                          text: 'الاسم : مصطفى عثمان',
+                                          textAlign: TextAlign.right,
+                                          fontSize: 15,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        TextClass(
+                                          text: 'السن : ٢٢',
+                                          textAlign: TextAlign.right,
+                                          fontSize: 15,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        TextClass(
+                                          text: 'الجنس : ذكر',
+                                          textAlign: TextAlign.right,
+                                          fontSize: 15,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        TextClass(
+                                          text: 'العنوان : المعادي - القاهره',
+                                          textAlign: TextAlign.right,
+                                          fontSize: 15,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        TextClass(
+                                          text: 'هاتف التواصل : 01149589134',
+                                          textAlign: TextAlign.right,
+                                          fontSize: 15,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+
                                 ],
                               ),
                             ),
@@ -163,14 +175,17 @@ class PostCard extends StatelessWidget {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  TextClass(
-                                    text: 'التعليق',
-                                    fontSize: 20,
+                                  FittedBox(
+                                    fit: BoxFit.fitWidth,
+                                    child: TextClass(
+                                      text: 'التعليق',
+                                      fontSize: 20,
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -209,7 +224,7 @@ class PostCard extends StatelessWidget {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
