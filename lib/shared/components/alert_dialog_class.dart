@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'divider_class.dart';
 
@@ -37,9 +38,7 @@ class AlertDialogClass extends StatelessWidget {
             widget,
         Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Image.asset(
-                'assets/icons/done.png',
-              ),
+              child: SvgPicture.asset('assets/icons/done.svg'),
             ),
 
             DividerClass(

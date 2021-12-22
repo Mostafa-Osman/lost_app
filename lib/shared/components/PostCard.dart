@@ -133,14 +133,7 @@ class PostCard extends StatelessWidget {
                               flex: 1,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: SvgPicture.asset('assets/images/login.svg',fit: BoxFit.cover),
-
-                                // Image.asset(
-                                //   'assets/images/IMG20201115111300.jpg',
-                                //   fit: BoxFit.cover,
-                                //
-                                //   //color: Colors.white,
-                                // ),
+                                child: SvgPicture.asset('assets/images/login.svg',fit: BoxFit.fitWidth),
                               ),
                             ),
                           ],
@@ -195,10 +188,8 @@ class PostCard extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 2.0),
-                                    child: Image.asset(
-                                      'assets/icons/comment_icon.png',
-                                      //color: Colors.white,
-                                    ),
+                                    child: SvgPicture.asset('assets/icons/comment_icon.svg'),
+
                                   ),
                                 ],
                               ),
@@ -241,10 +232,7 @@ class PostCard extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 2.0),
-                                    child: Image.asset(
-                                      'assets/icons/comment_icon.png',
-                                      //color: Colors.white,
-                                    ),
+                                    child: SvgPicture.asset('assets/icons/share_icon.svg'),
                                   ),
                                 ],
                               ),

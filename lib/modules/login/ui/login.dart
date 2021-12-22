@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/home_layout/home_layout.dart';
 import 'package:lost_app/modules/login/login_cubit/cubit.dart';
 import 'package:lost_app/modules/login/login_cubit/states.dart';
-import 'package:lost_app/modules/register/register.dart';
+import 'package:lost_app/modules/register/ui/register.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
@@ -14,14 +14,14 @@ import 'package:lost_app/shared/styles/color.dart';
 
 import 'enter_phone_number.dart';
 
-class LoginScreen extends StatelessWidget{
+class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   var loginPhoneControl = TextEditingController();
   var loginPasswordControl = TextEditingController();
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var cubit=LoginCubit.get(context);
+    var cubit = LoginCubit.get(context);
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) => {},
       builder: (context, state) => Scaffold(
@@ -38,8 +38,7 @@ class LoginScreen extends StatelessWidget{
                     Container(
                       height: size.height / 1.75,
                       width: double.infinity,
-                      child:SvgPicture.asset('assets/images/login.svg'),
-
+                      child: SvgPicture.asset('assets/images/login.svg'),
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -74,12 +73,8 @@ class LoginScreen extends StatelessWidget{
                                     textHint: 'ادخل كلمه المرور',
                                     controller: loginPasswordControl,
                                     suffixIcon: IconButton(
-                                        onPressed: () {
-                                          cubit.visibilityPassword();
-                                          // setState(() {
-                                          //   notVisible = !notVisible;
-                                          // });
-                                        },
+                                        onPressed: () =>
+                                            cubit.visibilityPassword(),
                                         icon: cubit.isVisibility
                                             ? Icon(Icons.visibility)
                                             : Icon(Icons.visibility_off)),

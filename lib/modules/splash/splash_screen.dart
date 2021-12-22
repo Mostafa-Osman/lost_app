@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/on_boarding/on_boarding.dart';
+import 'package:lost_app/modules/on_boarding/ui/on_boarding.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

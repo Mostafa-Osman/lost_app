@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/shared/components/comment_card.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -224,10 +225,8 @@ class CommentScreen extends StatelessWidget {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     bottom: 5.0),
-                                                child: Image.asset(
-                                                  'assets/icons/share_icon.png',
-                                                  //color: Colors.white,
-                                                ),
+                                                child: SvgPicture.asset('assets/icons/share_icon.svg'),
+
                                               ),
                                             ],
                                           ),
@@ -287,7 +286,8 @@ class CommentScreen extends StatelessWidget {
                                             child: Padding(
                                               padding: const EdgeInsets.only(right: 4.0),
                                               child: IconButton(
-                                                icon: Icon(Icons.send_rounded),
+                                                icon: SvgPicture.asset('assets/icons/comment_ic.svg'),
+                                                // Icon(Icons.send_rounded),
                                                 iconSize: 30.0,
                                                 color: BottomNavBarBlue,
                                                 onPressed: () {},

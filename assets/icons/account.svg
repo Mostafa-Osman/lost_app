@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23">
+  <g id="icon_account" data-name="icon / account" transform="translate(0 0)">
+    <rect id="Rectangle" width="23" height="23" fill="none"/>
+    <g id="single-02" transform="translate(1.917 0)">
+      <path id="Path" d="M12.9,0A6.51,6.51,0,0,1,9.583.936,6.51,6.51,0,0,1,6.267,0,6.712,6.712,0,0,0,0,6.686V8.344l.666.214a31.908,31.908,0,0,0,8.917,1,31.908,31.908,0,0,0,8.917-1l.666-.214V6.686A6.712,6.712,0,0,0,12.9,0Z" transform="translate(0 13.439)" fill="#c8c8d3"/>
+      <path id="Path-2" data-name="Path" d="M5.75,12.458c3.238,0,5.75-3.606,5.75-6.708A5.75,5.75,0,0,0,0,5.75C0,8.852,2.512,12.458,5.75,12.458Z" transform="translate(3.833)" fill="#c8c8d3"/>
+    </g>
+  </g>
+</svg>

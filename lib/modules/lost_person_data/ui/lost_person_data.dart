@@ -56,7 +56,7 @@ class _LostPersonDataScreenState extends State<LostPersonDataScreen> {
                       ),
                       shape: BoxShape.circle,
                     ),
-                    child: SvgPicture.asset('assets/images/person.png'),
+                    child: SvgPicture.asset('assets/images/person.svg'),
 
                   ),
                      Container(

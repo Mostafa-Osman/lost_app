@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/notification/notification.dart';
-import 'package:lost_app/modules/setting/setting.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/modules/notification/ui/notification.dart';
+import 'package:lost_app/modules/setting/ui/setting.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -49,10 +50,7 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
         padding: const EdgeInsets.only(right: 10.0),
         child: IconButton(
           iconSize: 2,
-          icon: Image.asset(
-            'assets/icons/notification.png',
-            color: black,
-          ),
+          icon:SvgPicture.asset('assets/icons/notification.svg',  color: black),
           onPressed: () =>navigateTo(context, NotificationScreen()),
         ),
       ),
@@ -100,9 +98,8 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
           child: IconButton(
             iconSize: 28,
             color: black,
-            icon: Image.asset(
-              'assets/icons/profile_acc_ic.png',
-            ),
+            icon:SvgPicture.asset('assets/icons/profile_acc_ic.svg'),
+
             onPressed: () {
             },
           ),

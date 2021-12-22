@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.159" height="16.015" viewBox="0 0 17.159 16.015">
+  <g id="ic_cooment" transform="translate(-13.841 -2)">
+    <g id="_x31_4_comment" transform="translate(12.841)">
+      <g id="Group_256" data-name="Group 256" transform="translate(1 2)">
+        <path id="Path_1060" data-name="Path 1060" d="M5,18.015a.572.572,0,0,1-.572-.572v-2.86H2.716A1.718,1.718,0,0,1,1,12.867V3.716A1.718,1.718,0,0,1,2.716,2H16.443a1.718,1.718,0,0,1,1.716,1.716v9.151a1.718,1.718,0,0,1-1.716,1.716H9.494L5.361,17.89A.571.571,0,0,1,5,18.015ZM2.716,3.144a.573.573,0,0,0-.572.572v9.151a.573.573,0,0,0,.572.572H5a.571.571,0,0,1,.572.572v2.242l3.36-2.689a.572.572,0,0,1,.357-.125h7.15a.573.573,0,0,0,.572-.572V3.716a.573.573,0,0,0-.572-.572Z" transform="translate(-1 -2)"/>
+      </g>
+      <g id="Group_257" data-name="Group 257" transform="translate(4.432 6.576)">
+        <path id="Path_1061" data-name="Path 1061" d="M16.723,11.144H7.572a.572.572,0,1,1,0-1.144h9.151a.572.572,0,0,1,0,1.144Z" transform="translate(-7 -10)"/>
+      </g>
+      <g id="Group_258" data-name="Group 258" transform="translate(4.432 8.864)">
+        <path id="Path_1062" data-name="Path 1062" d="M12.148,15.144H7.572a.572.572,0,1,1,0-1.144h4.576a.572.572,0,1,1,0,1.144Z" transform="translate(-7 -14)"/>
+      </g>
+    </g>
+  </g>
+</svg>

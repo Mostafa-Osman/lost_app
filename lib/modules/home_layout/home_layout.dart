@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/modules/profile/profile.dart';
 import 'package:lost_app/shared/components/appbar_widget.dart';
@@ -7,7 +8,6 @@ import 'package:lost_app/modules/post/post.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
-
 
 class HomeLayout extends StatefulWidget {
   @override
@@ -39,10 +39,11 @@ class _HomeLayoutState extends State<HomeLayout> {
         onPressed: () {
           navigateTo(context, PostScreen());
         },
-        child: Image.asset(
-          'assets/icons/post.png',
-          color: white,
-        ), //icon inside button
+        child: SvgPicture.asset('assets/icons/post.svg',
+           color: white
+        ),
+
+        //icon inside button
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -72,12 +73,9 @@ class _HomeLayoutState extends State<HomeLayout> {
                         IconButton(
                           iconSize: 10,
                           highlightColor: black,
-                          icon: Image.asset(
-                            'assets/icons/account.png',
-                            color: bottomNavBarAccColor,
-                          ),
+                          icon: SvgPicture.asset('assets/icons/account.svg',
+                              color: bottomNavBarAccColor),
                           onPressed: null,
-
                         ),
                         TextClass(
                           text: 'حسابي',
@@ -99,7 +97,9 @@ class _HomeLayoutState extends State<HomeLayout> {
                   },
                 ),
               ),
-              SizedBox(width: 80,),
+              SizedBox(
+                width: 80,
+              ),
               Expanded(
                 child: FlatButton(
                   child: Padding(
@@ -108,10 +108,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                       children: [
                         IconButton(
                           iconSize: 10,
-                          icon: Image.asset(
-                            'assets/icons/home.png',
-                            color: bottomNavBarHomeColor,
-                          ),
+                          icon: SvgPicture.asset('assets/icons/home.svg',
+                              color: bottomNavBarHomeColor),
                           onPressed: null,
                         ),
                         TextClass(

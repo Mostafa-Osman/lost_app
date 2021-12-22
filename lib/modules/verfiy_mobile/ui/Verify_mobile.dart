@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_app/modules/home_layout/home_layout.dart';
-import 'package:lost_app/modules/login/reset_password.dart';
+import 'package:lost_app/modules/login/ui/reset_password.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/component.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/login/Verify_mobile.dart';
+import 'package:lost_app/modules/verfiy_mobile/ui/Verify_mobile.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
