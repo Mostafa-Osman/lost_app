@@ -5,6 +5,7 @@ import 'package:lost_app/modules/login/ui/login.dart';
 import 'modules/home_layout/home_layout.dart';
 import 'modules/login/login_cubit/cubit.dart';
 import 'modules/lost_person_data/ui/lost_person_data.dart';
+import 'modules/posts_found/ui/posts_found.dart';
 import 'modules/register/regisster_cubit/cubit.dart';
 
 void main() {
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: [
             Locale('ar', ''),
           ],
-          home: HomeLayout(),
+          home: PostsFoundScreen(),
         ));
   }
 }
