@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -34,13 +35,13 @@ class PostScreen extends StatelessWidget {
               child: Column(
                 children: [
                   CardPostPage(
-                      image: 'assets/images/founded_post.png',
+                      image: 'assets/images/welcome_1.svg',
                       text: 'ابحث عن احد المفقودين'),
                   SizedBox(
                     height: 20,
                   ),
                   CardPostPage(
-                    image: 'assets/images/lost_post.png',
+                    image: 'assets/images/lost_post.svg',
                     text: 'وجدت احد المفقودين',
                   ),
                 ],
@@ -80,9 +81,8 @@ class CardPostPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Image.asset(
-                  image,
-                ),
+                child:SvgPicture.asset(image),
+
               ),
               SizedBox(
                 height: 20,

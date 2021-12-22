@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -31,13 +32,10 @@ class NotificationItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10, right: 10),
                   child: ClipOval(
-                    child: Image.asset(
-                      'assets/images/post_person_image.png',
+                    child: SvgPicture.asset('assets/images/lost_person_image.svg',
                       height: 40,
                       width: 40,
-                      fit: BoxFit.cover,
-                      //color: Colors.white,
-                    ),
+                      fit: BoxFit.cover),
                   ),
                 ),
                 Container(
@@ -73,11 +71,10 @@ class NotificationItem extends StatelessWidget {
                       width: 90,
                       height: MediaQuery.of(context).size.height / 10.1,
                       //14.2,
-                      child: Image.asset(
-                        'assets/images/lost_person_image.png',
-                        fit: BoxFit.fill,
-                        width: 90,
-                      ),
+                      child:SvgPicture.asset('assets/images/lost_person_image.svg',
+                          width: 90,
+                          fit: BoxFit.fill),
+
                     ),
                   ],
                 ),

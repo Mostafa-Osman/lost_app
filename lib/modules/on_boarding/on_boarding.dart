@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
@@ -18,17 +19,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   List<OnBoardingModel> splash = [
     OnBoardingModel(
-        image: 'assets/images/welcome_1.png',
+        image: 'assets/images/welcome_1.svg',
         title: 'هل تبحث عن احد المفقودين ',
         body:
             "اذا كنت تبحث عن احد الأشخاص المفقودين يمكنك ارفاق صوره لهذا الشخص و سوف نساعدك في ايجاده"),
     OnBoardingModel(
-        image: 'assets/images/welcome_2.png',
+        image: 'assets/images/welcome_2.svg',
         title: 'ام وجدت احد المفقودين ',
         body:
             "اما اذا كنت قد وجدت شخصا مفقوداو لا تستطيع الوصول الى ذويه فيمكنك ارفاق صورة له وسوف نساعدك في الوصول الى اقربائه"),
     OnBoardingModel(
-        image: 'assets/images/welcome_3.png',
+        image: 'assets/images/welcome_3.svg',
         title: 'كل ما عليك هو ارفاق صورة وسنقوم بالبحث بدلا عنك ',
         body:
             "نقوم بتحليل الصورة عن طريق احدى تقنيات الذكاء الاصطناعي ومن ثم البحث في قاعدة البيانات التي تحتوي على العديد من الصور لاشخاص مفقودين  "),
@@ -82,24 +83,28 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
 Widget buildBoardingItem(OnBoardingModel model, splashLength, controller) =>
     SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 80.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
               width: 370,
               height: 270,
-              child: Image(image: AssetImage(model.image))),
-          SizedBox(height: 10),
-          SmoothPageIndicatorClass(count: splashLength, controller: controller),
-          SizedBox(height: 30),
-          TextClass(
-            text: model.title,
-            fontSize: 25,
-            fontWeight: FontWeight.normal,
-          ),
-          SizedBox(height: 50),
-          TextClass(text: model.body, textColor: lightGrey),
-        ],
+              child: SvgPicture.asset(model.image),
+            ),
+            SizedBox(height: 10),
+            SmoothPageIndicatorClass(count: splashLength, controller: controller),
+            SizedBox(height: 30),
+            TextClass(
+              text: model.title,
+              fontSize: 25,
+              fontWeight: FontWeight.normal,
+            ),
+            SizedBox(height: 50),
+            TextClass(text: model.body, textColor: lightGrey),
+          ],
+        ),
       ),
     );
 

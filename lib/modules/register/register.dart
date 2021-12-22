@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/login/Verify_mobile.dart';
 import 'package:lost_app/modules/login/login.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
@@ -33,11 +34,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: SafeArea(
             child: Column(
               children: [
-                Container(
-                  height: 150,
-                  width: double.infinity,
-                  child: Image.asset(
-                    "assets/images/logo.png",
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    height: 150,
+                    width: double.infinity,
+                    child: SvgPicture.asset('assets/images/logo.svg'),
                   ),
                 ),
                 Form(

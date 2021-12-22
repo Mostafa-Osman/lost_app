@@ -33,6 +33,9 @@ dependencies:
   flutter_form_builder: ^7.0.0
   countries_utils: ^1.0.1
   lottie: ^1.2.1
+  flutter_svg: ^0.22.0
+  flutter_bloc:
+
 
 
 
