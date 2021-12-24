@@ -56,16 +56,15 @@ class _HomeLayoutState extends State<HomeLayout> {
         elevation: 10.0,
         //shape of notch
         notchMargin: 10,
-
         child: Container(
-          height: 70,
+          height: 67,
           child: Row(
             //children inside bottom appbar
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Expanded(
-                child: FlatButton(
+                child: InkWell(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Column(
@@ -86,7 +85,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                       ],
                     ),
                   ),
-                  onPressed: () {
+                  onTap: () {
                     setState(() {
                       if (indexPage != 1) {
                         bottomNavBarAccColor = BottomNavBarBlue;

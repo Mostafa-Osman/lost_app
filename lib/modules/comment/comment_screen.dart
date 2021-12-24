@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/shared/components/comment_card.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -14,6 +13,7 @@ class CommentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: white,
@@ -78,8 +78,7 @@ class CommentScreen extends StatelessWidget {
                                               ClipOval(
                                                 child: Image.asset(
                                                   'assets/images/IMG20201116145812.jpg',
-                                                  height: 40,
-                                                  width: 40,
+                                                  width: size.width >= 500? 40 :size.width/10,
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -89,7 +88,8 @@ class CommentScreen extends StatelessWidget {
                                                     top: 10.0),
                                                 child: Container(
                                                   child: TextClass(
-                                                    text: 'منصور طارق',
+                                                    text: 'منصور طارق منصور',
+                                                    fontSize: size.width >= 500? 20 : size.width/20,
                                                     overflow: TextOverflow.ellipsis,
                                                   ),
                                                 ),
@@ -99,17 +99,20 @@ class CommentScreen extends StatelessWidget {
                                                 onPressed: () {},
                                                 icon: Icon(
                                                   Icons.more_vert,
-                                                  size: 30,
+                                                  size: size.width >= 500? 30 : size.width/18,
                                                 ),
                                               ),
                                             ],
                                           ),
                                           SizedBox(height: 10.0),
-                                          TextClass(
-                                            text: 'مفقود منذ 3 ايام فى دار السلام',
-                                            textAlign: TextAlign.right,
-                                            fontSize: 15,
-                                            overflow: TextOverflow.ellipsis,
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: TextClass(
+                                              text: 'مفقود منذ 3 ايام فى دار السلام',
+                                              textAlign: TextAlign.right,
+                                              fontSize: 15,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           ),
                                           SizedBox(height: 20.0),
                                           Column(
@@ -118,53 +121,56 @@ class CommentScreen extends StatelessWidget {
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                             children: [
-                                              Container(
-                                                height: 100,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: [
-                                                    TextClass(
-                                                      text:
-                                                      'الاسم : مصطفى عثمان',
-                                                      textAlign: TextAlign.right,
-                                                      fontSize: 15,
-                                                      overflow:
-                                                      TextOverflow.ellipsis,
-                                                    ),
-                                                    TextClass(
-                                                      text: 'السن : ٢٢',
-                                                      textAlign: TextAlign.right,
-                                                      fontSize: 15,
-                                                      overflow:
-                                                      TextOverflow.ellipsis,
-                                                    ),
-                                                    TextClass(
-                                                      text: 'الجنس : ذكر',
-                                                      textAlign: TextAlign.right,
-                                                      fontSize: 15,
-                                                      overflow:
-                                                      TextOverflow.ellipsis,
-                                                    ),
-                                                    TextClass(
-                                                      text:
-                                                      'العنوان : المعادي - القاهره',
-                                                      textAlign: TextAlign.right,
-                                                      fontSize: 15,
-                                                      overflow:
-                                                      TextOverflow.ellipsis,
-                                                    ),
-                                                    TextClass(
-                                                      text:
-                                                      'هاتف التواصل : 01145589134',
-                                                      textAlign: TextAlign.right,
-                                                      fontSize: 15,
-                                                      overflow:
-                                                      TextOverflow.ellipsis,
-                                                    ),
-                                                  ],
+                                              FittedBox(
+                                                fit: BoxFit.fitWidth,
+                                                child: Container(
+                                                  height: 100,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                    children: [
+                                                      TextClass(
+                                                        text:
+                                                        'الاسم : مصطفى عثمان',
+                                                        textAlign: TextAlign.right,
+                                                        fontSize: 15,
+                                                        overflow:
+                                                        TextOverflow.ellipsis,
+                                                      ),
+                                                      TextClass(
+                                                        text: 'السن : ٢٢',
+                                                        textAlign: TextAlign.right,
+                                                        fontSize: 15,
+                                                        overflow:
+                                                        TextOverflow.ellipsis,
+                                                      ),
+                                                      TextClass(
+                                                        text: 'الجنس : ذكر',
+                                                        textAlign: TextAlign.right,
+                                                        fontSize: 15,
+                                                        overflow:
+                                                        TextOverflow.ellipsis,
+                                                      ),
+                                                      TextClass(
+                                                        text:
+                                                        'العنوان : المعادي - القاهره',
+                                                        textAlign: TextAlign.right,
+                                                        fontSize: 15,
+                                                        overflow:
+                                                        TextOverflow.ellipsis,
+                                                      ),
+                                                      TextClass(
+                                                        text:
+                                                        'هاتف التواصل : 01145589134',
+                                                        textAlign: TextAlign.right,
+                                                        fontSize: 15,
+                                                        overflow:
+                                                        TextOverflow.ellipsis,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                               Row(
@@ -217,7 +223,7 @@ class CommentScreen extends StatelessWidget {
                                             children: [
                                               TextClass(
                                                 text: 'مشاركه',
-                                                fontSize: 20,
+                                                fontSize: size.width >= 500? 19 : size.width/18,
                                               ),
                                               SizedBox(
                                                 width: 10,
@@ -225,8 +231,11 @@ class CommentScreen extends StatelessWidget {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     bottom: 5.0),
-                                                child: SvgPicture.asset('assets/icons/share_icon.svg'),
-
+                                                child: Image.asset(
+                                                  'assets/icons/share_icon.png',
+                                                  width: size.width >= 500? 30 : size.width/18,
+                                                  //color: Colors.white,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -286,8 +295,7 @@ class CommentScreen extends StatelessWidget {
                                             child: Padding(
                                               padding: const EdgeInsets.only(right: 4.0),
                                               child: IconButton(
-                                                icon: SvgPicture.asset('assets/icons/comment_ic.svg'),
-                                                // Icon(Icons.send_rounded),
+                                                icon: Icon(Icons.send_rounded),
                                                 iconSize: 30.0,
                                                 color: BottomNavBarBlue,
                                                 onPressed: () {},

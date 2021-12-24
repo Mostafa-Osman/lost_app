@@ -10,6 +10,7 @@ class PostScreen extends StatelessWidget {
       appBar: AppBar(
         title: TextClass(
           text: 'اختر نوع المنشور',
+          textAlign: TextAlign.center,
         ),
         leading: IconButton(
           onPressed: () {
@@ -35,14 +36,15 @@ class PostScreen extends StatelessWidget {
               child: Column(
                 children: [
                   CardPostPage(
-                      image: 'assets/images/welcome_1.svg',
-                      text: 'ابحث عن احد المفقودين'),
-                  SizedBox(
-                    height: 20,
+                    image: 'assets/images/welcome_1.svg',
+                    text: 'ابحث عن احد المفقودين',
+                    size: 250,
                   ),
+                  SizedBox(height: 20),
                   CardPostPage(
                     image: 'assets/images/lost_post.svg',
                     text: 'وجدت احد المفقودين',
+                    size: 200,
                   ),
                 ],
               ),
@@ -57,9 +59,10 @@ class PostScreen extends StatelessWidget {
 class CardPostPage extends StatelessWidget {
   final String image;
   final String text;
+  double? size;
   Widget? page;
 
-  CardPostPage({required this.image, required this.text, this.page});
+  CardPostPage({required this.image, required this.text, this.page, this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +84,11 @@ class CardPostPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child:SvgPicture.asset(image),
-
+                child: SvgPicture.asset(
+                  image,
+                  fit: BoxFit.fitWidth,
+                  width: size,
+                ),
               ),
               SizedBox(
                 height: 20,

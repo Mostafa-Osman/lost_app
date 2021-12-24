@@ -8,6 +8,7 @@ class CommentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
       child: Container(
@@ -24,27 +25,29 @@ class CommentCard extends StatelessWidget {
                   ClipOval(
                     child: Image.asset(
                       'assets/images/IMG20201116145812.jpg',
-                      height: 40,
-                      width: 40,
+                      width: size.width >= 500? 40 :size.width/10,
                       fit: BoxFit.cover,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextClass(
-                          text: 'محمد احمد',
-                          textAlign: TextAlign.start,
-                        ),
-                        TextClass(
-                          text: 'منذ 5 دقائق',
-                          fontSize: 12,
-                          textAlign: TextAlign.start,
-                        ),
-                      ],
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextClass(
+                            text: 'محمد احمد',
+                            textAlign: TextAlign.start,
+                          ),
+                          TextClass(
+                            text: 'منذ 5 دقائق',
+                            fontSize: 12,
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Spacer(),
@@ -52,7 +55,7 @@ class CommentCard extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(
                       Icons.more_vert,
-                      size: 30,
+                      size: size.width >= 500? 30 : size.width/18,
                     ),
                   ),
                 ],
@@ -66,6 +69,7 @@ class CommentCard extends StatelessWidget {
                       text:
                           'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
                       maxLines: 3,
+                      fontSize: size.width >= 500? 20 : size.width/24,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
                     ),

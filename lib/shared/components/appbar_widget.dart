@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/notification/ui/notification.dart';
-import 'package:lost_app/modules/setting/ui/setting.dart';
+import 'package:lost_app/modules/notification/notification.dart';
+import 'package:lost_app/modules/search/search_screen.dart';
+import 'package:lost_app/modules/setting/setting.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -36,13 +36,40 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
           ),
           child: Padding(
             padding: const EdgeInsets.all(5.0),
-            child: ConstrainedBox(
-              constraints: BoxConstraints.tightFor(height: 40),
-              child: TextFormFieldClass(
-                controller: widget.homeAppBarController,
-                roundedRectangleBorder: 6,
-                textHint: 'البحث...',
-
+            child: Container(
+              height: 45,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                border: Border.all(
+                  color: black,
+                  width: 1,
+                ),
+                shape: BoxShape.rectangle,
+              ),
+              child: Material(
+                shape: RoundedRectangleBorder(
+                  borderRadius:BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                child: InkWell(
+                  onTap: () => navigateTo(context, SearchScreen()),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 5.0, right: 10),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: TextClass(
+                        text: 'البحث...',
+                        fontSize:  18,
+                        textColor: grey,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           )),
@@ -50,7 +77,10 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
         padding: const EdgeInsets.only(right: 10.0),
         child: IconButton(
           iconSize: 2,
-          icon:SvgPicture.asset('assets/icons/notification.svg',  color: black),
+          icon: Image.asset(
+            'assets/icons/notification.png',
+            color: black,
+          ),
           onPressed: () =>navigateTo(context, NotificationScreen()),
         ),
       ),
@@ -79,7 +109,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
       title: TextClass(
         text: 'الملف الشخصي',
         fontSize: 20,
-
+        textAlign: TextAlign.center,
       ),
       leading: Padding(
         padding: const EdgeInsets.only(right: 15.0),
@@ -98,8 +128,9 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
           child: IconButton(
             iconSize: 28,
             color: black,
-            icon:SvgPicture.asset('assets/icons/profile_acc_ic.svg'),
-
+            icon: Image.asset(
+              'assets/icons/profile_acc_ic.png',
+            ),
             onPressed: () {
             },
           ),
