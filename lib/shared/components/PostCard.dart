@@ -34,7 +34,7 @@ class PostCard extends StatelessWidget {
                     ),
                   ),
                   splashColor: grey,
-                  child:Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
@@ -43,7 +43,7 @@ class PostCard extends StatelessWidget {
                             ClipOval(
                               child: Image.asset(
                                 'assets/images/IMG20201116145812.jpg',
-                                width: size.width >= 500? 40 :size.width/10,
+                                width: size.width >= 500 ? 40 : size.width / 10,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -52,7 +52,8 @@ class PostCard extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 10.0),
                               child: TextClass(
                                 text: 'منصور طارق منصور',
-                                fontSize: size.width >= 500? 20 : size.width/20,
+                                fontSize:
+                                    size.width >= 500 ? 20 : size.width / 20,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -61,7 +62,7 @@ class PostCard extends StatelessWidget {
                               onPressed: () {},
                               icon: Icon(
                                 Icons.more_vert,
-                                size: size.width >= 500? 30 : size.width/18,
+                                size: size.width >= 500 ? 30 : size.width / 18,
                               ),
                             ),
                           ],
@@ -91,8 +92,10 @@ class PostCard extends StatelessWidget {
                                     fit: BoxFit.fitWidth,
                                     child: Container(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           TextClass(
                                             text: 'الاسم : مصطفى عثمان',
@@ -133,7 +136,6 @@ class PostCard extends StatelessWidget {
                                       ),
                                     ),
                                   )
-
                                 ],
                               ),
                             ),
@@ -144,7 +146,8 @@ class PostCard extends StatelessWidget {
                                 height: 120,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset('assets/images/login.svg',
+                                  child: SvgPicture.asset(
+                                    'assets/images/login.svg',
                                     width: MediaQuery.of(context).size.width,
                                   ),
                                 ),
@@ -177,7 +180,8 @@ class PostCard extends StatelessWidget {
                             ),
                           ),
                           child: InkWell(
-                            onTap: () => navigateTo(context, CommentScreen(details: {})),
+                            onTap: () =>
+                                navigateTo(context, CommentScreen(details: {})),
                             splashColor: grey,
                             customBorder: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -194,20 +198,28 @@ class PostCard extends StatelessWidget {
                                     fit: BoxFit.fitWidth,
                                     child: TextClass(
                                       text: 'التعليق',
-                                      fontSize: size.width >= 500? 19 : size.width/18,
+                                      fontSize: size.width >= 500
+                                          ? 19
+                                          : size.width / 18,
                                     ),
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(bottom: 2.0),
-                                    child: Image.asset(
-                                      'assets/icons/comment_icon.png',
-                                      width: size.width >= 500? 30 : size.width/18,
-                                      //color: Colors.white,
-                                    ),
-                                  ),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 2.0),
+                                      child: SvgPicture.asset(
+                                          'assets/icons/comment_icon.svg',
+                                          width: size.width >= 500
+                                              ? 30
+                                              : size.width / 18)
+                                      // Image.asset(
+                                      //   'assets/icons/comment_icon.png',
+                                      //   width: size.width >= 500? 30 : size.width/18,
+                                      //   //color: Colors.white,
+                                      // ),
+                                      ),
                                 ],
                               ),
                             ),
@@ -242,17 +254,27 @@ class PostCard extends StatelessWidget {
                                 children: [
                                   TextClass(
                                     text: 'مشاركه',
-                                    fontSize: size.width >= 500? 19 : size.width/18,
+                                    fontSize: size.width >= 500
+                                        ? 19
+                                        : size.width / 18,
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 2.0),
-                                    child: Image.asset(
-                                      'assets/icons/share_icon.png',
-                                      width: size.width >= 500? 34 : size.width/18,
-                                    ),
+                                    child:SvgPicture.asset(
+                                      'assets/icons/share_icon.svg',
+                                        width: size.width >= 500
+                                            ? 34
+                                            : size.width / 18,
+                                            ),
+                                    // Image.asset(
+                                    //   'assets/icons/share_icon.png',
+                                    //   width: size.width >= 500
+                                    //       ? 34
+                                    //       : size.width / 18,
+                                    // ),
                                   ),
                                 ],
                               ),
