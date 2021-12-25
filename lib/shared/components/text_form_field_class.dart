@@ -13,8 +13,7 @@ class TextFormFieldClass extends StatelessWidget {
   // //Hint color (initial color black)
   Color hintColor;
   TextStyle? hintStyle;
-  TextAlign textAlign;
-
+   TextAlign textAlign;
   //Text color (initial color black)
   Color textColor;
 
@@ -43,7 +42,6 @@ class TextFormFieldClass extends StatelessWidget {
   InputDecoration? decoration;
   TextStyle? textStyle;
   StrutStyle? structStyle;
-  TextAlignVertical? textAlignVertical;
 
   TextFormFieldClass({
     required this.controller,
@@ -51,7 +49,7 @@ class TextFormFieldClass extends StatelessWidget {
     this.textHint,
     this.hintStyle,
     this.hintColor = Colors.black38,
-    this.textAlign = TextAlign.start,
+    this.textAlign=TextAlign.start,
     this.textColor = const Color.fromRGBO(4, 15, 15, 1),
     this.backgroundColor = Colors.white,
     this.prefix,
@@ -62,7 +60,6 @@ class TextFormFieldClass extends StatelessWidget {
     this.label,
     this.decoration,
     this.textStyle,
-    this.textAlignVertical,
     this.contentPadding =
         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
   });
@@ -74,9 +71,9 @@ class TextFormFieldClass extends StatelessWidget {
       keyboardType: keyboardType,
       validator: validator,
       textAlign: textAlign,
-      textAlignVertical: textAlignVertical,
       style: TextStyle(
         color: textColor,
+
         fontFamily: 'Tajawal',
       ),
       strutStyle: structStyle,

@@ -20,24 +20,26 @@ class SearchScreen extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.black, //change your color here
         ),
-      ),
-      body: Container(
+        title: Container(
           decoration: BoxDecoration(
             color: white,
             //borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(5.0),
             child: ConstrainedBox(
-              constraints: BoxConstraints.tightFor(height: 40),
+              constraints: BoxConstraints.tightFor(height: 45),
               child: TextFormFieldClass(
+                autofocus: true,
                 controller: homeAppBarController,
-                roundedRectangleBorder: 6,
+                roundedRectangleBorder: 10,
                 textHint: 'البحث...',
-
               ),
             ),
-          )),
+          ),
+        ),
+      ),
+      //body:
     );
   }
 }
