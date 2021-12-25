@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/shared/components/comment_card.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -7,9 +8,11 @@ import 'dart:math' as math;
 
 class CommentScreen extends StatelessWidget {
   final Map<String, Object> details;
+  bool autofocus;
   TextEditingController commentController = TextEditingController();
 
-  CommentScreen({required this.details});
+  CommentScreen({required this.details, this.autofocus = false});
+
 
   @override
   Widget build(BuildContext context) {
@@ -231,11 +234,11 @@ class CommentScreen extends StatelessWidget {
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     bottom: 5.0),
-                                                child: Image.asset(
-                                                  'assets/icons/share_icon.png',
-                                                  width: size.width >= 500? 30 : size.width/18,
-                                                  //color: Colors.white,
-                                                ),
+                                                child: SvgPicture.asset(
+                                                    'assets/icons/share_icon.svg',
+                                                    width: size.width >= 500
+                                                        ? 30
+                                                        : size.width / 18)
                                               ),
                                             ],
                                           ),
@@ -286,6 +289,7 @@ class CommentScreen extends StatelessWidget {
                                       const EdgeInsets.only(right: 15, left: 15),
                                       child: Container(
                                         child: TextFormFieldClass(
+                                          autofocus: autofocus,
                                           controller: commentController,
                                           roundedRectangleBorder: 6,
                                           textHint: 'اكتب تعليقا ...',

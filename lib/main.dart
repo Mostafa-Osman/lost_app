@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lost_app/modules/home_layout/home_layout.dart';
-import 'package:lost_app/modules/processing/processing_page.dart';
-import 'package:lost_app/modules/splash/splash_screen.dart';
-import 'package:lost_app/shared/styles/color.dart';
 import 'modules/login/login_cubit/cubit.dart';
-import 'modules/lost_person_data/ui/lost_person_data.dart';
-import 'modules/post/post.dart';
-import 'modules/posts_found/ui/posts_found.dart';
 
 void main() {
   runApp(MyApp());

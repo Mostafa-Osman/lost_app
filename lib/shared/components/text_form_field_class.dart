@@ -42,6 +42,7 @@ class TextFormFieldClass extends StatelessWidget {
   InputDecoration? decoration;
   TextStyle? textStyle;
   StrutStyle? structStyle;
+  bool autofocus;
 
   TextFormFieldClass({
     required this.controller,
@@ -62,11 +63,13 @@ class TextFormFieldClass extends StatelessWidget {
     this.textStyle,
     this.contentPadding =
         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+    this.autofocus = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: autofocus,
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,

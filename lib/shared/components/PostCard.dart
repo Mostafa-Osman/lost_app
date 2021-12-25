@@ -181,7 +181,7 @@ class PostCard extends StatelessWidget {
                           ),
                           child: InkWell(
                             onTap: () =>
-                                navigateTo(context, CommentScreen(details: {})),
+                                navigateTo(context, CommentScreen(details: {}, autofocus: true,)),
                             splashColor: grey,
                             customBorder: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -207,19 +207,18 @@ class PostCard extends StatelessWidget {
                                     width: 10,
                                   ),
                                   Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 2.0),
-                                      child: SvgPicture.asset(
-                                          'assets/icons/comment_icon.svg',
-                                          width: size.width >= 500
-                                              ? 30
-                                              : size.width / 18)
-                                      // Image.asset(
-                                      //   'assets/icons/comment_icon.png',
-                                      //   width: size.width >= 500? 30 : size.width/18,
-                                      //   //color: Colors.white,
-                                      // ),
-                                      ),
+                                    padding: const EdgeInsets.only(bottom: 2.0),
+                                    child: SvgPicture.asset(
+                                        'assets/icons/comment_icon.svg',
+                                        width: size.width >= 500
+                                            ? 30
+                                            : size.width / 18),
+                                    // Image.asset(
+                                    //   'assets/icons/comment_icon.png',
+                                    //   width: size.width >= 500? 30 : size.width/18,
+                                    //   //color: Colors.white,
+                                    // ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -263,12 +262,12 @@ class PostCard extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 2.0),
-                                    child:SvgPicture.asset(
+                                    child: SvgPicture.asset(
                                       'assets/icons/share_icon.svg',
-                                        width: size.width >= 500
-                                            ? 34
-                                            : size.width / 18,
-                                            ),
+                                      width: size.width >= 500
+                                          ? 34
+                                          : size.width / 18,
+                                    ),
                                     // Image.asset(
                                     //   'assets/icons/share_icon.png',
                                     //   width: size.width >= 500

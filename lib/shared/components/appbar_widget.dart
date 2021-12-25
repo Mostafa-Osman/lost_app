@@ -7,11 +7,10 @@ import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-
-
-
 class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
-  HomePageAppBar({Key? key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+  HomePageAppBar({Key? key})
+      : preferredSize = Size.fromHeight(kToolbarHeight),
+        super(key: key);
   TextEditingController homeAppBarController = TextEditingController();
 
   @override
@@ -21,8 +20,7 @@ class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
   _HomePageAppBarState createState() => _HomePageAppBarState();
 }
 
-class _HomePageAppBarState extends State<HomePageAppBar>{
-
+class _HomePageAppBarState extends State<HomePageAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -51,7 +49,7 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
               ),
               child: Material(
                 shape: RoundedRectangleBorder(
-                  borderRadius:BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
                 ),
@@ -63,7 +61,7 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
                       alignment: Alignment.centerRight,
                       child: TextClass(
                         text: 'البحث...',
-                        fontSize:  18,
+                        fontSize: 18,
                         textColor: grey,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -78,8 +76,9 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
         child: IconButton(
           iconSize: 2,
           icon: SvgPicture.asset(
-            'assets/icons/notification.svg',),
-          onPressed: () =>navigateTo(context, NotificationScreen()),
+            'assets/icons/notification.svg',
+          ),
+          onPressed: () => navigateTo(context, NotificationScreen()),
         ),
       ),
     );
@@ -87,7 +86,9 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
 }
 
 class AccountPageAppBar extends StatefulWidget implements PreferredSizeWidget {
-  AccountPageAppBar({Key? key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+  AccountPageAppBar({Key? key})
+      : preferredSize = Size.fromHeight(kToolbarHeight),
+        super(key: key);
   TextEditingController accAppBarController = TextEditingController();
   @override
   final Size preferredSize; // default is 56.0
@@ -96,8 +97,7 @@ class AccountPageAppBar extends StatefulWidget implements PreferredSizeWidget {
   _AccountPageAppBarState createState() => _AccountPageAppBarState();
 }
 
-class _AccountPageAppBarState extends State<AccountPageAppBar>{
-
+class _AccountPageAppBarState extends State<AccountPageAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -114,7 +114,9 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
         child: IconButton(
           iconSize: 28,
           color: black,
-          icon: Icon(Icons.settings_rounded,),
+          icon: Icon(
+            Icons.settings_rounded,
+          ),
           onPressed: () {
             navigateTo(context, SettingScreen());
           },
@@ -126,11 +128,8 @@ class _AccountPageAppBarState extends State<AccountPageAppBar>{
           child: IconButton(
             iconSize: 28,
             color: black,
-            icon: Image.asset(
-              'assets/icons/profile_acc_ic.png',
-            ),
-            onPressed: () {
-            },
+            icon: SvgPicture.asset('assets/icons/profile_acc_ic.svg'),
+            onPressed: () {},
           ),
         ),
       ],
