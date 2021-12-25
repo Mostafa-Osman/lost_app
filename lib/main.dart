@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: [
             Locale('ar', ''),
           ],
-          home: LostPersonDataScreen(),
+          home: HomeLayout(),
         ));
   }
 }

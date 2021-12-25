@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/notification/ui/notification.dart';
 import 'package:lost_app/modules/search/search_screen.dart';
 import 'package:lost_app/modules/setting/ui/setting.dart';
@@ -73,13 +74,11 @@ class _HomePageAppBarState extends State<HomePageAppBar>{
             ),
           )),
       leading: Padding(
-        padding: const EdgeInsets.only(right: 10.0),
+        padding: const EdgeInsets.only(right: 15.0),
         child: IconButton(
           iconSize: 2,
-          icon: Image.asset(
-            'assets/icons/notification.png',
-            color: black,
-          ),
+          icon: SvgPicture.asset(
+            'assets/icons/notification.svg',),
           onPressed: () =>navigateTo(context, NotificationScreen()),
         ),
       ),

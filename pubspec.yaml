@@ -35,7 +35,6 @@ dependencies:
   lottie: ^1.2.1
   flutter_svg: ^0.22.0
   flutter_bloc:
-  carousel_slider: ^4.0.0
 
 
 
