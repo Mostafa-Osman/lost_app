@@ -6,15 +6,19 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   static RegisterCubit get(context) => BlocProvider.of(context);
 
+  // variable bool to change visibility
   bool isVisibility = true;
+
+  // variable bool to change visibility in (confirm field)
   bool confirmNotVisible = true;
 
-
+  // method to switch icon visibility
   void visibilityPassword() {
     isVisibility = !isVisibility;
     emit(RegisterVisibilityPasswordState());
   }
 
+  // method to switch icon visibility (in confirm password field )
   void confirmVisibilityPassword() {
     confirmNotVisible = !confirmNotVisible;
     emit(ConfirmRegisterVisibilityPasswordState());

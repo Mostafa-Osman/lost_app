@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lost_app/modules/notification/ui/notification.dart';
+import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -42,21 +44,18 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 SizedBox(height: 10),
                 ListTile(
-                  onTap: () {},
-                  title: Align(
-                      alignment: Alignment.topRight,
-                      child: TextClass(
+                  onTap: ()=>navigateTo(context, NotificationScreen()),
+                  title:TextClass(
                           text: 'الاشعارات',
+                          textAlign: TextAlign.start,
                           fontSize: 20,
-                          textColor: lightGrey)),
+                          textColor: lightGrey),
                   trailing: Icon(Icons.arrow_back_ios_new_outlined),
                 ),
                 ListTile(
                   onTap: () {},
-                  title: Align(
-                      alignment: Alignment.topRight,
-                      child: TextClass(
-                          text: 'اللغه', fontSize: 20, textColor: lightGrey)),
+                  title:TextClass(
+                          text: 'اللغه',textAlign: TextAlign.start, fontSize: 20, textColor: lightGrey),
                   trailing: Icon(Icons.arrow_back_ios_new_outlined),
                 ),
                 SizedBox(height: 10),
@@ -91,13 +90,13 @@ class _SettingScreenState extends State<SettingScreen> {
                 DividerClass(color: HexColor('#D8D8D8'), thickness: 0.8),
                 SizedBox(height: 5),
                 Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
+                  padding: const EdgeInsets.only(right: 15.0,bottom: 5),
                   child: TextClass(
                     text: 'الحساب',
                     fontSize: 25,
                   ),
                 ),
-                SizedBox(height: 5),
+                // SizedBox(height: 5),
                 ListTile(
                   onTap: () {},
                   title: Align(

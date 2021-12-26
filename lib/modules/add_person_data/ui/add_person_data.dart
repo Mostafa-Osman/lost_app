@@ -11,21 +11,16 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class AddPersonDataScreen extends StatefulWidget {
-  @override
-  _AddPersonDataScreenState createState() => _AddPersonDataScreenState();
-}
-
-class _AddPersonDataScreenState extends State<AddPersonDataScreen> {
+class AddPersonDataScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _genderKey = GlobalKey<FormState>();
   final _citiesKey = GlobalKey<FormState>();
   final _key = GlobalKey<FormState>();
   final TextEditingController personName = TextEditingController();
   final TextEditingController personAge = TextEditingController();
-  var moreTitleDetails = TextEditingController();
-  var detailBox = TextEditingController();
-  String? selectedValue;
+  final moreTitleDetails = TextEditingController();
+  final detailBox = TextEditingController();
+   String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -177,4 +172,6 @@ class _AddPersonDataScreenState extends State<AddPersonDataScreen> {
       },
     );
   }
+
+
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/modules/register/regisster_cubit/cubit.dart';
 import 'package:lost_app/modules/register/regisster_cubit/states.dart';
 import 'package:lost_app/modules/verfiy_mobile/ui/Verify_mobile.dart';
-import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
@@ -13,13 +13,12 @@ import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class RegisterScreen extends StatelessWidget {
-
   final _formKey = GlobalKey<FormState>();
-  var registerNameControl = TextEditingController();
-  var registerEmailControl = TextEditingController();
-  var registerPhoneControl = TextEditingController();
-  var registerPasswordControl = TextEditingController();
-  var registerConfirmPasswordControl = TextEditingController();
+  final registerNameControl = TextEditingController();
+  final registerEmailControl = TextEditingController();
+  final registerPhoneControl = TextEditingController();
+  final registerPasswordControl = TextEditingController();
+  final registerConfirmPasswordControl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +32,7 @@ class RegisterScreen extends StatelessWidget {
             child: SafeArea(
               child: Column(
                 children: [
+                  // logo of page
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Container(
@@ -48,15 +48,20 @@ class RegisterScreen extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextClass(text: 'الاسم', fontSize: 15),
+                            //  text to display name
+                            TextClass(text: 'الاسم'),
+                            // Text form field to enter Name
                             TextFormFieldClass(
                               textHint: 'ادخل اسمك',
                               controller: registerNameControl,
                               validator: (value) =>
                                   value!.isEmpty ? 'من فضلك ادخل اسمك' : null,
                             ),
+                            // Sized Box
                             SizedBox(height: 20),
-                            TextClass(text: 'رقم الهاتف', fontSize: 15),
+                            //  text phone number
+                            TextClass(text: 'رقم الهاتف'),
+                            // Text form field to enter phone number
                             TextFormFieldClass(
                               textHint: 'ادخل رقم هاتفك',
                               controller: registerPhoneControl,
@@ -67,20 +72,24 @@ class RegisterScreen extends StatelessWidget {
                                       ? 'رقم الهاتف غير صحيح'
                                       : null,
                             ),
+                            // Sized Box
                             SizedBox(height: 20),
-                            TextClass(
-                                text: 'البريد الالكتروني (اختياري)',
-                                fontSize: 15),
+                            //  text to display email
+                            TextClass(text: 'البريد الالكتروني (اختياري)'),
+                            // Text form field to enter email
                             TextFormFieldClass(
                               textHint: 'ادخل بريدك الالكتروني',
                               controller: registerEmailControl,
                               validator: (value) =>
-                                  (!value!.isEmpty && !value.contains('@'))
+                                  (value!.length>0 && !value.contains('@'))
                                       ? 'البريد الالكتروني الذي ادخلته غير صحيح'
                                       : null,
                             ),
+                            // Sized Box
                             SizedBox(height: 20),
-                            TextClass(text: 'كلمه المرور', fontSize: 15),
+                            //  text to display password
+                            TextClass(text: 'كلمه المرور'),
+                            // Text form field to enter password
                             TextFormFieldClass(
                               textHint: 'ادخل كلمه المرور',
                               controller: registerPasswordControl,
@@ -96,8 +105,11 @@ class RegisterScreen extends StatelessWidget {
                                       ? 'كلمه المرور اقل من 8 احرف'
                                       : null,
                             ),
+                            // Sized Box
                             SizedBox(height: 20),
-                            TextClass(text: 'تأكيد كلمه المرور ', fontSize: 15),
+                            //  text to display rewrite password
+                            TextClass(text: 'تأكيد كلمه المرور '),
+                            // Text form field to rewrite password
                             TextFormFieldClass(
                               textHint: ' اعد تأكيد ادخل كلمه المرور',
                               controller: registerConfirmPasswordControl,
@@ -114,7 +126,9 @@ class RegisterScreen extends StatelessWidget {
                                       ? 'كلمه المرور غير متطابق'
                                       : null,
                             ),
+                            // Sized Box
                             SizedBox(height: 30),
+                            // button to submit register
                             ButtonTheme(
                                 minWidth: double.infinity,
                                 height: 50,
@@ -127,11 +141,12 @@ class RegisterScreen extends StatelessWidget {
                                           context, VerifyMobileScreen(false));
                                   },
                                 )),
+                            // Sized Box
                             SizedBox(height: 10),
+                            // Text button class to   navigate to login page if you have account
                             TextButtonClass(
-                                onPressed: () {
-                                  navigatorAndFinish(context, LoginScreen());
-                                },
+                                onPressed: () =>
+                                    navigatorAndFinish(context, LoginScreen()),
                                 text: 'هل لديك حساب بالفعل ؟',
                                 textColor: mainColor),
                           ]),
