@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/modules/add_person_data/ui/add_person_data.dart';
+import 'package:lost_app/modules/posts_found/ui/posts_found.dart';
+import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -39,12 +42,18 @@ class PostScreen extends StatelessWidget {
                     image: 'assets/images/welcome_1.svg',
                     text: 'ابحث عن احد المفقودين',
                     size: 250,
+                    page: AddPersonDataScreen(
+                      textPost: 'مكان الفقدان',
+                    ),
                   ),
                   SizedBox(height: 20),
                   CardPostPage(
                     image: 'assets/images/lost_post.svg',
                     text: 'وجدت احد المفقودين',
                     size: 200,
+                    page: AddPersonDataScreen(
+                      textPost: 'مكان العثور',
+                    ),
                   ),
                 ],
               ),
@@ -74,9 +83,9 @@ class CardPostPage extends StatelessWidget {
       ),
       child: Card(
         elevation: 6,
-        child: FlatButton(
-          onPressed: () {
-            //navigateTo(context, null);
+        child: InkWell(
+          onTap: () {
+            navigateTo(context, page);
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

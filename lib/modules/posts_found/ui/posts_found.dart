@@ -8,6 +8,7 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class PostsFoundScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

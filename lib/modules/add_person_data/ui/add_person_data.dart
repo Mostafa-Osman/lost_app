@@ -20,7 +20,10 @@ class AddPersonDataScreen extends StatelessWidget {
   final TextEditingController personAge = TextEditingController();
   final moreTitleDetails = TextEditingController();
   final detailBox = TextEditingController();
-   String? selectedValue;
+  String? selectedValue;
+  final String textPost;
+
+  AddPersonDataScreen({required this.textPost});
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +100,7 @@ class AddPersonDataScreen extends StatelessWidget {
                     ),
                     //location
                     SizedBox(height: 10),
-                    TextClass(text: 'مكان الفقدان', fontSize: 25),
+                    TextClass(text: textPost, fontSize: 25),
                     //dropdownButton for City
                     DropdownButtonClass(
                       key: _citiesKey,
