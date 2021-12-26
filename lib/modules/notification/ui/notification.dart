@@ -16,11 +16,19 @@ class NotificationScreen extends StatelessWidget {
           leading: IconButton(
               onPressed: ()=>Navigator.pop(context),
               icon: Icon(Icons.arrow_back_ios_sharp, color: black))),
-      body: ListView.builder(
-        itemBuilder: (ctx, index) {
-          return NotificationItem( index: index);
-        },
-        itemCount: 10,
+      body: Container(
+        color: white,
+        width: double.infinity,
+        child: Container(
+          alignment: Alignment.center,
+          width: 500,
+          child: ListView.builder(
+            itemBuilder: (ctx, index) {
+              return NotificationItem( index: index);
+            },
+            itemCount: 10,
+          ),
+        ),
       ),
     );
   }

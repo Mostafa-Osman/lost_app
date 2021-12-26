@@ -39,10 +39,9 @@ class _SettingScreenState extends State<SettingScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
+                  padding: const EdgeInsets.only(right: 15.0,bottom: 10),
                   child: TextClass(text: 'النظام', fontSize: 20),
                 ),
-                SizedBox(height: 10),
                 ListTile(
                   onTap: ()=>navigateTo(context, NotificationScreen()),
                   title:TextClass(
@@ -88,21 +87,17 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 SizedBox(height: 10),
                 DividerClass(color: HexColor('#D8D8D8'), thickness: 0.8),
-                SizedBox(height: 5),
                 Padding(
-                  padding: const EdgeInsets.only(right: 15.0,bottom: 5),
+                  padding: const EdgeInsets.only(top: 5,right: 15.0,bottom: 5),
                   child: TextClass(
                     text: 'الحساب',
                     fontSize: 25,
                   ),
                 ),
-                // SizedBox(height: 5),
                 ListTile(
                   onTap: () {},
-                  title: Align(
-                      alignment: Alignment.topRight,
-                      child: TextClass(
-                          text: 'تسجيل خروج', fontSize: 20, textColor: red)),
+                  title:  TextClass(
+                          text: 'تسجيل خروج',    textAlign: TextAlign.start, fontSize: 20, textColor: red),
                   trailing: Icon(Icons.arrow_back_ios_new_outlined, color: red),
                 ),
               ],

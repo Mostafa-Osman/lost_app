@@ -11,11 +11,15 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
+class Keys {
+  static final _formKey = GlobalKey<FormState>();
+  static final _genderKey = GlobalKey<FormState>();
+  static final _citiesKey = GlobalKey<FormState>();
+  static final _key = GlobalKey<FormState>();
+}
+
 class AddPersonDataScreen extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  final _genderKey = GlobalKey<FormState>();
-  final _citiesKey = GlobalKey<FormState>();
-  final _key = GlobalKey<FormState>();
+
   final TextEditingController personName = TextEditingController();
   final TextEditingController personAge = TextEditingController();
   final moreTitleDetails = TextEditingController();
@@ -49,7 +53,7 @@ class AddPersonDataScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Form(
-                      key: _formKey,
+                      key: Keys._formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -86,7 +90,7 @@ class AddPersonDataScreen extends StatelessWidget {
                     //dropdownButton
                     TextClass(text: 'النوع', fontSize: 25),
                     DropdownButtonClass(
-                      key: _genderKey,
+                      keyForm:  Keys._genderKey,
                       hintText: 'اختر النوع',
                       validator: (value) =>
                           value == null ? "من فضلك اختر النوع" : null,
@@ -103,7 +107,7 @@ class AddPersonDataScreen extends StatelessWidget {
                     TextClass(text: textPost, fontSize: 25),
                     //dropdownButton for City
                     DropdownButtonClass(
-                      key: _citiesKey,
+                      keyForm: Keys. _citiesKey,
                       hintText: 'اختر المحافظه',
                       validator: (value) =>
                           value == null ? "من فضلك اختر المحافظه" : null,
@@ -118,7 +122,7 @@ class AddPersonDataScreen extends StatelessWidget {
                     SizedBox(height: 10),
                     //location details
                     DropdownButtonClass(
-                      key: _key,
+                      keyForm:  Keys._key,
                       hintText: 'اختر المنطقه',
                       validator: (value) =>
                           value == null ? "من فضلك اختر المنطقه" : null,
@@ -155,13 +159,12 @@ class AddPersonDataScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
                       child: RaisedButtonClass(
                           onPressed: () {
-                            if (_formKey.currentState!.validate() &&
-                                _genderKey.currentState!.validate() &&
-                                _citiesKey.currentState!.validate() &&
-                                _key.currentState!.validate())
-                              print(AddPersonDataCubit.get(context)
-                                  .imageCamera
-                                  .length);
+                            if ( Keys._formKey.currentState!.validate() &&
+                                Keys._genderKey.currentState!.validate() &&
+                                Keys._citiesKey.currentState!.validate() &&
+                                Keys._key.currentState!.validate())
+                            print('ok');
+
                           },
                           text: "نشر",
                           textColor: white),
@@ -175,6 +178,4 @@ class AddPersonDataScreen extends StatelessWidget {
       },
     );
   }
-
-
 }

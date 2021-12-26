@@ -3,14 +3,14 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class DropdownButtonClass extends StatelessWidget {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+  GlobalKey<FormState> keyForm = GlobalKey<FormState>();
   final hintText;
   final validator;
   final items;
   final selectedValue;
 
   DropdownButtonClass(
-      {required this.key,
+      {required this.keyForm,
       this.hintText,
       this.validator,
       this.items,
@@ -27,7 +27,7 @@ class DropdownButtonClass extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Form(
-        key: key,
+        key: keyForm,
         child: DropdownButtonFormField(
             hint: TextClass(text: hintText, textColor: lightGrey),
             icon: Icon(Icons.keyboard_arrow_down_outlined, size: 30),
