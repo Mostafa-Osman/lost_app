@@ -37,7 +37,8 @@ class _TextButtonClassState extends State<TextButtonClass> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: TextClass(
+      child:
+      TextClass(
         text: widget.text,
         fontSize: widget.fontSize,
         fontWeight: widget.fontWeight,

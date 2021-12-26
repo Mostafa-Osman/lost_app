@@ -36,7 +36,6 @@ dependencies:
   flutter_svg: ^0.22.0
   flutter_bloc:
   image_picker:
-  country_state_city_picker: ^1.2.8
 
 
 

@@ -42,6 +42,8 @@ class TextFormFieldClass extends StatelessWidget {
   InputDecoration? decoration;
   TextStyle? textStyle;
   StrutStyle? structStyle;
+  bool autofocus;
+  int maxLines;
 
   TextFormFieldClass({
     required this.controller,
@@ -55,6 +57,7 @@ class TextFormFieldClass extends StatelessWidget {
     this.prefix,
     this.roundedRectangleBorder = 15.0,
     this.obscureText = false,
+    this.autofocus=false,
     this.suffixIcon,
     this.keyboardType,
     this.label,
@@ -62,6 +65,7 @@ class TextFormFieldClass extends StatelessWidget {
     this.textStyle,
     this.contentPadding =
         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+    this.maxLines=1,
   });
 
   @override
@@ -71,6 +75,7 @@ class TextFormFieldClass extends StatelessWidget {
       keyboardType: keyboardType,
       validator: validator,
       textAlign: textAlign,
+      autofocus: autofocus,
       style: TextStyle(
         color: textColor,
 
@@ -93,6 +98,7 @@ class TextFormFieldClass extends StatelessWidget {
         suffixIcon: suffixIcon,
       ),
       obscureText: obscureText,
+      maxLines:maxLines,
     );
   }
 }
