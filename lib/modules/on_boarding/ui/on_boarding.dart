@@ -1,98 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/login/ui/login.dart';
+import 'package:lost_app/modules/on_boarding/on_boarding_cubit/cubit.dart';
+import 'package:lost_app/modules/on_boarding/on_boarding_cubit/states.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/smooth_page_indicator_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  @override
-  _OnBoardingScreenState createState() => _OnBoardingScreenState();
-}
-
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
+class OnBoardingScreen extends StatelessWidget {
   var boardingController = PageController();
-  String changeButtonText = 'التالي';
-  bool isLogin = false;
-
-  List<OnBoardingModel> splash = [
-    OnBoardingModel(
-        image: 'assets/images/welcome_1.svg',
-        title: 'هل تبحث عن احد المفقودين ',
-        body:
-            "اذا كنت تبحث عن احد الأشخاص المفقودين يمكنك ارفاق صوره لهذا الشخص و سوف نساعدك في ايجاده"),
-    OnBoardingModel(
-        image: 'assets/images/welcome_2.svg',
-        title: 'ام وجدت احد المفقودين ',
-        body:
-            "اما اذا كنت قد وجدت شخصا مفقوداو لا تستطيع الوصول الى ذويه فيمكنك ارفاق صورة له وسوف نساعدك في الوصول الى اقربائه"),
-    OnBoardingModel(
-        image: 'assets/images/welcome_3.svg',
-        title: 'كل ما عليك هو ارفاق صورة وسنقوم بالبحث بدلا عنك ',
-        body:
-            "نقوم بتحليل الصورة عن طريق احدى تقنيات الذكاء الاصطناعي ومن ثم البحث في قاعدة البيانات التي تحتوي على العديد من الصور لاشخاص مفقودين  "),
-  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Align(
-        alignment: Alignment.center,
-        child: Container(
-          width: 500,
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                children: [
-                  Flexible(
-                    child: PageView.builder(
-                      reverse: true,
-                      itemCount: splash.length,
-                      itemBuilder: (context, index) => buildBoardingItem(
-                          splash[index],
-                          splash.length,
-                          boardingController,
-                          context),
-                      controller: boardingController,
-                      onPageChanged: (index) {
-                        (index == splash.length - 1)
-                            ? setState(() {
-                                changeButtonText = 'هيا نبدأ';
-                                isLogin = true;
-                              })
-                            : setState(() {
-                                changeButtonText = 'التالي';
-                                isLogin = false;
-                              });
-                      },
+    return BlocConsumer<OnBoardingCubit, OnBoardingStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = OnBoardingCubit.get(context);
+        return Scaffold(
+            body: Align(
+          alignment: Alignment.center,
+          child: Container(
+            width: 500,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  children: [
+                    Flexible(
+                      child: PageView.builder(
+                        reverse: true,
+                        itemCount: cubit.splash.length,
+                        itemBuilder: (context, index) => buildBoardingItem(
+                            cubit.splash[index],
+                            cubit.splash.length,
+                            boardingController,
+                            context),
+                        controller: boardingController,
+                        onPageChanged: (index) {
+                          if (index == cubit.splash.length - 1) {
+                            cubit.changeTextButton(true);
+                            cubit.isLastPage = true;
+                          } else {
+                            cubit.changeTextButton(false);
+                            cubit.isLastPage = false;
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                  RaisedButtonClass(
-                      onPressed: () {
-                        print(isLogin);
-                        isLogin
-                            ? navigateTo(context, LoginScreen())
-                            : boardingController.nextPage(
-                                duration: Duration(microseconds: 700),
-                                curve: Curves.easeIn);
-                      },
-                      text: changeButtonText,
-                      textColor: white),
-                ],
+                    RaisedButtonClass(
+                        onPressed: () {
+                          cubit.isLastPage
+                              ? navigateTo(context, LoginScreen())
+                              : boardingController.nextPage(
+                                  duration: Duration(microseconds: 700),
+                                  curve: Curves.easeIn);
+                        },
+                        text: cubit.buttonText,
+                        textColor: white),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        ));
+      },
     );
   }
 }
 
-Widget buildBoardingItem(
-    OnBoardingModel model, splashLength, controller, context) {
+Widget buildBoardingItem(model, splashLength, controller, context) {
   Size size = MediaQuery.of(context).size;
   return SingleChildScrollView(
     child: Padding(
@@ -126,13 +105,4 @@ Widget buildBoardingItem(
       ),
     ),
   );
-}
-
-class OnBoardingModel {
-  final String image;
-  final String title;
-  final String body;
-
-  OnBoardingModel(
-      {required this.image, required this.title, required this.body});
 }

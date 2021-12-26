@@ -11,6 +11,7 @@ import 'package:lost_app/shared/styles/color.dart';
 import 'modules/add_person_data/add_person_cubit/cubit.dart';
 import 'modules/add_person_data/ui/add_person_data.dart';
 import 'modules/login/login_cubit/cubit.dart';
+import 'modules/on_boarding/on_boarding_cubit/cubit.dart';
 import 'modules/post/post.dart';
 import 'modules/posts_found/ui/posts_found.dart';
 import 'modules/register/regisster_cubit/cubit.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => LoginCubit()),
           BlocProvider(create: (context) => RegisterCubit()),
           BlocProvider(create: (context) => AddPersonDataCubit()),
+          BlocProvider(create: (context) => OnBoardingCubit()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: [
             Locale('ar', ''),
           ],
-          home: LoginScreen(),
+          home: OnBoardingScreen(),
         ));
   }
 }
