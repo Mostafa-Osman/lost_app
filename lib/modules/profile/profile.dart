@@ -22,6 +22,7 @@ class _ProfileClassState extends State<ProfileClass> {
         //alignment: Alignment.topCenter,
         child: Container(
           width: 500,
+          color: white,
           child: Column(
             children: [
               Padding(
