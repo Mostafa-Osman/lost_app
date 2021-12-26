@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/modules/register/regisster_cubit/states.dart';
+import 'package:lost_app/modules/register/register_cubit/states.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(RegisterInitialState());

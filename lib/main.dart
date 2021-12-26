@@ -14,7 +14,7 @@ import 'modules/login/login_cubit/cubit.dart';
 import 'modules/on_boarding/on_boarding_cubit/cubit.dart';
 import 'modules/post/post.dart';
 import 'modules/posts_found/ui/posts_found.dart';
-import 'modules/register/regisster_cubit/cubit.dart';
+import 'modules/register/register_cubit/cubit.dart';
 
 void main() {
   runApp(MyApp());

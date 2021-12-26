@@ -11,7 +11,7 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class OnBoardingScreen extends StatelessWidget {
-  var boardingController = PageController();
+  final PageController boardingController = PageController();
 
   @override
   Widget build(BuildContext context) {
