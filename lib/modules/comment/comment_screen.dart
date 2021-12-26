@@ -13,7 +13,6 @@ class CommentScreen extends StatelessWidget {
 
   CommentScreen({required this.details, this.autofocus = false});
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -43,7 +42,7 @@ class CommentScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      width: 500,
+                      // width: 500,
                       child: ListView(
                         shrinkWrap: true,
                         children: [
@@ -61,27 +60,31 @@ class CommentScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: lightBlue,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
+                                      BorderRadius.all(Radius.circular(15)),
                                 ),
                                 child: Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          top: 17.0,
-                                          right: 15,
-                                          left: 15,
-                                          bottom: 10),
+                                        top: 17.0,
+                                        right: 15,
+                                        left: 15,
+                                        bottom: 10,
+                                      ),
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             children: [
                                               ClipOval(
                                                 child: Image.asset(
                                                   'assets/images/IMG20201116145812.jpg',
-                                                  width: size.width >= 500? 40 :size.width/10,
+                                                  width: size.width >= 500
+                                                      ? 40
+                                                      : size.width / 10,
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -92,8 +95,11 @@ class CommentScreen extends StatelessWidget {
                                                 child: Container(
                                                   child: TextClass(
                                                     text: 'منصور طارق منصور',
-                                                    fontSize: size.width >= 500? 20 : size.width/20,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: size.width >= 500
+                                                        ? 20
+                                                        : size.width / 20,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ),
                                               ),
@@ -102,7 +108,9 @@ class CommentScreen extends StatelessWidget {
                                                 onPressed: () {},
                                                 icon: Icon(
                                                   Icons.more_vert,
-                                                  size: size.width >= 500? 30 : size.width/18,
+                                                  size: size.width >= 500
+                                                      ? 30
+                                                      : size.width / 18,
                                                 ),
                                               ),
                                             ],
@@ -111,7 +119,8 @@ class CommentScreen extends StatelessWidget {
                                           FittedBox(
                                             fit: BoxFit.fitWidth,
                                             child: TextClass(
-                                              text: 'مفقود منذ 3 ايام فى دار السلام',
+                                              text:
+                                                  'مفقود منذ 3 ايام فى دار السلام',
                                               textAlign: TextAlign.right,
                                               fontSize: 15,
                                               overflow: TextOverflow.ellipsis,
@@ -120,9 +129,9 @@ class CommentScreen extends StatelessWidget {
                                           SizedBox(height: 20.0),
                                           Column(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                                MainAxisAlignment.start,
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               FittedBox(
                                                 fit: BoxFit.fitWidth,
@@ -130,47 +139,53 @@ class CommentScreen extends StatelessWidget {
                                                   height: 100,
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                        MainAxisAlignment.start,
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       TextClass(
                                                         text:
-                                                        'الاسم : مصطفى عثمان',
-                                                        textAlign: TextAlign.right,
+                                                            'الاسم : مصطفى عثمان',
+                                                        textAlign:
+                                                            TextAlign.right,
                                                         fontSize: 15,
-                                                        overflow:
-                                                        TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
                                                       TextClass(
                                                         text: 'السن : ٢٢',
-                                                        textAlign: TextAlign.right,
+                                                        textAlign:
+                                                            TextAlign.right,
                                                         fontSize: 15,
-                                                        overflow:
-                                                        TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
                                                       TextClass(
                                                         text: 'الجنس : ذكر',
-                                                        textAlign: TextAlign.right,
+                                                        textAlign:
+                                                            TextAlign.right,
                                                         fontSize: 15,
-                                                        overflow:
-                                                        TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
                                                       TextClass(
                                                         text:
-                                                        'العنوان : المعادي - القاهره',
-                                                        textAlign: TextAlign.right,
+                                                            'العنوان : المعادي - القاهره',
+                                                        textAlign:
+                                                            TextAlign.right,
                                                         fontSize: 15,
-                                                        overflow:
-                                                        TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
                                                       TextClass(
                                                         text:
-                                                        'هاتف التواصل : 01145589134',
-                                                        textAlign: TextAlign.right,
+                                                            'هاتف التواصل : 01145589134',
+                                                        textAlign:
+                                                            TextAlign.right,
                                                         fontSize: 15,
-                                                        overflow:
-                                                        TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
                                                     ],
                                                   ),
@@ -178,15 +193,18 @@ class CommentScreen extends StatelessWidget {
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                    CrossAxisAlignment.center,
                                                 children: [
                                                   Expanded(
                                                     child: Container(
-                                                      alignment: Alignment.center,
+                                                      alignment:
+                                                          Alignment.center,
                                                       child: ClipRRect(
-                                                        borderRadius: BorderRadius.circular(8.0),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
                                                         child: Image.asset(
                                                           'assets/images/IMG20201115111300.jpg',
                                                           fit: BoxFit.cover,
@@ -207,45 +225,53 @@ class CommentScreen extends StatelessWidget {
                                       width: double.infinity,
                                       color: white,
                                     ),
-                                    Container(
-                                      height: 55,
-                                      child: Container(
-                                        child: FlatButton(
-                                          onPressed: () {},
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(15),
-                                              bottomRight: Radius.circular(15),
-                                            ),
+                                    Material(
+                                      color: lightBlue,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(15),
+                                          bottomRight: Radius.circular(15),
+                                        ),
+                                      ),
+                                      child: InkWell(
+                                        customBorder: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(15),
+                                            bottomRight: Radius.circular(15),
                                           ),
+                                        ),
+                                        onTap: () {},
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
                                           child: Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                                MainAxisAlignment.center,
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                                CrossAxisAlignment.center,
                                             children: [
                                               TextClass(
                                                 text: 'مشاركه',
-                                                fontSize: size.width >= 500? 19 : size.width/18,
+                                                fontSize: size.width >= 500
+                                                    ? 19
+                                                    : size.width / 18,
                                               ),
                                               SizedBox(
                                                 width: 10,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 5.0),
-                                                child: SvgPicture.asset(
-                                                    'assets/icons/share_icon.svg',
-                                                    width: size.width >= 500
-                                                        ? 30
-                                                        : size.width / 18)
-                                              ),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 5.0),
+                                                  child: SvgPicture.asset(
+                                                      'assets/icons/share_icon.svg',
+                                                      width: size.width >= 500
+                                                          ? 30
+                                                          : size.width / 18)),
                                             ],
                                           ),
                                         ),
                                       ),
                                     ),
-
                                   ],
                                 ),
                               ),
@@ -257,7 +283,6 @@ class CommentScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Container(
                       alignment: Alignment.bottomCenter,
                       width: double.infinity,
@@ -285,8 +310,8 @@ class CommentScreen extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Padding(
-                                      padding:
-                                      const EdgeInsets.only(right: 15, left: 15),
+                                      padding: const EdgeInsets.only(
+                                          right: 15, left: 15),
                                       child: Container(
                                         child: TextFormFieldClass(
                                           autofocus: autofocus,
@@ -295,9 +320,11 @@ class CommentScreen extends StatelessWidget {
                                           textHint: 'اكتب تعليقا ...',
                                           prefix: Transform(
                                             alignment: Alignment.center,
-                                            transform: Matrix4.rotationY(math.pi),
+                                            transform:
+                                                Matrix4.rotationY(math.pi),
                                             child: Padding(
-                                              padding: const EdgeInsets.only(right: 4.0),
+                                              padding: const EdgeInsets.only(
+                                                  right: 4.0),
                                               child: IconButton(
                                                 icon: Icon(Icons.send_rounded),
                                                 iconSize: 30.0,

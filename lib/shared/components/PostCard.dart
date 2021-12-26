@@ -5,6 +5,7 @@ import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
+
 class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -213,11 +214,6 @@ class PostCard extends StatelessWidget {
                                         width: size.width >= 500
                                             ? 30
                                             : size.width / 18),
-                                    // Image.asset(
-                                    //   'assets/icons/comment_icon.png',
-                                    //   width: size.width >= 500? 30 : size.width/18,
-                                    //   //color: Colors.white,
-                                    // ),
                                   ),
                                 ],
                               ),
@@ -238,7 +234,9 @@ class PostCard extends StatelessWidget {
                             ),
                           ),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+
+                            },
                             splashColor: grey,
                             customBorder: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -268,12 +266,6 @@ class PostCard extends StatelessWidget {
                                           ? 34
                                           : size.width / 18,
                                     ),
-                                    // Image.asset(
-                                    //   'assets/icons/share_icon.png',
-                                    //   width: size.width >= 500
-                                    //       ? 34
-                                    //       : size.width / 18,
-                                    // ),
                                   ),
                                 ],
                               ),
