@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Padding(
               padding:
-                  const EdgeInsets.only(left: 30.0, right: 30.0, top: 00.0),
+                  const EdgeInsets.only(left: 30.0, right: 30.0),
               // Container of all screen
               child: Container(
                 width: 500,
