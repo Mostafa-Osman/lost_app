@@ -33,8 +33,8 @@ class PhoneNumberScreen extends StatelessWidget {
                   fontSize: 20.0,
                   textColor: lightGrey,
                 ),
-                // Sized Box with height 50
-                SizedBox(height: 50),
+                // Sized Box with height 20
+                SizedBox(height: 20),
                 //  text (phone number)
                 Container(
                   alignment: Alignment.topRight,
