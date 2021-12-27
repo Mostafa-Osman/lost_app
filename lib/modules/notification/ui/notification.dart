@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -8,6 +7,7 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white,
       appBar: AppBar(
           backgroundColor: white,
           elevation: 0,
@@ -16,20 +16,17 @@ class NotificationScreen extends StatelessWidget {
           leading: IconButton(
               onPressed: ()=>Navigator.pop(context),
               icon: Icon(Icons.arrow_back_ios_sharp, color: black))),
-      body: Container(
-        color: white,
-        width: double.infinity,
-        child: Container(
+      body:Container(
           alignment: Alignment.center,
           width: 500,
           child: ListView.builder(
             itemBuilder: (ctx, index) {
-              return NotificationItem( index: index);
+              return NotificationItem(index: index);
             },
             itemCount: 10,
           ),
         ),
-      ),
+
     );
   }
 }
@@ -102,7 +99,7 @@ class NotificationItem extends StatelessWidget {
                     Container(
                       width: 90,
                       height: MediaQuery.of(context).size.height / 10.1,
-                      //14.2,
+
                       child:SvgPicture.asset('assets/images/lost_person_image.svg',
                           width: 90,
                           fit: BoxFit.fill),

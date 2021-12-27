@@ -16,7 +16,7 @@ class HomeLayout extends StatefulWidget {
 
 class _HomeLayoutState extends State<HomeLayout> {
   Color bottomNavBarAccColor = grey;
-  Color bottomNavBarHomeColor = BottomNavBarBlue;
+  Color bottomNavBarHomeColor = bottomNavBarBlue;
   int indexPage = 0;
   Map<int, PreferredSizeWidget> appBar = {
     0: HomePageAppBar(),
@@ -34,7 +34,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       body: page[indexPage],
 
       floatingActionButton: FloatingActionButton(
-        backgroundColor: BottomNavBarBlue,
+        backgroundColor: bottomNavBarBlue,
         //Floating action button on Scaffold
         onPressed: () {
           navigateTo(context, PostScreen());
@@ -88,7 +88,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                   onTap: () {
                     setState(() {
                       if (indexPage != 1) {
-                        bottomNavBarAccColor = BottomNavBarBlue;
+                        bottomNavBarAccColor = bottomNavBarBlue;
                         bottomNavBarHomeColor = grey;
                         indexPage = 1;
                       }
@@ -123,7 +123,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                   onPressed: () {
                     setState(() {
                       if (indexPage != 0) {
-                        bottomNavBarHomeColor = BottomNavBarBlue;
+                        bottomNavBarHomeColor = bottomNavBarBlue;
                         bottomNavBarAccColor = grey;
                         indexPage = 0;
                       }

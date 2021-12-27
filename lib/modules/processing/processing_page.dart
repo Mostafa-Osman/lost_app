@@ -3,13 +3,8 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 import 'package:lottie/lottie.dart';
 
-class ProcessingPage extends StatefulWidget {
-  @override
-  ProcessingPageState createState() => ProcessingPageState();
-}
+class ProcessingPage extends StatelessWidget {
 
-class ProcessingPageState extends State<ProcessingPage>
-{
   @override
   Widget build(BuildContext context) {
     return Scaffold(

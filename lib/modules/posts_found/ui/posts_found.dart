@@ -45,13 +45,12 @@ class PostsFoundScreen extends StatelessWidget {
                           widget: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(20.0),
+                                padding: const EdgeInsets.only(top: 20.0,right: 20.0,left: 20.0,bottom: 30),
                                 child: TextClass(
                                     text:
                                         'سنقوم بحفظ البيانات المدخله في قاعدة البيانات وانشاء منشور',
                                     fontSize: 20),
                               ),
-                              SizedBox(height: 10),
                               Container(
                                 height: 2,
                                 color: Color.fromRGBO(200, 218, 245, 1),
@@ -80,7 +79,8 @@ class PostsFoundScreen extends StatelessWidget {
                               ))
                             ],
                           ),
-                          isDoneIcon: false),
+                          isDoneIcon: false
+                      ),
                     );
                   }),
               SizedBox(height: 30),

@@ -328,7 +328,7 @@ class CommentScreen extends StatelessWidget {
                                               child: IconButton(
                                                 icon: Icon(Icons.send_rounded),
                                                 iconSize: 30.0,
-                                                color: BottomNavBarBlue,
+                                                color: bottomNavBarBlue,
                                                 onPressed: () {},
                                               ),
                                             ),
