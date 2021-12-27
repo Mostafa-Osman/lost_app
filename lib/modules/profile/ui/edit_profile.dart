@@ -99,12 +99,14 @@ class EditProfile extends StatelessWidget {
                 controller: cubit.numberController,
                 suffixIcon: Icon(Icons.phone),
                 textAlign: TextAlign.end,
-                height: 0.5,
+                height: 0.1,
               ),
               SizedBox(height: 3),
-              AccountTextFormField(
-                text: cubit.email,
-                icon: Icons.email,
+              TextFormFieldClass(
+                controller: cubit.emailController,
+                suffixIcon: Icon(Icons.email),
+                textAlign: TextAlign.end,
+                height: 1.5,
               ),
             ],
           ),

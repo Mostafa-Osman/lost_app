@@ -81,7 +81,6 @@ class TextFormFieldClass extends StatelessWidget {
       validator: validator,
       textAlign: textAlign,
       autofocus: autofocus,
-
       style: TextStyle(
         color: textColor,
         fontSize: fontSize,
