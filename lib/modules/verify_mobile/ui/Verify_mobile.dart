@@ -49,8 +49,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                       'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
                   textColor: lightGrey),
               SizedBox(height: 50),
-             pinCodeFields(context),
-
+              pinCodeFields(context),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,

@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/modules/register/register_cubit/cubit.dart';
 import 'package:lost_app/modules/register/register_cubit/states.dart';
-import 'package:lost_app/modules/verfiy_mobile/ui/Verify_mobile.dart';
+import 'package:lost_app/modules/verify_mobile/ui/Verify_mobile.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';

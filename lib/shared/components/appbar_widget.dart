@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/notification/ui/notification.dart';
-import 'package:lost_app/modules/search/search_screen.dart';
+import 'package:lost_app/modules/search/ui/search_screen.dart';
 import 'package:lost_app/modules/setting/ui/setting.dart';
 import 'package:lost_app/shared/components/component.dart';
 import 'package:lost_app/shared/components/text_class.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:lost_app/modules/profile/profile.dart';
+import 'package:lost_app/modules/profile/ui/profile.dart';
 import 'package:lost_app/shared/components/appbar_widget.dart';
 import 'package:lost_app/modules/home/home.dart';
 import 'package:lost_app/modules/post/post.dart';
