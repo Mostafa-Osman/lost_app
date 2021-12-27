@@ -12,4 +12,15 @@ class ProfileCubit extends Cubit<ProfileStates> {
   String name = 'منصور طارق منصور محمد منصور';
   String number = '01149589134';
   String email = 'mansourtarek100@gmail.com';
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController numberController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
+  void setEditPageController(){
+    nameController.text = name;
+    numberController.text = number;
+    emailController.text = email;
+    emit(SetEditPageControllerState());
+  }
 }

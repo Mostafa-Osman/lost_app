@@ -43,8 +43,10 @@ class TextFormFieldClass extends StatelessWidget {
   TextStyle? textStyle;
   StrutStyle? structStyle;
   bool autofocus;
-  int maxLines;
-
+  int? maxLines;
+  double? fontSize;
+  TextOverflow? overflow;
+  double? height;
   TextFormFieldClass({
     required this.controller,
     this.validator,
@@ -66,6 +68,9 @@ class TextFormFieldClass extends StatelessWidget {
     this.contentPadding =
         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
     this.maxLines=1,
+    this.fontSize,
+    this.overflow,
+    this.height,
   });
 
   @override
@@ -76,10 +81,13 @@ class TextFormFieldClass extends StatelessWidget {
       validator: validator,
       textAlign: textAlign,
       autofocus: autofocus,
+
       style: TextStyle(
         color: textColor,
-
+        fontSize: fontSize,
+        overflow: overflow,
         fontFamily: 'Tajawal',
+        height: height,
       ),
       strutStyle: structStyle,
       decoration: InputDecoration(
