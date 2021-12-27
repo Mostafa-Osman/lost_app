@@ -27,7 +27,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
 
   _VerifyMobileScreenState(this.isForget);
 
-  StreamController<ErrorAnimationType>? errorController;
+  // StreamController<ErrorAnimationType>? errorController;
 
   TextEditingController textEditingController = TextEditingController();
   String currentText = "";
@@ -39,9 +39,10 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(50.0),
           child: Column(
             children: [
+              SizedBox(height: 30),
               TextClass(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
               SizedBox(height: 10),
               TextClass(
@@ -65,38 +66,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
                                 : showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
-                                        AlertDialogClass(
-                                      height: 260.0,
-                                      widget: Column(
-                                        children: [
-                                          TextClass(
-                                            text: 'تهانينا لقد اتممت إنشاء',
-                                          ),
-                                          TextClass(
-                                            text: 'الحساب بنجاح',
-                                          ),
-                                        ],
-                                      ),
-                                      bottomWidget: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          TextButtonClass(
-                                            onPressed: () => navigateTo(
-                                                context, HomeLayout()),
-                                            text: 'الي الصفحه الرئيسيه',
-                                            fontSize: 20,
-                                            textColor: black,
-                                          ),
-                                          TimerClass(
-                                              5,
-                                              Duration(milliseconds: 1000),
-                                              () => navigateTo(
-                                                  context, HomeLayout()))
-                                        ],
-                                      ),
-                                    ),
-                                  );
+                                        Dialog());
                           })),
                 ),
               ),
@@ -179,7 +149,6 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
         cursorColor: black,
         animationDuration: Duration(milliseconds: 300),
         enableActiveFill: true,
-        errorAnimationController: errorController,
         controller: textEditingController,
         keyboardType: TextInputType.number,
         boxShadows: [
@@ -194,33 +163,7 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
               ? navigateTo(context, ResetPasswordScreen())
               : showDialog(
                   context: context,
-                  builder: (BuildContext context) => AlertDialogClass(
-                    height: 260.0,
-                    widget: Column(
-                      children: [
-                        TextClass(
-                          text: 'تهانينا لقد اتممت إنشاء',
-                        ),
-                        TextClass(
-                          text: 'الحساب بنجاح',
-                        ),
-                      ],
-                    ),
-                    bottomWidget: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButtonClass(
-                          onPressed: () => navigateTo(context, HomeLayout()),
-                          text: 'الي الصفحه الرئيسيه',
-                          fontSize: 20,
-                          textColor: black,
-                        ),
-                        TimerClass(5, Duration(milliseconds: 1000),
-                            () => navigateTo(context, HomeLayout()))
-                      ],
-                    ),
-                  ),
-                );
+                  builder: (BuildContext context) => Dialog());
         },
         onChanged: (value) {
           print(value);
@@ -228,10 +171,38 @@ class _VerifyMobileScreenState extends State<VerifyMobileScreen> {
             currentText = value;
           });
         },
-        beforeTextPaste: (text) {
-          print("Allowing to paste $text");
-          return true;
-        },
+      ),
+    );
+  }
+}
+
+class Dialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialogClass(
+      height: 260.0,
+      widget: Column(
+        children: [
+          TextClass(
+            text: 'تهانينا لقد اتممت إنشاء',
+          ),
+          TextClass(
+            text: 'الحساب بنجاح',
+          ),
+        ],
+      ),
+      bottomWidget: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButtonClass(
+            onPressed: () => navigateTo(context, HomeLayout()),
+            text: 'الي الصفحه الرئيسيه',
+            fontSize: 20,
+            textColor: black,
+          ),
+          TimerClass(5, Duration(milliseconds: 1000),
+              () => navigateTo(context, HomeLayout()))
+        ],
       ),
     );
   }

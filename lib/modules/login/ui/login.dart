@@ -11,7 +11,6 @@ import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
-
 import 'enter_phone_number.dart';
 
 class LoginScreen extends StatelessWidget {

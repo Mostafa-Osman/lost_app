@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/edit_profile/edit_profile.dart';
+import 'package:lost_app/modules/profile/ui/edit_profile.dart';
 import 'package:lost_app/modules/notification/ui/notification.dart';
 import 'package:lost_app/modules/search/ui/search_screen.dart';
 import 'package:lost_app/modules/setting/ui/setting.dart';
 import 'package:lost_app/shared/components/component.dart';
-import 'package:lost_app/shared/components/profile_details.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
