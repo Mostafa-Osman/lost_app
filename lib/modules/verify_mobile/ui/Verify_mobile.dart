@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/modules/home_layout/home_layout.dart';
+import 'package:lost_app/modules/home_layout/ui/home_layout.dart';
 import 'package:lost_app/modules/login/ui/reset_password.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/modules/verify_mobile/verify_cubit/cubit.dart';
 import 'package:lost_app/modules/verify_mobile/verify_cubit/states.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/timer.dart';
@@ -75,7 +76,8 @@ class VerifyMobileScreen extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       onCompleted: (v) {
                         (isFromResetPhone)
-                            ? navigateTo(context, ResetPasswordScreen())
+                            ? navigateTo(
+                                context, RouteConstant.resetPasswordRoute)
                             : showDialog(
                                 context: context,
                                 builder: (BuildContext context) => Dialog());
@@ -96,7 +98,8 @@ class VerifyMobileScreen extends StatelessWidget {
                               textColor: white,
                               onPressed: () {
                                 (isFromResetPhone)
-                                    ? navigateTo(context, ResetPasswordScreen())
+                                    ? navigateTo(context,
+                                        RouteConstant.resetPasswordRoute)
                                     : showDialog(
                                         context: context,
                                         builder: (BuildContext context) =>
@@ -170,13 +173,13 @@ class Dialog extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextButtonClass(
-            onPressed: () => navigateTo(context, HomeLayout()),
+            onPressed: () => navigateTo(context, RouteConstant.homeLayoutRoute),
             text: 'الي الصفحه الرئيسيه',
             fontSize: 20,
             textColor: black,
           ),
           TimerClass(5, Duration(milliseconds: 1000),
-              () => navigateTo(context, HomeLayout()))
+              () => navigateTo(context, RouteConstant.homeLayoutRoute))
         ],
       ),
     );

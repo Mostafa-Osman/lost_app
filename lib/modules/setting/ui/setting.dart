@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/modules/notification/ui/notification.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/modules/setting/setting_cubit/cubit.dart';
 import 'package:lost_app/modules/setting/setting_cubit/states.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -41,7 +42,7 @@ class SettingScreen extends StatelessWidget {
                     child: TextClass(text: 'النظام', fontSize: 20),
                   ),
                   ListTile(
-                    onTap: () => navigateTo(context, NotificationScreen()),
+                    onTap: () => navigateTo(context, RouteConstant.notificationRote),
                     title: TextClass(
                         text: 'الاشعارات',
                         textAlign: TextAlign.start,

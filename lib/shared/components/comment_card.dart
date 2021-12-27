@@ -4,7 +4,6 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class CommentCard extends StatelessWidget {
-  const CommentCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

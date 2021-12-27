@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/on_boarding/ui/on_boarding.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -23,8 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => OnBoardingScreen()));
+    navigatorAndFinish(context, RouteConstant.onBoardingRoute);
   }
 
   @override

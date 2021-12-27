@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/comment/comment_screen.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-
 class PostCard extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,7 +27,9 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 child: InkWell(
-                  onTap: () => navigateTo(context, CommentScreen(details: {})),
+                  onTap: () => Navigator.pushNamed(
+                      context, RouteConstant.commentRoute,
+                      arguments: {}),
                   customBorder: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(15),
@@ -181,8 +183,11 @@ class PostCard extends StatelessWidget {
                             ),
                           ),
                           child: InkWell(
-                            onTap: () =>
-                                navigateTo(context, CommentScreen(details: {}, autofocus: true,)),
+                            onTap: () => navigateWithArgument(
+                              context,
+                              RouteConstant.commentRoute,
+                              {},
+                            ),
                             splashColor: grey,
                             customBorder: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -234,9 +239,7 @@ class PostCard extends StatelessWidget {
                             ),
                           ),
                           child: InkWell(
-                            onTap: () {
-
-                            },
+                            onTap: () {},
                             splashColor: grey,
                             customBorder: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(

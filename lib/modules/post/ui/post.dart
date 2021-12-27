@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/add_person_data/ui/add_person_data.dart';
-import 'package:lost_app/modules/posts_found/ui/posts_found.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -42,18 +42,14 @@ class PostScreen extends StatelessWidget {
                     image: 'assets/images/welcome_1.svg',
                     text: 'ابحث عن احد المفقودين',
                     size: 250,
-                    page: AddPersonDataScreen(
-                      textPost: 'مكان الفقدان',
-                    ),
+                    optionText: 'مكان الفقدان',
                   ),
                   SizedBox(height: 20),
                   CardPostPage(
                     image: 'assets/images/lost_post.svg',
                     text: 'وجدت احد المفقودين',
                     size: 200,
-                    page: AddPersonDataScreen(
-                      textPost: 'مكان العثور',
-                    ),
+                    optionText: 'مكان العثور',
                   ),
                 ],
               ),
@@ -69,9 +65,10 @@ class CardPostPage extends StatelessWidget {
   final String image;
   final String text;
   double? size;
-  Widget? page;
+  var optionText;
 
-  CardPostPage({required this.image, required this.text, this.page, this.size});
+  CardPostPage(
+      {required this.image, required this.text, this.optionText, this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +81,8 @@ class CardPostPage extends StatelessWidget {
       child: Card(
         elevation: 6,
         child: InkWell(
-          onTap: () {
-            navigateTo(context, page);
-          },
+          onTap: () => navigateWithArgument(
+              context, RouteConstant.addPersonDataRoute, optionText),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

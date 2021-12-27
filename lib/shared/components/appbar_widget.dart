@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/profile/ui/edit_profile.dart';
 import 'package:lost_app/modules/notification/ui/notification.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/modules/search/ui/search_screen.dart';
 import 'package:lost_app/modules/setting/ui/setting.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -55,7 +56,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                   ),
                 ),
                 child: InkWell(
-                  onTap: () => navigateTo(context, SearchScreen()),
+                  onTap: () => navigateTo(context, RouteConstant.searchRote),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5.0, right: 10),
                     child: Align(
@@ -79,7 +80,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
           icon: SvgPicture.asset(
             'assets/icons/notification.svg',
           ),
-          onPressed: () => navigateTo(context, NotificationScreen()),
+          onPressed: () => navigateTo(context, RouteConstant.notificationRote),
         ),
       ),
     );
@@ -119,7 +120,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
             Icons.settings_rounded,
           ),
           onPressed: () {
-            navigateTo(context, SettingScreen());
+            navigateTo(context, RouteConstant.settingRote);
           },
         ),
       ),
@@ -130,7 +131,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
             iconSize: 28,
             color: black,
             icon: SvgPicture.asset('assets/icons/profile_acc_ic.svg'),
-            onPressed: () => navigateTo(context, EditProfile()),
+            onPressed: () => navigateTo(context, RouteConstant.editProfileRote),
           ),
         ),
       ],

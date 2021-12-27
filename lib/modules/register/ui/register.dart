@@ -4,9 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/modules/register/register_cubit/cubit.dart';
 import 'package:lost_app/modules/register/register_cubit/states.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/modules/verify_mobile/ui/Verify_mobile.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -137,8 +138,10 @@ class RegisterScreen extends StatelessWidget {
                                   textColor: white,
                                   onPressed: () {
                                     if (_formKey.currentState!.validate())
-                                      navigateTo(
-                                          context, VerifyMobileScreen(isFromResetPhone: false));
+                                      navigateWithArgument(
+                                          context, RouteConstant.verifyRote
+                                          ,false
+                                      );
                                   },
                                 )),
                             // Sized Box
@@ -146,7 +149,7 @@ class RegisterScreen extends StatelessWidget {
                             // Text button class to   navigate to login page if you have account
                             TextButtonClass(
                                 onPressed: () =>
-                                    navigatorAndFinish(context, LoginScreen()),
+                                    navigatorAndFinish(context, RouteConstant.loginRoute),
                                 text: 'هل لديك حساب بالفعل ؟',
                                 textColor: mainColor),
                           ]),

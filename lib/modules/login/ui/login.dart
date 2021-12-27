@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/home_layout/home_layout.dart';
+import 'package:lost_app/modules/home_layout/ui/home_layout.dart';
 import 'package:lost_app/modules/login/login_cubit/cubit.dart';
 import 'package:lost_app/modules/login/login_cubit/states.dart';
 import 'package:lost_app/modules/register/ui/register.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/modules/route/router.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -28,8 +30,7 @@ class LoginScreen extends StatelessWidget {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 30.0, right: 30.0),
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0),
               // Container of all screen
               child: Container(
                 width: 500,
@@ -93,8 +94,8 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   // Text button forget password
                                   TextButtonClass(
-                                    onPressed: () => navigateTo(
-                                        context, PhoneNumberScreen()),
+                                    onPressed: () => navigateTo(context,
+                                        RouteConstant.phoneNumberRoute),
                                     text: 'هل نسيت كلمه المرور ؟ ',
                                     textColor: lightGrey,
                                   ),
@@ -108,7 +109,10 @@ class LoginScreen extends StatelessWidget {
                                           onPressed: () {
                                             if (_formKey.currentState!
                                                 .validate())
-                                              navigateTo(context, HomeLayout());
+                                              navigateTo(
+                                                  context,
+                                                  RouteConstant
+                                                      .homeLayoutRoute);
                                           },
                                           text: 'تسجيل الدخول',
                                           textColor: white)),
@@ -126,10 +130,12 @@ class LoginScreen extends StatelessWidget {
                                           ),
                                         ),
                                         // Text button to go  sign up screen
+
                                         Expanded(
                                             child: TextButtonClass(
                                           onPressed: () => navigatorAndFinish(
-                                              context, RegisterScreen()),
+                                              context,
+                                              RouteConstant.registerRoute),
                                           text: 'إنشاء حساب',
                                           fontSize: 18,
                                           textColor: mainColor,

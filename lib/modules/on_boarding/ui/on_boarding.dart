@@ -4,8 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/modules/on_boarding/on_boarding_cubit/cubit.dart';
 import 'package:lost_app/modules/on_boarding/on_boarding_cubit/states.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/smooth_page_indicator_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -53,7 +54,7 @@ class OnBoardingScreen extends StatelessWidget {
                     RaisedButtonClass(
                         onPressed: () {
                           cubit.isLastPage
-                              ? navigateTo(context, LoginScreen())
+                              ? navigateTo(context, RouteConstant.loginRoute)
                               : boardingController.nextPage(
                                   duration: Duration(microseconds: 700),
                                   curve: Curves.easeIn);

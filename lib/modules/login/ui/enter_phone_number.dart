@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/verify_mobile/ui/Verify_mobile.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -70,7 +70,8 @@ class PhoneNumberScreen extends StatelessWidget {
                         textColor: white,
                         onPressed: () {
                           if (_formKey.currentState!.validate())
-                            navigateTo(context, VerifyMobileScreen(isFromResetPhone: true));
+                            navigateWithArgument(context, RouteConstant.verifyRote,true
+                            );
                           },
                       ),
                     ),

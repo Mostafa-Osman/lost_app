@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/modules/profile/ui/profile.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/shared/components/appbar_widget.dart';
-import 'package:lost_app/modules/home/home.dart';
-import 'package:lost_app/modules/post/post.dart';
-import 'package:lost_app/shared/components/component.dart';
+import 'package:lost_app/modules/home/ui/home.dart';
+import 'package:lost_app/modules/post/ui/post.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class HomeLayout extends StatefulWidget {
+class HomeLayoutScreen extends StatefulWidget {
   @override
-  _HomeLayoutState createState() => _HomeLayoutState();
+  _HomeLayoutScreenState createState() => _HomeLayoutScreenState();
 }
 
-class _HomeLayoutState extends State<HomeLayout> {
+class _HomeLayoutScreenState extends State<HomeLayoutScreen> {
   Color bottomNavBarAccColor = grey;
   Color bottomNavBarHomeColor = bottomNavBarBlue;
   int indexPage = 0;
@@ -37,7 +37,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         backgroundColor: bottomNavBarBlue,
         //Floating action button on Scaffold
         onPressed: () {
-          navigateTo(context, PostScreen());
+          navigateTo(context, RouteConstant.postRote);
         },
         child: SvgPicture.asset('assets/icons/post.svg',
            color: white

@@ -7,11 +7,10 @@ import 'package:lost_app/shared/styles/color.dart';
 import 'dart:math' as math;
 
 class CommentScreen extends StatelessWidget {
-  final Map<String, Object> details;
-  bool autofocus;
-  TextEditingController commentController = TextEditingController();
+  final Map details;
+  final TextEditingController commentController = TextEditingController();
 
-  CommentScreen({required this.details, this.autofocus = false});
+  CommentScreen({required this.details,});
 
   @override
   Widget build(BuildContext context) {
@@ -314,7 +313,7 @@ class CommentScreen extends StatelessWidget {
                                           right: 15, left: 15),
                                       child: Container(
                                         child: TextFormFieldClass(
-                                          autofocus: autofocus,
+                                          autofocus: true,
                                           controller: commentController,
                                           roundedRectangleBorder: 6,
                                           textHint: 'اكتب تعليقا ...',

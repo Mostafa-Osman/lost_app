@@ -14,6 +14,7 @@ class SearchScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: white,
             appBar: AppBar(
               backgroundColor: white,
               elevation: 0,

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/modules/profile/profile_cubit/cubit.dart';
-import 'package:lost_app/modules/profile/ui/profile.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

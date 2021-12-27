@@ -3,7 +3,7 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 import 'package:lottie/lottie.dart';
 
-class ProcessingPage extends StatelessWidget {
+class ProcessingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
