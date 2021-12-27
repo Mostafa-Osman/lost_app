@@ -6,5 +6,17 @@ class VerifyCubit extends Cubit<VerifyStates> {
 
   static VerifyCubit get(context) => BlocProvider.of(context);
 
+  String flatButtonText = 'اعادة الارسال';
+  bool isTimerOn = false;
 
+  changeFlatButtonText(bool changeText) {
+    if (changeText) {
+      flatButtonText = 'لارسال الرمز مره اخري برجاء الانتظار';
+      isTimerOn = true;
+    } else {
+      flatButtonText = 'اعادة الارسال';
+      isTimerOn = false;
+    }
+    emit(ChangeButtonTextSuccess());
+  }
 }

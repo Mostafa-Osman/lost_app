@@ -138,7 +138,7 @@ class RegisterScreen extends StatelessWidget {
                                   onPressed: () {
                                     if (_formKey.currentState!.validate())
                                       navigateTo(
-                                          context, VerifyMobileScreen(false));
+                                          context, VerifyMobileScreen(isFromResetPhone: false));
                                   },
                                 )),
                             // Sized Box

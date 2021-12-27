@@ -29,12 +29,14 @@ class UploadPictures extends StatelessWidget {
               ? Center(child: addPicture('assets/images/osman.jpg', context))
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: AddPersonDataCubit.get(context).imageCamera.length + 1,
+                  itemCount:
+                      AddPersonDataCubit.get(context).imageCamera.length + 1,
                   itemBuilder: (context, index) {
                     return index == 0
                         ? Padding(
                             padding: const EdgeInsets.only(left: 10.0),
-                            child: addPicture('assets/images/osman.jpg', context))
+                            child:
+                                addPicture('assets/images/osman.jpg', context))
                         : Padding(
                             padding: const EdgeInsets.only(left: 10.0),
                             child: ClipOval(
@@ -82,54 +84,53 @@ class UploadPictures extends StatelessWidget {
           height: 50,
           width: 50,
           child: InkWell(
-            child: SvgPicture.asset('assets/icons/add_icon.svg'),
-            onTap: () => pp(context),
-            //navigateTo(context, UploadPictures())
-          ),
+              child: SvgPicture.asset('assets/icons/add_icon.svg'),
+              onTap: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialogClass(
+                        isDoneIcon: false,
+                        height: 220.0,
+                        widget: TextClass(
+                          text: 'اختر طريقه ادراج الصور',
+                          fontSize: 25,
+                        ),
+                        bottomWidget: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              DividerClass(thickness: 1),
+                              ListTile(
+                                  leading:
+                                      Icon(Icons.add_photo_alternate_outlined),
+                                  title: TextClass(
+                                      text: 'من المعرض',
+                                      textAlign: TextAlign.start,
+                                      fontSize: 20,
+                                      textColor: mainColor),
+                                  onTap: () {
+                                    AddPersonDataCubit.get(context)
+                                        .getImageFromGallery();
+                                    Navigator.pop(context);
+                                  }),
+                              ListTile(
+                                  leading: Icon(Icons.add_a_photo_outlined),
+                                  title: TextClass(
+                                      text: 'الكاميرا',
+                                      textAlign: TextAlign.start,
+                                      fontSize: 20,
+                                      textColor: mainColor),
+                                  onTap: () {
+                                    AddPersonDataCubit.get(context)
+                                        .getImageFromCamera();
+                                    Navigator.pop(context);
+                                  }),
+                            ],
+                          ),
+                        ),
+                      ))),
         ),
       ),
     ]);
   }
-
-  pp(context) => showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialogClass(
-            isDoneIcon: false,
-            height: 220.0,
-            widget: TextClass(
-              text: 'اختر طريقه ادراج الصور',
-              fontSize: 25,
-            ),
-            bottomWidget: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DividerClass(thickness: 1),
-                  ListTile(
-                      leading: Icon(Icons.add_photo_alternate_outlined),
-                      title: TextClass(
-                          text: 'من المعرض',
-                          textAlign: TextAlign.start,
-                          fontSize: 20,
-                          textColor: mainColor),
-                      onTap: () {
-                        AddPersonDataCubit.get(context).getImageFromGallery();
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.add_a_photo_outlined),
-                      title: TextClass(
-                          text: 'الكاميرا',
-                          textAlign: TextAlign.start,
-                          fontSize: 20,
-                          textColor: mainColor),
-                      onTap: () {
-                        AddPersonDataCubit.get(context).getImageFromCamera();
-                        print(
-                            AddPersonDataCubit.get(context).imageCamera.length);
-                      }),
-                ],
-              ),
-            ),
-          ));
 }

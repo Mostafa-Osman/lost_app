@@ -70,7 +70,7 @@ class PhoneNumberScreen extends StatelessWidget {
                         textColor: white,
                         onPressed: () {
                           if (_formKey.currentState!.validate())
-                            navigateTo(context, VerifyMobileScreen(true));
+                            navigateTo(context, VerifyMobileScreen(isFromResetPhone: true));
                           },
                       ),
                     ),
