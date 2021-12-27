@@ -107,9 +107,9 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             // Sized Box
                             SizedBox(height: 20),
-                            //  text to display rewrite password
+                            //  Text to  confirm password
                             TextClass(text: 'تأكيد كلمه المرور '),
-                            // Text form field to rewrite password
+                            //  Text form field to confirm password
                             TextFormFieldClass(
                               textHint: ' اعد تأكيد ادخل كلمه المرور',
                               controller: registerConfirmPasswordControl,

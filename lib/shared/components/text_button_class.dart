@@ -44,6 +44,7 @@ class _TextButtonClassState extends State<TextButtonClass> {
         fontWeight: widget.fontWeight,
         textColor: widget.textColor,
         textAlign: widget.textAlign,
+
       ),
       onPressed: () => widget.onPressed(),
     );

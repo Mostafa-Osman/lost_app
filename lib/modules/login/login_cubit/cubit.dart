@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/modules/login/login_cubit/states.dart';
 
@@ -8,10 +6,32 @@ class LoginCubit extends Cubit<LoginStates> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
+  // variable bool to change visibility (in reset password page)
+  bool resetPasswordVisibility = true;
+
+  // variable bool to confirm change visibility in (confirm reset password)
+  bool resetConfirmPasswordVisibility = true;
+
+  // variable bool to change visibility (in login page)
   bool isVisibility = true;
 
-  void visibilityPassword() {
+  // method to change visibility in login page
+  void loginVisibilityPassword() {
     isVisibility = !isVisibility;
     emit(LoginVisibilityPasswordState());
+  }
+
+  // In reset password page
+
+  // method to switch icon visibility
+  void changeResetVisibility() {
+    resetPasswordVisibility = !resetPasswordVisibility;
+    emit(ResetVisibilityPasswordState());
+  }
+
+  // method to switch icon visibility (in confirm password field )
+  void changeResetConfirmVisibility() {
+    resetConfirmPasswordVisibility = !resetConfirmPasswordVisibility;
+    emit(ResetConfirmVisibilityPasswordState());
   }
 }
