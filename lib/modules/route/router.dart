@@ -14,15 +14,12 @@ import 'package:lost_app/modules/profile/ui/edit_profile.dart';
 import 'package:lost_app/modules/register/ui/register.dart';
 import 'package:lost_app/modules/search/ui/search_screen.dart';
 import 'package:lost_app/modules/setting/ui/setting.dart';
-import 'package:lost_app/modules/splash/ui/splash_screen.dart';
 import 'package:lost_app/modules/verify_mobile/ui/Verify_mobile.dart';
 import 'route_constants.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RouteConstant.splashRote:
-        return MaterialPageRoute(builder: (_) => SplashScreen());
       case RouteConstant.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
       case RouteConstant.registerRoute:

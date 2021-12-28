@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class RaisedButtonClass extends StatefulWidget {
-  late final Function onPressed;
-  late final String text;
-  late Color background;
-  late Color textColor;
-  late double textFontSize;
-  late double roundedRectangleBorder;
-  late double width;
-  late double height;
+  final Function onPressed;
+  final String text;
+  final Color background;
+  final Color textColor;
+  final double textFontSize;
+  final double roundedRectangleBorder;
+  final double width;
+  final double height;
 
   RaisedButtonClass({
     required this.onPressed,
@@ -42,8 +42,8 @@ class _RaisedButtonClassState extends State<RaisedButtonClass> {
         ),
         color: widget.background,
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(widget.roundedRectangleBorder), // <-- Radius
+          borderRadius: BorderRadius.circular(
+              widget.roundedRectangleBorder), // <-- Radius
         ),
         onPressed: () => widget.onPressed(),
       ),
