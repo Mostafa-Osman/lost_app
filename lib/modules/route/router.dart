@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/modules/add_person_data/ui/add_person_data.dart';
+import 'package:lost_app/modules/comment/ui/comment_arguments.dart';
 import 'package:lost_app/modules/comment/ui/comment_screen.dart';
+import 'package:lost_app/modules/comment/ui/reply_comment_screen.dart';
 import 'package:lost_app/modules/home_layout/ui/home_layout.dart';
 import 'package:lost_app/modules/login/ui/enter_phone_number.dart';
 import 'package:lost_app/modules/login/ui/login.dart';
@@ -43,31 +45,39 @@ class AppRouter {
 
       case RouteConstant.commentRoute:
         return MaterialPageRoute(builder: (_) {
-          final Map arguments = settings.arguments as Map;
+          final CommentArguments arguments =
+              settings.arguments as CommentArguments;
           var details = arguments;
           return CommentScreen(details: details);
         });
 
-      case RouteConstant.notificationRote:
+      case RouteConstant.notificationRoute:
         return MaterialPageRoute(builder: (_) => NotificationScreen());
-      case RouteConstant.postRote:
+      case RouteConstant.postRoute:
         return MaterialPageRoute(builder: (_) => PostScreen());
-      case RouteConstant.postsFoundRote:
+      case RouteConstant.postsFoundRoute:
         return MaterialPageRoute(builder: (_) => PostsFoundScreen());
-      case RouteConstant.processingRote:
+      case RouteConstant.processingRoute:
         return MaterialPageRoute(builder: (_) => ProcessingScreen());
-      case RouteConstant.editProfileRote:
+      case RouteConstant.editProfileRoute:
         return MaterialPageRoute(builder: (_) => EditProfileScreen());
-      case RouteConstant.searchRote:
+      case RouteConstant.searchRoute:
         return MaterialPageRoute(builder: (_) => SearchScreen());
-      case RouteConstant.settingRote:
+      case RouteConstant.settingRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
-      case RouteConstant.verifyRote:
+      case RouteConstant.verifyRoute:
         return MaterialPageRoute(builder: (_) {
           final bool arguments = settings.arguments as bool;
           var isFromResetPhone = arguments;
 
           return VerifyMobileScreen(isFromResetPhone: isFromResetPhone);
+        });
+      case RouteConstant.replyCommentRoute:
+        return MaterialPageRoute(builder: (_) {
+          final CommentArguments arguments =
+              settings.arguments as CommentArguments;
+          var details = arguments;
+          return ReplyCommentScreen(details: details);
         });
 
       default:

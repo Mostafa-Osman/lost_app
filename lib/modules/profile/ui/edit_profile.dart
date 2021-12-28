@@ -7,6 +7,8 @@ import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class EditProfileScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,7 +18,10 @@ class EditProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.only(top: 8.0),
-          child: TextClass(text: 'تعديل الملف', textAlign: TextAlign.center,),
+          child: TextClass(
+            text: 'تعديل الملف',
+            textAlign: TextAlign.center,
+          ),
         ),
         leading: IconButton(
           onPressed: () {
@@ -87,53 +92,73 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30),
-                Align(
-                    alignment: Alignment.topRight,
-                    child: TextClass(
-                      text: ' الاسم: ',
-                    )),
-                TextFormFieldClass(
-                  controller: cubit.nameController,
-                  maxLines: null,
-                  fontSize: 18,
-                  keyboardType: TextInputType.name,
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 20),
-                Align(
-                    alignment: Alignment.topRight,
-                    child: TextClass(
-                      text: ' الهاتف: ',
-                    )),
-                TextFormFieldClass(
-                  controller: cubit.numberController,
-                  suffixIcon: Icon(Icons.phone),
-                  keyboardType: TextInputType.phone,
-                  textAlign: TextAlign.end,
-                  fontSize: 18,
-                  height: 1.8,
-                ),
-                SizedBox(height: 20),
-                Align(
-                    alignment: Alignment.topRight,
-                    child: TextClass(
-                      text: ' الابريد الالكتروني: ',
-                    )),
-                TextFormFieldClass(
-                  controller: cubit.emailController,
-                  suffixIcon: Icon(Icons.email),
-                  keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.end,
-                  fontSize: 18,
-                  height: 1.8,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: TextClass(
+                            text: ' الاسم: ',
+                          )),
+                      TextFormFieldClass(
+                        controller: cubit.nameController,
+                        maxLines: null,
+                        fontSize: 18,
+                        validator: (value) =>
+                            value!.isEmpty ? 'من فضلك ادخل الاسم' : null,
+                        keyboardType: TextInputType.name,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.start,
+                      ),
+                      SizedBox(height: 20),
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: TextClass(
+                            text: ' الهاتف: ',
+                          )),
+                      TextFormFieldClass(
+                        controller: cubit.numberController,
+                        suffixIcon: Icon(Icons.phone),
+                        keyboardType: TextInputType.phone,
+                        validator: (value) => value!.isEmpty
+                            ? 'من فضلك ادخل رقم هاتفك'
+                            : (value.length != 11)
+                                ? 'رقم الهاتف غير صحيح'
+                                : null,
+                        textAlign: TextAlign.end,
+                        fontSize: 18,
+                        height: 1.8,
+                      ),
+                      SizedBox(height: 20),
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: TextClass(
+                            text: ' البريد الالكتروني: ',
+                          )),
+                      TextFormFieldClass(
+                        controller: cubit.emailController,
+                        suffixIcon: Icon(Icons.email),
+                        validator: (value) =>
+                            (value!.isEmpty || !value.contains('@'))
+                                ? 'البريد الالكتروني الذي ادخلته غير صحيح'
+                                : null,
+                        keyboardType: TextInputType.emailAddress,
+                        textAlign: TextAlign.end,
+                        fontSize: 18,
+                        height: 1.8,
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 50),
                 CustomButton(
-                 onPressed: (){
-                   cubit.setEditPageDetails();
-                   Navigator.pop(context);
-                 },
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      cubit.setEditPageDetails();
+                      Navigator.pop(context);
+                    }
+                  },
                   text: 'حفظ',
                 ),
               ],

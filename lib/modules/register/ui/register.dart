@@ -133,7 +133,7 @@ class RegisterScreen extends StatelessWidget {
                                   onPressed: () {
                                     if (_formKey.currentState!.validate())
                                       navigateWithArgument(
-                                          context, RouteConstant.verifyRote
+                                          context, RouteConstant.verifyRoute
                                           ,false
                                       );
                                   },

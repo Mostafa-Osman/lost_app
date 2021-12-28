@@ -1,7 +1,5 @@
 class RouteConstant {
   RouteConstant._();
-
-  static const String splashRote = '/splash';
   static const String onBoardingRoute = '/onBoarding';
   static const String registerRoute = '/register';
   static const String loginRoute = '/login';
@@ -10,12 +8,13 @@ class RouteConstant {
   static const String homeLayoutRoute = '/home';
   static const String addPersonDataRoute = '/addPersonData';
   static const String commentRoute = '/commentScreen';
-  static const String notificationRote = '/notification';
-  static const String postRote = '/post';
-  static const String postsFoundRote = '/postsFound';
-  static const String processingRote = '/processing';
-  static const String editProfileRote = '/editProfile';
-  static const String searchRote = '/search';
-  static const String settingRote = '/setting';
-  static const String verifyRote = '/verify';
+  static const String notificationRoute = '/notification';
+  static const String postRoute = '/post';
+  static const String postsFoundRoute = '/postsFound';
+  static const String processingRoute = '/processing';
+  static const String editProfileRoute = '/editProfile';
+  static const String searchRoute = '/search';
+  static const String settingRoute = '/setting';
+  static const String verifyRoute = '/verify';
+  static const String replyCommentRoute = '/replyComment';
 }

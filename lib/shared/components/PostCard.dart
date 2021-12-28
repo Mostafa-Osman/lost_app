@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/modules/comment/ui/comment_arguments.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class PostCard extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,9 +27,11 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 child: InkWell(
-                  onTap: () => Navigator.pushNamed(
-                      context, RouteConstant.commentRoute,
-                      arguments: {}),
+                  onTap: () => navigateWithArgument(
+                    context,
+                    RouteConstant.commentRoute,
+                    CommentArguments(),
+                  ),
                   customBorder: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(15),
@@ -186,7 +188,7 @@ class PostCard extends StatelessWidget {
                             onTap: () => navigateWithArgument(
                               context,
                               RouteConstant.commentRoute,
-                              {},
+                              CommentArguments(autofocus: true),
                             ),
                             splashColor: grey,
                             customBorder: RoundedRectangleBorder(

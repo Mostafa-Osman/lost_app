@@ -43,7 +43,7 @@ class SettingScreen extends StatelessWidget {
                     child: TextClass(text: 'النظام', fontSize: 20),
                   ),
                   ListTile(
-                    onTap: () => navigateTo(context, RouteConstant.notificationRote),
+                    onTap: () => navigateTo(context, RouteConstant.notificationRoute),
                     title: TextClass(
                         text: 'الاشعارات',
                         textAlign: TextAlign.start,

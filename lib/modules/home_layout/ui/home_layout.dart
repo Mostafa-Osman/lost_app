@@ -37,7 +37,7 @@ class _HomeLayoutScreenState extends State<HomeLayoutScreen> {
         backgroundColor: bottomNavBarBlue,
         //Floating action button on Scaffold
         onPressed: () {
-          navigateTo(context, RouteConstant.postRote);
+          navigateTo(context, RouteConstant.postRoute);
         },
         child: SvgPicture.asset('assets/icons/post.svg',
            color: white

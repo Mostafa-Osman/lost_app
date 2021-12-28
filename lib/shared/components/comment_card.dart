@@ -1,9 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/modules/comment/ui/comment_arguments.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class CommentCard extends StatelessWidget {
+  bool reply = false;
+  CommentCard({this.reply = false,});
+
+  Widget replyWidget(context, Size size) {
+    if (!reply)
+      return Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(width: 50),
+              Expanded(
+                child: TextClass(
+                  text:
+                      'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
+                  maxLines: 3,
+                  fontSize: size.width >= 500 ? 20 : size.width / 24,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextButtonClass(
+                text: 'الرد',
+                onPressed: () => reply
+                    ? null
+                    : navigateWithArgument(
+                        context,
+                        RouteConstant.replyCommentRoute,
+                        CommentArguments(autofocus: true),
+                      ),
+                fontSize: 12,
+              ),
+              TextButtonClass(
+                text: 'الردود (3)',
+                onPressed: () => reply
+                    ? null
+                    : navigateWithArgument(
+                  context,
+                  RouteConstant.replyCommentRoute,
+                  CommentArguments(),
+                ),
+                fontSize: 12,
+              ),
+            ],
+          ),
+        ],
+      );
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: 50),
+            Expanded(
+              child: TextClass(
+                text:
+                    'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
+                maxLines: null,
+                fontSize: size.width >= 500 ? 20 : size.width / 24,
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +99,7 @@ class CommentCard extends StatelessWidget {
                   ClipOval(
                     child: Image.asset(
                       'assets/images/IMG20201116145812.jpg',
-                      width: size.width >= 500? 40 :size.width/10,
+                      width: size.width >= 500 ? 40 : size.width / 10,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -54,43 +129,13 @@ class CommentCard extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(
                       Icons.more_vert,
-                      size: size.width >= 500? 30 : size.width/18,
+                      size: size.width >= 500 ? 30 : size.width / 18,
                     ),
                   ),
                 ],
               ),
               SizedBox(height: 5),
-              Row(
-                children: [
-                  SizedBox(width: 50),
-                  Expanded(
-                    child: TextClass(
-                      text:
-                          'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
-                      maxLines: 3,
-                      fontSize: size.width >= 500? 20 : size.width/24,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextButtonClass(
-                    text: 'الرد',
-                    onPressed: () {},
-                    fontSize: 12,
-                  ),
-                  TextButtonClass(
-                    text: 'الردود (3)',
-                    onPressed: () {},
-                    fontSize: 12,
-                  ),
-                ],
-              ),
+              replyWidget(context, size),
             ],
           ),
         ),

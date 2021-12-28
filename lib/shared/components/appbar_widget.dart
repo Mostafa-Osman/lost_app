@@ -56,7 +56,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
                   ),
                 ),
                 child: InkWell(
-                  onTap: () => navigateTo(context, RouteConstant.searchRote),
+                  onTap: () => navigateTo(context, RouteConstant.searchRoute),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5.0, right: 10),
                     child: Align(
@@ -80,7 +80,7 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
           icon: SvgPicture.asset(
             'assets/icons/notification.svg',
           ),
-          onPressed: () => navigateTo(context, RouteConstant.notificationRote),
+          onPressed: () => navigateTo(context, RouteConstant.notificationRoute),
         ),
       ),
     );
@@ -120,7 +120,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
             Icons.settings_rounded,
           ),
           onPressed: () {
-            navigateTo(context, RouteConstant.settingRote);
+            navigateTo(context, RouteConstant.settingRoute);
           },
         ),
       ),
@@ -131,7 +131,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
             iconSize: 28,
             color: black,
             icon: SvgPicture.asset('assets/icons/profile_acc_ic.svg'),
-            onPressed: () => navigateTo(context, RouteConstant.editProfileRote),
+            onPressed: () => navigateTo(context, RouteConstant.editProfileRoute),
           ),
         ),
       ],
