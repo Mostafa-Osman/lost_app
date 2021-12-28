@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/modules/on_boarding/on_boarding_cubit/cubit.dart';
 import 'package:lost_app/modules/on_boarding/on_boarding_cubit/states.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
-import 'package:lost_app/shared/components/raised_button_class.dart';
+import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/smooth_page_indicator_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -51,7 +50,7 @@ class OnBoardingScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    RaisedButtonClass(
+                    CustomButton(
                         onPressed: () {
                           cubit.isLastPage
                               ? navigateTo(context, RouteConstant.loginRoute)
@@ -60,7 +59,7 @@ class OnBoardingScreen extends StatelessWidget {
                                   curve: Curves.easeIn);
                         },
                         text: cubit.buttonText,
-                        textColor: white),
+                      ),
                   ],
                 ),
               ),

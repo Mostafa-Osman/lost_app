@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -11,7 +10,6 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
   final EdgeInsetsGeometry margin;
-
   final FontWeight fontWeight;
 
   CustomButton({
@@ -40,9 +38,10 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: Colors.white,
+            color: white,
             fontSize: fontSize,
             fontWeight: fontWeight,
+            fontFamily: 'Tajawal',
           ),
         ),
       ),

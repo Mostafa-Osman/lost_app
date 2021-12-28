@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/modules/add_person_data/add_person_cubit/cubit.dart';
 import 'package:lost_app/modules/add_person_data/add_person_cubit/states.dart';
 import 'package:lost_app/modules/add_person_data/ui/dropdown_Button.dart';
 import 'package:lost_app/modules/add_person_data/ui/upload_pictures.dart';
-import 'package:lost_app/shared/components/raised_button_class.dart';
+import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -157,7 +155,7 @@ class AddPersonDataScreen extends StatelessWidget {
                     UploadPictures(),
                     Padding(
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
-                      child: RaisedButtonClass(
+                      child: CustomButton(
                           onPressed: () {
                             if ( Keys._formKey.currentState!.validate() &&
                                 Keys._genderKey.currentState!.validate() &&
@@ -167,7 +165,7 @@ class AddPersonDataScreen extends StatelessWidget {
 
                           },
                           text: "نشر",
-                          textColor: white),
+                      ),
                     ),
                   ],
                 ),

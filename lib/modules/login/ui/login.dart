@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/home_layout/ui/home_layout.dart';
 import 'package:lost_app/modules/login/login_cubit/cubit.dart';
 import 'package:lost_app/modules/login/login_cubit/states.dart';
-import 'package:lost_app/modules/register/ui/register.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
-import 'package:lost_app/modules/route/router.dart';
-import 'package:lost_app/shared/components/raised_button_class.dart';
+import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
-import 'enter_phone_number.dart';
 
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -102,10 +98,7 @@ class LoginScreen extends StatelessWidget {
                                   // Sized Box with height 10
                                   SizedBox(height: 10),
                                   // Button to submit (go to home screen)
-                                  ButtonTheme(
-                                      minWidth: double.infinity,
-                                      height: 50,
-                                      child: RaisedButtonClass(
+                                  CustomButton(
                                           onPressed: () {
                                             if (_formKey.currentState!
                                                 .validate())
@@ -115,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                                                       .homeLayoutRoute);
                                           },
                                           text: 'تسجيل الدخول',
-                                          textColor: white)),
+                                         ),
                                   // if do not have account to go sign up screen
                                   Expanded(
                                     child: Row(

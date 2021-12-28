@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
-import 'package:lost_app/shared/components/raised_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -62,18 +62,14 @@ class PhoneNumberScreen extends StatelessWidget {
                 Expanded(
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: ButtonTheme(
-                      minWidth: double.infinity,
-                      height: 50,
-                      child: RaisedButtonClass(
+                    child:  CustomButton(
                         text: 'التالي',
-                        textColor: white,
                         onPressed: () {
                           if (_formKey.currentState!.validate())
                             navigateWithArgument(context, RouteConstant.verifyRote,true
                             );
                           },
-                      ),
+
                     ),
                   ),
                 ),

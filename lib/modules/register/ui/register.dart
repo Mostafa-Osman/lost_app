@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/modules/register/register_cubit/cubit.dart';
 import 'package:lost_app/modules/register/register_cubit/states.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
-import 'package:lost_app/modules/verify_mobile/ui/Verify_mobile.dart';
-import 'package:lost_app/shared/components/raised_button_class.dart';
+import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -130,12 +128,8 @@ class RegisterScreen extends StatelessWidget {
                             // Sized Box
                             SizedBox(height: 30),
                             // button to submit register
-                            ButtonTheme(
-                                minWidth: double.infinity,
-                                height: 50,
-                                child: RaisedButtonClass(
+                            CustomButton(
                                   text: 'إنشاء',
-                                  textColor: white,
                                   onPressed: () {
                                     if (_formKey.currentState!.validate())
                                       navigateWithArgument(
@@ -143,7 +137,7 @@ class RegisterScreen extends StatelessWidget {
                                           ,false
                                       );
                                   },
-                                )),
+                                ),
                             // Sized Box
                             SizedBox(height: 10),
                             // Text button class to   navigate to login page if you have account

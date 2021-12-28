@@ -5,12 +5,12 @@ import 'package:lost_app/modules/home_layout/ui/home_layout.dart';
 import 'package:lost_app/modules/login/login_cubit/cubit.dart';
 import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/modules/on_boarding/on_boarding_cubit/cubit.dart';
+import 'package:lost_app/modules/on_boarding/ui/on_boarding.dart';
 import 'package:lost_app/modules/profile/profile_cubit/cubit.dart';
 import 'package:lost_app/modules/register/register_cubit/cubit.dart';
 import 'package:lost_app/modules/route/router.dart';
 import 'package:lost_app/modules/search/search_cubit/cubit.dart';
 import 'package:lost_app/modules/setting/setting_cubit/cubit.dart';
-import 'package:lost_app/modules/splash/ui/splash_screen.dart';
 import 'package:lost_app/modules/verify_mobile/verify_cubit/cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: [
               Locale('ar', ''),
             ],
-            home: SplashScreen()));
+            home: OnBoardingScreen()));
   }
 
   @override

@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/modules/home_layout/ui/home_layout.dart';
-import 'package:lost_app/modules/login/ui/reset_password.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/modules/verify_mobile/verify_cubit/cubit.dart';
 import 'package:lost_app/modules/verify_mobile/verify_cubit/states.dart';
-import 'package:lost_app/shared/components/raised_button_class.dart';
+import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
@@ -93,9 +90,8 @@ class VerifyMobileScreen extends StatelessWidget {
                       child: ButtonTheme(
                           minWidth: double.infinity,
                           height: 50,
-                          child: RaisedButtonClass(
+                          child: CustomButton(
                               text: 'التالي',
-                              textColor: white,
                               onPressed: () {
                                 (isFromResetPhone)
                                     ? navigateTo(context,
