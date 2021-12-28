@@ -15,10 +15,8 @@ import 'package:lost_app/modules/verify_mobile/verify_cubit/cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatefulWidget {
-  // final String initialRoute;
 
-  const MyApp(// this.initialRoute
-      );
+  const MyApp();
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -53,7 +51,6 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(create: (context) => profileCubit),
         ],
         child: MaterialApp(
-            // initialRoute: widget.initialRoute,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: AppRouter.generateRoute,
             // to make app all support  arabic language
@@ -70,6 +67,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
+    super.dispose();
     onBoardingCubit.close();
     loginBloc.close();
     registerBloc.close();
@@ -78,6 +76,5 @@ class _MyAppState extends State<MyApp> {
     settingCubit.close();
     verifyCubit.close();
     profileCubit.close();
-    super.dispose();
   }
 }
