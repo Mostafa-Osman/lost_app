@@ -69,7 +69,6 @@ class PhoneNumberScreen extends StatelessWidget {
                             navigateWithArgument(context, RouteConstant.verifyRoute,true
                             );
                           },
-
                     ),
                   ),
                 ),

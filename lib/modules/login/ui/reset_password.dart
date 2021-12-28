@@ -12,7 +12,6 @@ import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/components/timer.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-import 'enter_phone_number.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   final TextEditingController resetPasswordControl = TextEditingController();

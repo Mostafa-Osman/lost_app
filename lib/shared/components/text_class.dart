@@ -10,7 +10,7 @@ class TextClass extends StatelessWidget {
   //initial TextAlign center
   late TextAlign textAlign;
 
-  //initial FontWeight bold
+  //initial FontWeight normal
   late FontWeight fontWeight;
 
   //initial Text color black

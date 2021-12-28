@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 
-class TextButtonClass extends StatefulWidget {
+class TextButtonClass extends StatelessWidget {
   // required text
-  late String text;
+  final String text;
 
   // required Function (Action happen when press in text)
-  late Function onPressed;
+  final Function onPressed;
 
   //initial font size 15
-  double fontSize;
+  final double fontSize;
 
   //initial TextAlign center
-  TextAlign textAlign;
+  final TextAlign textAlign;
 
   //initial FontWeight bold
-  FontWeight fontWeight;
+  final FontWeight fontWeight;
 
   //initial Text color black
-  Color textColor = Colors.black;
+  final Color textColor;
 
   TextButtonClass({
     required this.text,
@@ -30,23 +30,15 @@ class TextButtonClass extends StatefulWidget {
   });
 
   @override
-  State<TextButtonClass> createState() => _TextButtonClassState();
-}
-
-class _TextButtonClassState extends State<TextButtonClass> {
-  @override
   Widget build(BuildContext context) {
     return TextButton(
-      child:
-      TextClass(
-        text: widget.text,
-        fontSize: widget.fontSize,
-        fontWeight: widget.fontWeight,
-        textColor: widget.textColor,
-        textAlign: widget.textAlign,
-
+      child: Text(
+        text,
+        style: TextStyle(
+            fontSize: fontSize, fontWeight: fontWeight, color: textColor),
+        textAlign: textAlign,
       ),
-      onPressed: () => widget.onPressed(),
+      onPressed: () => onPressed(),
     );
   }
 }
