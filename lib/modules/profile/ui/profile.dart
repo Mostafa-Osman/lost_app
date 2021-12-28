@@ -7,6 +7,7 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class ProfileClass extends StatelessWidget {
+
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -56,7 +57,7 @@ class ProfileClass extends StatelessWidget {
                           SizedBox(height: 30),
                           TextClass(
                             text: cubit.name,
-                            fontSize: size.width >= 500 ? 30 : size.width / 13,
+                            fontSize: size.width >= 500 ? 22 : size.width / 18,
                             overflow: TextOverflow.clip,
                           ),
                           SizedBox(height: 20),

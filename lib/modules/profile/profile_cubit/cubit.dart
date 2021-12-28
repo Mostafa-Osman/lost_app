@@ -23,4 +23,10 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emailController.text = email;
     emit(SetEditPageControllerState());
   }
+  void setEditPageDetails(){
+    name = nameController.text;
+    number = numberController.text;
+    email = emailController.text;
+    emit(SetEditPageDetailsState());
+  }
 }

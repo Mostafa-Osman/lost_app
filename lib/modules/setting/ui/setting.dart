@@ -4,6 +4,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/modules/notification/ui/notification.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/modules/setting/setting_cubit/cubit.dart';
 import 'package:lost_app/modules/setting/setting_cubit/states.dart';
 import 'package:lost_app/shared/components/navigator.dart';
