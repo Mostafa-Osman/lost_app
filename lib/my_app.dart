@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/modules/add_person_data/add_person_cubit/cubit.dart';
 import 'package:lost_app/modules/home_layout/home_layout_cubit/cubit.dart';
-import 'package:lost_app/modules/home_layout/ui/home_layout.dart';
 import 'package:lost_app/modules/login/login_cubit/cubit.dart';
-import 'package:lost_app/modules/login/ui/login.dart';
 import 'package:lost_app/modules/on_boarding/on_boarding_cubit/cubit.dart';
 import 'package:lost_app/modules/on_boarding/ui/on_boarding.dart';
 import 'package:lost_app/modules/profile/profile_cubit/cubit.dart';
@@ -15,15 +13,8 @@ import 'package:lost_app/modules/setting/setting_cubit/cubit.dart';
 import 'package:lost_app/modules/verify_mobile/verify_cubit/cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
 
-  const MyApp();
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   final registerBloc = RegisterCubit();
   final loginBloc = LoginCubit();
   final addPersonDataBloc = AddPersonDataCubit();
@@ -33,11 +24,6 @@ class _MyAppState extends State<MyApp> {
   final verifyCubit = VerifyCubit();
   final profileCubit = ProfileCubit();
   final homeLayoutCubit = HomeLayoutCubit();
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,20 +51,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: [
               Locale('ar', ''),
             ],
-            home: HomeLayoutScreen()));
+            home: OnBoardingScreen()));
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    onBoardingCubit.close();
-    loginBloc.close();
-    registerBloc.close();
-    addPersonDataBloc.close();
-    searchCubit.close();
-    settingCubit.close();
-    verifyCubit.close();
-    profileCubit.close();
-    homeLayoutCubit.close();
-  }
 }
