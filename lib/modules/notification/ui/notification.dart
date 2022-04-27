@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -12,10 +14,10 @@ class NotificationScreen extends StatelessWidget {
           backgroundColor: white,
           elevation: 0,
           centerTitle: true,
-          title: TextClass(text: 'الاشعارات', fontSize: 25),
+          title: const TextClass(text: 'الاشعارات', fontSize: 25),
           leading: IconButton(
               onPressed: ()=>Navigator.pop(context),
-              icon: Icon(Icons.arrow_back_ios_sharp, color: black))),
+              icon: const Icon(Icons.arrow_back_ios_sharp, color: black),),),
       body:Container(
           alignment: Alignment.center,
           width: 500,
@@ -39,18 +41,18 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height / 5.9;
+    final double height = MediaQuery.of(context).size.height / 5.9;
     return GestureDetector(
       onTap: () {
-        print(index);
+        log(index.toString());
       },
       child: Container(
-        margin: EdgeInsets.only(top: 20, right: 10, left: 10),
+        margin: const EdgeInsets.only(top: 20, right: 10, left: 10),
         width: MediaQuery.of(context).size.width,
         height: height,
         decoration: BoxDecoration(
           color: lightBlue,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,13 +66,13 @@ class NotificationItem extends StatelessWidget {
                     child: SvgPicture.asset('assets/images/lost_person_image.svg',
                         height: 40,
                         width: 40,
-                        fit: BoxFit.cover),
+                        fit: BoxFit.cover,),
                   ),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width / 1.9,
                   height: MediaQuery.of(context).size.height / 6.3,
-                  padding: EdgeInsets.only(top: 30, right: 5),
+                  padding: const EdgeInsets.only(top: 30, right: 5),
                   child: TextClass(
                     fontSize: height * 0.1,
                     textAlign: TextAlign.start,
@@ -88,21 +90,21 @@ class NotificationItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 90,
                       height: 20,
                       child: TextClass(
                           text: 'منذ ${index * 2} دقائق',
                           fontSize: height * 0.1,
-                          textColor: lightGrey),
+                          textColor: lightGrey,),
                     ),
-                    Container(
+                    SizedBox(
                       width: 90,
                       height: MediaQuery.of(context).size.height / 10.1,
 
                       child:SvgPicture.asset('assets/images/lost_person_image.svg',
                           width: 90,
-                          fit: BoxFit.fill),
+                          fit: BoxFit.fill,),
 
                     ),
                   ],

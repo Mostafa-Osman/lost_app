@@ -7,16 +7,16 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class CommentCard extends StatelessWidget {
-  bool reply = false;
-  CommentCard({this.reply = false,});
+ final  bool reply ;
+  const CommentCard({this.reply = false,});
 
-  Widget replyWidget(context, Size size) {
-    if (!reply)
+  Widget replyWidget(BuildContext context, Size size) {
+    if (!reply) {
       return Column(
         children: [
           Row(
             children: [
-              SizedBox(width: 50),
+              const SizedBox(width: 50),
               Expanded(
                 child: TextClass(
                   text:
@@ -59,36 +59,36 @@ class CommentCard extends StatelessWidget {
           ),
         ],
       );
+    }
     return Column(
       children: [
         Row(
           children: [
-            SizedBox(width: 50),
+            const SizedBox(width: 50),
             Expanded(
               child: TextClass(
                 text:
                     'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
-                maxLines: null,
                 fontSize: size.width >= 500 ? 20 : size.width / 24,
                 textAlign: TextAlign.start,
               ),
             ),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
       child: Container(
         decoration: BoxDecoration(
           color: lightBlue,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
@@ -108,9 +108,8 @@ class CommentCard extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children:const [
                           TextClass(
                             text: 'محمد احمد',
                             textAlign: TextAlign.start,
@@ -124,7 +123,7 @@ class CommentCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                     onPressed: () {},
                     icon: Icon(
@@ -134,7 +133,7 @@ class CommentCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               replyWidget(context, size),
             ],
           ),

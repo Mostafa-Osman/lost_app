@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 
 class TextClass extends StatelessWidget {
   // required text
-  late final String text;
+   final String text;
 
   //initial font size 25
-  late double fontSize;
+   final double fontSize;
 
   //initial TextAlign center
-  late TextAlign textAlign;
+   final  TextAlign textAlign;
 
   //initial FontWeight normal
-  late FontWeight fontWeight;
+   final  FontWeight fontWeight;
 
   //initial Text color black
-  late Color textColor;
+   final  Color textColor;
 
-  TextOverflow? overflow;
-  int? maxLines;
+   final TextOverflow? overflow;
+   final int? maxLines;
 
   //initial Text backgroundColor white
   // Color backgroundColor = Colors.white,
 
-  TextClass({
+  const TextClass({
     required this.text,
     this.fontSize = 18,
     this.textAlign = TextAlign.center,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/register/register_cubit/cubit.dart';
-import 'package:lost_app/modules/register/register_cubit/states.dart';
+import 'package:lost_app/modules/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -21,7 +20,7 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = RegisterCubit.get(context);
+    final cubit = RegisterCubit.get(context);
     return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, state) {},
       builder: (context, state) => Scaffold(
@@ -34,7 +33,7 @@ class RegisterScreen extends StatelessWidget {
                   // logo of page
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Container(
+                    child: SizedBox(
                       height: 150,
                       width: double.infinity,
                       child: SvgPicture.asset('assets/images/logo.svg'),
@@ -48,7 +47,7 @@ class RegisterScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //  text to display name
-                            TextClass(text: 'الاسم'),
+                            const TextClass(text: 'الاسم'),
                             // Text form field to enter Name
                             TextFormFieldClass(
                               textHint: 'ادخل اسمك',
@@ -57,14 +56,14 @@ class RegisterScreen extends StatelessWidget {
                                   value!.isEmpty ? 'من فضلك ادخل اسمك' : null,
                             ),
                             // Sized Box
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             //  text phone number
-                            TextClass(text: 'رقم الهاتف'),
+                            const TextClass(text: 'رقم الهاتف'),
                             // Text form field to enter phone number
                             TextFormFieldClass(
                               textHint: 'ادخل رقم هاتفك',
                               controller: registerPhoneControl,
-                              keyboardType: TextInputType.numberWithOptions(),
+                              // keyboardType: const TextInputType.numberWithOptions(),
                               validator: (value) => value!.isEmpty
                                   ? 'من فضلك ادخل رقم هاتفك'
                                   : (value.length != 11)
@@ -72,22 +71,22 @@ class RegisterScreen extends StatelessWidget {
                                       : null,
                             ),
                             // Sized Box
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             //  text to display email
-                            TextClass(text: 'البريد الالكتروني (اختياري)'),
+                            const TextClass(text: 'البريد الالكتروني (اختياري)'),
                             // Text form field to enter email
                             TextFormFieldClass(
                               textHint: 'ادخل بريدك الالكتروني',
                               controller: registerEmailControl,
                               validator: (value) =>
-                                  (value!.length>0 && !value.contains('@'))
+                                  (value!.isNotEmpty && !value.contains('@'))
                                       ? 'البريد الالكتروني الذي ادخلته غير صحيح'
                                       : null,
                             ),
                             // Sized Box
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             //  text to display password
-                            TextClass(text: 'كلمه المرور'),
+                            const TextClass(text: 'كلمه المرور'),
                             // Text form field to enter password
                             TextFormFieldClass(
                               textHint: 'ادخل كلمه المرور',
@@ -96,8 +95,8 @@ class RegisterScreen extends StatelessWidget {
                               suffixIcon: IconButton(
                                   onPressed: () => cubit.visibilityPassword(),
                                   icon: cubit.isVisibility
-                                      ? Icon(Icons.visibility)
-                                      : Icon(Icons.visibility_off)),
+                                      ? const Icon(Icons.visibility)
+                                      : const Icon(Icons.visibility_off),),
                               validator: (value) => value!.isEmpty
                                   ? 'من فضلك ادخل كلمه المرور'
                                   : (value.length < 8)
@@ -105,9 +104,9 @@ class RegisterScreen extends StatelessWidget {
                                       : null,
                             ),
                             // Sized Box
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             //  Text to  confirm password
-                            TextClass(text: 'تأكيد كلمه المرور '),
+                            const TextClass(text: 'تأكيد كلمه المرور '),
                             //  Text form field to confirm password
                             TextFormFieldClass(
                               textHint: ' اعد تأكيد ادخل كلمه المرور',
@@ -117,8 +116,8 @@ class RegisterScreen extends StatelessWidget {
                                   onPressed: () =>
                                       cubit.confirmVisibilityPassword(),
                                   icon: cubit.confirmNotVisible
-                                      ? Icon(Icons.visibility)
-                                      : Icon(Icons.visibility_off)),
+                                      ? const Icon(Icons.visibility)
+                                      : const Icon(Icons.visibility_off),),
                               validator: (value) => value!.isEmpty
                                   ? 'من فضلك اعد ادخال كلمه المرور'
                                   : (value != registerPasswordControl.text)
@@ -126,27 +125,28 @@ class RegisterScreen extends StatelessWidget {
                                       : null,
                             ),
                             // Sized Box
-                            SizedBox(height: 30),
+                            const SizedBox(height: 30),
                             // button to submit register
                             CustomButton(
                                   text: 'إنشاء',
                                   onPressed: () {
-                                    if (_formKey.currentState!.validate())
+                                    if (_formKey.currentState!.validate()) {
                                       navigateWithArgument(
                                           context, RouteConstant.verifyRoute
                                           ,false
-                                      );
+                                      ,);
+                                    }
                                   },
                                 ),
                             // Sized Box
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             // Text button class to   navigate to login page if you have account
                             TextButtonClass(
                                 onPressed: () =>
                                     navigatorAndFinish(context, RouteConstant.loginRoute),
                                 text: 'هل لديك حساب بالفعل ؟',
-                                textColor: mainColor),
-                          ]),
+                                textColor: mainColor,),
+                          ],),
                     ),
                   )
                 ],

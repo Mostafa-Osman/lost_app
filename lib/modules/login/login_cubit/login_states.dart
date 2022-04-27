@@ -1,3 +1,6 @@
+part of'login_cubit.dart';
+@immutable
+
 abstract class LoginStates {}
 
 class LoginInitialState extends LoginStates {}

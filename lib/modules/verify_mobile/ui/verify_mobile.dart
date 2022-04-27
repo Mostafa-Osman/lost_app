@@ -1,10 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
-import 'package:lost_app/modules/verify_mobile/verify_cubit/cubit.dart';
-import 'package:lost_app/modules/verify_mobile/verify_cubit/states.dart';
-import 'package:lost_app/shared/components/custom_button.dart';
+import 'package:lost_app/modules/verify_mobile/verify_cubit/verify_cubit.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
+import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -26,21 +27,21 @@ class VerifyMobileScreen extends StatelessWidget {
     return BlocConsumer<VerifyCubit, VerifyStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = VerifyCubit.get(context);
+        final cubit = VerifyCubit.get(context);
         return Scaffold(
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(50.0),
               child: Column(
                 children: [
-                  SizedBox(height: 30),
-                  TextClass(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 30),
+                  const TextClass(text: 'لقد ارسلنا اليك رمز التاكيد', fontSize: 25),
+                  const SizedBox(height: 10),
                   TextClass(
                       text:
                           'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
-                      textColor: lightGrey),
-                  SizedBox(height: 50),
+                      textColor: lightGrey,),
+                  const SizedBox(height: 50),
                   //pin code design
                   Form(
                     key: _formKey,
@@ -62,7 +63,7 @@ class VerifyMobileScreen extends StatelessWidget {
                       ),
                       boxShadows: [
                         BoxShadow(
-                          offset: Offset(0, 1),
+                          offset: const Offset(0, 1),
                           color: lightGrey,
                           blurRadius: 10,
                         )
@@ -72,15 +73,15 @@ class VerifyMobileScreen extends StatelessWidget {
                       controller: textEditingController,
                       keyboardType: TextInputType.number,
                       onCompleted: (v) {
-                        (isFromResetPhone)
+                        isFromResetPhone
                             ? navigateTo(
-                                context, RouteConstant.resetPasswordRoute)
+                                context, RouteConstant.resetPasswordRoute,)
                             : showDialog(
                                 context: context,
-                                builder: (BuildContext context) => Dialog());
+                                builder: (BuildContext context) => Dialog(),);
                       },
                       onChanged: (value) {
-                        print(value);
+                        log(value);
                       },
                     ),
                   ),
@@ -93,23 +94,23 @@ class VerifyMobileScreen extends StatelessWidget {
                           child: CustomButton(
                               text: 'التالي',
                               onPressed: () {
-                                (isFromResetPhone)
+                                isFromResetPhone
                                     ? navigateTo(context,
-                                        RouteConstant.resetPasswordRoute)
+                                        RouteConstant.resetPasswordRoute,)
                                     : showDialog(
                                         context: context,
                                         builder: (BuildContext context) =>
-                                            Dialog());
-                              })),
+                                            Dialog(),);
+                              },),),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if (!cubit.isTimerOn)
                         TextClass(
-                            text: 'لم يصلك الرمز ؟', textColor: lightGrey),
+                            text: 'لم يصلك الرمز ؟', textColor: lightGrey,),
                       TextButtonClass(
                         text: cubit.flatButtonText,
                         textColor: mainColor,
@@ -118,16 +119,15 @@ class VerifyMobileScreen extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) => AlertDialogClass(
                               height: 240.0,
-                              widget: TextClass(
+                              widget: const TextClass(
                                   text: 'تم اعاده ارسال رمز التاكيد',
-                                  fontSize: 20,
-                                  textColor: black),
+                                  fontSize: 20,),
                               bottomWidget: TextButtonClass(
                                 text: 'تم',
                                 fontSize: 25,
                                 textColor: mainColor,
                                 onPressed: () {
-                                  cubit.changeFlatButtonText(true);
+                                  cubit.changeFlatButtonText( changeText: true);
                                   Navigator.pop(context);
                                 },
                               ),
@@ -136,8 +136,8 @@ class VerifyMobileScreen extends StatelessWidget {
                         },
                       ),
                       if (cubit.isTimerOn)
-                        TimerClass(59, Duration(milliseconds: 1000),
-                            () => cubit.changeFlatButtonText(false)),
+                        TimerClass(59, const Duration(milliseconds: 1000),
+                            () => cubit.changeFlatButtonText(changeText: false),),
                     ],
                   ),
                 ],
@@ -156,7 +156,7 @@ class Dialog extends StatelessWidget {
     return AlertDialogClass(
       height: 260.0,
       widget: Column(
-        children: [
+        children: const [
           TextClass(
             text: 'تهانينا لقد اتممت إنشاء',
           ),
@@ -172,10 +172,9 @@ class Dialog extends StatelessWidget {
             onPressed: () => navigateTo(context, RouteConstant.homeLayoutRoute),
             text: 'الي الصفحه الرئيسيه',
             fontSize: 20,
-            textColor: black,
           ),
-          TimerClass(5, Duration(milliseconds: 1000),
-              () => navigateTo(context, RouteConstant.homeLayoutRoute))
+          TimerClass(5, const Duration(milliseconds: 1000),
+              () => navigateTo(context, RouteConstant.homeLayoutRoute),)
         ],
       ),
     );

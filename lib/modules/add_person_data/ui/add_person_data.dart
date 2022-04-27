@@ -1,31 +1,30 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/modules/add_person_data/add_person_cubit/cubit.dart';
-import 'package:lost_app/modules/add_person_data/add_person_cubit/states.dart';
-import 'package:lost_app/modules/add_person_data/ui/dropdown_Button.dart';
+import 'package:lost_app/modules/add_person_data/add_person_cubit/add_person_cubit.dart';
+import 'package:lost_app/modules/add_person_data/ui/dropdown_button.dart';
 import 'package:lost_app/modules/add_person_data/ui/upload_pictures.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class Keys {
-  static final _formKey = GlobalKey<FormState>();
-  static final _genderKey = GlobalKey<FormState>();
-  static final _citiesKey = GlobalKey<FormState>();
-  static final _key = GlobalKey<FormState>();
-}
 
 class AddPersonDataScreen extends StatelessWidget {
 
   final TextEditingController personName = TextEditingController();
   final TextEditingController personAge = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _genderKey = GlobalKey<FormState>();
+  final _citiesKey = GlobalKey<FormState>();
+  final _key = GlobalKey<FormState>();
   final moreTitleDetails = TextEditingController();
   final detailBox = TextEditingController();
-  String? selectedValue;
+  final String? selectedValue;
   final String textPost;
 
-  AddPersonDataScreen({required this.textPost});
+  AddPersonDataScreen({required this.textPost, this.selectedValue});
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +36,10 @@ class AddPersonDataScreen extends StatelessWidget {
               backgroundColor: white,
               elevation: 0,
               centerTitle: true,
-              title: TextClass(text: 'بيانات المفقود', fontSize: 25),
+              title: const TextClass(text: 'بيانات المفقود', fontSize: 25),
               leading: IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: Icon(Icons.arrow_back_ios_sharp, color: black))),
+                  icon: const Icon(Icons.arrow_back_ios_sharp, color: black),),),
           body: SingleChildScrollView(
             child: Container(
               color: white,
@@ -51,13 +50,13 @@ class AddPersonDataScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Form(
-                      key: Keys._formKey,
+                      key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //name
-                          SizedBox(height: 10),
-                          TextClass(text: 'الاسم', fontSize: 25),
+                          const SizedBox(height: 10),
+                          const TextClass(text: 'الاسم', fontSize: 25),
                           TextFormFieldClass(
                             roundedRectangleBorder: 10,
                             controller: personName,
@@ -68,8 +67,8 @@ class AddPersonDataScreen extends StatelessWidget {
                                 : null,
                           ),
                           //age
-                          SizedBox(height: 10),
-                          TextClass(text: 'الفئه العمريه', fontSize: 25),
+                          const SizedBox(height: 10),
+                          const TextClass(text: 'الفئه العمريه', fontSize: 25),
                           TextFormFieldClass(
                             roundedRectangleBorder: 10,
                             controller: personAge,
@@ -83,64 +82,64 @@ class AddPersonDataScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     //dropdownButton
-                    TextClass(text: 'النوع', fontSize: 25),
+                    const TextClass(text: 'النوع', fontSize: 25),
                     DropdownButtonClass(
-                      keyForm:  Keys._genderKey,
+                      keyForm:  _genderKey,
                       hintText: 'اختر النوع',
                       validator: (value) =>
                           value == null ? "من فضلك اختر النوع" : null,
                       selectedValue: selectedValue,
                       items: ['ذكر', 'انثي', 'اخري']
                           .map((label) => DropdownMenuItem(
-                                child: TextClass(text: label.toString()),
                                 value: label,
-                              ))
+                                child: TextClass(text: label),
+                              ),)
                           .toList(),
                     ),
                     //location
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextClass(text: textPost, fontSize: 25),
                     //dropdownButton for City
                     DropdownButtonClass(
-                      keyForm: Keys. _citiesKey,
+                      keyForm:  _citiesKey,
                       hintText: 'اختر المحافظه',
                       validator: (value) =>
                           value == null ? "من فضلك اختر المحافظه" : null,
                       selectedValue: selectedValue,
                       items: ['القاهره', 'الجيزه', 'اخري']
                           .map((label) => DropdownMenuItem(
-                                child: TextClass(text: label.toString()),
                                 value: label,
-                              ))
+                                child: TextClass(text: label),
+                              ),)
                           .toList(),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     //location details
                     DropdownButtonClass(
-                      keyForm:  Keys._key,
+                      keyForm: _key,
                       hintText: 'اختر المنطقه',
                       validator: (value) =>
                           value == null ? "من فضلك اختر المنطقه" : null,
                       selectedValue: selectedValue,
                       items: ['حلوان', 'دار السلام', 'اخري']
                           .map((label) => DropdownMenuItem(
-                                child: TextClass(text: label.toString()),
                                 value: label,
-                              ))
+                                child: TextClass(text: label),
+                              ),)
                           .toList(),
                     ),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // more title details
                     TextFormFieldClass(
                       controller: moreTitleDetails,
                       textHint: 'ادخل باقي تفاصيل العنوان',
                     ),
-                    SizedBox(height: 20),
-                    TextClass(
+                    const SizedBox(height: 20),
+                    const    TextClass(
                       text: 'التفاصيل',
                       fontSize: 25,
                     ),
@@ -157,11 +156,12 @@ class AddPersonDataScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
                       child: CustomButton(
                           onPressed: () {
-                            if ( Keys._formKey.currentState!.validate() &&
-                                Keys._genderKey.currentState!.validate() &&
-                                Keys._citiesKey.currentState!.validate() &&
-                                Keys._key.currentState!.validate())
-                            print('ok');
+                            if ( _formKey.currentState!.validate() &&
+                                _genderKey.currentState!.validate() &&
+                                _citiesKey.currentState!.validate() &&
+                                _formKey.currentState!.validate()) {
+                              log('ok');
+                            }
 
                           },
                           text: "نشر",

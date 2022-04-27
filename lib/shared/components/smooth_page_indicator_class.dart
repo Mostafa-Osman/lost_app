@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SmoothPageIndicatorClass extends StatelessWidget {
-  late final count;
-  dynamic controller;
+   final int  count;
+   final PageController controller;
 
-  SmoothPageIndicatorClass({required this.count, this.controller});
+  const SmoothPageIndicatorClass({required this.count,required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +13,10 @@ class SmoothPageIndicatorClass extends StatelessWidget {
       count: count,
       textDirection: TextDirection.ltr,
       controller: controller,
-      effect: WormEffect(
-        dotHeight: 16,
+      effect: const WormEffect(
         dotWidth: 20,
-        type: WormType.normal,
-        activeDotColor: const Color.fromRGBO(42, 185, 237, 1),
-          dotColor:const Color.fromRGBO(45, 199, 255, 0.2),
+        activeDotColor: Color.fromRGBO(42, 185, 237, 1),
+          dotColor:Color.fromRGBO(45, 199, 255, 0.2),
 
       ),
     );

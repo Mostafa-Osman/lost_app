@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/add_person_data/add_person_cubit/cubit.dart';
+import 'package:lost_app/modules/add_person_data/add_person_cubit/add_person_cubit.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -11,32 +11,33 @@ import 'package:lost_app/shared/styles/color.dart';
 class UploadPictures extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         //add photos
-        Padding(
-          padding: const EdgeInsets.only(top: 40.0, bottom: 20),
+        const Padding(
+          padding: EdgeInsets.only(top: 40.0, bottom: 20),
           child: TextClass(
             textAlign: TextAlign.start,
             text: 'اضافه صوره او اكثر',
             fontSize: 25,
           ),
         ),
-        Container(
+        SizedBox(
           height: 180,
           width: double.infinity,
-          child: (AddPersonDataCubit.get(context).imageCamera.length == 0)
-              ? Center(child: addPicture('assets/images/osman.jpg', context))
+          child: (AddPersonDataCubit.get(context).imageCamera.isEmpty)
+              ? Center(child: addPicture('assets/images/osman.jpg', context,))
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount:
-                      AddPersonDataCubit.get(context).imageCamera.length + 1,
+                  AddPersonDataCubit.get(context).imageCamera.length + 1,
                   itemBuilder: (context, index) {
                     return index == 0
                         ? Padding(
                             padding: const EdgeInsets.only(left: 10.0),
                             child:
-                                addPicture('assets/images/osman.jpg', context))
+                                addPicture('assets/images/osman.jpg', context,),)
                         : Padding(
                             padding: const EdgeInsets.only(left: 10.0),
                             child: ClipOval(
@@ -59,12 +60,11 @@ class UploadPictures extends StatelessWidget {
     );
   }
 
-  addPicture(imageUrl, context) {
+  Stack addPicture(String imageUrl,BuildContext context,) {
     return Stack(alignment: Alignment.bottomRight, children: [
       Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: black,
             width: 1.3,
           ),
           shape: BoxShape.circle,
@@ -79,58 +79,56 @@ class UploadPictures extends StatelessWidget {
           ),
         ),
       ),
-      Container(
-        child: Container(
-          height: 50,
-          width: 50,
-          child: InkWell(
-              child: SvgPicture.asset('assets/icons/add_icon.svg'),
-              onTap: () => showDialog(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialogClass(
-                        isDoneIcon: false,
-                        height: 220.0,
-                        widget: TextClass(
-                          text: 'اختر طريقه ادراج الصور',
-                          fontSize: 25,
+      SizedBox(
+        height: 50,
+        width: 50,
+        child: InkWell(
+            child: SvgPicture.asset('assets/icons/add_icon.svg'),
+            onTap: () => showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialogClass(
+                      isDoneIcon: false,
+                      height: 220.0,
+                      widget: const TextClass(
+                        text: 'اختر طريقه ادراج الصور',
+                        fontSize: 25,
+                      ),
+                      bottomWidget: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const DividerClass(thickness: 1),
+                            ListTile(
+                                leading:
+                                    const Icon(Icons.add_photo_alternate_outlined),
+                                title: const TextClass(
+                                    text: 'من المعرض',
+                                    textAlign: TextAlign.start,
+                                    fontSize: 20,
+                                    textColor: mainColor,),
+                                onTap: () {
+                                  AddPersonDataCubit.get(context)
+                                      .getImageFromGallery();
+                                  Navigator.pop(context);
+                                },),
+                            ListTile(
+                                leading: const Icon(Icons.add_a_photo_outlined),
+                                title: const TextClass(
+                                    text: 'الكاميرا',
+                                    textAlign: TextAlign.start,
+                                    fontSize: 20,
+                                    textColor: mainColor,),
+                                onTap: () {
+                                  AddPersonDataCubit.get(context)
+                                      .getImageFromCamera();
+                                  Navigator.pop(context);
+                                },),
+                          ],
                         ),
-                        bottomWidget: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              DividerClass(thickness: 1),
-                              ListTile(
-                                  leading:
-                                      Icon(Icons.add_photo_alternate_outlined),
-                                  title: TextClass(
-                                      text: 'من المعرض',
-                                      textAlign: TextAlign.start,
-                                      fontSize: 20,
-                                      textColor: mainColor),
-                                  onTap: () {
-                                    AddPersonDataCubit.get(context)
-                                        .getImageFromGallery();
-                                    Navigator.pop(context);
-                                  }),
-                              ListTile(
-                                  leading: Icon(Icons.add_a_photo_outlined),
-                                  title: TextClass(
-                                      text: 'الكاميرا',
-                                      textAlign: TextAlign.start,
-                                      fontSize: 20,
-                                      textColor: mainColor),
-                                  onTap: () {
-                                    AddPersonDataCubit.get(context)
-                                        .getImageFromCamera();
-                                    Navigator.pop(context);
-                                  }),
-                            ],
-                          ),
-                        ),
-                      ))),
-        ),
+                      ),
+                    ),),),
       ),
-    ]);
+    ],);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/modules/search/search_cubit/cubit.dart';
-import 'package:lost_app/modules/search/search_cubit/states.dart';
+import 'package:lost_app/modules/search/search_cubit/search_cubit.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -22,20 +21,20 @@ class SearchScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back_ios_sharp, color: black),
+                icon: const Icon(Icons.arrow_back_ios_sharp, color: black),
               ),
-              iconTheme: IconThemeData(
+              iconTheme: const IconThemeData(
                 color: Colors.black, //change your color here
               ),
               title: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: white,
                   //borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: ConstrainedBox(
-                    constraints: BoxConstraints.tightFor(height: 45),
+                    constraints: const BoxConstraints.tightFor(height: 45),
                     child: TextFormFieldClass(
                       autofocus: true,
                       controller: homeAppBarController,
@@ -48,6 +47,6 @@ class SearchScreen extends StatelessWidget {
             ),
             //body:
           );
-        });
+        },);
   }
 }

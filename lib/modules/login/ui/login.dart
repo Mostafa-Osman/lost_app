@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/login/login_cubit/cubit.dart';
-import 'package:lost_app/modules/login/login_cubit/states.dart';
+import 'package:lost_app/modules/login/login_cubit/login_cubit.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -16,9 +15,10 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController loginPhoneControl = TextEditingController();
   final TextEditingController loginPasswordControl = TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    var cubit = LoginCubit.get(context);
+    final Size size = MediaQuery.of(context).size;
+    final cubit = LoginCubit.get(context);
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) => {},
       builder: (context, state) => Scaffold(
@@ -40,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                     // Align to alignment fields (phone number and password) on the end of logo
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Container(
+                      child: SizedBox(
                         height: size.height / 1.75,
                         child: Form(
                           key: _formKey,
@@ -50,15 +50,15 @@ class LoginScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   //  text phone number
-                                  TextClass(
+                                  const TextClass(
                                     text: 'رقم الهاتف',
                                   ),
                                   // Text form field to enter phone number
                                   TextFormFieldClass(
                                     textHint: 'ادخل رقم هاتفك',
                                     controller: loginPhoneControl,
-                                    keyboardType:
-                                        TextInputType.numberWithOptions(),
+                                    // keyboardType:
+                                    //        TextInputType.numberWithOptions(),
                                     validator: (value) => value!.isEmpty
                                         ? 'من فضلك ادخل رقم هاتفك'
                                         : (value.length != 11)
@@ -66,9 +66,9 @@ class LoginScreen extends StatelessWidget {
                                             : null,
                                   ),
                                   // Sized Box with height 15
-                                  SizedBox(height: 15),
+                                  const SizedBox(height: 15),
                                   //  text password
-                                  TextClass(
+                                  const   TextClass(
                                     text: 'كلمه المرور',
                                   ),
                                   // Text form field to enter password
@@ -79,8 +79,8 @@ class LoginScreen extends StatelessWidget {
                                         onPressed: () =>
                                             cubit.loginVisibilityPassword(),
                                         icon: cubit.isVisibility
-                                            ? Icon(Icons.visibility)
-                                            : Icon(Icons.visibility_off)),
+                                            ? const Icon(Icons.visibility)
+                                            : const Icon(Icons.visibility_off),),
                                     obscureText: cubit.isVisibility,
                                     validator: (value) => value!.isEmpty
                                         ? 'من فضلك ادخل كلمه المرور'
@@ -91,21 +91,22 @@ class LoginScreen extends StatelessWidget {
                                   // Text button forget password
                                   TextButtonClass(
                                     onPressed: () => navigateTo(context,
-                                        RouteConstant.phoneNumberRoute),
+                                        RouteConstant.phoneNumberRoute,),
                                     text: 'هل نسيت كلمه المرور ؟ ',
                                     textColor: lightGrey,
                                   ),
                                   // Sized Box with height 10
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   // Button to submit (go to home screen)
                                   CustomButton(
                                           onPressed: () {
                                             if (_formKey.currentState!
-                                                .validate())
+                                                .validate()) {
                                               navigateTo(
                                                   context,
                                                   RouteConstant
-                                                      .homeLayoutRoute);
+                                                      .homeLayoutRoute,);
+                                            }
                                           },
                                           text: 'تسجيل الدخول',
                                          ),
@@ -128,15 +129,15 @@ class LoginScreen extends StatelessWidget {
                                             child: TextButtonClass(
                                           onPressed: () => navigatorAndFinish(
                                               context,
-                                              RouteConstant.registerRoute),
+                                              RouteConstant.registerRoute,),
                                           text: 'إنشاء حساب',
                                           fontSize: 18,
                                           textColor: mainColor,
-                                        )),
+                                        ),),
                                       ],
                                     ),
                                   ),
-                                ]),
+                                ],),
                           ),
                         ),
                       ),

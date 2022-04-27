@@ -14,13 +14,13 @@ import 'package:lost_app/modules/posts_found/ui/posts_found.dart';
 import 'package:lost_app/modules/processing/ui/processing_page.dart';
 import 'package:lost_app/modules/profile/ui/edit_profile.dart';
 import 'package:lost_app/modules/register/ui/register.dart';
+import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/modules/search/ui/search_screen.dart';
 import 'package:lost_app/modules/setting/ui/setting.dart';
-import 'package:lost_app/modules/verify_mobile/ui/Verify_mobile.dart';
-import 'route_constants.dart';
+import 'package:lost_app/modules/verify_mobile/ui/verify_mobile.dart';
 
 class AppRouter {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteConstant.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
@@ -35,21 +35,25 @@ class AppRouter {
       case RouteConstant.homeLayoutRoute:
         return MaterialPageRoute(builder: (_) => HomeLayoutScreen());
       case RouteConstant.addPersonDataRoute:
-        return MaterialPageRoute(builder: (_) {
-          final String arguments = settings.arguments as String;
-          var textPost = arguments;
+        return MaterialPageRoute(
+        settings:settings ,
+
+        builder: (_) {
+          final String textPost = settings.arguments! as String;
           return AddPersonDataScreen(
             textPost: textPost,
           );
-        });
+        },);
 
       case RouteConstant.commentRoute:
-        return MaterialPageRoute(builder: (_) {
+        return MaterialPageRoute(
+          settings:settings ,
+          builder: (_) {
           final CommentArguments arguments =
-              settings.arguments as CommentArguments;
-          var details = arguments;
+          settings.arguments!  as CommentArguments;
+          final CommentArguments details = arguments;
           return CommentScreen(details: details);
-        });
+        },);
 
       case RouteConstant.notificationRoute:
         return MaterialPageRoute(builder: (_) => NotificationScreen());
@@ -66,26 +70,30 @@ class AppRouter {
       case RouteConstant.settingRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
       case RouteConstant.verifyRoute:
-        return MaterialPageRoute(builder: (_) {
-          final bool arguments = settings.arguments as bool;
-          var isFromResetPhone = arguments;
+        return MaterialPageRoute(
+            settings:settings ,
+            builder: (_) {
+          final bool arguments = settings.arguments! as bool;
+          final isFromResetPhone = arguments;
 
           return VerifyMobileScreen(isFromResetPhone: isFromResetPhone);
-        });
+        },);
       case RouteConstant.replyCommentRoute:
-        return MaterialPageRoute(builder: (_) {
+        return MaterialPageRoute(
+            settings:settings ,
+            builder: (_) {
           final CommentArguments arguments =
-              settings.arguments as CommentArguments;
-          var details = arguments;
+              settings.arguments! as CommentArguments;
+          final details = arguments;
           return ReplyCommentScreen(details: details);
-        });
+        },);
 
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
                   body: Center(
-                      child: Text('No route defined for ${settings.name}')),
-                ));
+                      child: Text('No route defined for ${settings.name}'),),
+                ),);
     }
   }
 }

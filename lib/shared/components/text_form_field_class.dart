@@ -5,49 +5,49 @@ class TextFormFieldClass extends StatelessWidget {
   final TextEditingController controller;
 
   //validator
-  FormFieldValidator<String>? validator;
+  final  FormFieldValidator<String>? validator;
 
   //Hint text
-  String? textHint;
+  final String? textHint;
 
   // //Hint color (initial color black)
-  Color hintColor;
-  TextStyle? hintStyle;
-   TextAlign textAlign;
+ final Color hintColor;
+ final TextStyle? hintStyle;
+ final  TextAlign textAlign;
   //Text color (initial color black)
-  Color textColor;
+ final Color textColor;
 
   //background color (initial color white)
-  Color backgroundColor;
+ final Color backgroundColor;
 
   // prefix Icon
-  Widget? prefix;
+ final Widget? prefix;
 
   //Rounded Rectangle Border (initial 15.0)
-  double roundedRectangleBorder;
+ final double roundedRectangleBorder;
 
   //obscure Text
-  bool obscureText;
+  final bool obscureText;
 
   //Widget suffix Icon
-  Widget? suffixIcon;
+  final Widget? suffixIcon;
 
   //Text Input Type (keyboard Type)
-  TextInputType? keyboardType;
+  final TextInputType? keyboardType;
 
-  EdgeInsetsGeometry contentPadding;
+  final EdgeInsetsGeometry contentPadding;
 
   //label
-  String? label;
-  InputDecoration? decoration;
-  TextStyle? textStyle;
-  StrutStyle? structStyle;
-  bool autofocus;
-  int? maxLines;
-  double? fontSize;
-  TextOverflow? overflow;
-  double? height;
-  TextFormFieldClass({
+ final String? label;
+ final InputDecoration? decoration;
+ final TextStyle? textStyle;
+ final StrutStyle? structStyle;
+ final bool autofocus;
+ final int? maxLines;
+ final double? fontSize;
+ final TextOverflow? overflow;
+ final double? height;
+  const TextFormFieldClass({
     required this.controller,
     this.validator,
     this.textHint,
@@ -70,7 +70,7 @@ class TextFormFieldClass extends StatelessWidget {
     this.maxLines=1,
     this.fontSize,
     this.overflow,
-    this.height,
+    this.height, this.structStyle,
   });
 
   @override

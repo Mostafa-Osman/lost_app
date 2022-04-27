@@ -18,15 +18,14 @@ class PhoneNumberScreen extends StatelessWidget {
             padding:
             const EdgeInsets.only(top: 60.0, right: 30, left: 30, bottom: 30),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //  text (enter phone number)
-                TextClass(
+                const TextClass(
                   text: 'ادخل رقم هاتفك',
                   fontSize: 30.0,
                 ),
                 // Sized Box with height 10
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 //  text
                 TextClass(
                   text: 'ادخل رقم هاتفك لنتمكن من ارسال رمز التاكيد اليك',
@@ -34,11 +33,11 @@ class PhoneNumberScreen extends StatelessWidget {
                   textColor: lightGrey,
                 ),
                 // Sized Box with height 20
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 //  text (phone number)
                 Container(
                   alignment: Alignment.topRight,
-                  child: TextClass(
+                  child: const TextClass(
                     text: 'رقم الهاتف',
                     textAlign: TextAlign.start,
                     fontSize: 20.0,
@@ -65,9 +64,10 @@ class PhoneNumberScreen extends StatelessWidget {
                     child:  CustomButton(
                         text: 'التالي',
                         onPressed: () {
-                          if (_formKey.currentState!.validate())
+                          if (_formKey.currentState!.validate()) {
                             navigateWithArgument(context, RouteConstant.verifyRoute,true
-                            );
+                           , );
+                          }
                           },
                     ),
                   ),

@@ -12,7 +12,7 @@ class CustomButton extends StatelessWidget {
   final EdgeInsetsGeometry margin;
   final FontWeight fontWeight;
 
-  CustomButton({
+  const CustomButton({
     this.margin = EdgeInsets.zero,
     this.width = double.infinity,
     this.height = 50,

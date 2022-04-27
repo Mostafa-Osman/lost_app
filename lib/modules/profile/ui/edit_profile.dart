@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/profile/profile_cubit/cubit.dart';
+import 'package:lost_app/modules/profile/profile_cubit/profile_cubit.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -11,25 +11,23 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    var cubit = ProfileCubit.get(context);
+    final cubit = ProfileCubit.get(context);
     cubit.setEditPageController();
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+        title:const Padding(
+          padding:  EdgeInsets.only(top: 8.0),
           child: TextClass(
             text: 'تعديل الملف',
-            textAlign: TextAlign.center,
           ),
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios_sharp, color: black),
+          icon: const Icon(Icons.arrow_back_ios_sharp, color: black),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
         ),
         backgroundColor: white,
@@ -42,11 +40,10 @@ class EditProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: black,
                       width: 1.3,
                     ),
                     shape: BoxShape.circle,
@@ -72,7 +69,7 @@ class EditProfileScreen extends StatelessWidget {
                               alignment: Alignment.bottomCenter,
                               height: 50,
                               width: 180,
-                              color: Color.fromRGBO(0, 0, 0, 0.7),
+                              color: const Color.fromRGBO(0, 0, 0, 0.7),
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 5.0),
                                 child: IconButton(
@@ -91,16 +88,16 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Form(
                   key: _formKey,
                   child: Column(
                     children: [
-                      Align(
+                      const Align(
                           alignment: Alignment.topRight,
                           child: TextClass(
                             text: ' الاسم: ',
-                          )),
+                          ),),
                       TextFormFieldClass(
                         controller: cubit.nameController,
                         maxLines: null,
@@ -109,17 +106,16 @@ class EditProfileScreen extends StatelessWidget {
                             value!.isEmpty ? 'من فضلك ادخل الاسم' : null,
                         keyboardType: TextInputType.name,
                         overflow: TextOverflow.clip,
-                        textAlign: TextAlign.start,
                       ),
-                      SizedBox(height: 20),
-                      Align(
+                      const SizedBox(height: 20),
+                      const  Align(
                           alignment: Alignment.topRight,
                           child: TextClass(
                             text: ' الهاتف: ',
-                          )),
+                          ),),
                       TextFormFieldClass(
                         controller: cubit.numberController,
-                        suffixIcon: Icon(Icons.phone),
+                        suffixIcon: const Icon(Icons.phone),
                         keyboardType: TextInputType.phone,
                         validator: (value) => value!.isEmpty
                             ? 'من فضلك ادخل رقم هاتفك'
@@ -130,15 +126,15 @@ class EditProfileScreen extends StatelessWidget {
                         fontSize: 18,
                         height: 1.8,
                       ),
-                      SizedBox(height: 20),
-                      Align(
+                      const SizedBox(height: 20),
+                      const    Align(
                           alignment: Alignment.topRight,
                           child: TextClass(
                             text: ' البريد الالكتروني: ',
-                          )),
+                          ),),
                       TextFormFieldClass(
                         controller: cubit.emailController,
-                        suffixIcon: Icon(Icons.email),
+                        suffixIcon: const Icon(Icons.email),
                         validator: (value) =>
                             (value!.isEmpty || !value.contains('@'))
                                 ? 'البريد الالكتروني الذي ادخلته غير صحيح'
@@ -151,7 +147,7 @@ class EditProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 CustomButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/home_layout/home_layout_cubit/cubit.dart';
-import 'package:lost_app/modules/home_layout/home_layout_cubit/states.dart';
+import 'package:lost_app/modules/home_layout/home_layout_cubit/home_cubit.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
-
 class HomeLayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeLayoutCubit, HomeLayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = HomeLayoutCubit.get(context);
+        final cubit = HomeLayoutCubit.get(context);
         return Scaffold(
           appBar: cubit.appBar[cubit.indexPage],
           body: cubit.page[cubit.indexPage],
@@ -37,17 +35,16 @@ class HomeLayoutScreen extends StatelessWidget {
           bottomNavigationBar: BottomAppBar(
             //bottom navigation bar on scaffold
             color: white,
-            shape: CircularNotchedRectangle(),
+            shape: const CircularNotchedRectangle(),
             elevation: 10.0,
             //shape of notch
             notchMargin: 10,
-            child: Container(
-              height: 67,
+            child: SizedBox(
+              height: 82,
               child: Row(
                 //children inside bottom appbar
-                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
+                children: [
                   Expanded(
                     child: InkWell(
                       child: Padding(
@@ -58,14 +55,13 @@ class HomeLayoutScreen extends StatelessWidget {
                               iconSize: 10,
                               highlightColor: black,
                               icon: SvgPicture.asset('assets/icons/account.svg',
-                                  color: cubit.bottomNavBarAccColor),
+                                  color: cubit.bottomNavBarAccColor,),
                               onPressed: null,
                             ),
                             TextClass(
                               text: 'حسابي',
                               textColor: cubit.bottomNavBarAccColor,
                               fontSize: 15,
-                              fontWeight: FontWeight.normal,
                             ),
                           ],
                         ),
@@ -73,11 +69,11 @@ class HomeLayoutScreen extends StatelessWidget {
                       onTap: () => cubit.changeBottomNavBarIndexAndColor(),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 80,
                   ),
                   Expanded(
-                    child: FlatButton(
+                    child: TextButton(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Column(
@@ -85,14 +81,13 @@ class HomeLayoutScreen extends StatelessWidget {
                             IconButton(
                               iconSize: 10,
                               icon: SvgPicture.asset('assets/icons/home.svg',
-                                  color: cubit.bottomNavBarHomeColor),
+                                  color: cubit.bottomNavBarHomeColor,),
                               onPressed: null,
                             ),
                             TextClass(
                               text: 'الرئيسيه',
                               textColor: cubit.bottomNavBarHomeColor,
                               fontSize: 15,
-                              fontWeight: FontWeight.normal,
                             ),
                           ],
                         ),

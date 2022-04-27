@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/modules/add_person_data/ui/add_person_data.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -11,17 +10,16 @@ class PostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextClass(
+        title: const TextClass(
           text: 'اختر نوع المنشور',
-          textAlign: TextAlign.center,
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios_sharp, color: black),
+          icon: const Icon(Icons.arrow_back_ios_sharp, color: black),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
         ),
         backgroundColor: white,
@@ -37,7 +35,7 @@ class PostScreen extends StatelessWidget {
               width: double.infinity,
               color: white,
               child: Column(
-                children: [
+                children: const [
                   CardPostPage(
                     image: 'assets/images/welcome_1.svg',
                     text: 'ابحث عن احد المفقودين',
@@ -64,28 +62,27 @@ class PostScreen extends StatelessWidget {
 class CardPostPage extends StatelessWidget {
   final String image;
   final String text;
-  double? size;
-  var optionText;
+  final double? size;
+  final String? optionText;
 
-  CardPostPage(
-      {required this.image, required this.text, this.optionText, this.size});
+  const CardPostPage(
+      {required this.image, required this.text, this.optionText, this.size,});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 400,
       height: 310,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
       child: Card(
         elevation: 6,
         child: InkWell(
           onTap: () => navigateWithArgument(
-              context, RouteConstant.addPersonDataRoute, optionText),
+              context, RouteConstant.addPersonDataRoute, optionText,),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -95,11 +92,10 @@ class CardPostPage extends StatelessWidget {
                   width: size,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Align(
-                alignment: Alignment.center,
                 child: TextClass(text: text),
               ),
             ],

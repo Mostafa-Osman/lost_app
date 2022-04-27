@@ -7,7 +7,7 @@ class TimerClass extends StatelessWidget{
   final int seconds;
   final Duration interval;
   final Function onFinished;
-  TimerClass( this.seconds, this.interval,this.onFinished);
+  const TimerClass( this.seconds, this.interval,this.onFinished);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,6 @@ class TimerClass extends StatelessWidget{
           textColor: mainColor,
         ),
         interval: interval, //Duration(milliseconds: 1000),
-        onFinished: onFinished);
+        onFinished: onFinished,);
   }
 }

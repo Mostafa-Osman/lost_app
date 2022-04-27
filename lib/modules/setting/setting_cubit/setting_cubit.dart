@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/modules/setting/setting_cubit/states.dart';
-
+part 'setting_states.dart';
 class SettingCubit extends Cubit<SettingStates> {
   SettingCubit() : super(SettingInitialState());
 
-  static SettingCubit get(context) => BlocProvider.of(context);
+  static SettingCubit get(BuildContext context) => BlocProvider.of(context);
 
   // variable bool to change mode
   bool isDark = false;

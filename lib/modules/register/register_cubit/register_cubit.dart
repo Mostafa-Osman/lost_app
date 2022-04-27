@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/modules/register/register_cubit/states.dart';
-
+part 'register_states.dart';
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(RegisterInitialState());
 
-  static RegisterCubit get(context) => BlocProvider.of(context);
+  static RegisterCubit get(BuildContext context) => BlocProvider.of(context);
 
   // variable bool to change visibility
   bool isVisibility = true;

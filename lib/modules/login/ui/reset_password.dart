@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/modules/login/login_cubit/cubit.dart';
-import 'package:lost_app/modules/login/login_cubit/states.dart';
+import 'package:lost_app/modules/login/login_cubit/login_cubit.dart';
 import 'package:lost_app/modules/route/route_constants.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
@@ -24,7 +23,7 @@ class ResetPasswordScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = LoginCubit.get(context);
+        final cubit = LoginCubit.get(context);
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -32,56 +31,54 @@ class ResetPasswordScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // text
-                  TextClass(text: 'مرحبا, مصطفي عثمان', fontSize: 25),
+                  const TextClass(text: 'مرحبا, مصطفي عثمان', fontSize: 25),
                   // sized box with height 50
-                  SizedBox(height: 50),
-                  Container(
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          //  text password
-                          TextClass(text: 'كلمه المرور', fontSize: 20),
-                          // Text form field to enter password
-                          TextFormFieldClass(
-                            textHint: 'ادخل كلمه المرور',
-                            controller: resetPasswordControl,
-                            obscureText: cubit.resetPasswordVisibility,
-                            suffixIcon: IconButton(
-                                onPressed: () => cubit.changeResetVisibility(),
-                                icon: cubit.resetPasswordVisibility
-                                    ? Icon(Icons.visibility)
-                                    : Icon(Icons.visibility_off)),
-                            validator: (value) => value!.isEmpty
-                                ? 'من فضلك ادخل كلمه المرور'
-                                : (value.length < 8)
-                                    ? 'كلمه المرور اقل من 8 احرف'
-                                    : null,
-                          ),
-                          // Sized Box with height 20
-                          SizedBox(height: 20),
-                          //  Text to  confirm password
-                          TextClass(text: 'تأكيد كلمه المرور ', fontSize: 20),
-                          //  Text form field to confirm password
-                          TextFormFieldClass(
-                            textHint: ' اعد تأكيد ادخل كلمه المرور',
-                            controller: resetConfirmPasswordControl,
-                            obscureText: cubit.resetConfirmPasswordVisibility,
-                            suffixIcon: IconButton(
-                                onPressed: () =>
-                                    cubit.changeResetConfirmVisibility(),
-                                icon: cubit.resetConfirmPasswordVisibility
-                                    ? Icon(Icons.visibility)
-                                    : Icon(Icons.visibility_off)),
-                            validator: (value) => value!.isEmpty
-                                ? 'من فضلك اعد ادخال كلمه المرور'
-                                : (value != resetPasswordControl.text)
-                                    ? 'كلمه المرور غير متطابق'
-                                    : null,
-                          ),
-                        ],
-                      ),
+                  const SizedBox(height: 50),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //  text password
+                        const  TextClass(text: 'كلمه المرور', fontSize: 20),
+                        // Text form field to enter password
+                        TextFormFieldClass(
+                          textHint: 'ادخل كلمه المرور',
+                          controller: resetPasswordControl,
+                          obscureText: cubit.resetPasswordVisibility,
+                          suffixIcon: IconButton(
+                              onPressed: () => cubit.changeResetVisibility(),
+                              icon: cubit.resetPasswordVisibility
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),),
+                          validator: (value) => value!.isEmpty
+                              ? 'من فضلك ادخل كلمه المرور'
+                              : (value.length < 8)
+                                  ? 'كلمه المرور اقل من 8 احرف'
+                                  : null,
+                        ),
+                        // Sized Box with height 20
+                        const SizedBox(height: 20),
+                        //  Text to  confirm password
+                        const   TextClass(text: 'تأكيد كلمه المرور ', fontSize: 20),
+                        //  Text form field to confirm password
+                        TextFormFieldClass(
+                          textHint: ' اعد تأكيد ادخل كلمه المرور',
+                          controller: resetConfirmPasswordControl,
+                          obscureText: cubit.resetConfirmPasswordVisibility,
+                          suffixIcon: IconButton(
+                              onPressed: () =>
+                                  cubit.changeResetConfirmVisibility(),
+                              icon: cubit.resetConfirmPasswordVisibility
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),),
+                          validator: (value) => value!.isEmpty
+                              ? 'من فضلك اعد ادخال كلمه المرور'
+                              : (value != resetPasswordControl.text)
+                                  ? 'كلمه المرور غير متطابق'
+                                  : null,
+                        ),
+                      ],
                     ),
                   ),
                   // Button to submit (show alert dialog)
@@ -92,23 +89,24 @@ class ResetPasswordScreen extends StatelessWidget {
                             text: 'التالي',
 
                             onPressed: () {
-                              if (_formKey.currentState!.validate())
+                              if (_formKey.currentState!.validate()) {
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
-                                        Dialog());
-                            }),
+                                        Dialog(),);
+                              }
+                            },),
                       ),
 
                   ),
                   // Sized Box with height 10
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   // Text Button (back to change mobile number)
                   TextButtonClass(
                     text: 'لست مصطفي عثمان؟',
                     textColor: lightGrey,
                     onPressed: () => navigatorAndFinish(
-                        context, RouteConstant.phoneNumberRoute),
+                        context, RouteConstant.phoneNumberRoute,),
                   ),
                 ],
               ),
@@ -127,7 +125,7 @@ class Dialog extends StatelessWidget {
       height: 260.0,
       // Title of dialog
       widget: Column(
-        children: [
+        children:const [
           TextClass(
             text: 'تهانينا لقد قمت بإعاده تعيين',
           ),
@@ -150,7 +148,7 @@ class Dialog extends StatelessWidget {
           // Timer with 5 second to go home screen automatic
           TimerClass(
             5,
-            Duration(milliseconds: 1000),
+            const Duration(milliseconds: 1000),
             () => navigatorAndFinish(context, RouteConstant.homeLayoutRoute),
           ),
         ],

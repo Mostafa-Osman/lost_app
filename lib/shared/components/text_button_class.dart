@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/shared/components/text_class.dart';
 
 class TextButtonClass extends StatelessWidget {
   // required text
@@ -20,7 +19,7 @@ class TextButtonClass extends StatelessWidget {
   //initial Text color black
   final Color textColor;
 
-  TextButtonClass({
+  const TextButtonClass({
     required this.text,
     required this.onPressed,
     this.fontSize = 15,
@@ -35,10 +34,10 @@ class TextButtonClass extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            fontSize: fontSize, fontWeight: fontWeight, color: textColor),
+            fontSize: fontSize, fontWeight: fontWeight, color: textColor,),
         textAlign: textAlign,
       ),
-      onPressed: () => onPressed(),
+      onPressed: () => onPressed,
     );
   }
 }

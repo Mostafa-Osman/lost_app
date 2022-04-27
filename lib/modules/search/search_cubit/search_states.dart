@@ -1,3 +1,6 @@
+part of'search_cubit.dart';
+@immutable
+
 abstract class SearchStates {}
 
 class SearchInitialState extends SearchStates {}
