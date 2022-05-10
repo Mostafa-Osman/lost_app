@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/modules/comment/ui/comment_arguments.dart';
-import 'package:lost_app/modules/route/route_constants.dart';
+import 'package:lost_app/presentations/comment/ui/comment_arguments.dart';
+import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
