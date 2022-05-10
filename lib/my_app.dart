@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
+import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
+import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/presentations/add_person_data/add_person_cubit/add_person_cubit.dart';
-import 'package:lost_app/presentations/authentication/login/login_cubit/login_cubit.dart';
-import 'package:lost_app/presentations/authentication/register/register_cubit/register_cubit.dart';
-import 'package:lost_app/presentations/authentication/register/screen/register_screen.dart';
 import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/ui/on_boarding.dart';
@@ -13,6 +13,9 @@ import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/presentations/search/search_cubit/search_cubit.dart';
 import 'package:lost_app/presentations/setting/setting_cubit/setting_cubit.dart';
 import 'package:lost_app/presentations/verify_mobile/verify_cubit/verify_cubit.dart';
+
+
+
 
 class MyApp extends StatelessWidget {
   final AppRouter appRoutes;

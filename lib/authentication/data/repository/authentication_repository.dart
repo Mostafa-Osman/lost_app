@@ -1,5 +1,6 @@
-import 'package:lost_app/data/model/authentication/register_model.dart';
-import 'package:lost_app/data/repositories/authentication/register/register_web_service.dart';
+
+import 'package:lost_app/authentication/data/model/register_model.dart';
+import 'package:lost_app/authentication/data/repository/authentcation_web_service.dart';
 
 class RegisterRepository {
   RegisterWebService registerWebService;
@@ -19,6 +20,6 @@ class RegisterRepository {
       email: email,
     );
 
-    return RegisterData.fromJson(data['message'] as Map<String,dynamic>);
+    return RegisterData.fromJson(data['data'] as Map<String,dynamic>);
   }
 }
