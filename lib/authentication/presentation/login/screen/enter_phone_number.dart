@@ -65,7 +65,7 @@ class PhoneNumberScreen extends StatelessWidget {
                         text: 'التالي',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            navigateWithArgument(context, RouteConstant.verifyRoute,true
+                            navigateWithArgument(context, RouteConstant.otpRoute,true
                            , );
                           }
                           },

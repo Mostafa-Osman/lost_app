@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/authentication/data/repository/authentcation_web_service.dart';
 import 'package:lost_app/authentication/data/repository/authentication_repository.dart';
+import 'package:lost_app/authentication/data/repository/authentication_web_service.dart';
+import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
 import 'package:lost_app/authentication/presentation/login/screen/enter_phone_number.dart';
 import 'package:lost_app/authentication/presentation/login/screen/login.dart';
 import 'package:lost_app/authentication/presentation/login/screen/reset_password.dart';
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
+import 'package:lost_app/authentication/presentation/verify_mobile/screen/otp_screen.dart';
 import 'package:lost_app/presentations/add_person_data/ui/add_person_data.dart';
 import 'package:lost_app/presentations/comment/ui/comment_arguments.dart';
 import 'package:lost_app/presentations/comment/ui/comment_screen.dart';
 import 'package:lost_app/presentations/comment/ui/reply_comment_screen.dart';
 import 'package:lost_app/presentations/home_layout/ui/home_layout.dart';
 import 'package:lost_app/presentations/notification/ui/notification.dart';
+import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/ui/on_boarding.dart';
 import 'package:lost_app/presentations/post/ui/post.dart';
 import 'package:lost_app/presentations/posts_found/ui/posts_found.dart';
@@ -21,19 +24,18 @@ import 'package:lost_app/presentations/profile/ui/edit_profile.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/presentations/search/ui/search_screen.dart';
 import 'package:lost_app/presentations/setting/ui/setting.dart';
-import 'package:lost_app/presentations/verify_mobile/ui/verify_mobile.dart';
 
 class AppRouter {
-  //Register
+  //Authentication
 
-  late RegisterRepository registerRepository;
-  late RegisterWebService registerWebService;
+  late AuthenticationRepository authenticationRepository;
+  late AuthenticationWebService authenticationWebService;
 
   void initAppSettings() {
-    //Register init
-    registerWebService = RegisterWebService();
-    registerRepository = RegisterRepository(
-      registerWebService,
+    //Authentication init
+    authenticationWebService = AuthenticationWebService();
+    authenticationRepository = AuthenticationRepository(
+      authenticationWebService,
     );
   }
 
@@ -42,16 +44,27 @@ class AppRouter {
 
     switch (settings.name) {
       case RouteConstant.onBoardingRoute:
-        return MaterialPageRoute(builder: (_) => OnBoardingScreen());
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => BlocProvider(
+            create: (_) => OnBoardingCubit(),
+            child: OnBoardingScreen(),
+          ),
+        );
       case RouteConstant.registerRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => RegisterCubit(registerRepository),
+            create: (_) => RegisterCubit(authenticationRepository),
             child: RegisterScreen(),
           ),
         );
       case RouteConstant.loginRoute:
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => LoginCubit(authenticationRepository),
+            child: LoginScreen(),
+          ),
+        );
       case RouteConstant.phoneNumberRoute:
         return MaterialPageRoute(builder: (_) => PhoneNumberScreen());
       case RouteConstant.resetPasswordRoute:
@@ -94,7 +107,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => SearchScreen());
       case RouteConstant.settingRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
-      case RouteConstant.verifyRoute:
+      case RouteConstant.otpRoute:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {

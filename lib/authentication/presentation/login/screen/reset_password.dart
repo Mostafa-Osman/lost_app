@@ -23,7 +23,8 @@ class ResetPasswordScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        final cubit = LoginCubit.get(context);
+        final loginCubit = BlocProvider.of<LoginCubit>(context);
+
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -45,10 +46,10 @@ class ResetPasswordScreen extends StatelessWidget {
                         TextFormFieldClass(
                           textHint: 'ادخل كلمه المرور',
                           controller: resetPasswordControl,
-                          obscureText: cubit.resetPasswordVisibility,
+                          obscureText: loginCubit.resetPasswordVisibility,
                           suffixIcon: IconButton(
-                              onPressed: () => cubit.changeResetVisibility(),
-                              icon: cubit.resetPasswordVisibility
+                              onPressed: () => loginCubit.changeResetVisibility(),
+                              icon: loginCubit.resetPasswordVisibility
                                   ? const Icon(Icons.visibility)
                                   : const Icon(Icons.visibility_off),),
                           validator: (value) => value!.isEmpty
@@ -65,11 +66,11 @@ class ResetPasswordScreen extends StatelessWidget {
                         TextFormFieldClass(
                           textHint: ' اعد تأكيد ادخل كلمه المرور',
                           controller: resetConfirmPasswordControl,
-                          obscureText: cubit.resetConfirmPasswordVisibility,
+                          obscureText: loginCubit.resetConfirmPasswordVisibility,
                           suffixIcon: IconButton(
                               onPressed: () =>
-                                  cubit.changeResetConfirmVisibility(),
-                              icon: cubit.resetConfirmPasswordVisibility
+                                  loginCubit.changeResetConfirmVisibility(),
+                              icon: loginCubit.resetConfirmPasswordVisibility
                                   ? const Icon(Icons.visibility)
                                   : const Icon(Icons.visibility_off),),
                           validator: (value) => value!.isEmpty

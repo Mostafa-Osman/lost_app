@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "622115721589",
+    "project_id": "lost-app-5cdae",
+    "storage_bucket": "lost-app-5cdae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622115721589:android:ca69acd952bfe02bb6033c",
+        "android_client_info": {
+          "package_name": "com.example.lost_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622115721589-15uln7dcv4c1ig8fsaeagvf9pguvc2v1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE_UZQXCYVkiT_ldOeT0vfqvOTxcJ6cqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622115721589-15uln7dcv4c1ig8fsaeagvf9pguvc2v1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

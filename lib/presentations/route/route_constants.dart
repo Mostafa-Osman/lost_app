@@ -15,6 +15,6 @@ class RouteConstant {
   static const String editProfileRoute = '/editProfile';
   static const String searchRoute = '/search';
   static const String settingRoute = '/setting';
-  static const String verifyRoute = '/verify';
+  static const String otpRoute = '/otp';
   static const String replyCommentRoute = '/replyComment';
 }

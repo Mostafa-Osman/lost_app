@@ -9,10 +9,9 @@ part 'register_states.dart';
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit(this.registerRepository) : super(RegisterInitialState());
   final formKey = GlobalKey<FormState>();
-  RegisterRepository registerRepository;
+  AuthenticationRepository registerRepository;
 
   bool isVisibility = true;
-
   bool confirmNotVisible = true;
   final registerNameControl = TextEditingController();
   final registerEmailControl = TextEditingController();
@@ -36,6 +35,8 @@ class RegisterCubit extends Cubit<RegisterStates> {
       emit(RegisterError(message: e.toString()));
     }
   }
+
+
 
   void visibilityPassword() {
     isVisibility = !isVisibility;

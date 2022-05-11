@@ -9,6 +9,7 @@ class TextFormFieldClass extends StatelessWidget {
 
   //Hint text
   final String? textHint;
+  final TextInputAction textInputAction;
 
   // //Hint color (initial color black)
  final Color hintColor;
@@ -61,6 +62,7 @@ class TextFormFieldClass extends StatelessWidget {
     this.obscureText = false,
     this.autofocus=false,
     this.suffixIcon,
+    this.textInputAction=TextInputAction.done,
     this.keyboardType,
     this.label,
     this.decoration,
@@ -104,6 +106,8 @@ class TextFormFieldClass extends StatelessWidget {
         // icon: icon,
         suffixIcon: suffixIcon,
       ),
+      textInputAction: textInputAction,
+
       obscureText: obscureText,
       maxLines:maxLines,
     );

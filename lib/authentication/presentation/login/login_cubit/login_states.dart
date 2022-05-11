@@ -4,9 +4,19 @@ part of'login_cubit.dart';
 abstract class LoginStates {}
 
 class LoginInitialState extends LoginStates {}
+class LoginLoading extends LoginStates {}
 
-class LoginVisibilityPasswordState extends LoginStates {}
+class LoginSuccess extends LoginStates {
 
-class ResetVisibilityPasswordState extends LoginStates {}
+}
 
-class ResetConfirmVisibilityPasswordState extends LoginStates {}
+class LoginError extends LoginStates {
+  final String message;
+
+  LoginError(this.message);
+}
+
+
+class LoginRefreshUi extends LoginStates {}
+
+

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/data/local/cash_helper.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/smooth_page_indicator_class.dart';
@@ -14,10 +16,21 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = OnBoardingCubit.get(context);
+
     return BlocConsumer<OnBoardingCubit, OnBoardingStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (cubit.isLastPage) {
+          CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
+            onBoarding = true;
+          });
+        } else {
+          CacheHelper.removeData(key: 'onBoarding').then((value) {
+            onBoarding = false;
+          });
+        }
+      },
       builder: (context, state) {
-        final cubit = OnBoardingCubit.get(context);
         return Scaffold(
           body: Align(
             child: SizedBox(
