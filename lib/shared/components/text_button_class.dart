@@ -5,7 +5,7 @@ class TextButtonClass extends StatelessWidget {
   final String text;
 
   // required Function (Action happen when press in text)
-  final Function onPressed;
+  final VoidCallback onPressed;
 
   //initial font size 15
   final double fontSize;
@@ -31,13 +31,13 @@ class TextButtonClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      onPressed: onPressed,
       child: Text(
         text,
         style: TextStyle(
             fontSize: fontSize, fontWeight: fontWeight, color: textColor,),
         textAlign: textAlign,
       ),
-      onPressed: () => onPressed,
     );
   }
 }
