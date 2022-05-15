@@ -27,8 +27,8 @@ dependencies:
     sdk: flutter
 
   flutter_bloc:
-  firebase_auth: ^3.3.17
-  firebase_core: ^1.16.0
+  firebase_auth: ^3.3.18
+  firebase_core: ^1.17.0
   flutter_form_builder: ^7.0.0
   flutter_lints: ^1.0.4
   fluttertoast: ^8.0.8
@@ -36,10 +36,11 @@ dependencies:
     sdk: flutter
   flutter_svg: ^0.22.0
   flutter_switch: ^0.3.2
+  dio: ^4.0.6
 
 
   flutter_verification_code:
-  hexcolor: ^2.0.5
+  #hexcolor: ^2.0.5
   http: ^0.13.4
   image_picker:
   intl: 0.17.0
