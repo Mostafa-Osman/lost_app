@@ -23,13 +23,14 @@ Future<void> main() async {
   log('onBoarding:$onBoarding');
 
 
-  (onBoarding==null)
-      ? widget = OnBoardingScreen()
-      : (token.isEmpty)
-          ? widget = LoginScreen()
-          : widget = HomeLayoutScreen();
+  // (onBoarding==null)
+  //     ? widget = OnBoardingScreen()
+  //     : (token.isEmpty)
+  //         ? widget = LoginScreen()
+  //         : widget = HomeLayoutScreen();
+  widget = HomeLayoutScreen();
 
-
+  
   runApp(
     MyApp(
       appRoutes: AppRouter(),
