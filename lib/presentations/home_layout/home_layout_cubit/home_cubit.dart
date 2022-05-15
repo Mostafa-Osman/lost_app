@@ -22,8 +22,8 @@ class HomeLayoutCubit extends Cubit<HomeLayoutStates> {
     1: ProfileClass(),
   };
 
-  void changeBottomNavBarIndexAndColor() {
-    if (indexPage == 0) {
+  void changeBottomNavBarIndexAndColor(int index) {
+    if (index == 0) {
       bottomNavBarAccColor = bottomNavBarBlue;
       bottomNavBarHomeColor = grey;
       indexPage = 1;

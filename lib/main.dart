@@ -30,7 +30,6 @@ Future<void> main() async {
   //         : widget = HomeLayoutScreen();
   widget = HomeLayoutScreen();
 
-  
   runApp(
     MyApp(
       appRoutes: AppRouter(),

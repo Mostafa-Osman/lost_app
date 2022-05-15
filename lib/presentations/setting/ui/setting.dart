@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/presentations/setting/setting_cubit/setting_cubit.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
@@ -74,7 +73,7 @@ class SettingScreen extends StatelessWidget {
                           width: 50,
                           height: 30,
                           value: cubit.isDark,
-                          inactiveColor: HexColor('##E2E6ED'),
+                          inactiveColor: const Color(0xffE2E6ED),
                           activeColor: mainColor,
                           onToggle: (_) {
                             cubit.changeMode();
@@ -83,7 +82,7 @@ class SettingScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  DividerClass(color: HexColor('#D8D8D8'), thickness: 0.8),
+                  const DividerClass(color:  Color(0xffE2E6ED), thickness: 0.8),
                   const  Padding(
                     padding:
                          EdgeInsets.only(top: 5, right: 15.0, bottom: 5),
