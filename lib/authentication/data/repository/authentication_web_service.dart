@@ -25,7 +25,7 @@ class AuthenticationWebService {
       'phone_number': phone,
       'email': email,
       'password': password,
-      'confirm_password': password,
+      // 'confirm_password': password,
     };
     final response = await http.post(
       Uri.parse(url),
@@ -47,6 +47,8 @@ class AuthenticationWebService {
     required String phone,
     required String password,
   }) async {
+    log('phone: $phone');
+    log('password : $password');
 
     //todo remove it after upload backend to server
     await Future.delayed(const Duration(seconds: 3));
@@ -74,4 +76,71 @@ class AuthenticationWebService {
       throw data['message'].toString();
     }
   }
+
+
+  Future<Map<String, dynamic>> verifyPhoneNumber({
+    required String phone,
+  }) async {
+    log('phone: $phone');
+
+    //todo remove it after upload backend to server
+    await Future.delayed(const Duration(seconds: 3));
+    const String url = '${AppConst.baseUrl}forgot_password';
+    final headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+
+    final verifyPhoneNumber = {
+      'phone_number': phone,
+    };
+    final response = await http.post(
+      Uri.parse(url),
+      body: const Utf8Encoder().convert(
+        jsonEncode(verifyPhoneNumber),
+      ),
+      headers: headers,
+    );
+    final data = json.decode(response.body) as Map<String, dynamic>;
+    // if (data['status'] == 200) {
+      log(data.toString());
+      return data;
+    // } else {
+    //   throw data['message'].toString();
+    // }
+  }
+
+  Future<Map<String, dynamic>> resetPassword({
+    required String phone,
+    required String password,
+  }) async {
+    log('phone: $phone');
+    log('password : $password');
+
+    //todo remove it after upload backend to server
+    await Future.delayed(const Duration(seconds: 3));
+    const String url = '${AppConst.baseUrl}reset_password';
+    final headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+
+    final resetPasswordBody = {
+      'phone_number': phone,
+      'password': password,
+    };
+    final response = await http.post(
+      Uri.parse(url),
+      body: const Utf8Encoder().convert(
+        jsonEncode(resetPasswordBody),
+      ),
+      headers: headers,
+    );
+    final data = json.decode(response.body) as Map<String, dynamic>;
+    if (data['status'] == 200) {
+      log(data.toString());
+      return data;
+    } else {
+      throw data['message'].toString();
+    }
+  }
+
 }

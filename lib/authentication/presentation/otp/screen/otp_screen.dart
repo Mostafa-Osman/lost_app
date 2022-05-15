@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/authentication/presentation/otp/verify_cubit/otp_cubit.dart';
+import 'package:lost_app/authentication/presentation/otp/widgets/otp_dialog.dart';
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
-import 'package:lost_app/authentication/presentation/verify_mobile/verify_cubit/otp_cubit.dart';
-import 'package:lost_app/authentication/presentation/verify_mobile/widgets/otp_dialog.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
@@ -16,32 +16,37 @@ import 'package:lost_app/shared/components/toast.dart';
 import 'package:lost_app/shared/styles/color.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class VerifyMobileScreen extends StatelessWidget {
+class OtpScreen extends StatelessWidget {
   final bool isFromResetPhone;
 
-  const VerifyMobileScreen({required this.isFromResetPhone});
+  const OtpScreen({required this.isFromResetPhone});
 
   @override
   Widget build(BuildContext context) {
     final otpCubit = BlocProvider.of<OtpCubit>(context);
-    final registerCubit = BlocProvider.of<RegisterCubit>(context);
-
-    return BlocConsumer<OtpCubit, OtpStates>(
-      listener: (context, state) {
-        if (state is PhoneOtpSuccess) {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => OtpDialog(),
-          );
-        } else if (state is PhoneOtpError) {
-          showToast(state: ToastStates.error, message: state.message);
-        } else if (state is PhoneOtpTimeOut) {
-          showToast(state: ToastStates.error, message: 'Time out');
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          body: SafeArea(
+    return Scaffold(
+      body: BlocConsumer<OtpCubit, OtpStates>(
+        listener: (context, state) {
+          if (state is PhoneOtpSuccess) {
+            if (isFromResetPhone) {
+              navigateTo(
+                context,
+                RouteConstant.resetPasswordRoute,
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => OtpDialog(),
+              );
+            }
+          } else if (state is PhoneOtpError) {
+            showToast(state: ToastStates.error, message: state.message);
+          } else if (state is PhoneOtpTimeOut) {
+            showToast(state: ToastStates.error, message: 'Time out');
+          }
+        },
+        builder: (context, state) {
+          return SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(50.0),
               child: Column(
@@ -66,6 +71,7 @@ class VerifyMobileScreen extends StatelessWidget {
                       hintCharacter: '*',
                       length: 6,
                       animationType: AnimationType.fade,
+                      autovalidateMode: AutovalidateMode.always,
                       pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
                         borderRadius: BorderRadius.circular(10),
@@ -86,18 +92,11 @@ class VerifyMobileScreen extends StatelessWidget {
                       ],
                       cursorColor: black,
                       enableActiveFill: true,
-                      controller: otpCubit.textEditingController,
+                      controller: otpCubit.otpController,
                       keyboardType: TextInputType.number,
                       onCompleted: (v) {
-                        isFromResetPhone
-                            ? navigateTo(
-                                context,
-                                RouteConstant.resetPasswordRoute,
-                              )
-                            : showDialog(
-                                context: context,
-                                builder: (BuildContext context) => OtpDialog(),
-                              );
+                        otpCubit.submitOTP();
+                        otpCubit.saveOtpCode(v);
                       },
                       onChanged: (value) {
                         log(value);
@@ -113,17 +112,24 @@ class VerifyMobileScreen extends StatelessWidget {
                         child: CustomButton(
                           text: 'التالي',
                           onPressed: () {
-                            if (isFromResetPhone) {
-                              navigateTo(
-                                context,
-                                RouteConstant.resetPasswordRoute,
-                              );
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) => OtpDialog(),
-                              );
-                            }
+                            navigateTo(
+                              context,
+                              RouteConstant.resetPasswordRoute,
+                            );
+
+                            // if (isFromResetPhone) {
+                            //   navigateTo(
+                            //     context,
+                            //     RouteConstant.resetPasswordRoute,
+                            //   );
+                            // } else {
+                            //   otpCubit.sendOtp(
+                            //     phoneNumber:
+                            //         BlocProvider.of<RegisterCubit>(context)
+                            //             .registerPhoneControl
+                            //             .text,
+                            //   );
+                            // }
                           },
                         ),
                       ),
@@ -143,10 +149,19 @@ class VerifyMobileScreen extends StatelessWidget {
                         textColor: mainColor,
                         onPressed: () {
                           if (!otpCubit.isTimerOn) {
-                            otpCubit.verifyNumber(
-                              phoneNumber:
-                                  registerCubit.registerPhoneControl.text,
-                            );
+                            if (isFromResetPhone) {
+                              navigateTo(
+                                context,
+                                RouteConstant.resetPasswordRoute,
+                              );
+                            } else {
+                              otpCubit.sendOtp(
+                                phoneNumber:
+                                    BlocProvider.of<RegisterCubit>(context)
+                                        .registerPhoneControl
+                                        .text,
+                              );
+                            }
                             showDialog(
                               context: context,
                               builder: (BuildContext context) =>
@@ -175,20 +190,20 @@ class VerifyMobileScreen extends StatelessWidget {
                       if (otpCubit.isTimerOn)
                         //todo change timer to 59
                         TimerClass(
-                          5,
+                          seconds:   5,
                           // 59,
-                          const Duration(milliseconds: 1000),
-                          () =>
+                            interval:  const Duration(milliseconds: 1000),
+                            onFinished:   () =>
                               otpCubit.changeFlatButtonText(changeText: false),
-                        )
+                        ),
                     ],
                   ),
                 ],
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

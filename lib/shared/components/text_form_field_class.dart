@@ -1,45 +1,35 @@
 import 'package:flutter/material.dart';
 
 class TextFormFieldClass extends StatelessWidget {
-  //required controller
+
   final TextEditingController controller;
 
-  //validator
+
   final  FormFieldValidator<String>? validator;
 
-  //Hint text
+
   final String? textHint;
   final TextInputAction textInputAction;
 
-  // //Hint color (initial color black)
  final Color hintColor;
  final TextStyle? hintStyle;
  final  TextAlign textAlign;
-  //Text color (initial color black)
  final Color textColor;
 
-  //background color (initial color white)
  final Color backgroundColor;
 
-  // prefix Icon
  final Widget? prefix;
 
-  //Rounded Rectangle Border (initial 15.0)
  final double roundedRectangleBorder;
 
-  //obscure Text
   final bool obscureText;
 
-  //Widget suffix Icon
   final Widget? suffixIcon;
 
-  //Text Input Type (keyboard Type)
   final TextInputType? keyboardType;
 
   final EdgeInsetsGeometry contentPadding;
-
-  //label
- final String? label;
+  final String? label;
  final InputDecoration? decoration;
  final TextStyle? textStyle;
  final StrutStyle? structStyle;

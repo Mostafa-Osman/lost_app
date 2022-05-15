@@ -30,8 +30,8 @@ class OtpDialog extends StatelessWidget {
             text: 'الي الصفحه الرئيسيه',
             fontSize: 20,
           ),
-          TimerClass(5, const Duration(milliseconds: 1000),
-                () => navigateTo(context, RouteConstant.homeLayoutRoute),)
+          TimerClass(seconds:5,interval: const Duration(milliseconds: 1000),
+    onFinished: () => navigateTo(context, RouteConstant.homeLayoutRoute),)
         ],
       ),
     );

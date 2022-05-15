@@ -39,7 +39,7 @@ class UserData {
       email: json['email'] as String,
       phoneNumber: json['phone_number'] as String,
       username: json['username'] as String,
-      token: json['token'] as String,
+      token: json['token'] as String? ??'',
     );
   }
 }

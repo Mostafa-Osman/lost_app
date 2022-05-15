@@ -7,7 +7,7 @@ class TimerClass extends StatelessWidget{
   final int seconds;
   final Duration interval;
   final Function onFinished;
-  const TimerClass( this.seconds, this.interval,this.onFinished);
+  const TimerClass( {required this.seconds,required this.interval,required this.onFinished});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,6 @@ part 'on_boarding_states.dart';
 class OnBoardingCubit extends Cubit<OnBoardingStates> {
   OnBoardingCubit() : super(OnBoardingInitialState());
 
-  static OnBoardingCubit get(BuildContext context) => BlocProvider.of(context);
   String buttonText = 'التالي';
   bool isLastPage = false;
 

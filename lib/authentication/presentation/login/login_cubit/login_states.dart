@@ -7,6 +7,9 @@ class LoginInitialState extends LoginStates {}
 class LoginLoading extends LoginStates {}
 
 class LoginSuccess extends LoginStates {
+  final UserData userData;
+
+  LoginSuccess(this.userData);
 
 }
 
@@ -18,5 +21,3 @@ class LoginError extends LoginStates {
 
 
 class LoginRefreshUi extends LoginStates {}
-
-

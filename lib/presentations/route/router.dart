@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/authentication/data/repository/authentication_repository.dart';
 import 'package:lost_app/authentication/data/repository/authentication_web_service.dart';
+import 'package:lost_app/authentication/presentation/forget_password/screen/enter_phone_number.dart';
+import 'package:lost_app/authentication/presentation/forget_password/screen/reset_password.dart';
 import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
-import 'package:lost_app/authentication/presentation/login/screen/enter_phone_number.dart';
 import 'package:lost_app/authentication/presentation/login/screen/login.dart';
-import 'package:lost_app/authentication/presentation/login/screen/reset_password.dart';
+import 'package:lost_app/authentication/presentation/otp/screen/otp_screen.dart';
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
-import 'package:lost_app/authentication/presentation/verify_mobile/screen/otp_screen.dart';
+import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/presentations/add_person_data/ui/add_person_data.dart';
 import 'package:lost_app/presentations/comment/ui/comment_arguments.dart';
 import 'package:lost_app/presentations/comment/ui/comment_screen.dart';
@@ -26,12 +27,16 @@ import 'package:lost_app/presentations/search/ui/search_screen.dart';
 import 'package:lost_app/presentations/setting/ui/setting.dart';
 
 class AppRouter {
+  late UserPrefs userPrefs;
+
   //Authentication
 
   late AuthenticationRepository authenticationRepository;
   late AuthenticationWebService authenticationWebService;
 
   void initAppSettings() {
+    userPrefs = UserPrefs();
+
     //Authentication init
     authenticationWebService = AuthenticationWebService();
     authenticationRepository = AuthenticationRepository(
@@ -70,7 +75,15 @@ class AppRouter {
       case RouteConstant.resetPasswordRoute:
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
       case RouteConstant.homeLayoutRoute:
-        return MaterialPageRoute(builder: (_) => HomeLayoutScreen());
+        if (userPrefs.isUserLoggedIn()) {
+          return MaterialPageRoute(
+            builder: (_) => HomeLayoutScreen(),
+          );
+        } else {
+          return MaterialPageRoute(
+            builder: (_) => LoginScreen(),
+          );
+        }
       case RouteConstant.addPersonDataRoute:
         return MaterialPageRoute(
           settings: settings,
@@ -114,7 +127,7 @@ class AppRouter {
             final bool arguments = settings.arguments! as bool;
             final isFromResetPhone = arguments;
 
-            return VerifyMobileScreen(isFromResetPhone: isFromResetPhone);
+            return OtpScreen(isFromResetPhone: isFromResetPhone);
           },
         );
       case RouteConstant.replyCommentRoute:

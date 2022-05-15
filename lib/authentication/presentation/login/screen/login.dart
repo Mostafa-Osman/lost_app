@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
 import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
-import 'package:lost_app/data/local/cash_helper.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
-import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
@@ -23,14 +22,9 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: white,
       body: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
-          if (state is LoginSuccess) {
-            CacheHelper.saveData(
-              key: 'token',
-              value: loginCubit.userData.token,
-            ).then((value) {
-              token = loginCubit.userData.token!;
-              navigatorAndFinish(context, RouteConstant.homeLayoutRoute);
-            });
+          if (state is LoginSuccess &&
+              BlocProvider.of<ResetPasswordCubit>(context).isTimerFinished) {
+            navigatorAndFinish(context, RouteConstant.homeLayoutRoute);
           } else if (state is LoginError) {
             showToast(state: ToastStates.error, message: state.message);
           }
@@ -98,10 +92,15 @@ class LoginScreen extends StatelessWidget {
                                           : null,
                                 ),
                                 TextButtonClass(
-                                  onPressed: () => navigateTo(
-                                    context,
-                                    RouteConstant.phoneNumberRoute,
-                                  ),
+                                  onPressed: () {
+                                    BlocProvider.of<ResetPasswordCubit>(context)
+                                        .phoneNumberController
+                                        .clear();
+                                    navigateTo(
+                                      context,
+                                      RouteConstant.phoneNumberRoute,
+                                    );
+                                  },
                                   text: 'هل نسيت كلمه المرور ؟ ',
                                   textColor: lightGrey,
                                 ),

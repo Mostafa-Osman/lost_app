@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/data/local/cash_helper.dart';
+import 'package:lost_app/data/local/pref/routing_pref.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
-import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/smooth_page_indicator_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController boardingController = PageController();
 
   @override
-  Widget build(BuildContext context) {
-    final cubit = OnBoardingCubit.get(context);
+  void initState() {
+    super.initState();
+    RoutingPrefs.setOnBoardingSeen();
+  }
 
-    return BlocConsumer<OnBoardingCubit, OnBoardingStates>(
-      listener: (context, state) {
-        if (cubit.isLastPage) {
-          CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
-            onBoarding = true;
-          });
-        } else {
-          CacheHelper.removeData(key: 'onBoarding').then((value) {
-            onBoarding = false;
-          });
-        }
-      },
+  @override
+  Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<OnBoardingCubit>(context);
+
+    return BlocBuilder<OnBoardingCubit, OnBoardingStates>(
+
       builder: (context, state) {
         return Scaffold(
           body: Align(

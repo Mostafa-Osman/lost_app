@@ -1,6 +1,6 @@
-part of'otp_cubit.dart';
-@immutable
+part of 'otp_cubit.dart';
 
+@immutable
 abstract class OtpStates {}
 
 class VerifyInitialState extends OtpStates {}
@@ -18,4 +18,6 @@ class PhoneOtpError extends OtpStates {
 
 class PhoneOtpTimeOut extends OtpStates {}
 
-class ChangeButtonTextSuccess extends OtpStates {}
+class OtpRefreshUi extends OtpStates {}
+
+class PhonePinCodeNotFilled extends OtpStates {}
