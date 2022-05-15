@@ -12,7 +12,7 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = ProfileCubit.get(context);
-    cubit.setEditPageController();
+    //cubit.setEditPageController();
     return Scaffold(
       appBar: AppBar(
         title:const Padding(
@@ -102,6 +102,7 @@ class EditProfileScreen extends StatelessWidget {
                         controller: cubit.nameController,
                         maxLines: null,
                         fontSize: 18,
+                        textHint: cubit.name,
                         validator: (value) =>
                             value!.isEmpty ? 'من فضلك ادخل الاسم' : null,
                         keyboardType: TextInputType.name,
@@ -117,6 +118,7 @@ class EditProfileScreen extends StatelessWidget {
                         controller: cubit.numberController,
                         suffixIcon: const Icon(Icons.phone),
                         keyboardType: TextInputType.phone,
+                        textHint: cubit.number,
                         validator: (value) => value!.isEmpty
                             ? 'من فضلك ادخل رقم هاتفك'
                             : (value.length != 11)
@@ -135,6 +137,7 @@ class EditProfileScreen extends StatelessWidget {
                       TextFormFieldClass(
                         controller: cubit.emailController,
                         suffixIcon: const Icon(Icons.email),
+                        textHint: cubit.email,
                         validator: (value) =>
                             (value!.isEmpty || !value.contains('@'))
                                 ? 'البريد الالكتروني الذي ادخلته غير صحيح'
@@ -151,7 +154,7 @@ class EditProfileScreen extends StatelessWidget {
                 CustomButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      cubit.setEditPageDetails();
+                      //cubit.setEditPageDetails();
                       Navigator.pop(context);
                     }
                   },

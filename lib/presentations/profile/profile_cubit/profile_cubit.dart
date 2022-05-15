@@ -15,16 +15,16 @@ class ProfileCubit extends Cubit<ProfileStates> {
   final TextEditingController numberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
-  void setEditPageController(){
-    nameController.text = name;
-    numberController.text = number;
-    emailController.text = email;
-    emit(SetEditPageControllerState());
-  }
-  void setEditPageDetails(){
-    name = nameController.text;
-    number = numberController.text;
-    email = emailController.text;
-    emit(SetEditPageDetailsState());
-  }
+  // void setEditPageController(){
+  //   nameController.text = name;
+  //   numberController.text = number;
+  //   emailController.text = email;
+  //   emit(SetEditPageControllerState());
+  // }
+  // void setEditPageDetails(){
+  //   name = nameController.text;
+  //   number = numberController.text;
+  //   email = emailController.text;
+  //   emit(SetEditPageDetailsState());
+  // }
 }
