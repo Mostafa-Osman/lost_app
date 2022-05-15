@@ -12,10 +12,10 @@ class HomeLayoutScreen extends StatelessWidget {
     return BlocConsumer<HomeLayoutCubit, HomeLayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        final cubit = HomeLayoutCubit.get(context);
+        final homeCubit = BlocProvider.of<HomeLayoutCubit>(context);
         return Scaffold(
-          appBar: cubit.appBar[cubit.indexPage],
-          body: cubit.page[cubit.indexPage],
+          appBar: homeCubit.appBar[homeCubit.indexPage],
+          body: homeCubit.page[homeCubit.indexPage],
 
           floatingActionButton: FloatingActionButton(
             backgroundColor: bottomNavBarBlue,
@@ -55,18 +55,18 @@ class HomeLayoutScreen extends StatelessWidget {
                               iconSize: 10,
                               highlightColor: black,
                               icon: SvgPicture.asset('assets/icons/account.svg',
-                                  color: cubit.bottomNavBarAccColor,),
+                                  color: homeCubit.bottomNavBarAccColor,),
                               onPressed: null,
                             ),
                             TextClass(
                               text: 'حسابي',
-                              textColor: cubit.bottomNavBarAccColor,
+                              textColor: homeCubit.bottomNavBarAccColor,
                               fontSize: 15,
                             ),
                           ],
                         ),
                       ),
-                      onTap: () => cubit.changeBottomNavBarIndexAndColor(),
+                      onTap: () => homeCubit.changeBottomNavBarIndexAndColor(),
                     ),
                   ),
                   const SizedBox(
@@ -81,18 +81,18 @@ class HomeLayoutScreen extends StatelessWidget {
                             IconButton(
                               iconSize: 10,
                               icon: SvgPicture.asset('assets/icons/home.svg',
-                                  color: cubit.bottomNavBarHomeColor,),
+                                  color: homeCubit.bottomNavBarHomeColor,),
                               onPressed: null,
                             ),
                             TextClass(
                               text: 'الرئيسيه',
-                              textColor: cubit.bottomNavBarHomeColor,
+                              textColor: homeCubit.bottomNavBarHomeColor,
                               fontSize: 15,
                             ),
                           ],
                         ),
                       ),
-                      onPressed: ()=> cubit.changeBottomNavBarIndexAndColor(),
+                      onPressed: ()=> homeCubit.changeBottomNavBarIndexAndColor(),
 
 
                     ),

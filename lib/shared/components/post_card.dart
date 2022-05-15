@@ -15,7 +15,7 @@ class PostCard extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
           child: Column(
             children: [
               Material(
