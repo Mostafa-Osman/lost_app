@@ -16,7 +16,6 @@ class HomeLayoutScreen extends StatelessWidget {
         return Scaffold(
           appBar: homeCubit.appBar[homeCubit.indexPage],
           body: homeCubit.page[homeCubit.indexPage],
-
           floatingActionButton: FloatingActionButton(
             backgroundColor: bottomNavBarBlue,
             //Floating action button on Scaffold
@@ -66,7 +65,7 @@ class HomeLayoutScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onTap: () => homeCubit.changeBottomNavBarIndexAndColor(),
+                      onTap: () => homeCubit.changeBottomNavBarIndexAndColor(0),
                     ),
                   ),
                   const SizedBox(
@@ -92,7 +91,7 @@ class HomeLayoutScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onPressed: ()=> homeCubit.changeBottomNavBarIndexAndColor(),
+                      onPressed: ()=> homeCubit.changeBottomNavBarIndexAndColor(1),
 
 
                     ),
