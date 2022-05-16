@@ -111,7 +111,13 @@ class LoginScreen extends StatelessWidget {
                                   onPressed: () {
                                     if (loginCubit.formKey.currentState!
                                         .validate()) {
-                                      loginCubit.login();
+                                      BlocProvider.of<LoginCubit>(context)
+                                          .login(
+                                        phone:
+                                            loginCubit.loginPhoneControl.text,
+                                        password: loginCubit
+                                            .loginPasswordControl.text,
+                                      );
                                     }
                                   },
                                   text: 'تسجيل الدخول',

@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
-import 'package:lost_app/authentication/presentation/otp/verify_cubit/otp_cubit.dart';
+import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -31,9 +33,10 @@ class PhoneNumberScreen extends StatelessWidget {
                 RouteConstant.otpRoute,
                 true,
               );
-              // BlocProvider.of<OtpCubit>(context).sendOtp(
-              //   phoneNumber: resetPasswordCubit.phoneNumberController.text,
-              // );
+              log('mostafa :${resetPasswordCubit.phoneNumberController.text}');
+              BlocProvider.of<OtpCubit>(context).sendOtp(
+                phoneNumber: resetPasswordCubit.phoneNumberController.text,
+              );
             } else {
               showToast(
                 message: 'هذا الرقم ليس لديه حساب',
@@ -98,7 +101,8 @@ class PhoneNumberScreen extends StatelessWidget {
                         onPressed: () {
                           if (resetPasswordCubit.phoneNumberFormKey.currentState!
                               .validate()) {
-                            resetPasswordCubit.verifyPhoneNumber();
+                            resetPasswordCubit.verifyPhoneNumber(phoneNumber: resetPasswordCubit
+                                .phoneNumberController.text,);
                           }
                         },
                       ),

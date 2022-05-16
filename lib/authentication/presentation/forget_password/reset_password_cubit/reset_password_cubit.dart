@@ -11,7 +11,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   ResetPasswordCubit(this.loginRepository) : super(ResetPasswordInitial());
   AuthenticationRepository loginRepository;
   final TextEditingController phoneNumberController =
-      TextEditingController(text: '');
+      TextEditingController();
   final TextEditingController resetPasswordControl = TextEditingController();
   final TextEditingController resetConfirmPasswordControl =
       TextEditingController();
@@ -23,15 +23,13 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   String? otpCode;
   bool isTimerFinished = true;
 
-  Future<void> verifyPhoneNumber() async {
+  Future<void> verifyPhoneNumber({required String phoneNumber}) async {
     emit(VerifyPhoneNumberLoading());
     try {
       isVerifyPhoneNumber = await loginRepository.verifyPhoneNumber(
-        phone: phoneNumberController.text,
+        phone: phoneNumber,
       );
       log(isVerifyPhoneNumber.toString());
-
-      phoneNumberController.clear();
       emit(VerifyPhoneNumberSuccess());
     } catch (e, s) {
       log(e.toString(), stackTrace: s);

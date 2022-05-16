@@ -10,13 +10,13 @@ class AuthenticationRepository {
     required String username,
     required String phone,
     required String password,
-    required String email,
+     String? email,
   }) async {
     final data = await registerWebService.register(
       username: username,
       phone: phone,
       password: password,
-      email: email,
+      email: email??'',
     );
 
     return UserData.fromJson(data['data'] as Map<String, dynamic>);

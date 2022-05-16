@@ -16,13 +16,15 @@ class LoginCubit extends Cubit<LoginStates> {
 
   late UserData userData;
   bool isVisibility = true;
-  Future<void> login() async {
+  Future<void> login({required String phone,required String password}) async {
     emit(LoginLoading());
     try {
-
+      log('*phone:* ${phone}');
+      log('*password:* ${password}');
       userData= await loginRepository.login(
-        password:loginPasswordControl.text,
-        phone:loginPhoneControl.text,
+        phone:phone,
+        password:password,
+
       );
       await UserPrefs().setUserToken(userData.token!);
 
@@ -38,8 +40,9 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoginRefreshUi());
   }
 
-  void setPhoneAndPassword({required String phone,required String password}){
-    loginPhoneControl.text=phone;
-    loginPasswordControl.text=password;
-  }
+  // void setPhoneAndPassword({required String phone,required String password}){
+  //   loginPhoneControl.text=phone;
+  //   loginPasswordControl.text=password;
+  //   emit(LoginRefreshUi());
+  // }
 }

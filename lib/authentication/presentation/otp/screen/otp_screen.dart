@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/authentication/presentation/otp/verify_cubit/otp_cubit.dart';
+import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
+import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/widgets/otp_dialog.dart';
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
@@ -24,26 +25,35 @@ class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final otpCubit = BlocProvider.of<OtpCubit>(context);
+    final registerCubit = BlocProvider.of<RegisterCubit>(context);
     return Scaffold(
       body: BlocConsumer<OtpCubit, OtpStates>(
         listener: (context, state) {
-          if (state is PhoneOtpSuccess) {
-            if (isFromResetPhone) {
-              navigateTo(
-                context,
-                RouteConstant.resetPasswordRoute,
-              );
-            } else {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => OtpDialog(),
-              );
-            }
-          } else if (state is PhoneOtpError) {
-            showToast(state: ToastStates.error, message: state.message);
-          } else if (state is PhoneOtpTimeOut) {
-            showToast(state: ToastStates.error, message: 'Time out');
-          }
+          // if (state is PhoneOtpLoading) {
+          //   const Center(
+          //     child: CircularProgressIndicator(),
+          //   );
+          // } else if (state is PhoneOtpError) {
+          //   showToast(state: ToastStates.error, message: state.message);
+          // } else if (state is PhoneOtpTimeOut) {
+          //   showToast(state: ToastStates.error, message: 'Time out');
+          // } else if (state is PhoneOtpSuccess) {
+          //   if (isFromResetPhone) {
+          //     navigateTo(
+          //       context,
+          //       RouteConstant.resetPasswordRoute,
+          //     );
+          //   } else {
+          //     BlocProvider.of<LoginCubit>(context).login(
+          //       password: registerCubit.registerPasswordControl.text,
+          //       phone: registerCubit.registerPhoneControl.text,
+          //     );
+          //     showDialog(
+          //       context: context,
+          //       builder: (BuildContext context) => OtpDialog(),
+          //     );
+          //   }
+          // }
         },
         builder: (context, state) {
           return SafeArea(
@@ -64,43 +74,46 @@ class OtpScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 50),
                   //pin code design
-                  Form(
-                    key: otpCubit.formKey,
-                    child: PinCodeTextField(
-                      appContext: context,
-                      hintCharacter: '*',
-                      length: 6,
-                      animationType: AnimationType.fade,
-                      autovalidateMode: AutovalidateMode.always,
-                      pinTheme: PinTheme(
-                        shape: PinCodeFieldShape.box,
-                        borderRadius: BorderRadius.circular(10),
-                        fieldHeight: 50,
-                        fieldWidth: 43,
-                        inactiveColor: grey,
-                        selectedFillColor: mainColor,
-                        selectedColor: grey,
-                        activeFillColor: white,
-                        inactiveFillColor: white,
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Form(
+                      key: otpCubit.formKey,
+                      child: PinCodeTextField(
+                        appContext: context,
+                        hintCharacter: '*',
+                        length: 6,
+                        animationType: AnimationType.fade,
+                        autovalidateMode: AutovalidateMode.always,
+                        pinTheme: PinTheme(
+                          shape: PinCodeFieldShape.box,
+                          borderRadius: BorderRadius.circular(10),
+                          fieldHeight: 50,
+                          fieldWidth: 43,
+                          inactiveColor: grey,
+                          selectedFillColor: mainColor,
+                          selectedColor: grey,
+                          activeFillColor: white,
+                          inactiveFillColor: white,
+                        ),
+                        boxShadows: [
+                          BoxShadow(
+                            offset: const Offset(0, 1),
+                            color: lightGrey,
+                            blurRadius: 10,
+                          )
+                        ],
+                        cursorColor: black,
+                        enableActiveFill: true,
+                        controller: otpCubit.otpController,
+                        keyboardType: TextInputType.number,
+                        onCompleted: (v) {
+                          otpCubit.submitOTP();
+                          otpCubit.saveOtpCode(v);
+                        },
+                        onChanged: (value) {
+                          log(value);
+                        },
                       ),
-                      boxShadows: [
-                        BoxShadow(
-                          offset: const Offset(0, 1),
-                          color: lightGrey,
-                          blurRadius: 10,
-                        )
-                      ],
-                      cursorColor: black,
-                      enableActiveFill: true,
-                      controller: otpCubit.otpController,
-                      keyboardType: TextInputType.number,
-                      onCompleted: (v) {
-                        otpCubit.submitOTP();
-                        otpCubit.saveOtpCode(v);
-                      },
-                      onChanged: (value) {
-                        log(value);
-                      },
                     ),
                   ),
                   Expanded(
@@ -112,24 +125,26 @@ class OtpScreen extends StatelessWidget {
                         child: CustomButton(
                           text: 'التالي',
                           onPressed: () {
-                            navigateTo(
-                              context,
-                              RouteConstant.resetPasswordRoute,
-                            );
-
-                            // if (isFromResetPhone) {
-                            //   navigateTo(
-                            //     context,
-                            //     RouteConstant.resetPasswordRoute,
-                            //   );
-                            // } else {
-                            //   otpCubit.sendOtp(
-                            //     phoneNumber:
-                            //         BlocProvider.of<RegisterCubit>(context)
-                            //             .registerPhoneControl
-                            //             .text,
-                            //   );
-                            // }
+                            //todo step:1 check otp that user add it with otp in firebase true or not
+                            //todo delete it after finish step: 1
+                            if (isFromResetPhone) {
+                              navigateTo(
+                                context,
+                                RouteConstant.resetPasswordRoute,
+                              );
+                            } else {
+                              log('************${registerCubit.registerPhoneControl.text}');
+                              log('************${registerCubit.registerPasswordControl.text}');
+                              BlocProvider.of<LoginCubit>(context).login(
+                                phone: registerCubit.registerPhoneControl.text,
+                                password:
+                                    registerCubit.registerPasswordControl.text,
+                              );
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => OtpDialog(),
+                              );
+                            }
                           },
                         ),
                       ),
@@ -190,10 +205,10 @@ class OtpScreen extends StatelessWidget {
                       if (otpCubit.isTimerOn)
                         //todo change timer to 59
                         TimerClass(
-                          seconds:   5,
+                          seconds: 5,
                           // 59,
-                            interval:  const Duration(milliseconds: 1000),
-                            onFinished:   () =>
+                          interval: const Duration(milliseconds: 1000),
+                          onFinished: () =>
                               otpCubit.changeFlatButtonText(changeText: false),
                         ),
                     ],

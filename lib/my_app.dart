@@ -6,7 +6,7 @@ import 'package:lost_app/authentication/data/repository/authentication_repositor
 import 'package:lost_app/authentication/data/repository/authentication_web_service.dart';
 import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
 import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
-import 'package:lost_app/authentication/presentation/otp/verify_cubit/otp_cubit.dart';
+import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/presentations/add_person_data/add_person_cubit/add_person_cubit.dart';

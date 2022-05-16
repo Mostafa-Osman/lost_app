@@ -23,18 +23,15 @@ class ResetPasswordScreen extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is ResetPasswordSuccess) {
-          BlocProvider.of<LoginCubit>(context).setPhoneAndPassword(
-            phone: resetPasswordCubit.phoneNumberController.text,
-            password: resetPasswordCubit.resetPasswordControl.text,
-          );
           BlocProvider.of<ResetPasswordCubit>(context)
               .checkTimerCanceled(status: false);
-          BlocProvider.of<LoginCubit>(context).login();
+
+          BlocProvider.of<LoginCubit>(context).login(   phone: resetPasswordCubit.resetPasswordControl.text,
+            password: resetPasswordCubit.phoneNumberController.text,);
           showDialog(
             context: context,
             builder: (BuildContext context) => const ResetPasswordDialog(),
           );
-
         } else if (state is ResetPasswordError) {
           showToast(state: ToastStates.error, message: state.message);
         }
@@ -57,13 +54,13 @@ class ResetPasswordScreen extends StatelessWidget {
                       children: [
                         //  text password
                         const TextClass(
-                            text: 'كلمه المرور الجديده', fontSize: 20,),
+                          text: 'كلمه المرور الجديده', fontSize: 20,),
                         // Text form field to enter password
                         TextFormFieldClass(
                           textHint: 'ادخل كلمه المرور الجديده',
                           controller: resetPasswordCubit.resetPasswordControl,
                           obscureText:
-                              resetPasswordCubit.resetPasswordVisibility,
+                          resetPasswordCubit.resetPasswordVisibility,
                           textInputAction: TextInputAction.next,
                           suffixIcon: IconButton(
                             onPressed: () =>
@@ -72,11 +69,12 @@ class ResetPasswordScreen extends StatelessWidget {
                                 ? const Icon(Icons.visibility)
                                 : const Icon(Icons.visibility_off),
                           ),
-                          validator: (value) => value!.isEmpty
+                          validator: (value) =>
+                          value!.isEmpty
                               ? 'من فضلك ادخل كلمه المرور'
                               : (value.length < 8)
-                                  ? 'كلمه المرور اقل من 8 احرف'
-                                  : null,
+                              ? 'كلمه المرور اقل من 8 احرف'
+                              : null,
                         ),
                         // Sized Box with height 20
                         const SizedBox(height: 20),
@@ -89,24 +87,26 @@ class ResetPasswordScreen extends StatelessWidget {
                         TextFormFieldClass(
                           textHint: ' اعد تأكيد ادخل كلمه المرور الجديده',
                           controller:
-                              resetPasswordCubit.resetConfirmPasswordControl,
+                          resetPasswordCubit.resetConfirmPasswordControl,
                           obscureText:
-                              resetPasswordCubit.resetConfirmPasswordVisibility,
+                          resetPasswordCubit.resetConfirmPasswordVisibility,
                           suffixIcon: IconButton(
-                            onPressed: () => resetPasswordCubit
-                                .changeResetConfirmVisibility(),
+                            onPressed: () =>
+                                resetPasswordCubit
+                                    .changeResetConfirmVisibility(),
                             icon: resetPasswordCubit
-                                    .resetConfirmPasswordVisibility
+                                .resetConfirmPasswordVisibility
                                 ? const Icon(Icons.visibility)
                                 : const Icon(Icons.visibility_off),
                           ),
-                          validator: (value) => value!.isEmpty
+                          validator: (value) =>
+                          value!.isEmpty
                               ? 'من فضلك اعد ادخال كلمه المرور'
                               : (value !=
-                                      resetPasswordCubit
-                                          .resetPasswordControl.text)
-                                  ? 'كلمه المرور غير متطابق'
-                                  : null,
+                              resetPasswordCubit
+                                  .resetPasswordControl.text)
+                              ? 'كلمه المرور غير متطابق'
+                              : null,
                         ),
                       ],
                     ),
@@ -133,10 +133,11 @@ class ResetPasswordScreen extends StatelessWidget {
                   TextButtonClass(
                     text: 'لست مصطفي عثمان؟',
                     textColor: lightGrey,
-                    onPressed: () => navigatorAndFinish(
-                      context,
-                      RouteConstant.phoneNumberRoute,
-                    ),
+                    onPressed: () =>
+                        navigatorAndFinish(
+                          context,
+                          RouteConstant.phoneNumberRoute,
+                        ),
                   ),
                 ],
               ),

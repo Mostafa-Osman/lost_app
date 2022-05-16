@@ -19,6 +19,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
   final registerPasswordControl = TextEditingController();
   final registerConfirmPasswordControl = TextEditingController();
 
+
   Future<void> register() async {
     emit(RegisterLoading());
     try {
@@ -42,6 +43,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
     isVisibility = !isVisibility;
     emit(RegisterRefreshUi());
   }
+
+  void setLoginData() {
+    isVisibility = !isVisibility;
+    emit(RegisterRefreshUi());
+  }
+
 
   void confirmVisibilityPassword() {
     confirmNotVisible = !confirmNotVisible;

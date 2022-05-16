@@ -24,32 +24,39 @@ class OtpCubit extends Cubit<OtpStates> {
   Future<void> sendOtp({required String phoneNumber}) async {
     otpCode = '';
     emit(PhoneOtpLoading());
-    log('number otp:***$phoneNumber');
+    log('number otp:+2$phoneNumber');
     await auth.verifyPhoneNumber(
       phoneNumber: '+2$phoneNumber',
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        await auth.signInWithCredential(credential).then((value) {
-          log('otp send successfully ');
-          emit(PhoneOtpSuccess());
-        });
-      },
-      verificationFailed: (FirebaseAuthException exception) {
-        log('otp send Fail');
-        log(exception.toString());
-
-        emit(PhoneOtpError(exception.toString()));
-      },
-      codeSent: (String verificationID, int? reSendToken) {
-        verificationId = verificationID;
-        resendToken = resendToken;
-      },
-      codeAutoRetrievalTimeout: (String verificationID) {
-        log('otp send time out');
-        emit(PhoneOtpTimeOut());
-      },
-      timeout: const Duration(seconds: 59),
+      verificationCompleted: verificationCompleted,
+      verificationFailed: verificationFailed,
+      codeSent: onCodeSent,
+      codeAutoRetrievalTimeout:onCodeAutoRetrievalError ,
+      timeout: const Duration(seconds: 120),
       forceResendingToken: resendToken,
     );
+  }
+
+  void onCodeSent(String verificationID, int? reSendToken) {
+    verificationId = verificationID;
+    resendToken = resendToken;
+  }
+
+  void verificationFailed(FirebaseAuthException exception) {
+    log('otp send Fail',error: exception);
+    emit(PhoneOtpError(exception.toString()));
+  }
+
+  void onCodeAutoRetrievalError(String verificationID) {
+    log('otp send time out');
+    emit(PhoneOtpTimeOut());
+  }
+  Future<void> verificationCompleted(PhoneAuthCredential credential) async {
+    try {
+      await auth.signInWithCredential(credential);
+    } catch (e) {
+      log('otp send successfully ');
+      emit(PhoneOtpSuccess());
+    }
   }
 
   Future<void> submitOTP() async {
