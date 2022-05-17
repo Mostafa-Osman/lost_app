@@ -5,7 +5,8 @@ class RouteConstant {
   static const String loginRoute = '/login';
   static const String phoneNumberRoute = '/phoneNumber';
   static const String resetPasswordRoute = '/resetPassword';
-  static const String homeLayoutRoute = '/home';
+  static const String homeLayoutRoute = '/homeLayout';
+  static const String homeRoute = '/home';
   static const String addPersonDataRoute = '/addPersonData';
   static const String commentRoute = '/commentScreen';
   static const String notificationRoute = '/notification';

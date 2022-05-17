@@ -1,16 +1,14 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:lost_app/presentations/comment/ui/comment_arguments.dart';
 import 'package:lost_app/shared/components/comment_card.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class ReplyCommentScreen extends StatelessWidget {
-  final CommentArguments details;
   final TextEditingController commentController = TextEditingController();
-
-  ReplyCommentScreen({required this.details});
+  final bool autofocus;
+  ReplyCommentScreen({required this.autofocus});
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +81,7 @@ class ReplyCommentScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(right: 15, left: 15),
                         child: TextFormFieldClass(
-                          autofocus: details.autofocus,
+                          autofocus: autofocus,
                           controller: commentController,
                           roundedRectangleBorder: 6,
                           textHint: 'اكتب تعليقا ...',

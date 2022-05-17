@@ -75,7 +75,7 @@ class ProfileClass extends StatelessWidget {
                       ],
                     ),
                   ),
-                  PostCard(),
+                  //PostCard(),
                 ],
               ),
             ),

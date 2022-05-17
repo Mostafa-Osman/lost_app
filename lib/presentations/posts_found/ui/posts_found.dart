@@ -92,7 +92,7 @@ class PostsFoundScreen extends StatelessWidget {
                       );
                     },),
                const SizedBox(height: 30),
-                PostCard(),
+                //PostCard(),
               ],
             ),
           ),

@@ -10,10 +10,14 @@ import 'package:lost_app/authentication/presentation/otp/screen/otp_screen.dart'
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
+import 'package:lost_app/data/repositories/home/home_repistory.dart';
+import 'package:lost_app/data/web_services/home_web_service.dart';
 import 'package:lost_app/presentations/add_person_data/ui/add_person_data.dart';
-import 'package:lost_app/presentations/comment/ui/comment_arguments.dart';
-import 'package:lost_app/presentations/comment/ui/comment_screen.dart';
-import 'package:lost_app/presentations/comment/ui/reply_comment_screen.dart';
+import 'package:lost_app/presentations/home/screen/post_details_screen.dart';
+import 'package:lost_app/presentations/home/screen/reply_comment_screen.dart';
+import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
+import 'package:lost_app/presentations/home/screen/home_screen.dart';
+import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
 import 'package:lost_app/presentations/home_layout/ui/home_layout.dart';
 import 'package:lost_app/presentations/notification/ui/notification.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
@@ -34,6 +38,10 @@ class AppRouter {
   late AuthenticationRepository authenticationRepository;
   late AuthenticationWebService authenticationWebService;
 
+  // home page
+  late HomeRepository homeRepository;
+  late HomeWebService homeWebService;
+
   void initAppSettings() {
     userPrefs = UserPrefs();
 
@@ -42,6 +50,10 @@ class AppRouter {
     authenticationRepository = AuthenticationRepository(
       authenticationWebService,
     );
+
+    // home init
+    homeWebService = HomeWebService();
+    homeRepository = HomeRepository(homeWebService);
   }
 
   Route? generateRoute(RouteSettings settings) {
@@ -75,6 +87,9 @@ class AppRouter {
       case RouteConstant.resetPasswordRoute:
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
       case RouteConstant.homeLayoutRoute:
+        return MaterialPageRoute(
+          builder: (_) => HomeLayoutScreen(),
+        );
         if (userPrefs.isUserLoggedIn()) {
           return MaterialPageRoute(
             builder: (_) => HomeLayoutScreen(),
@@ -99,10 +114,12 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final CommentArguments arguments =
-                settings.arguments! as CommentArguments;
-            final CommentArguments details = arguments;
-            return CommentScreen(details: details);
+            final  arguments =
+                settings.arguments! as List;
+            return BlocProvider(
+              create: (context) => HomeCubit(homeRepository)..getPostData(arguments[1] as int),
+              child: PostDetailsScreen(autofocus: arguments[0] as bool, postId: arguments[1] as int,),
+            );
           },
         );
 
@@ -134,10 +151,9 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final CommentArguments arguments =
-                settings.arguments! as CommentArguments;
-            final details = arguments;
-            return ReplyCommentScreen(details: details);
+            final arguments =
+                settings.arguments! as bool;
+            return ReplyCommentScreen(autofocus: arguments,);
           },
         );
 

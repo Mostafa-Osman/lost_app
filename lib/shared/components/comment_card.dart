@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/presentations/comment/ui/comment_arguments.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
@@ -40,7 +39,7 @@ class CommentCard extends StatelessWidget {
                     : navigateWithArgument(
                         context,
                         RouteConstant.replyCommentRoute,
-                        CommentArguments(autofocus: true),
+                        true,
                       ),
                 fontSize: 12,
               ),
@@ -51,7 +50,7 @@ class CommentCard extends StatelessWidget {
                     : navigateWithArgument(
                   context,
                   RouteConstant.replyCommentRoute,
-                  CommentArguments(),
+                  false,
                 ),
                 fontSize: 12,
               ),

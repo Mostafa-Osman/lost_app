@@ -3,106 +3,78 @@ class HomeModel {
     required this.posts,
     required this.status,
   });
-  late final List<Posts> posts;
+  late final List<HomePost> posts;
   late final int status;
 
   HomeModel.fromJson(Map<String, dynamic> json){
-    posts = List.from(json['Posts'] as List<dynamic>).map((e)=>Posts.fromJson(e as Map<String, dynamic>)).toList();
+    posts = List.from(json['posts'] as List<dynamic>).map((e)=>HomePost.fromJson(e as Map<String, dynamic>)).toList();
     status = json['status'] as int;
   }
 
-  // Map<String, dynamic> toJson() {
-  //   final _data = <String, dynamic>{};
-  //   _data['Posts'] = Posts.map((e )=>e.toJson()).toList();
-  //   _data['status'] = status;
-  //   return _data;
-  // }
 }
 
-class Posts {
-  Posts({
-    required this.comments,
+class HomePost {
+  HomePost({
+    required this.date,
     required this.details,
-    required this.foundPersonData,
+    required this.personData,
     required this.isLost,
     required this.isOwner,
     required this.isSaved,
     required this.userId,
     required this.userPhoto,
     required this.username,
+    required this.userPhoneNumber,
   });
-  late final List<dynamic> comments;
+  late final String date;
   late final String details;
-  late final FoundPersonData? foundPersonData;
+  late final PersonData? personData;
   late final bool isLost;
   late final bool isOwner;
-  late final bool? isSaved;
+  late bool isSaved;
   late final int userId;
+  late final int postId;
   late final String userPhoto;
   late final String username;
+  late final String userPhoneNumber;
 
-  Posts.fromJson(Map<String, dynamic> json){
-    comments = List.castFrom<dynamic, dynamic>(json['Comments'] as List<dynamic>);
+  HomePost.fromJson(Map<String, dynamic> json){
+    date = json['date'] as String;
     details = json['details'] as String;
-    foundPersonData = json['found_person_data'] as FoundPersonData;
+    personData =  PersonData.fromJson(json['person_data'] as Map<String, dynamic>);
     isLost = json['is_lost'] as bool;
     isOwner = json['is_owner'] as bool;
     isSaved = json['is_saved'] as bool;
     userId = json['user_id'] as int;
+    postId = json['post_id'] as int;
     userPhoto = json['user_photo'] as String;
     username = json['username'] as String;
+    userPhoneNumber = json['user_phone_number'] as String;
   }
 
-  // Map<String, dynamic> toJson() {
-  //   final _data = <String, dynamic>{};
-  //   _data['Comments'] = comments;
-  //   _data['details'] = details;
-  //   _data['found_person_data'] = foundPersonData;
-  //   _data['is_lost'] = isLost;
-  //   _data['is_owner'] = isOwner;
-  //   _data['is_saved'] = isSaved;
-  //   _data['user_id'] = userId;
-  //   _data['user_photo'] = userPhoto;
-  //   _data['username'] = username;
-  //   return _data;
-  // }
 }
 
-class FoundPersonData {
-  FoundPersonData({
+class PersonData {
+  PersonData({
     required this.address,
     required this.age,
-    required this.extraPhotos,
     required this.gender,
     required this.mainPhoto,
     required this.personName,
   });
   late final Address address;
   late final int age;
-  late final List<dynamic> extraPhotos;
   late final String gender;
   late final String mainPhoto;
   late final String personName;
 
-  FoundPersonData.fromJson(Map<String, dynamic> json){
+  PersonData.fromJson(Map<String, dynamic> json){
     address = Address.fromJson(json['address'] as Map<String, dynamic>);
     age = json['age'] as int;
-    extraPhotos = List.castFrom<dynamic, dynamic>(json['extra_photos'] as List<dynamic>);
     gender = json['gender'] as String;
     mainPhoto = json['main_photo'] as String;
     personName = json['person_name'] as String;
   }
-
-  // Map<String, dynamic> toJson() {
-  //   final _data = <String, dynamic>{};
-  //   _data['address'] = address.toJson();
-  //   _data['age'] = age;
-  //   _data['extra_photos'] = extraPhotos;
-  //   _data['gender'] = gender;
-  //   _data['main_photo'] = mainPhoto;
-  //   _data['person_name'] = personName;
-  //   return _data;
-  // }
 }
 
 class Address {
@@ -121,11 +93,4 @@ class Address {
     district = json['district'] as String;
   }
 
-  // Map<String, dynamic> toJson() {
-  //   final _data = <String, dynamic>{};
-  //   _data['address_details'] = addressDetails;
-  //   _data['city'] = city;
-  //   _data['district'] = district;
-  //   return _data;
-  // }
 }
