@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/presentations/comment/ui/comment_arguments.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
@@ -7,78 +6,11 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class CommentCard extends StatelessWidget {
- final  bool reply ;
-  const CommentCard({this.reply = false,});
+  final bool reply;
 
-  Widget replyWidget(BuildContext context, Size size) {
-    if (!reply) {
-      return Column(
-        children: [
-          Row(
-            children: [
-              const SizedBox(width: 50),
-              Expanded(
-                child: TextClass(
-                  text:
-                      'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
-                  maxLines: 3,
-                  fontSize: size.width >= 500 ? 20 : size.width / 24,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              TextButtonClass(
-                text: 'الرد',
-                onPressed: () => reply
-                    ? null
-                    : navigateWithArgument(
-                        context,
-                        RouteConstant.replyCommentRoute,
-                        CommentArguments(autofocus: true),
-                      ),
-                fontSize: 12,
-              ),
-              TextButtonClass(
-                text: 'الردود (3)',
-                onPressed: () => reply
-                    ? null
-                    : navigateWithArgument(
-                  context,
-                  RouteConstant.replyCommentRoute,
-                  CommentArguments(),
-                ),
-                fontSize: 12,
-              ),
-            ],
-          ),
-        ],
-      );
-    }
-    return Column(
-      children: [
-        Row(
-          children: [
-            const SizedBox(width: 50),
-            Expanded(
-              child: TextClass(
-                text:
-                    'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
-                fontSize: size.width >= 500 ? 20 : size.width / 24,
-                textAlign: TextAlign.start,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 20),
-      ],
-    );
-  }
+  const CommentCard({
+    this.reply = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +41,7 @@ class CommentCard extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children:const [
+                        children: const [
                           TextClass(
                             text: 'محمد احمد',
                             textAlign: TextAlign.start,
@@ -134,7 +66,52 @@ class CommentCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 5),
-              replyWidget(context, size),
+              Row(
+                children: [
+                  const SizedBox(width: 50),
+                  Expanded(
+                    child: TextClass(
+                      text:
+                          'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
+                      maxLines: 3,
+                      fontSize: size.width >= 500 ? 20 : size.width / 24,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ],
+              ),
+              if (!reply)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextButtonClass(
+                      text: 'الرد',
+                      onPressed: () => reply
+                          ? null
+                          : navigateWithArgument(
+                              context,
+                              RouteConstant.replyCommentRoute,
+                              true,
+                            ),
+                      fontSize: 12,
+                    ),
+                    TextButtonClass(
+                      text: 'الردود (3)',
+                      onPressed: () => reply
+                          ? null
+                          : navigateWithArgument(
+                              context,
+                              RouteConstant.replyCommentRoute,
+                              false,
+                            ),
+                      fontSize: 12,
+                    ),
+                  ],
+                )
+              else
+                const SizedBox(height: 20,),
             ],
           ),
         ),

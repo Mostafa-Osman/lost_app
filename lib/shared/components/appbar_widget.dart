@@ -7,7 +7,7 @@ import 'package:lost_app/shared/styles/color.dart';
 
 class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
   HomePageAppBar({Key? key})
-      : preferredSize = const Size.fromHeight(kToolbarHeight),
+      : preferredSize = const Size.fromHeight(70),
         super(key: key);
   final TextEditingController homeAppBarController = TextEditingController();
 
@@ -21,59 +21,62 @@ class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _HomePageAppBarState extends State<HomePageAppBar> {
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: white,
-      elevation: 0.0,
-      toolbarHeight: 55,
-      title: Container(
-          decoration: const BoxDecoration(
-            color: white,
-            //borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Container(
-              height: 45,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                border: Border.all(
-
-                ),
-              ),
-              child: Material(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: AppBar(
+        backgroundColor: white,
+        elevation: 0.0,
+        toolbarHeight: 55,
+        title: Container(
+            decoration: const BoxDecoration(
+              color: white,
+              //borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                height: 45,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),
+                  border: Border.all(
+
+                  ),
                 ),
-                child: InkWell(
-                  onTap: () => navigateTo(context, RouteConstant.searchRoute),
-                  child:const Padding(
-                    padding:  EdgeInsets.only(top: 5.0, right: 10),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: TextClass(
-                        text: 'البحث...',
-                        textColor: grey,
-                        overflow: TextOverflow.ellipsis,
+                child: Material(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: InkWell(
+                    onTap: () => navigateTo(context, RouteConstant.searchRoute),
+                    child:const Padding(
+                      padding:  EdgeInsets.only(top: 5.0, right: 10),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: TextClass(
+                          text: 'البحث...',
+                          textColor: grey,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
+            ),),
+        leading: Padding(
+          padding: const EdgeInsets.only(right: 15.0),
+          child: IconButton(
+            iconSize: 2,
+            icon: SvgPicture.asset(
+              'assets/icons/notification.svg',
             ),
-          ),),
-      leading: Padding(
-        padding: const EdgeInsets.only(right: 15.0),
-        child: IconButton(
-          iconSize: 2,
-          icon: SvgPicture.asset(
-            'assets/icons/notification.svg',
+            onPressed: () => navigateTo(context, RouteConstant.notificationRoute),
           ),
-          onPressed: () => navigateTo(context, RouteConstant.notificationRoute),
         ),
       ),
     );

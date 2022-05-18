@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/presentations/home/ui/home.dart';
+import 'package:lost_app/presentations/home/screen/home_screen.dart';
 import 'package:lost_app/presentations/profile/ui/profile.dart';
 import 'package:lost_app/shared/components/appbar_widget.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -18,7 +18,7 @@ class HomeLayoutCubit extends Cubit<HomeLayoutStates> {
     1: AccountPageAppBar(),
   };
   Map<int, Widget> page = {
-    0: HomeClass(),
+    0: HomeScreen(),
     1: ProfileClass(),
   };
 
