@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
@@ -13,26 +13,30 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final registerCubit = BlocProvider.of<RegisterCubit>(context);
-
     final otpCubit = BlocProvider.of<OtpCubit>(context);
-    return BlocConsumer<RegisterCubit, RegisterStates>(
+    return BlocConsumer<OtpCubit, OtpStates>(
       listener: (context, state) {
-        if (state is RegisterLoading) {
-          const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (state is RegisterError) {
-          showToast(message: state.message, state: ToastStates.error);
-        } else if (state is RegisterSuccess) {
-          // otpCubit.sendOtp(
-          //   phoneNumber: registerCubit.registerPhoneControl.text,
-          // );
-          registerCubit.setLoginData();
+        if (state is VerifyPhoneIsFoundSuccess && !otpCubit.phoneIsFound.isRegistered) {
+          otpCubit.sendVerifyCode(otpCubit.registerPhoneControl.text);
           navigateWithArgument(
             context,
             RouteConstant.otpRoute,
-            false,
+            [
+              false,
+              otpCubit.registerPhoneControl.text,
+              otpCubit.registerPasswordControl.text
+            ],
+          );
+        } else if (state is VerifyPhoneIsFoundSuccess &&
+            otpCubit.phoneIsFound.isRegistered) {
+          showToast(
+            message: 'هذا الرقم مسجل بالفعل',
+            state: ToastStates.warning,
+          );
+        } else if (state is VerifyPhoneIsFoundError) {
+          showToast(
+            message: 'error',
+            state: ToastStates.error,
           );
         }
       },
@@ -40,8 +44,10 @@ class SubmitButton extends StatelessWidget {
         return CustomButton(
           text: 'إنشاء',
           onPressed: () {
-            if (registerCubit.formKey.currentState!.validate()) {
-              registerCubit.register();
+            if (otpCubit.registerFormKey.currentState!.validate()) {
+              otpCubit.verifyPhoneNumber(
+                phoneNumber: otpCubit.registerPhoneControl.text,
+              );
             }
           },
         );

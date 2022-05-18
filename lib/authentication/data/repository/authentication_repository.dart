@@ -1,5 +1,6 @@
+import 'package:lost_app/authentication/data/model/reset_password_model.dart';
 import 'package:lost_app/authentication/data/model/user_data_model.dart';
-import 'package:lost_app/authentication/data/repository/authentication_web_service.dart';
+import 'package:lost_app/authentication/data/web_services/authentication_web_service.dart';
 
 class AuthenticationRepository {
   AuthenticationWebService registerWebService;
@@ -10,13 +11,13 @@ class AuthenticationRepository {
     required String username,
     required String phone,
     required String password,
-     String? email,
+    String? email,
   }) async {
     final data = await registerWebService.register(
       username: username,
       phone: phone,
       password: password,
-      email: email??'',
+      email: email ?? '',
     );
 
     return UserData.fromJson(data['data'] as Map<String, dynamic>);
@@ -34,13 +35,13 @@ class AuthenticationRepository {
     return UserData.fromJson(data['data'] as Map<String, dynamic>);
   }
 
-  Future<bool> verifyPhoneNumber({
+  Future<Data> verifyPhoneNumber({
     required String phone,
   }) async {
     final data = await registerWebService.verifyPhoneNumber(
       phone: phone,
     );
-    return data['Is Registered?'] as bool;
+    return Data.fromJson(data['data'] as Map<String, dynamic>);
   }
 
   Future<String> resetPassword({

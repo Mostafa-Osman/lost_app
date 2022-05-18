@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
+import 'package:lost_app/authentication/data/model/reset_password_model.dart';
 import 'package:lost_app/shared/components/constant.dart';
 
 class AuthenticationWebService {
@@ -9,7 +10,7 @@ class AuthenticationWebService {
     required String username,
     required String phone,
     required String password,
-    required String email,
+    String? email,
   }) async {
     //todo remove it after upload backend to server
 
@@ -23,7 +24,7 @@ class AuthenticationWebService {
     final registerBody = {
       'username': username,
       'phone_number': phone,
-      'email': email,
+      'email': email ?? '',
       'password': password,
       // 'confirm_password': password,
     };
@@ -77,7 +78,6 @@ class AuthenticationWebService {
     }
   }
 
-
   Future<Map<String, dynamic>> verifyPhoneNumber({
     required String phone,
   }) async {
@@ -101,12 +101,12 @@ class AuthenticationWebService {
       headers: headers,
     );
     final data = json.decode(response.body) as Map<String, dynamic>;
-    // if (data['status'] == 200) {
+    if (data['status'] == 200) {
       log(data.toString());
       return data;
-    // } else {
-    //   throw data['message'].toString();
-    // }
+    } else {
+      throw 'error is verifyPhoneNumber AuthenticationWebService ';
+    }
   }
 
   Future<Map<String, dynamic>> resetPassword({
@@ -142,5 +142,4 @@ class AuthenticationWebService {
       throw data['message'].toString();
     }
   }
-
 }

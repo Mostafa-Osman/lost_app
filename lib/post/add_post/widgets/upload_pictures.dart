@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/presentations/add_person_data/add_person_cubit/add_person_cubit.dart';
+import 'package:lost_app/post/add_person_cubit/add_person_cubit.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';

@@ -2,19 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/presentations/add_person_data/add_person_cubit/add_person_cubit.dart';
-import 'package:lost_app/presentations/add_person_data/ui/dropdown_button.dart';
-import 'package:lost_app/presentations/add_person_data/ui/upload_pictures.dart';
+import 'package:lost_app/data/local/cities.dart';
+import 'package:lost_app/post/add_person_cubit/add_person_cubit.dart';
+import 'package:lost_app/post/add_post/widgets/dropdown_button.dart';
+import 'package:lost_app/post/add_post/widgets/upload_pictures.dart';
 
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-
-
 class AddPersonDataScreen extends StatelessWidget {
-
   final TextEditingController personName = TextEditingController();
   final TextEditingController personAge = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -89,24 +87,31 @@ class AddPersonDataScreen extends StatelessWidget {
                     //dropdownButton
                     const TextClass(text: 'النوع', fontSize: 25),
                     DropdownButtonClass(
-                      keyForm:  _genderKey,
+                      keyForm: _genderKey,
                       hintText: 'اختر النوع',
                       validator: (value) =>
                           value == null ? "من فضلك اختر النوع" : null,
                       selectedValue: selectedValue,
-                      items: ['ذكر', 'انثي', 'اخري']
-                          .map((label) => DropdownMenuItem(
-                                value: label,
-                                child: TextClass(text: label),
-                              ),)
+                      items: ['ذكر', 'انثي']
+                          .map(
+                            (label) => DropdownMenuItem(
+                              value: label,
+                              child: TextClass(text: label),
+                            ),
+                          )
                           .toList(),
                     ),
+
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+
                     //location
                     const SizedBox(height: 10),
                     TextClass(text: textPost, fontSize: 25),
                     //dropdownButton for City
                     DropdownButtonClass(
-                      keyForm:  _citiesKey,
+                      keyForm: _citiesKey,
                       hintText: 'اختر المحافظه',
                       validator: (value) =>
                           value == null ? "من فضلك اختر المحافظه" : null,
@@ -127,21 +132,23 @@ class AddPersonDataScreen extends StatelessWidget {
                           value == null ? "من فضلك اختر المنطقه" : null,
                       selectedValue: selectedValue,
                       items: ['حلوان', 'دار السلام', 'اخري']
-                          .map((label) => DropdownMenuItem(
-                                value: label,
-                                child: TextClass(text: label),
-                              ),)
+                          .map(
+                            (label) => DropdownMenuItem(
+                              value: label,
+                              child: TextClass(text: label),
+                            ),
+                          )
                           .toList(),
                     ),
 
                     const SizedBox(height: 10),
-                    // more title details
+                    //    more title details
                     TextFormFieldClass(
                       controller: moreTitleDetails,
                       textHint: 'ادخل باقي تفاصيل العنوان',
                     ),
                     const SizedBox(height: 20),
-                    const    TextClass(
+                    const TextClass(
                       text: 'التفاصيل',
                       fontSize: 25,
                     ),
@@ -157,16 +164,15 @@ class AddPersonDataScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
                       child: CustomButton(
-                          onPressed: () {
-                            if ( _formKey.currentState!.validate() &&
-                                _genderKey.currentState!.validate() &&
-                                _citiesKey.currentState!.validate() &&
-                                _formKey.currentState!.validate()) {
-                              log('ok');
-                            }
-
-                          },
-                          text: "نشر",
+                        onPressed: () {
+                          if (_formKey.currentState!.validate() &&
+                              _genderKey.currentState!.validate() &&
+                              _citiesKey.currentState!.validate() &&
+                              _formKey.currentState!.validate()) {
+                            log('ok');
+                          }
+                        },
+                        text: "نشر",
                       ),
                     ),
                   ],

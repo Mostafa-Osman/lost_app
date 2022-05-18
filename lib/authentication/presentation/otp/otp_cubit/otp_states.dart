@@ -10,6 +10,20 @@ class PhoneOtpLoading extends OtpStates {}
 
 class PhoneOtpSuccess extends OtpStates {}
 
+class PhoneSendOtpLoading extends OtpStates {}
+
+class PhoneAlreadyExistState extends OtpStates {
+
+}
+
+class PhoneVerifyCodeError extends OtpStates {
+  final String message;
+
+  PhoneVerifyCodeError(this.message);
+}
+
+class PhoneOtpSentSuccessfully extends OtpStates {}
+
 class PhoneOtpError extends OtpStates {
   final String message;
 
@@ -21,3 +35,31 @@ class PhoneOtpTimeOut extends OtpStates {}
 class OtpRefreshUi extends OtpStates {}
 
 class PhonePinCodeNotFilled extends OtpStates {}
+
+class PhoneVerificationResendTimer extends OtpStates {}
+class PhoneVerifyOtpLoading extends OtpStates {}
+class PhoneVerifyOtpSuccess extends OtpStates {}
+
+
+////////////////////////////
+class RegisterInitialState extends OtpStates {}
+
+class RegisterLoading extends OtpStates {}
+
+class RegisterSuccess extends OtpStates {}
+
+class RegisterError extends OtpStates {
+  final String message;
+
+  RegisterError({required this.message});
+
+}
+class VerifyPhoneIsFoundLoading extends OtpStates {}
+class VerifyPhoneIsFoundError extends OtpStates {
+  final String message;
+
+  VerifyPhoneIsFoundError( this.message);
+}
+class VerifyPhoneIsFoundSuccess extends OtpStates {}
+
+

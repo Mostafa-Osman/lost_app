@@ -22,7 +22,7 @@ class HomeLayoutScreen extends StatelessWidget {
             onPressed: () {
               navigateTo(context, RouteConstant.postRoute);
             },
-            child: SvgPicture.asset('assets/icons/post.svg', color: white),
+            child: SvgPicture.asset('assets/icons/add_post.svg', color: white),
 
             //icon inside button
           ),

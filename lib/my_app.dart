@@ -3,19 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lost_app/authentication/data/repository/authentication_repository.dart';
-import 'package:lost_app/authentication/data/repository/authentication_web_service.dart';
+import 'package:lost_app/authentication/data/web_services/authentication_web_service.dart';
 import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
 import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
-import 'package:lost_app/presentations/add_person_data/add_person_cubit/add_person_cubit.dart';
+import 'package:lost_app/post/add_person_cubit/add_person_cubit.dart';
 import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/profile/profile_cubit/profile_cubit.dart';
 import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/presentations/search/search_cubit/search_cubit.dart';
 import 'package:lost_app/presentations/setting/setting_cubit/setting_cubit.dart';
+
 
 class MyApp extends StatelessWidget {
   final AppRouter appRoutes;
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
               LoginCubit(AuthenticationRepository(AuthenticationWebService())),
         ),
         BlocProvider(
-          create: (_) => RegisterCubit(
+          create: (_) => OtpCubit(
             AuthenticationRepository(AuthenticationWebService()),
           ),
           child: RegisterScreen(),

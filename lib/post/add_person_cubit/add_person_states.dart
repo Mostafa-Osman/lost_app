@@ -3,6 +3,7 @@ part of'add_person_cubit.dart';
 abstract class PersonDataStates {}
 
 class PersonDataInitialState extends PersonDataStates {}
+class RefreshUi extends PersonDataStates {}
 
 class PictureState extends PersonDataStates {}
 

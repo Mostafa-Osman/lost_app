@@ -17,32 +17,41 @@ class PhoneNumberScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resetPasswordCubit = BlocProvider.of<ResetPasswordCubit>(context);
+
     return Scaffold(
       body: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
         listener: (context, state) {
           if (state is VerifyPhoneNumberLoading) {
             const Center(
-              child: CircularProgressIndicator(color:Colors.blue,strokeWidth: 20.0,),
+              child: CircularProgressIndicator(
+                color: Colors.blue,
+                strokeWidth: 20.0,
+              ),
             );
           } else if (state is VerifyPhoneNumberError) {
             showToast(message: state.message, state: ToastStates.error);
-          } else if (state is VerifyPhoneNumberSuccess){
-            if (resetPasswordCubit.isVerifyPhoneNumber) {
-              navigateWithArgument(
-                context,
-                RouteConstant.otpRoute,
-                true,
-              );
-              log('mostafa :${resetPasswordCubit.phoneNumberController.text}');
-              BlocProvider.of<OtpCubit>(context).sendOtp(
-                phoneNumber: resetPasswordCubit.phoneNumberController.text,
-              );
-            } else {
-              showToast(
-                message: 'هذا الرقم ليس لديه حساب',
-                state: ToastStates.error,
-              );
-            }
+          } else if (state is VerifyPhoneNumberSuccess) {
+            navigateTo(
+              context,
+              RouteConstant.resetPasswordRoute
+
+            );
+            // if (resetPasswordCubit.isVerifyPhoneNumber.isRegistered) {
+            //   navigateWithArgument(
+            //     context,
+            //     RouteConstant.otpRoute,
+            //     [true, '', ''],
+            //   );
+            //   log('mostafa :${resetPasswordCubit.phoneNumberController.text}');
+            //   BlocProvider.of<OtpCubit>(context).sendOtp(
+            //     phoneNumber: resetPasswordCubit.phoneNumberController.text,
+            //   );
+            // } else {
+            //   showToast(
+            //     message: 'هذا الرقم ليس لديه حساب',
+            //     state: ToastStates.error,
+            //   );
+            // }
           }
         },
         builder: (context, state) {
@@ -99,10 +108,13 @@ class PhoneNumberScreen extends StatelessWidget {
                       child: CustomButton(
                         text: 'التالي',
                         onPressed: () {
-                          if (resetPasswordCubit.phoneNumberFormKey.currentState!
+                          if (resetPasswordCubit
+                              .phoneNumberFormKey.currentState!
                               .validate()) {
-                            resetPasswordCubit.verifyPhoneNumber(phoneNumber: resetPasswordCubit
-                                .phoneNumberController.text,);
+                            resetPasswordCubit.verifyPhoneNumber(
+                              phoneNumber:
+                                  resetPasswordCubit.phoneNumberController.text,
+                            );
                           }
                         },
                       ),

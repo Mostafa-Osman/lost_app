@@ -19,8 +19,8 @@ class LoginCubit extends Cubit<LoginStates> {
   Future<void> login({required String phone,required String password}) async {
     emit(LoginLoading());
     try {
-      log('*phone:* ${phone}');
-      log('*password:* ${password}');
+      log('*phone:* $phone');
+      log('*password:* $password');
       userData= await loginRepository.login(
         phone:phone,
         password:password,
