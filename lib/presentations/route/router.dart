@@ -21,11 +21,8 @@ import 'package:lost_app/presentations/notification/ui/notification.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/ui/on_boarding.dart';
 import 'package:lost_app/presentations/posts_found/ui/posts_found.dart';
-import 'package:lost_app/presentations/processing/ui/processing_page.dart';
-import 'package:lost_app/presentations/profile/ui/edit_profile.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/presentations/search/ui/search_screen.dart';
-import 'package:lost_app/presentations/setting/ui/setting.dart';
 
 class AppRouter {
   late UserPrefs userPrefs;
@@ -114,13 +111,9 @@ class AppRouter {
       case RouteConstant.postsFoundRoute:
         return MaterialPageRoute(builder: (_) => PostsFoundScreen());
       case RouteConstant.processingRoute:
-        return MaterialPageRoute(builder: (_) => ProcessingScreen());
-      case RouteConstant.editProfileRoute:
-        return MaterialPageRoute(builder: (_) => EditProfileScreen());
       case RouteConstant.searchRoute:
         return MaterialPageRoute(builder: (_) => SearchScreen());
-      case RouteConstant.settingRoute:
-        return MaterialPageRoute(builder: (_) => SettingScreen());
+
       case RouteConstant.otpRoute:
         return MaterialPageRoute(
           settings: settings,

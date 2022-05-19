@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/presentations/profile/profile_cubit/profile_cubit.dart';
+import 'package:lost_app/profile/profile_cubit/profile_cubit.dart';
 import 'package:lost_app/shared/components/post_card.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';

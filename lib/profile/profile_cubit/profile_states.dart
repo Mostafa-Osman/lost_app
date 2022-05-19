@@ -4,7 +4,7 @@ part of'profile_cubit.dart';
 abstract class ProfileStates {}
 
 class ProfileInitialState extends ProfileStates {}
+class SettingModeIsDarkState extends ProfileStates {}
 
-class SetEditPageControllerState extends ProfileStates {}
 
-class SetEditPageDetailsState extends ProfileStates {}
+

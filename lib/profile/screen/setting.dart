@@ -5,7 +5,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
-import 'package:lost_app/presentations/setting/setting_cubit/setting_cubit.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -14,11 +13,7 @@ import 'package:lost_app/shared/styles/color.dart';
 class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SettingCubit, SettingStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        final cubit = SettingCubit.get(context);
-        return Scaffold(
+    return  Scaffold(
             backgroundColor: white,
             appBar: AppBar(
               backgroundColor: white,
@@ -71,19 +66,19 @@ class SettingScreen extends StatelessWidget {
                       ),
 
                     const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0, bottom: 10),
-                      child: FlutterSwitch(
-                        width: 50,
-                        height: 30,
-                        value: cubit.isDark,
-                        inactiveColor: HexColor('##E2E6ED'),
-                        activeColor: mainColor,
-                        onToggle: (_) {
-                          cubit.changeMode();
-                        },
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 10.0, bottom: 10),
+                    //   child: FlutterSwitch(
+                    //     width: 50,
+                    //     height: 30,
+                    //     value: cubit.isDark,
+                    //     inactiveColor: HexColor('##E2E6ED'),
+                    //     activeColor: mainColor,
+                    //     onToggle: (_) {
+                    //       cubit.changeMode();
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
                 DividerClass(color: HexColor('#D8D8D8'), thickness: 0.8),
@@ -113,8 +108,8 @@ class SettingScreen extends StatelessWidget {
               ],
             ),
           ),
-        );
-      },
+
+
     );
   }
 }

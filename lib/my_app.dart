@@ -12,10 +12,11 @@ import 'package:lost_app/authentication/presentation/register/screen/register_sc
 import 'package:lost_app/post/add_person_cubit/add_person_cubit.dart';
 import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
-import 'package:lost_app/presentations/profile/profile_cubit/profile_cubit.dart';
 import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/presentations/search/search_cubit/search_cubit.dart';
-import 'package:lost_app/presentations/setting/setting_cubit/setting_cubit.dart';
+import 'package:lost_app/shared/components/comment_card.dart';
+
+import 'data/web_services/home_web_service.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -23,8 +24,7 @@ class MyApp extends StatelessWidget {
   final String? initialRoute;
   final addPersonDataBloc = AddPersonDataCubit();
   final searchCubit = SearchCubit();
-  final settingCubit = SettingCubit();
-  final profileCubit = ProfileCubit();
+
   final homeLayoutCubit = HomeLayoutCubit();
 
   MyApp({Key? key, required this.appRoutes, required this.initialRoute})
@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => OnBoardingCubit()),
+        // BlocProvider(create: (context) => HomeCubit(HomeRepository(HomeWebService()))..getHomeData()),
         BlocProvider(
           create: (context) =>
               LoginCubit(AuthenticationRepository(AuthenticationWebService())),
@@ -55,12 +56,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (context) => addPersonDataBloc),
         BlocProvider(create: (context) => searchCubit),
-        BlocProvider(create: (context) => settingCubit),
-        BlocProvider(
-          create: (context) =>
-              OtpCubit(AuthenticationRepository(AuthenticationWebService())),
-        ),
-        BlocProvider(create: (context) => profileCubit),
         BlocProvider(create: (context) => homeLayoutCubit),
       ],
       child: GestureDetector(
