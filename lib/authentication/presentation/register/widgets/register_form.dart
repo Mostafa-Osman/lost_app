@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
@@ -17,12 +18,12 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final registerCubit = BlocProvider.of<RegisterCubit>(context);
+    final registerCubit = BlocProvider.of<OtpCubit>(context);
 
-    return BlocBuilder<RegisterCubit, RegisterStates>(
+    return BlocBuilder<OtpCubit, OtpStates>(
       builder: (context, state) {
         return Form(
-          key: registerCubit.formKey,
+          key: registerCubit.registerFormKey,
           child: Padding(
             padding: const EdgeInsets.only(right: 10, left: 10),
             child: Column(

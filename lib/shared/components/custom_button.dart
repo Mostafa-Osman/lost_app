@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         color: buttonColor,
-        borderRadius: const BorderRadiusDirectional.all(Radius.circular(18)),
+        borderRadius: const BorderRadiusDirectional.all(Radius.circular(10)),
       ),
       child: MaterialButton(
         onPressed: onPressed,

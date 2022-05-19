@@ -11,10 +11,12 @@ class AlertDialogClass extends StatelessWidget {
   final Widget widget;
   final Widget bottomWidget;
   final bool isDoneIcon;
+  final double width;
 
   const AlertDialogClass(
       {this.content,
       this.backgroundColor = Colors.transparent,
+        this.width=300,
       required this.height,
       required this.bottomWidget,
       required this.widget,
@@ -26,7 +28,7 @@ class AlertDialogClass extends StatelessWidget {
       backgroundColor: backgroundColor,
       insetPadding: const EdgeInsets.symmetric(vertical: 50),
       content: Container(
-        width: 300,
+        width: width,
         height: height,
         decoration: const BoxDecoration(
           color: Colors.white,
