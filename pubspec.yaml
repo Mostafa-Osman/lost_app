@@ -21,8 +21,8 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  countries_utils: ^1.0.1
   cupertino_icons: ^1.0.2
+  countries_utils: ^1.0.1
   flutter:
     sdk: flutter
 
@@ -37,6 +37,8 @@ dependencies:
   flutter_svg: ^0.22.0
   flutter_switch: ^0.3.2
   dio: ^4.0.6
+  sliding_sheet: ^0.5.2
+
 
 
   flutter_verification_code:
@@ -51,6 +53,8 @@ dependencies:
   splashscreen: ^1.3.5
   shared_preferences:
   timer_count_down: ^2.2.0
+
+
 
 
 
