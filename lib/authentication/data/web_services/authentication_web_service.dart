@@ -1,11 +1,94 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
-import 'package:lost_app/authentication/data/model/reset_password_model.dart';
 import 'package:lost_app/shared/components/constant.dart';
 
 class AuthenticationWebService {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  // String verificationIdSent = '';
+
+  Future<void> initFirebase({
+    Function(String? type)? callSignUpSuccess,
+    String? type,
+  }) async {
+    //log out fromm all accounts before do any thing
+    try {
+      await auth.signOut();
+      auth.authStateChanges().listen((firebaseUser) {
+        if (firebaseUser == null) {
+          log('User is currently signed out!');
+        } else {
+          // print("Firebase Auth changed.. $firebaseUser");
+          log('User is signed in!, ${firebaseUser.phoneNumber}');
+          //do function automatically
+          callSignUpSuccess?.call(type);
+        }
+      });
+    } catch (e, s) {
+      log('initFirebase error', error: e, stackTrace: s);
+    }
+  }
+  Future<void> requestVerify({
+    String? mobile,
+    String? type,
+    Function()? callSuccess,
+    Function(String )? callSend,
+    Function(String )? codeAutoRetrievalTimeout,
+    Function(FirebaseAuthException e)? callError,
+  }) async {
+    log('+2$mobile');
+    try {
+      log('we will send otp code to this number ${'+972${mobile!}'}');
+      await auth.verifyPhoneNumber(
+        phoneNumber: '+2$mobile',
+        // ignore: prefer_const_constructors
+        timeout: Duration(seconds: 60),
+        verificationCompleted: (credential) async {
+          log("Auth:Mobile verified automatically");
+          callSuccess!.call();
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          log("Auth:verification failed");
+          callError!.call(e);
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          log("Auth:Verification code successfully sent");
+          // verificationIdSent = verificationId;
+          callSend!.call(verificationId);
+
+          log('verificationId id $verificationId');
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          codeAutoRetrievalTimeout!.call(verificationId);
+          log("Auth:codeAutoRetrievalTimeout");
+        },
+      );
+    } catch (e, s) {
+      log("Auth:Send OTP Error ", error: e, stackTrace: s);
+    }
+  }
+  Future<void> verifyOtp({
+   required String verificationId,
+   required String smsCode,
+    Function(FirebaseAuthException e)? callError,
+  }) async {
+    try {
+      log("Auth:Verify $verificationId");
+      final PhoneAuthCredential phoneAuthCredential =
+      PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: smsCode,
+      );
+      await auth.signInWithCredential(phoneAuthCredential);
+    } on FirebaseAuthException catch (e, s) {
+      log("Auth:OTP Error...Please check error", error: e, stackTrace: s);
+      callError!.call(e);
+    }
+  }
+
+
   Future<Map<String, dynamic>> register({
     required String username,
     required String phone,

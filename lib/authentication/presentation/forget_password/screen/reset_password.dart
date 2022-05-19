@@ -49,9 +49,10 @@ class ResetPasswordScreen extends StatelessWidget {
                   // text
 
                   TextClass(
-                      text:
-                          'مرحبا,${resetPasswordCubit.isVerifyPhoneNumber.username}',
-                      fontSize: 25,),
+                    text:
+                        'مرحبا,${resetPasswordCubit.isVerifyPhoneNumber.data.username}',
+                    fontSize: 25,
+                  ),
                   // sized box with height 50
                   const SizedBox(height: 50),
                   Form(
@@ -137,7 +138,8 @@ class ResetPasswordScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   //todo change it to user name of user
                   TextButtonClass(
-                    text: 'لست,${resetPasswordCubit.isVerifyPhoneNumber.username}',
+                    text:
+                        'لست,${resetPasswordCubit.isVerifyPhoneNumber.data.username}',
                     textColor: lightGrey,
                     onPressed: () => navigatorAndFinish(
                       context,

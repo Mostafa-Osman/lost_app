@@ -7,22 +7,18 @@ import 'package:lost_app/authentication/data/web_services/authentication_web_ser
 import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
 import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
-import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
-import 'package:lost_app/post/add_person_cubit/add_person_cubit.dart';
+import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/presentations/search/search_cubit/search_cubit.dart';
-import 'package:lost_app/shared/components/comment_card.dart';
 
-import 'data/web_services/home_web_service.dart';
 
 
 class MyApp extends StatelessWidget {
   final AppRouter appRoutes;
   final String? initialRoute;
-  final addPersonDataBloc = AddPersonDataCubit();
   final searchCubit = SearchCubit();
 
   final homeLayoutCubit = HomeLayoutCubit();
@@ -47,6 +43,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => OtpCubit(
             AuthenticationRepository(AuthenticationWebService()),
+            UserPrefs(),
           ),
           child: RegisterScreen(),
         ),
@@ -54,7 +51,6 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               ResetPasswordCubit(AuthenticationRepository(AuthenticationWebService())),
         ),
-        BlocProvider(create: (context) => addPersonDataBloc),
         BlocProvider(create: (context) => searchCubit),
         BlocProvider(create: (context) => homeLayoutCubit),
       ],

@@ -17,7 +17,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
       TextEditingController();
   final resetPasswordFormKey = GlobalKey<FormState>();
   final phoneNumberFormKey = GlobalKey<FormState>();
-  late Data isVerifyPhoneNumber;
+  late ResetPasswordModel isVerifyPhoneNumber;
 
   bool resetPasswordVisibility = true;
   bool resetConfirmPasswordVisibility = true;

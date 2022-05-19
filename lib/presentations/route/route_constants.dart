@@ -6,12 +6,12 @@ class RouteConstant {
   static const String phoneNumberRoute = '/phoneNumber';
   static const String resetPasswordRoute = '/resetPassword';
   static const String homeLayoutRoute = '/home';
-  static const String addPersonDataRoute = '/addPersonData';
+  static const String createPostRoute = '/createPost';
   static const String commentRoute = '/commentScreen';
   static const String notificationRoute = '/notification';
-  static const String postRoute = '/add_post';
+  static const String postRoute = '/create_post';
   static const String postsFoundRoute = '/postsFound';
-  static const String processingRoute = '/processing';
+  static const String scanDataRoute = '/scanDataRoute';
   static const String editProfileRoute = '/editProfile';
   static const String searchRoute = '/search';
   static const String settingRoute = '/setting';

@@ -21,3 +21,16 @@ class LoginError extends LoginStates {
 
 
 class LoginRefreshUi extends LoginStates {}
+
+
+class VerifyPhoneLoading extends LoginStates {}
+class VerifyPhoneError extends LoginStates {
+  final String message;
+
+  VerifyPhoneError( this.message);
+}
+class VerifyPhoneSuccess extends LoginStates {
+  final String message;
+
+  VerifyPhoneSuccess( this.message);
+}

@@ -6,122 +6,121 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/authentication/data/model/reset_password_model.dart';
 import 'package:lost_app/authentication/data/repository/authentication_repository.dart';
-import 'package:lost_app/presentations/route/route_constants.dart';
-import 'package:lost_app/shared/components/navigator.dart';
+import 'package:lost_app/data/local/pref/user_pref.dart';
+
 
 part 'otp_states.dart';
 
+
+
 class OtpCubit extends Cubit<OtpStates> {
-  OtpCubit(this.registerRepository) : super(VerifyInitialState());
   AuthenticationRepository registerRepository;
+  UserPrefs userPrefs;
 
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final otpFormKey = GlobalKey<FormState>();
-  final TextEditingController otpController = TextEditingController();
-  String flatButtonText = 'اعادة الارسال';
-  bool isTimerOn = false;
-  String? otpCode;
-  int? resendToken;
-   String verificationId='';
+  OtpCubit( this.registerRepository, this.userPrefs)
+      : super(VerifyInitialState());
+
+  String otpCode = '';
+
+  late String phone;
+  late String pass;
+  late String name;
+  late String verificationId;
+
+  void fillData(List args) {
+    name = args[0] as String;
+    phone = args[1].toString();//.replaceFirst('0', '');
+    pass = args[2] as String;
+  }
+
+  //when phone number not right or otp wrong
+  void callError(FirebaseAuthException e) {
+    emit(OtpError());
+    log('Error verified retry.... ', error: e);
+    if (e.code == 'invalid-phone-number') {
+      log('The provided phone number is not valid.');
+      emit(OtpShowSnakeBar("wrong-phoneNumber"));
+    }
+    if (e.code == 'invalid-verification-code') {
+      log('OTP is wrong, please recheck');
+      emit(OtpShowSnakeBar("wrong-otp"));
+    }
+    if (e.code == 'too-many-requests') {
+      log('Too many request for this phone.');
+      emit(OtpShowSnakeBar("many-requests-to-same-num"));
+    }
+  }
+
+  //Call this Function when the sim in the same phone include this app
+  void callSuccess() {
+    emit(OtpRefreshUi());
+    log('Succeed verified go Home now....');
+    emit(OtpForgetPass());
+    log('forget');
+  }
+
+  void callSignUpSuccess(String? type) {
+    emit(OtpRefreshUi());
+    log('Succeed verified go Home now....');
+    if (type == 'sign-up') {
+      emit(OtpSignUp());
+    } else {
+      emit(OtpForgetPass());
+      log('forget');
+    }
+  }
+
+  //Call this Function when send otp successfully
+  void callSend(String id) {
+
+    log('Succeed send OTP with id .... id ');
+    verificationId =id;
+    emit(OtpShowSnakeBar("send-code-successfully"));
+  }
+  void autoRetrievalTimeOut(String id) {
+
+    log('autoRetrivalTimeOut with id .... id ');
+    verificationId =id;
+    // emit(OtpShowSnakeBar("send-code-successfully"));
+  }
 
 
-  //otp
-  Future<void> sendOtp({
-    required String phoneNumber,
-  }) async {
-    otpCode = '';
-    emit(PhoneOtpLoading());
-    log('number otp:+2$phoneNumber');
-    await auth.verifyPhoneNumber(
-      phoneNumber: '+2$phoneNumber',
-      verificationCompleted: verificationCompleted,
-      verificationFailed: verificationFailed,
-      codeSent: onCodeSent,
-      codeAutoRetrievalTimeout: onCodeAutoRetrievalError,
-      timeout: const Duration(seconds: 120),
-      forceResendingToken: resendToken,
+
+  Future<void> initService({required   String mobile,
+ required String type,}
+
+      ) async {
+    return registerRepository
+        .initialFirebaseService(callSignUpSuccess, type)!
+        .then((value) {
+      requestPhone(mobile, type);
+    });
+  }
+
+  Future<void> requestPhone(String mobile, String? type) async {
+    return await registerRepository.requestPhone(
+      callError: callError,
+      callSend: callSend,
+      codeAutoRetrievalTimeout: autoRetrievalTimeOut,
+      type: type,
+      mobile: mobile,
+      callSuccess: callSuccess,
     );
   }
 
-  Future<void> sendVerifyCode(String phoneNumber) async {
-    try {
-      emit(PhoneSendOtpLoading());
-      final Data isAlreadyExist = await registerRepository.verifyPhoneNumber(
-        phone: phoneNumber,
-      ) ;
-      if (!isAlreadyExist.isRegistered) {
-        await sendOtp(phoneNumber: phoneNumber);
-      } else {
-        emit(PhoneAlreadyExistState());
-      }
-    } catch (e, s) {
-      log(e.toString());
-      log(s.toString());
-      emit(PhoneVerifyCodeError(e.toString()));
-    }
+  Future<void> verifyOTP(String smsCode) async {
+    otpCode = smsCode;
+    emit(OtpLoading());
+    return await registerRepository.verifyOTP(
+      verificationIdSent:verificationId ,
+      callError: callError,
+      smsCode: smsCode,
+    );
   }
 
-  void codeSentSuccessfully(String verificationId, int? resendToken) {
-    log('codeSent');
-    try {
-      this.verificationId = verificationId;
-      this.resendToken = resendToken;
-      // seconds = 59;
-      // startTimer();
-      emit(PhoneOtpSentSuccessfully());
-    } catch (error) {
-      log(error.toString());
-    }
-  }
-
-  void onCodeSent(String verificationID, int? reSendToken) {
-    verificationId = verificationID;
-    resendToken = resendToken;
-    emit(OtpRefreshUi());
-
-  }
-
-  void verificationFailed(FirebaseAuthException exception) {
-    log('otp send Fail', error: exception);
-    emit(PhoneOtpError(exception.toString()));
-  }
-
-  void onCodeAutoRetrievalError(String verificationID) {
-    verificationId = verificationID;
-    log('otp send time out');
-    emit(PhoneOtpTimeOut());
-  }
-
-  Future<void> verificationCompleted(PhoneAuthCredential credential) async {
-    try {
-      await auth.signInWithCredential(credential);
-    } catch (e) {
-      log('otp send successfully ');
-      emit(PhoneOtpSuccess());
-      await signIn(credential);
-    }
-  }
-
-  Future<void> submitOTP() async {
-    log('Otp is$otpCode');
-    log('verificationId is$verificationId');
-    if (otpCode == null || otpCode!.length != 6) {
-      emit(PhonePinCodeNotFilled());
-    } else {
-      final PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId,
-        smsCode: otpCode!,
-      );
-
-      await signIn(credential);
-    }
-  }
-
-  void saveOtpCode({required String code}) {
-    otpCode = code;
-    emit(OtpRefreshUi());
-  }
-
+  bool isTimerOn = false;
+  final otpFormKey = GlobalKey<FormState>();
+  String flatButtonText = 'اعادة الارسال';
   void changeFlatButtonText({required bool changeText}) {
     if (changeText) {
       flatButtonText = 'لارسال الرمز مره اخري برجاء الانتظار';
@@ -132,28 +131,6 @@ class OtpCubit extends Cubit<OtpStates> {
     }
     emit(OtpRefreshUi());
   }
-
-  Future<void> signIn(PhoneAuthCredential credential) async {
-    try {
-      emit(PhoneVerifyOtpLoading());
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      emit(PhoneVerifyOtpSuccess());
-    } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case "invalid-verification-code":
-          emit(PhoneVerifyCodeError('الكود الذي ادخلته غير صحيح'));
-          break;
-        default:
-          log(e.toString());
-      }
-    } catch (error) {
-      emit(PhoneVerifyCodeError(error.toString()));
-    }
-  }
-
-
-  ///////////////////////////////////////
-
   final registerFormKey = GlobalKey<FormState>();
 
   bool isVisibility = true;
@@ -163,7 +140,8 @@ class OtpCubit extends Cubit<OtpStates> {
   final registerPhoneControl = TextEditingController();
   final registerPasswordControl = TextEditingController();
   final registerConfirmPasswordControl = TextEditingController();
-  late Data phoneIsFound ;
+  late ResetPasswordModel phoneIsFound ;
+
 
   Future<void> register() async {
     emit(RegisterLoading());
@@ -179,10 +157,10 @@ class OtpCubit extends Cubit<OtpStates> {
         phone: registerPhoneControl.text,
       );
       log(data.toString());
-      emit(RegisterSuccess());
+      emit(OtpNavigator());
     } catch (e, s) {
       log(e.toString(), stackTrace: s);
-      emit(RegisterError(message: e.toString()));
+      emit(OtpShowSnakeBar(e.toString()));
     }
   }
 
@@ -193,7 +171,7 @@ class OtpCubit extends Cubit<OtpStates> {
         phone: phoneNumber,
       )  ;
       log(phoneIsFound.toString());
-      emit(VerifyPhoneIsFoundSuccess());
+      emit(VerifyPhoneIsFoundSuccess(phoneIsFound.message));
     } catch (e, s) {
       log(e.toString(), stackTrace: s);
       emit(VerifyPhoneIsFoundError(e.toString()));

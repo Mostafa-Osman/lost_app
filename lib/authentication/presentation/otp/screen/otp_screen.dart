@@ -12,11 +12,30 @@ import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/timer.dart';
+import 'package:lost_app/shared/components/toast.dart';
 import 'package:lost_app/shared/styles/color.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
   const OtpScreen();
+
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () {
+      final args = ModalRoute.of(context)!.settings.arguments! as List;
+      BlocProvider.of<OtpCubit>(context).fillData(args);
+      BlocProvider.of<OtpCubit>(context).initService(
+        mobile: args[1].toString(), //.replaceFirst('0', ''),
+        type: args[2] as String,
+      );
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +43,42 @@ class OtpScreen extends StatelessWidget {
     final arguments = ModalRoute.of(context)!.settings.arguments! as List;
 
     return Scaffold(
-      body: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
-        listener: (context, state) {
-          if (state is PhoneVerifyOtpSuccess && arguments[0] as bool) {
-            navigateTo(
-              context,
+      body: BlocConsumer<OtpCubit, OtpStates>(
+        listener: (BuildContext context, state) {
+          if (state is OtpSignUp) {
+            otpCubit.register();
+          }
+          if (state is OtpForgetPass) {
+            Navigator.of(context).popAndPushNamed(
               RouteConstant.resetPasswordRoute,
-            );
-          } else if (state is PhoneVerifyOtpSuccess &&
-              arguments[0] as bool == false) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => OtpDialog(),
+              arguments: '0${otpCubit.phone}',
             );
           }
-         
+          if (state is OtpNavigator) {
+            Navigator.pushNamed(context, RouteConstant.homeLayoutRoute);
+          }
+          if (state is OtpShowSnakeBar) {
+            showToast(
+              message: state.message,
+              state: ToastStates.success,
+            );
+          }
         },
+        // listener: (context, state) {
+        //   if (state is PhoneVerifyOtpSuccess && arguments[0] as bool) {
+        //     navigateTo(
+        //       context,
+        //       RouteConstant.resetPasswordRoute,
+        //     );
+        //   } else if (state is PhoneVerifyOtpSuccess &&
+        //       arguments[0] as bool == false) {
+        //     showDialog(
+        //       context: context,
+        //       builder: (BuildContext context) => OtpDialog(),
+        //     );
+        //   }
+        //
+        // },
         builder: (context, state) {
           return SafeArea(
             child: Padding(
@@ -89,11 +128,11 @@ class OtpScreen extends StatelessWidget {
                         ],
                         cursorColor: black,
                         enableActiveFill: true,
-                        controller: otpCubit.otpController,
+                        // controller: otpCubit.otpController,
                         keyboardType: TextInputType.number,
                         onCompleted: (v) {
                           // otpCubit.submitOTP();
-                          otpCubit.saveOtpCode(code:v);
+                          otpCubit.verifyOTP(v);
                         },
                         onChanged: (value) {
                           log(value);
@@ -110,7 +149,7 @@ class OtpScreen extends StatelessWidget {
                         child: CustomButton(
                           text: 'التالي',
                           onPressed: () {
-                            otpCubit.submitOTP();
+                            otpCubit.verifyOTP(otpCubit.otpCode);
                           },
                         ),
                       ),
@@ -130,16 +169,14 @@ class OtpScreen extends StatelessWidget {
                         textColor: mainColor,
                         onPressed: () {
                           if (!otpCubit.isTimerOn) {
-                            if (arguments[0] as bool? ?? false) {
+                            if (arguments[3] == 'forget') {
                               navigateTo(
                                 context,
                                 RouteConstant.resetPasswordRoute,
                               );
                             } else {
-                              otpCubit.sendOtp(
-                                phoneNumber: BlocProvider.of<OtpCubit>(context)
-                                    .registerPhoneControl
-                                    .text,
+                              otpCubit.verifyOTP(
+                                otpCubit.otpCode,
                               );
                             }
                             showDialog(

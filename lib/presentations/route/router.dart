@@ -8,11 +8,13 @@ import 'package:lost_app/authentication/presentation/login/login_cubit/login_cub
 import 'package:lost_app/authentication/presentation/login/screen/login.dart';
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/screen/otp_screen.dart';
-import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
-import 'package:lost_app/post/add_post/screen/form_post.dart';
-import 'package:lost_app/post/add_post/screen/post.dart';
+import 'package:lost_app/post/create_post/screen/form_create_post.dart';
+import 'package:lost_app/post/create_post/screen/post.dart';
+import 'package:lost_app/post/create_post/screen/scan_data.dart';
+import 'package:lost_app/post/data/repositories/create_post_repository.dart';
+import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
 import 'package:lost_app/presentations/comment/ui/comment_arguments.dart';
 import 'package:lost_app/presentations/comment/ui/comment_screen.dart';
 import 'package:lost_app/presentations/comment/ui/reply_comment_screen.dart';
@@ -20,9 +22,11 @@ import 'package:lost_app/presentations/home_layout/ui/home_layout.dart';
 import 'package:lost_app/presentations/notification/ui/notification.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/ui/on_boarding.dart';
-import 'package:lost_app/presentations/posts_found/ui/posts_found.dart';
+import 'package:lost_app/post/create_post/screen/posts_found.dart';
+import 'package:lost_app/profile/screen/edit_profile.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/presentations/search/ui/search_screen.dart';
+import 'package:lost_app/profile/screen/setting.dart';
 
 class AppRouter {
   late UserPrefs userPrefs;
@@ -30,7 +34,10 @@ class AppRouter {
   //Authentication
 
   late AuthenticationRepository authenticationRepository;
-  late AuthenticationWebService authenticationWebService;
+  late AuthenticationWebService authenticationWebService; //Authentication
+
+  late CreatePostRepository createPostRepository;
+  late CreatePostWebServices createPostWebServices;
 
   void initAppSettings() {
     userPrefs = UserPrefs();
@@ -39,6 +46,11 @@ class AppRouter {
     authenticationWebService = AuthenticationWebService();
     authenticationRepository = AuthenticationRepository(
       authenticationWebService,
+    );
+    //create post init
+    createPostWebServices = CreatePostWebServices(userPrefs);
+    createPostRepository = CreatePostRepository(
+      createPostWebServices,
     );
   }
 
@@ -57,7 +69,7 @@ class AppRouter {
       case RouteConstant.registerRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => OtpCubit(authenticationRepository),
+            create: (_) => OtpCubit(authenticationRepository, userPrefs),
             child: RegisterScreen(),
           ),
         );
@@ -82,14 +94,11 @@ class AppRouter {
             builder: (_) => LoginScreen(),
           );
         }
-      case RouteConstant.addPersonDataRoute:
+      case RouteConstant.createPostRoute:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final String textPost = settings.arguments! as String;
-            return AddPersonDataScreen(
-              textPost: textPost,
-            );
+            return CreatePostScreen();
           },
         );
 
@@ -110,16 +119,23 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => PostScreen());
       case RouteConstant.postsFoundRoute:
         return MaterialPageRoute(builder: (_) => PostsFoundScreen());
-      case RouteConstant.processingRoute:
+      case RouteConstant.scanDataRoute:
+        return MaterialPageRoute(builder: (_) => ScanScreen());
+      case RouteConstant.editProfileRoute:
+        return MaterialPageRoute(builder: (_) => EditProfileScreen());
       case RouteConstant.searchRoute:
         return MaterialPageRoute(builder: (_) => SearchScreen());
 
       case RouteConstant.otpRoute:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) {
-            return const OtpScreen();
-          },
+          builder: (_) => BlocProvider(
+            create: (_) => OtpCubit(
+              authenticationRepository,
+              userPrefs,
+            ),
+            child: const OtpScreen(),
+          ),
         );
       case RouteConstant.replyCommentRoute:
         return MaterialPageRoute(
@@ -133,13 +149,7 @@ class AppRouter {
         );
 
       default:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
-        );
+        return null;
     }
   }
 }

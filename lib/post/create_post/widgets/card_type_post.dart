@@ -24,7 +24,7 @@ class CardPostPage extends StatelessWidget {
         elevation: 6,
         child: InkWell(
           onTap: () => navigateWithArgument(
-            context, RouteConstant.addPersonDataRoute, optionText,),
+            context, RouteConstant.createPostRoute, optionText,),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

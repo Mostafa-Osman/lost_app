@@ -22,7 +22,7 @@ class HomeLayoutScreen extends StatelessWidget {
             onPressed: () {
               navigateTo(context, RouteConstant.postRoute);
             },
-            child: SvgPicture.asset('assets/icons/add_post.svg', color: white),
+            child: SvgPicture.asset('assets/icons/create_post.svg', color: white),
 
             //icon inside button
           ),
@@ -65,7 +65,7 @@ class HomeLayoutScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onTap: () => homeCubit.changeBottomNavBarIndexAndColor(0),
+                      // onTap: () => homeCubit.changeBottomNavBarIndexAndColor(0),
                     ),
                   ),
                   const SizedBox(
@@ -91,7 +91,7 @@ class HomeLayoutScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onPressed: ()=> homeCubit.changeBottomNavBarIndexAndColor(1),
+                      onPressed: ()=> homeCubit.changeBottomNavBarIndexAndColor(0),
 
 
                     ),

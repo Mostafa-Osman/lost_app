@@ -83,13 +83,16 @@ class TextFormFieldClass extends StatelessWidget {
       strutStyle: structStyle,
       decoration: InputDecoration(
         hintText: textHint,
+
         filled: true,
         fillColor: backgroundColor,
         labelText: label,
         contentPadding: contentPadding,
         helperStyle: textStyle,
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(roundedRectangleBorder),
+
         ),
         prefixIcon: prefix,
         hintStyle: hintStyle,

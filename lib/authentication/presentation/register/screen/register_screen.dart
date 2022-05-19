@@ -16,21 +16,25 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final registerCubit = BlocProvider.of<OtpCubit>(context);
+
     return Scaffold(
       body: BlocConsumer<OtpCubit, OtpStates>(
         listener: (context, state) {
-          if (state is PhoneVerifyCodeError) {
+          if (state is VerifyPhoneIsFoundError) {
             showToast(state: ToastStates.error, message: state.message);
-          } else if (state is PhoneVerifyOtpSuccess) {
-            navigateTo(context, RouteConstant.otpRoute);
-            BlocProvider.of<OtpCubit>(context).register();
-          } else if (state is PhonePinCodeNotFilled) {
-            showToast(
-              state: ToastStates.error,
-              message: 'Please fill in all blocks before restoring',
+          } else if (state is VerifyPhoneIsFoundSuccess) {
+            navigateWithArgument(
+              context,
+              RouteConstant.otpRoute,
+             [
+               registerCubit.registerNameControl.text,
+               registerCubit.registerPhoneControl.text,
+               registerCubit.registerPasswordControl.text,
+                'sign-up'
+              ],
             );
+            BlocProvider.of<OtpCubit>(context).register();
           }
-
           if (state is RegisterSuccess) {
             BlocProvider.of<LoginCubit>(context).login(
               password: registerCubit.registerPasswordControl.text,
