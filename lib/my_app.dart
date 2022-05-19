@@ -15,7 +15,6 @@ import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/presentations/search/search_cubit/search_cubit.dart';
-import 'package:lost_app/presentations/setting/setting_cubit/setting_cubit.dart';
 import 'package:lost_app/shared/components/comment_card.dart';
 
 import 'presentations/home/bloc/home_cubit.dart';
