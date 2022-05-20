@@ -27,7 +27,7 @@ class Post {
     required this.userPhoto,
     required this.username,
   });
-  late final List<Comments> comments;
+  late List<Comments> comments;
   late final String date;
   late final String details;
   late final bool isLost;
@@ -60,22 +60,28 @@ class Post {
 class Comments {
   Comments({
     required this.content,
-    required this.id,
+    required this.commentId,
+    required this.date,
+    this.isOwner,
     required this.photo,
-    required this.replies,
+    this.replies,
     required this.username,
   });
-  late final String content;
-  late final int id;
+  late String content;
+  late final int commentId;
+  late final String date;
+  bool? isOwner;
   late final String photo;
-  late final List<Replies> replies;
+  List<Replies>? replies;
   late final String username;
 
   Comments.fromJson(Map<String, dynamic> json){
     content = json['Content'] as String;
-    id = json['id'] as int;
+    commentId = json['comment_id'] as int;
+    date = json['date'] as String;
+    isOwner = json['is_owner'] as bool? ?? true;
     photo = json['photo'] as String;
-    replies = List.from(json['replies'] as Iterable<dynamic>).map((e)=>Replies.fromJson(e as Map<String, dynamic>)).toList();
+    replies = List.from(json['replies'] as Iterable<dynamic>? ??[]).map((e)=>Replies.fromJson(e as Map<String, dynamic>)).toList();
     username = json['username'] as String;
   }
 
@@ -84,18 +90,24 @@ class Comments {
 class Replies {
   Replies({
     required this.content,
-    required this.id,
+    required this.commentId,
+    required this.date,
+    required this.isOwner,
     required this.photo,
     required this.username,
   });
   late final String content;
-  late final int id;
+  late final int commentId;
+  late final String date;
+  late final bool isOwner;
   late final String photo;
   late final String username;
 
   Replies.fromJson(Map<String, dynamic> json){
     content = json['Content'] as String;
-    id = json['id'] as int;
+    commentId = json['comment_id'] as int;
+    date = json['date'] as String;
+    isOwner = json['is_owner'] as bool;
     photo = json['photo'] as String;
     username = json['username'] as String;
   }

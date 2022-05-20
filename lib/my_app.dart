@@ -85,7 +85,6 @@ class MyApp extends StatelessWidget {
             Locale('ar', ''),
           ],
           initialRoute: initialRoute,
-
         ),
 
       ),

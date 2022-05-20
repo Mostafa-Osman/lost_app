@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_app/presentations/home/widgets/post_pop_up_menu.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
@@ -7,9 +9,33 @@ import 'package:lost_app/shared/styles/color.dart';
 
 class CommentCard extends StatelessWidget {
   final bool reply;
+  final String userName;
+  final String date;
+  final bool isOwner;
+  final String userImage;
+  final String comment;
+  final int postId;
+  final int commentIndex;
+  final int postIndex;
+  final int parentCommentId;
+  final int parentCommentIndex;
+  final int commentId;
+  final int replayNum;
 
-  const CommentCard({
+  CommentCard({
     this.reply = false,
+    required this.userName,
+    required this.date,
+    required this.isOwner,
+    required this.userImage,
+    required this.postId,
+    required this.postIndex,
+    required this.comment,
+    required this.commentId,
+    this.replayNum = 0,
+     required this.commentIndex,
+    this.parentCommentId = 0,
+    this.parentCommentIndex = -1,
   });
 
   @override
@@ -28,11 +54,15 @@ class CommentCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  ClipOval(
-                    child: Image.asset(
-                      'assets/images/IMG20201116145812.jpg',
-                      width: size.width >= 500 ? 40 : size.width / 10,
-                      fit: BoxFit.cover,
+                  SizedBox(
+                    width: size.width >= 500 ? 40 : size.width / 10,
+                    height: size.width >= 500 ? 40 : size.width / 10,
+                    child: ClipOval(
+                      child: Image.network(
+                        userImage,
+                        width: size.width >= 500 ? 40 : size.width / 10,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Padding(
@@ -41,13 +71,13 @@ class CommentCard extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           TextClass(
-                            text: 'محمد احمد',
+                            text: userName,
                             textAlign: TextAlign.start,
                           ),
                           TextClass(
-                            text: 'منذ 5 دقائق',
+                            text: date,
                             fontSize: 12,
                             textAlign: TextAlign.start,
                           ),
@@ -56,13 +86,17 @@ class CommentCard extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.more_vert,
-                      size: size.width >= 500 ? 30 : size.width / 18,
+                  if (isOwner)
+                    PostPopUpMenu(
+                      isPost: false,
+                      postId: postId,
+                      postIndex: postId,
+                      commentId: commentId,
+                      commentIndex: commentIndex,
+                      parentCommentId: parentCommentId,
+                      parentCommentIndex: parentCommentIndex,
+                      commentText: comment,
                     ),
-                  ),
                 ],
               ),
               const SizedBox(height: 5),
@@ -71,11 +105,9 @@ class CommentCard extends StatelessWidget {
                   const SizedBox(width: 50),
                   Expanded(
                     child: TextClass(
-                      text:
-                          'قام احمد محمد بنشر منشور يفيد بانه قد عثر علي شخص يشبه احد الاشخاص الذين قمت بالابلاغ عن فقدانهم',
-                      maxLines: 3,
+                      text: comment,
                       fontSize: size.width >= 500 ? 20 : size.width / 24,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.visible,
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -98,7 +130,7 @@ class CommentCard extends StatelessWidget {
                       fontSize: 12,
                     ),
                     TextButtonClass(
-                      text: 'الردود (3)',
+                      text: 'الردود ($replayNum)',
                       onPressed: () => reply
                           ? null
                           : navigateWithArgument(
@@ -111,7 +143,9 @@ class CommentCard extends StatelessWidget {
                   ],
                 )
               else
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
             ],
           ),
         ),

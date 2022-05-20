@@ -114,11 +114,15 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final  arguments =
-                settings.arguments! as List;
+            final arguments = settings.arguments! as List;
             return BlocProvider(
-              create: (context) => HomeCubit(homeRepository)..getPostData(arguments[1] as int),
-              child: PostDetailsScreen(autofocus: arguments[0] as bool, postId: arguments[1] as int,),
+              create: (context) =>
+                  HomeCubit(homeRepository)..getHomeData()..getPostData(arguments[1] as int),
+              child: PostDetailsScreen(
+                autofocus: arguments[0] as bool,
+                postId: arguments[1] as int,
+                postIndex: arguments[2] as int,
+              ),
             );
           },
         );
@@ -151,9 +155,10 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final arguments =
-                settings.arguments! as bool;
-            return ReplyCommentScreen(autofocus: arguments,);
+            final arguments = settings.arguments! as bool;
+            return ReplyCommentScreen(
+              autofocus: arguments,
+            );
           },
         );
 

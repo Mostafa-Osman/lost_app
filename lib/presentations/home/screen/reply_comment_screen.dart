@@ -43,14 +43,14 @@ class ReplyCommentScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const CommentCard(reply: true),
+                    //const CommentCard(reply: true),
                     Padding(
                       padding: const EdgeInsets.only(left: 20, top: 10),
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index){
-                          return const CommentCard(reply: true);
+                          return  SizedBox();//CommentCard(reply: true);
                         },
                         itemCount: 10,
                       ),
