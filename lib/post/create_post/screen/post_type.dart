@@ -3,7 +3,7 @@ import 'package:lost_app/post/create_post/widgets/card_type_post.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class PostScreen extends StatelessWidget {
+class PostTypeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

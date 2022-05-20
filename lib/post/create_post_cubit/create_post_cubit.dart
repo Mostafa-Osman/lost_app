@@ -27,9 +27,8 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
   SelectableItem? selectedGender;
   SelectableItem? selectedCity;
   SelectableItem? selectedGovernorate;
-
   final ImagePicker imagePicker = ImagePicker();
-  List<XFile> imageCamera = [];
+  List<XFile> images = [];
   List<LostCity> filteredCities = [];
 
   Future<void> createPost() async {
@@ -67,7 +66,7 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
     try {
       final XFile? photo =
           await imagePicker.pickImage(source: ImageSource.camera);
-      imageCamera.add(photo!);
+      images.add(photo!);
       emit(GetCameraImageSuccess());
     } catch (error) {
       emit(GetCameraImageError());
@@ -78,9 +77,9 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     emit(GetGalleryImageLoading());
     try {
-      imageCamera.addAll(selectedImages!);
+      images.addAll(selectedImages!);
       emit(GetGalleryImageSuccess());
-      log(imageCamera.length.toString());
+      log('length of list of photo ${images.length.toString()}');
     } catch (error) {
       emit(GetGalleryImageError());
     }
@@ -103,7 +102,7 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
   }
 
   void deletePhoto({required int index}) {
-    imageCamera.removeAt(index);
+    images.removeAt(index);
     emit(RefreshUi());
   }
 
@@ -119,7 +118,7 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
       return 'يجب اختيار المحافظه';
     } else if (selectedCity == null) {
       return 'يجب اختيار المنطقه';
-    } else if (imageCamera.isEmpty) {
+    } else if (images.isEmpty) {
       return 'يجب اختيار صوره واحده علي الاقل';
     } else {
       return 'done';
@@ -131,7 +130,7 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
     selectedGovernorate = null;
     selectedGender = null;
     filteredCities = [];
-    imageCamera = [];
+    images = [];
     personNameController.clear();
     personAgeController.clear();
     moreAddressDetailsController.clear();

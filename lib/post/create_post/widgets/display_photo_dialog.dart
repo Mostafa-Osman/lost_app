@@ -10,12 +10,11 @@ class DisplayPhotoDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final addPersonDataCubit = BlocProvider.of<CreatePostCubit>(context);
-
+    final createPostCubit = BlocProvider.of<CreatePostCubit>(context);
     return SizedBox(
       child: Image.file(
         File(
-          addPersonDataCubit.imageCamera[index - 1].path,
+          createPostCubit.images[index - 1].path,
         ),
         fit: BoxFit.cover,
       ),

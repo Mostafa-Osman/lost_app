@@ -20,7 +20,7 @@ class HomeLayoutScreen extends StatelessWidget {
             backgroundColor: bottomNavBarBlue,
             //Floating action button on Scaffold
             onPressed: () {
-              navigateTo(context, RouteConstant.postRoute);
+              navigateTo(context, RouteConstant.postType);
             },
             child: SvgPicture.asset('assets/icons/create_post.svg', color: white),
 

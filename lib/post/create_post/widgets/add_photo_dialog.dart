@@ -12,7 +12,6 @@ class AddPhotoDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addPersonDataCubit = BlocProvider.of<CreatePostCubit>(context);
-
     return AlertDialogClass(
       isDoneIcon: false,
       height: 220.0,

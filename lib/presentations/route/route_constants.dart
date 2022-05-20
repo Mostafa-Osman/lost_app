@@ -10,7 +10,7 @@ class RouteConstant {
   static const String createPostRoute = '/createPost';
   static const String commentRoute = '/commentScreen';
   static const String notificationRoute = '/notification';
-  static const String postRoute = '/create_post';
+  static const String postType = '/postType';
   static const String postsFoundRoute = '/postsFound';
   static const String scanDataRoute = '/scanDataRoute';
   static const String editProfileRoute = '/editProfile';

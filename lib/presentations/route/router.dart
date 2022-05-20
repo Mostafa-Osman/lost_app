@@ -12,25 +12,23 @@ import 'package:lost_app/authentication/presentation/register/screen/register_sc
 import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/data/repositories/home/home_repistory.dart';
 import 'package:lost_app/data/web_services/home_web_service.dart';
-import 'package:lost_app/post/create_post/screen/form_create_post.dart';
-import 'package:lost_app/post/create_post/screen/post.dart';
+import 'package:lost_app/post/create_post/screen/create_post.dart';
+import 'package:lost_app/post/create_post/screen/post_type.dart';
+import 'package:lost_app/post/create_post/screen/posts_found.dart';
 import 'package:lost_app/post/create_post/screen/scan_data.dart';
+import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
+import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/home/screen/post_details_screen.dart';
 import 'package:lost_app/presentations/home/screen/reply_comment_screen.dart';
-import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/home/screen/home_screen.dart';
-import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
 import 'package:lost_app/presentations/home_layout/ui/home_layout.dart';
 import 'package:lost_app/presentations/notification/ui/notification.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/on_boarding/ui/on_boarding.dart';
-import 'package:lost_app/post/create_post/screen/posts_found.dart';
-import 'package:lost_app/profile/screen/edit_profile.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/presentations/search/ui/search_screen.dart';
-import 'package:lost_app/profile/screen/setting.dart';
+import 'package:lost_app/profile/screen/edit_profile.dart';
 
 class AppRouter {
   late UserPrefs userPrefs;
@@ -68,7 +66,6 @@ class AppRouter {
 
   Route? generateRoute(RouteSettings settings) {
     initAppSettings();
-
     switch (settings.name) {
       case RouteConstant.onBoardingRoute:
         return MaterialPageRoute(
@@ -97,9 +94,6 @@ class AppRouter {
       case RouteConstant.resetPasswordRoute:
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
       case RouteConstant.homeLayoutRoute:
-        return MaterialPageRoute(
-          builder: (_) => HomeLayoutScreen(),
-        );
         if (userPrefs.isUserLoggedIn()) {
           return MaterialPageRoute(
             builder: (_) => HomeLayoutScreen(),
@@ -113,7 +107,10 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            return CreatePostScreen();
+            return BlocProvider(
+              create: (context) => CreatePostCubit(createPostRepository),
+              child: CreatePostScreen(),
+            );
           },
         );
 
@@ -121,19 +118,22 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final  arguments =
-                settings.arguments! as List;
+            final arguments = settings.arguments! as List;
             return BlocProvider(
-              create: (context) => HomeCubit(homeRepository)..getPostData(arguments[1] as int),
-              child: PostDetailsScreen(autofocus: arguments[0] as bool, postId: arguments[1] as int,),
+              create: (context) =>
+                  HomeCubit(homeRepository)..getPostData(arguments[1] as int),
+              child: PostDetailsScreen(
+                autofocus: arguments[0] as bool,
+                postId: arguments[1] as int,
+              ),
             );
           },
         );
 
       case RouteConstant.notificationRoute:
         return MaterialPageRoute(builder: (_) => NotificationScreen());
-      case RouteConstant.postRoute:
-        return MaterialPageRoute(builder: (_) => PostScreen());
+      case RouteConstant.postType:
+        return MaterialPageRoute(builder: (_) => PostTypeScreen());
       case RouteConstant.postsFoundRoute:
         return MaterialPageRoute(builder: (_) => PostsFoundScreen());
       case RouteConstant.scanDataRoute:
@@ -158,9 +158,10 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final arguments =
-                settings.arguments! as bool;
-            return ReplyCommentScreen(autofocus: arguments,);
+            final arguments = settings.arguments! as bool;
+            return ReplyCommentScreen(
+              autofocus: arguments,
+            );
           },
         );
 
