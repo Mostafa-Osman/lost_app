@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                         postId: post.postId,
                         isSaved: post.isSaved,
                         userPhoneNumber: post.userPhoneNumber,
-                        index: index,
+                        postIndex: index,
                       );
                     },
                   ),

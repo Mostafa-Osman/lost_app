@@ -21,6 +21,7 @@ class HomeWebService {
       throw 'home server error';
     }
   }
+
   Future<Map<String, dynamic>> getPostData(int postId) async {
     // final response = await DioHelper.getData(
     //   url: '${AppConst.baseUrl}click-post?post_id=$postId',
@@ -47,6 +48,83 @@ class HomeWebService {
 
     // todo: fake data
     final data = deletePostFakeResponse;
+    await Future.delayed(const Duration(seconds: 3));
+    // todo: end of fake data
+
+    log(data.toString());
+    if (data['status'] == 200) {
+      return data;
+    } else {
+      throw 'home server error';
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteComment({
+    required int postId,
+    required int commentId,
+    required int parentCommentId,
+  }) async {
+    // final response = await DioHelper.getData(
+    //   url: '${AppConst.baseUrl}delete-comment?post_id=$postId&parent_id=$parentCommentId&comment_id=$commentId',
+    // );
+    // final data = response?.data as Map<String, dynamic>;
+
+    // todo: fake data
+    final data = deleteCommentFakeResponse;
+    await Future.delayed(const Duration(seconds: 3));
+    // todo: end of fake data
+
+    log(data.toString());
+    if (data['status'] == 200) {
+      return data;
+    } else {
+      throw 'home server error';
+    }
+  }
+
+  Future<Map<String, dynamic>> createComment({
+    required int postId,
+    required int parentCommentId,
+    required String content,
+  }) async {
+    // final response = await DioHelper.getData(
+    //   url:
+    //       '${AppConst.baseUrl}create-comment?post_id=$postId&parent_id=$parentCommentId',
+    //   query: {
+    //     'content': content,
+    //   },
+    // );
+    // final data = response?.data as Map<String, dynamic>;
+
+    // todo: fake data
+    final data = createCommentFakeResponse;
+    await Future.delayed(const Duration(seconds: 3));
+    // todo: end of fake data
+
+    log(data.toString());
+    if (data['status'] == 200) {
+      return data;
+    } else {
+      throw 'home server error';
+    }
+  }
+  Future<Map<String, dynamic>> updateComment({
+    required int postId,
+    required int commentId,
+    required int parentCommentId,
+    required String content,
+  }) async {
+    // final response = await DioHelper.getData(
+    //   url:
+    //       '${AppConst.baseUrl}update-comment?post_id=$postId&parent_id=$parentCommentId&comment_id=$commentId',
+    //   query: {
+    //     'content': content,
+    //   },
+    // );
+    // final data = response?.data as Map<String, dynamic>;
+
+    // todo: fake data
+    final data = createCommentFakeResponse;
     await Future.delayed(const Duration(seconds: 3));
     // todo: end of fake data
 
@@ -113,13 +191,15 @@ final homeFakeResponse = {
         },
         "age": 8,
         "gender": "male",
-        "main_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "main_photo":
+            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "person_name": "fouad ali"
       },
       "post_id": 9,
       "user_id": 1,
       "user_phone_number": "01198752345",
-      "user_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "user_photo":
+          "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       "username": "Moamen Khaled"
     },
     {
@@ -136,13 +216,15 @@ final homeFakeResponse = {
         },
         "age": 16,
         "gender": "female",
-        "main_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "main_photo":
+            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "person_name": "Mariam Ahmed"
       },
       "post_id": 10,
       "user_id": 2,
       "user_phone_number": "01198756127",
-      "user_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "user_photo":
+          "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       "username": "Mohamed Ali"
     },
     {
@@ -152,20 +234,18 @@ final homeFakeResponse = {
       "is_owner": false,
       "is_saved": false,
       "person_data": {
-        "address": {
-          "address_details": "",
-          "city": "Giza",
-          "district": "Maadi"
-        },
+        "address": {"address_details": "", "city": "Giza", "district": "Maadi"},
         "age": 12,
         "gender": "female",
-        "main_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "main_photo":
+            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "person_name": "Hala Ahmed"
       },
       "post_id": 11,
       "user_id": 3,
       "user_phone_number": "01246932712",
-      "user_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "user_photo":
+          "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       "username": "Sara Adel"
     },
     {
@@ -175,20 +255,18 @@ final homeFakeResponse = {
       "is_owner": false,
       "is_saved": true,
       "person_data": {
-        "address": {
-          "address_details": "",
-          "city": "Giza",
-          "district": "Maadi"
-        },
+        "address": {"address_details": "", "city": "Giza", "district": "Maadi"},
         "age": 10,
         "gender": "male",
-        "main_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "main_photo":
+            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "person_name": "Hosam Hany"
       },
       "post_id": 12,
       "user_id": 3,
       "user_phone_number": "01246932712",
-      "user_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "user_photo":
+          "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       "username": "Sara Adel"
     }
   ],
@@ -199,19 +277,28 @@ final postFakeResponse = {
     "comments": [
       {
         "Content": "comment 1",
-        "id": 5,
-        "photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "comment_id": 5,
+        "date": "Tue, 17 May 2022 07:58:49 GMT",
+        "is_owner": true,
+        "photo":
+            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "replies": [
           {
             "Content": "reply 1 on comment 1",
-            "id": 8,
-            "photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "comment_id": 8,
+            "date": "Tue, 17 May 2022 08:05:16 GMT",
+            "is_owner": true,
+            "photo":
+                "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "username": "Mohamed Ali"
           },
           {
             "Content": "reply 2 on comment 1",
-            "id": 10,
-            "photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "comment_id": 10,
+            "date": "Tue, 17 May 2022 08:05:16 GMT",
+            "is_owner": false,
+            "photo":
+                "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "username": "Sara Adel"
           }
         ],
@@ -219,13 +306,19 @@ final postFakeResponse = {
       },
       {
         "Content": "comment 2",
-        "id": 6,
-        "photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "comment_id": 8,
+        "date": "Tue, 17 May 2022 08:05:16 GMT",
+        "is_owner": false,
+        "photo":
+            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "replies": [
           {
             "Content": "reply 1 on comment 2",
-            "id": 9,
-            "photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "comment_id": 8,
+            "date": "Tue, 17 May 2022 08:05:16 GMT",
+            "is_owner": true,
+            "photo":
+                "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "username": "Mohamed Ali"
           }
         ],
@@ -233,7 +326,8 @@ final postFakeResponse = {
       }
     ],
     "date": "Sat, 14 May 2022 22:48:28 GMT",
-    "details": "The survivors of a plane crash find themselves stranded on a mysterious island. They are forced to work together for their survival when they realise that they are not alone on the island.",
+    "details":
+        "The survivors of a plane crash find themselves stranded on a mysterious island. They are forced to work together for their survival when they realise that they are not alone on the island.",
     "is_lost": true,
     "is_owner": true,
     "is_saved": true,
@@ -251,25 +345,43 @@ final postFakeResponse = {
         "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       ],
       "gender": "female",
-      "main_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "main_photo":
+          "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       "person_name": "Mariam Ahmed"
     },
     "post_id": 10,
     "user_id": 2,
     "user_phone_number": "01198756127",
-    "user_photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "user_photo":
+        "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "username": "Mohamed Ali"
   },
   "status": 200
 };
-
 final deletePostFakeResponse = {
   "message": "تم حذف المنشور بنجاح",
   "status": 200
 };
+final createCommentFakeResponse = {
+  "data": {
+    "Content": "This is the initial comment",
+    "date": "Tue, 17 May 2022 06:01:48 GMT",
+    "post_id": 9,
+    "comment_id": 10,
+    "user_id": 2,
+    "photo": "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "username": "Mohamed Ali"
+  },
+  "message": "تم نشر التعليق بنجاح",
+  "status": 200
+};
+final deleteCommentFakeResponse = {
+  "message": "تم حذف التعليق بنجاح",
+  "status": 200
+};
 final savePostFakeResponse = {
-"message": "تم إضافة المنشور إلى منشوراتك المحفوظة",
-"status": 200
+  "message": "تم إضافة المنشور إلى منشوراتك المحفوظة",
+  "status": 200
 };
 final unSavePostFakeResponse = {
   "message": "تم إزالة المنشور من منشوراتك المحفوظة",

@@ -9,6 +9,10 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class PostDetails extends StatelessWidget {
+  final int postIndex;
+
+  PostDetails({required this.postIndex});
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -53,7 +57,7 @@ class PostDetails extends StatelessWidget {
                               height: size.width >= 500 ? 40 : size.width / 10,
                               child: ClipOval(
                                 child: Image.network(
-                                  postDetailsCubit.post!.userPhoto,
+                                  postDetailsCubit.post.userPhoto,
                                   width:
                                       size.width >= 500 ? 40 : size.width / 10,
                                   fit: BoxFit.cover,
@@ -66,17 +70,18 @@ class PostDetails extends StatelessWidget {
                                 top: 10.0,
                               ),
                               child: TextClass(
-                                text: postDetailsCubit.post!.username,
+                                text: postDetailsCubit.post.username,
                                 fontSize:
                                     size.width >= 500 ? 20 : size.width / 20,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             const Spacer(),
-                            if (postDetailsCubit.post!.isOwner)
+                            if (postDetailsCubit.post.isOwner)
                               PostPopUpMenu(
-                                postId: postDetailsCubit.post!.postId,
-                                navigate: true,
+                                isPost: true,
+                                postId: postDetailsCubit.post.postId,
+                                postIndex: postIndex,
                               ),
                           ],
                         ),
@@ -96,7 +101,7 @@ class PostDetails extends StatelessWidget {
                           children: [
                             TextClass(
                               text:
-                                  'الاسم : ${postDetailsCubit.post!.personData.personName}',
+                                  'الاسم : ${postDetailsCubit.post.personData.personName}',
                               textAlign: TextAlign.right,
                               fontSize: 15,
                               overflow: TextOverflow.ellipsis,
@@ -104,7 +109,7 @@ class PostDetails extends StatelessWidget {
                             const SizedBox(height: 2),
                             TextClass(
                               text:
-                                  'السن : ${postDetailsCubit.post!.personData.age}',
+                                  'السن : ${postDetailsCubit.post.personData.age}',
                               textAlign: TextAlign.right,
                               fontSize: 15,
                               overflow: TextOverflow.ellipsis,
@@ -112,7 +117,7 @@ class PostDetails extends StatelessWidget {
                             const SizedBox(height: 2),
                             TextClass(
                               text:
-                                  'الجنس : ${postDetailsCubit.post!.personData.gender}',
+                                  'الجنس : ${postDetailsCubit.post.personData.gender}',
                               textAlign: TextAlign.right,
                               fontSize: 15,
                               overflow: TextOverflow.ellipsis,
@@ -120,20 +125,20 @@ class PostDetails extends StatelessWidget {
                             const SizedBox(height: 2),
                             TextClass(
                               text:
-                                  'العنوان : ${"${postDetailsCubit.post!.personData.address.city} - ${postDetailsCubit.post!.personData.address.district}"}',
+                                  'العنوان : ${"${postDetailsCubit.post.personData.address.city} - ${postDetailsCubit.post.personData.address.district}"}',
                               textAlign: TextAlign.right,
                               fontSize: 15,
                               overflow: TextOverflow.ellipsis,
                             ),
                             if (postDetailsCubit
-                                    .post!.personData.address.addressDetails !=
+                                    .post.personData.address.addressDetails !=
                                 '')
                               Column(
                                 children: [
                                   const SizedBox(height: 2),
                                   TextClass(
                                     text:
-                                        'تفاصيل العنوان : ${"${postDetailsCubit.post!.personData.address.city} - ${postDetailsCubit.post!.personData.address.district}"}',
+                                        'تفاصيل العنوان : ${"${postDetailsCubit.post.personData.address.city} - ${postDetailsCubit.post.personData.address.district}"}',
                                     textAlign: TextAlign.right,
                                     fontSize: 15,
                                     overflow: TextOverflow.visible,
@@ -143,18 +148,18 @@ class PostDetails extends StatelessWidget {
                             const SizedBox(height: 2),
                             TextClass(
                               text:
-                                  'هاتف التواصل : ${postDetailsCubit.post!.userPhoneNumber}',
+                                  'هاتف التواصل : ${postDetailsCubit.post.userPhoneNumber}',
                               textAlign: TextAlign.right,
                               fontSize: 15,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            if (postDetailsCubit.post!.details != '')
+                            if (postDetailsCubit.post.details != '')
                               Column(
                                 children: [
                                   const SizedBox(height: 2),
                                   TextClass(
                                     text:
-                                        'التفاصيل : ${postDetailsCubit.post!.details}',
+                                        'التفاصيل : ${postDetailsCubit.post.details}',
                                     textAlign: TextAlign.right,
                                     fontSize: 15,
                                     overflow: TextOverflow.visible,
@@ -174,7 +179,7 @@ class PostDetails extends StatelessWidget {
                             ),
                             child: PhotoSlider(
                               images:
-                                  postDetailsCubit.post!.personData.extraPhotos,
+                                  postDetailsCubit.post.personData.extraPhotos,
                             ),
                           ),
                         ),
@@ -202,9 +207,10 @@ class PostDetails extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        log(postDetailsCubit.post!.isSaved.toString());
+                        log(postIndex.toString());
                         postDetailsCubit.isSavedPost(
-                          postId: postDetailsCubit.post!.postId,
+                          postId: postDetailsCubit.post.postId,
+                          postIndex: postIndex,
                         );
                       },
                       child: Padding(
@@ -226,7 +232,7 @@ class PostDetails extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 2.0),
-                              child: postDetailsCubit.post!.isSaved
+                              child: postDetailsCubit.post.isSaved
                                   ? const Icon(
                                       Icons.favorite,
                                       color: Colors.red,

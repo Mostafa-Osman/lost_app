@@ -121,10 +121,11 @@ class AppRouter {
             final arguments = settings.arguments! as List;
             return BlocProvider(
               create: (context) =>
-                  HomeCubit(homeRepository)..getPostData(arguments[1] as int),
+                  HomeCubit(homeRepository)..getHomeData()..getPostData(arguments[1] as int),
               child: PostDetailsScreen(
                 autofocus: arguments[0] as bool,
                 postId: arguments[1] as int,
+                postIndex: arguments[2] as int,
               ),
             );
           },
