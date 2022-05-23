@@ -22,13 +22,13 @@ class HomeLayoutScreen extends StatelessWidget {
             onPressed: () {
               navigateTo(context, RouteConstant.postType);
             },
-            child: SvgPicture.asset('assets/icons/create_post.svg', color: white),
+            child: SvgPicture.asset('assets/icons/post.svg', color: white),
 
             //icon inside button
           ),
 
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+          FloatingActionButtonLocation.centerDocked,
           //floating action button position to center
 
           bottomNavigationBar: BottomAppBar(
@@ -54,7 +54,7 @@ class HomeLayoutScreen extends StatelessWidget {
                               iconSize: 10,
                               highlightColor: black,
                               icon: SvgPicture.asset('assets/icons/account.svg',
-                                  color: homeCubit.bottomNavBarAccColor,),
+                                color: homeCubit.bottomNavBarAccColor,),
                               onPressed: null,
                             ),
                             TextClass(
@@ -65,7 +65,7 @@ class HomeLayoutScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // onTap: () => homeCubit.changeBottomNavBarIndexAndColor(0),
+                      onTap: () => homeCubit.changeBottomNavBarIndexAndColor(0),
                     ),
                   ),
                   const SizedBox(
@@ -80,7 +80,7 @@ class HomeLayoutScreen extends StatelessWidget {
                             IconButton(
                               iconSize: 10,
                               icon: SvgPicture.asset('assets/icons/home.svg',
-                                  color: homeCubit.bottomNavBarHomeColor,),
+                                color: homeCubit.bottomNavBarHomeColor,),
                               onPressed: null,
                             ),
                             TextClass(
@@ -91,9 +91,7 @@ class HomeLayoutScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onPressed: ()=> homeCubit.changeBottomNavBarIndexAndColor(0),
-
-
+                      onPressed: ()=> homeCubit.changeBottomNavBarIndexAndColor(1),
                     ),
                   ),
                 ],

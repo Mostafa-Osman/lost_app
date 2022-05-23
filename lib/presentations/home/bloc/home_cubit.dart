@@ -16,7 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepository) : super(HomeInitial());
 
   late List<HomePost> homePosts;
-  late Post post;
+  Post? post;
   late Comments comment;
   HomeRepository homeRepository;
   int startLimit = 0;
@@ -78,13 +78,13 @@ class HomeCubit extends Cubit<HomeState> {
         parentCommentId: parentCommentId,
       );
       log(parentCommentIndex.toString());
-      log(post.comments.length.toString());
+      log(post!.comments.length.toString());
       if (parentCommentIndex == -1) {
-        post.comments.removeAt(commentIndex);
+        post!.comments.removeAt(commentIndex);
       } else {
-        post.comments[parentCommentIndex].replies!.removeAt(commentIndex);
+        post!.comments[parentCommentIndex].replies!.removeAt(commentIndex);
       }
-      log(post.comments.length.toString());
+      log(post!.comments.length.toString());
       emit(HomeDeleteCommentSuccessState());
     } catch (e, s) {
       log('error in deleteComment', error: e, stackTrace: s);
@@ -127,14 +127,14 @@ class HomeCubit extends Cubit<HomeState> {
         parentCommentId: parentCommentId,
         content: comment,
       );
-      log(post.comments.length.toString());
+      log(post!.comments.length.toString());
       if (parentCommentIndex == -1) {
-        post.comments[commentIndex].content = comment;
+        post!.comments[commentIndex].content = comment;
       } else {
-        post.comments[parentCommentIndex].replies![commentIndex].content =
+        post!.comments[parentCommentIndex].replies![commentIndex].content =
             comment;
       }
-      log(post.comments.length.toString());
+      log(post!.comments.length.toString());
       emit(HomeDeleteCommentSuccessState());
     } catch (e, s) {
       log('error in updateComment', error: e, stackTrace: s);
@@ -155,7 +155,7 @@ class HomeCubit extends Cubit<HomeState> {
         content: content,
       );
       comment.isOwner = true;
-      post.comments.add(comment);
+      post!.comments.add(comment);
       log(comment.toString());
       emit(HomeSuccessState());
     } catch (e, s) {
@@ -169,9 +169,9 @@ class HomeCubit extends Cubit<HomeState> {
     required int postIndex,
   }) async {
     homePosts[postIndex].isSaved = !homePosts[postIndex].isSaved;
-    if (post.postId != null) {
-      if (postId == post.postId) {
-        post.isSaved = !post.isSaved;
+    if (post != null) {
+      if (postId == post!.postId) {
+        post!.isSaved = !post!.isSaved;
       }
     }
     emit(HomeSuccessState());

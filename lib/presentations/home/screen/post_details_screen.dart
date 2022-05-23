@@ -48,7 +48,7 @@ class PostDetailsScreen extends StatelessWidget {
             Navigator.pop(context);
           }
           if (_controller.hasClients) {
-            if (autofocus || state is PostCommentLoadingState) {
+            if (state is PostCommentLoadingState) {
               SchedulerBinding.instance?.addPostFrameCallback((_) {
                 _controller.animateTo(
                   _controller.position.maxScrollExtent,
@@ -115,9 +115,9 @@ class PostDetailsScreen extends StatelessWidget {
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: homeCubit.post.comments.length,
+                          itemCount: homeCubit.post!.comments.length,
                           itemBuilder: (context, index) {
-                            final comment = homeCubit.post.comments[index];
+                            final comment = homeCubit.post!.comments[index];
                             return CommentCard(
                               userName: comment.username,
                               userImage: comment.photo,
@@ -147,7 +147,7 @@ class PostDetailsScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: lightBlue,
                                   borderRadius: const BorderRadius.all(
-                                      Radius.circular(15)),
+                                      Radius.circular(15),),
                                 ),
                                 child: const Center(
                                   child: CircularProgressIndicator(),

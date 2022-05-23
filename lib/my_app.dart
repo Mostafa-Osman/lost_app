@@ -19,15 +19,14 @@ import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding
 import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/presentations/search/search_cubit/search_cubit.dart';
 import 'package:lost_app/shared/bottom_sheet/cubit/select_bottom_sheet_cubit.dart';
-import 'package:lost_app/shared/components/comment_card.dart';
-
 import 'presentations/home/bloc/home_cubit.dart';
+import 'profile/profile_cubit/profile_cubit.dart';
 
 class MyApp extends StatelessWidget {
   final AppRouter appRoutes;
   final String? initialRoute;
   final searchCubit = SearchCubit();
-
+  final profileCubit = ProfileCubit();
   final homeLayoutCubit = HomeLayoutCubit();
 
   MyApp({Key? key, required this.appRoutes, required this.initialRoute})
@@ -43,7 +42,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => OnBoardingCubit()),
         BlocProvider(create: (context) => SelectBottomSheetCubit()),
-
         BlocProvider(create: (context) => HomeCubit(HomeRepository(HomeWebService()))..getHomeData()),
         BlocProvider(
           create: (context) =>
@@ -66,6 +64,7 @@ class MyApp extends StatelessWidget {
               ResetPasswordCubit(AuthenticationRepository(AuthenticationWebService())),
         ),
         BlocProvider(create: (context) => searchCubit),
+        BlocProvider(create: (context) => profileCubit),
         BlocProvider(create: (context) => homeLayoutCubit),
       ],
       child: GestureDetector(

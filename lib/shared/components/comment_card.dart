@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_app/presentations/home/widgets/post_pop_up_menu.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
