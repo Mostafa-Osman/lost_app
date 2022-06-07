@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/profile/profile_cubit/profile_cubit.dart';
-import 'package:lost_app/shared/components/post_card.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class ProfileClass extends StatelessWidget {
-
   final TextEditingController controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return BlocConsumer<ProfileCubit, ProfileStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        final cubit = ProfileCubit.get(context);
-        return SingleChildScrollView(
+    final cubit = ProfileCubit.get(context);
+    return
+      BlocProvider(
+        create: (context) => ProfileCubit(),
+        child:  SingleChildScrollView(
           child: Align(
             //alignment: Alignment.topCenter,
             child: Container(
@@ -80,9 +77,8 @@ class ProfileClass extends StatelessWidget {
               ),
             ),
           ),
-        );
-      },
-    );
+        ),
+      );
   }
 }
 

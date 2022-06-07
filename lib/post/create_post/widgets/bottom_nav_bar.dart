@@ -30,7 +30,7 @@ class BottomNavBar extends StatelessWidget {
                     if (addPersonDataCubit.getErrorMessage() == 'done') {
                       //todo mansour will change null and sent request to server with new data
                       if (isUpdatePost) {
-                        return null;
+                        return;
                       } else {
                         //todo navigate to scanScreen when khedr finish
                         //  navigateTo(context, RouteConstant.scanDataRoute);

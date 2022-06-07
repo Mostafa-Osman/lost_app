@@ -1,10 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lost_app/data/local/pref/city_data.dart';
-import 'package:lost_app/post/data/models/create_post_model.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/shared/model/select_item.dart';
 
@@ -13,11 +13,7 @@ part 'create_post_states.dart';
 class CreatePostCubit extends Cubit<CreatePostStates> {
   CreatePostCubit(this.createPostRepository) : super(PersonDataInitialState());
   final CreatePostRepository createPostRepository;
-
-  //PageController pageController = PageController();
-
-  //todo should initial it after go to screen then contain steps
-  final bool isLost = true;
+   bool isLost = true;
   TextEditingController personNameController = TextEditingController();
   TextEditingController personAgeController = TextEditingController();
   final nameFormKey = GlobalKey<FormState>();
@@ -27,9 +23,34 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
   SelectableItem? selectedGender;
   SelectableItem? selectedCity;
   SelectableItem? selectedGovernorate;
-  final ImagePicker imagePicker = ImagePicker();
-  List<XFile> images = [];
+  final imagePicker = ImagePicker();
+  List<File> images = [];
   List<LostCity> filteredCities = [];
+
+  Future<void> getImageFromCamera() async {
+    emit(GetCameraImageLoading());
+    try {
+      final photo = await imagePicker.pickImage(source: ImageSource.camera);
+      images.add(File(photo!.path));
+      emit(GetCameraImageSuccess());
+    } catch (error) {
+      emit(GetCameraImageError());
+    }
+  }
+
+  Future<void> getImageFromGallery() async {
+    final selectedImages = await imagePicker.pickMultiImage();
+    emit(GetGalleryImageLoading());
+    try {
+      for (final XFile image in selectedImages!) {
+        images.add(File(image.path));
+      }
+      emit(GetGalleryImageSuccess());
+      log('length of list of photo ${images.length.toString()}');
+    } catch (error) {
+      emit(GetGalleryImageError());
+    }
+  }
 
   Future<void> createPost() async {
     emit(CreatePostLoading());
@@ -40,7 +61,6 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
     log('city=${selectedCity!.title}');
     log('addressDetails=${moreAddressDetailsController.text}');
     log('moreDetails=${moreDetailsController.text}');
-
     try {
       await createPostRepository.createPost(
         name: personNameController.text,
@@ -58,30 +78,6 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
     } catch (e, s) {
       log(e.toString(), stackTrace: s);
       emit(CreatePostError(e.toString()));
-    }
-  }
-
-  Future getImageFromCamera() async {
-    emit(GetCameraImageLoading());
-    try {
-      final XFile? photo =
-          await imagePicker.pickImage(source: ImageSource.camera);
-      images.add(photo!);
-      emit(GetCameraImageSuccess());
-    } catch (error) {
-      emit(GetCameraImageError());
-    }
-  }
-
-  Future getImageFromGallery() async {
-    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
-    emit(GetGalleryImageLoading());
-    try {
-      images.addAll(selectedImages!);
-      emit(GetGalleryImageSuccess());
-      log('length of list of photo ${images.length.toString()}');
-    } catch (error) {
-      emit(GetGalleryImageError());
     }
   }
 
@@ -137,6 +133,4 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
     moreDetailsController.clear();
     emit(RefreshUi());
   }
-
-
 }

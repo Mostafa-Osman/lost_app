@@ -107,10 +107,7 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            return BlocProvider(
-              create: (context) => CreatePostCubit(createPostRepository),
-              child: CreatePostScreen(),
-            );
+            return CreatePostScreen();
           },
         );
 

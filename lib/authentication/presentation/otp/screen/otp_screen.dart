@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
-import 'package:lost_app/authentication/presentation/otp/widgets/otp_dialog.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
@@ -30,8 +28,8 @@ class _OtpScreenState extends State<OtpScreen> {
       final args = ModalRoute.of(context)!.settings.arguments! as List;
       BlocProvider.of<OtpCubit>(context).fillData(args);
       BlocProvider.of<OtpCubit>(context).initService(
-        mobile: args[1].toString(), //.replaceFirst('0', ''),
-        type: args[2] as String,
+        mobile: args[0].toString(), //.replaceFirst('0', ''),
+        type: args[1] as String,
       );
     });
     super.initState();
@@ -64,21 +62,6 @@ class _OtpScreenState extends State<OtpScreen> {
             );
           }
         },
-        // listener: (context, state) {
-        //   if (state is PhoneVerifyOtpSuccess && arguments[0] as bool) {
-        //     navigateTo(
-        //       context,
-        //       RouteConstant.resetPasswordRoute,
-        //     );
-        //   } else if (state is PhoneVerifyOtpSuccess &&
-        //       arguments[0] as bool == false) {
-        //     showDialog(
-        //       context: context,
-        //       builder: (BuildContext context) => OtpDialog(),
-        //     );
-        //   }
-        //
-        // },
         builder: (context, state) {
           return SafeArea(
             child: Padding(
@@ -106,6 +89,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         appContext: context,
                         hintCharacter: '*',
                         length: 6,
+                        backgroundColor: Colors.white,
                         animationType: AnimationType.fade,
                         autovalidateMode: AutovalidateMode.always,
                         pinTheme: PinTheme(
@@ -131,7 +115,6 @@ class _OtpScreenState extends State<OtpScreen> {
                         // controller: otpCubit.otpController,
                         keyboardType: TextInputType.number,
                         onCompleted: (v) {
-                          // otpCubit.submitOTP();
                           otpCubit.verifyOTP(v);
                         },
                         onChanged: (value) {
@@ -169,39 +152,30 @@ class _OtpScreenState extends State<OtpScreen> {
                         textColor: mainColor,
                         onPressed: () {
                           if (!otpCubit.isTimerOn) {
-                            if (arguments[3] == 'forget') {
-                              navigateTo(
-                                context,
-                                RouteConstant.resetPasswordRoute,
-                              );
-                            } else {
-                              otpCubit.verifyOTP(
-                                otpCubit.otpCode,
-                              );
-                            }
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  AlertDialogClass(
-                                height: 240.0,
-                                widget: const TextClass(
-                                  text: 'تم اعاده ارسال رمز التاكيد',
-                                  fontSize: 20,
-                                ),
-                                bottomWidget: TextButtonClass(
-                                  text: 'تم',
-                                  fontSize: 25,
-                                  textColor: mainColor,
-                                  onPressed: () {
-                                    otpCubit.changeFlatButtonText(
-                                      changeText: true,
-                                    );
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ),
-                            );
+                            otpCubit.requestPhone(
+                                otpCubit.phone, arguments[1].toString(),);
                           }
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialogClass(
+                              height: 240.0,
+                              widget: const TextClass(
+                                text: 'تم اعاده ارسال رمز التاكيد',
+                                fontSize: 20,
+                              ),
+                              bottomWidget: TextButtonClass(
+                                text: 'تم',
+                                fontSize: 25,
+                                textColor: mainColor,
+                                onPressed: () {
+                                  otpCubit.changeFlatButtonText(
+                                    changeText: true,
+                                  );
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                          );
                         },
                       ),
                       if (otpCubit.isTimerOn)

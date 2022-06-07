@@ -39,10 +39,10 @@ class AuthenticationRepository {
   Future<void>? verifyOTP({
     Function(FirebaseAuthException e)? callError,
    required String smsCode,
-   required String verificationIdSent,
+    required String verificationIdSent,
   }) async {
     return registerWebService.verifyOtp(
-      verificationId: verificationIdSent,
+     verificationId: verificationIdSent,
       callError: callError,
       smsCode: smsCode,
     );

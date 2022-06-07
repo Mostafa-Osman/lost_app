@@ -81,7 +81,7 @@ class OtpCubit extends Cubit<OtpStates> {
 
     log('autoRetrivalTimeOut with id .... id ');
     verificationId =id;
-    // emit(OtpShowSnakeBar("send-code-successfully"));
+   emit(OtpShowSnakeBar("send-code-successfully"));
   }
 
 
@@ -140,7 +140,7 @@ class OtpCubit extends Cubit<OtpStates> {
   final registerPhoneControl = TextEditingController();
   final registerPasswordControl = TextEditingController();
   final registerConfirmPasswordControl = TextEditingController();
-  late ResetPasswordModel phoneIsFound ;
+  late bool phoneIsFound ;
 
 
   Future<void> register() async {
@@ -167,11 +167,12 @@ class OtpCubit extends Cubit<OtpStates> {
   Future<void> verifyPhoneNumber({required String phoneNumber}) async {
     emit(VerifyPhoneIsFoundLoading());
     try {
-      phoneIsFound = await registerRepository.verifyPhoneNumber(
+      final data = await registerRepository.verifyPhoneNumber(
         phone: phoneNumber,
       )  ;
+      phoneIsFound=data.data.isRegistered;
       log(phoneIsFound.toString());
-      emit(VerifyPhoneIsFoundSuccess(phoneIsFound.message));
+      emit(VerifyPhoneIsFoundSuccess(data.message));
     } catch (e, s) {
       log(e.toString(), stackTrace: s);
       emit(VerifyPhoneIsFoundError(e.toString()));

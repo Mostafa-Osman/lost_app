@@ -7,7 +7,6 @@ import 'package:lost_app/shared/components/constant.dart';
 
 class AuthenticationWebService {
   FirebaseAuth auth = FirebaseAuth.instance;
-  // String verificationIdSent = '';
 
   Future<void> initFirebase({
     Function(String? type)? callSignUpSuccess,
@@ -40,7 +39,7 @@ class AuthenticationWebService {
   }) async {
     log('+2$mobile');
     try {
-      log('we will send otp code to this number ${'+972${mobile!}'}');
+      log('we will send otp code to this number ${'+2${mobile!}'}');
       await auth.verifyPhoneNumber(
         phoneNumber: '+2$mobile',
         // ignore: prefer_const_constructors
@@ -55,13 +54,13 @@ class AuthenticationWebService {
         },
         codeSent: (String verificationId, int? resendToken) {
           log("Auth:Verification code successfully sent");
-          // verificationIdSent = verificationId;
           callSend!.call(verificationId);
 
           log('verificationId id $verificationId');
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           codeAutoRetrievalTimeout!.call(verificationId);
+
           log("Auth:codeAutoRetrievalTimeout");
         },
       );

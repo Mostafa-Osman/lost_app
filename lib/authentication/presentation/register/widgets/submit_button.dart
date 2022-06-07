@@ -16,27 +16,13 @@ class SubmitButton extends StatelessWidget {
     final otpCubit = BlocProvider.of<OtpCubit>(context);
     return BlocConsumer<OtpCubit, OtpStates>(
       listener: (context, state) {
-        if (state is VerifyPhoneIsFoundSuccess &&
-            !otpCubit.phoneIsFound.data.isRegistered) {
-          // otpCubit.verifyPhoneNumber(
-          //     phoneNumber: otpCubit.registerPhoneControl.text);
-          navigateWithArgument(
-            context,
-            RouteConstant.otpRoute,
-            [
-              BlocProvider.of<OtpCubit>(context).registerNameControl.text,
-
-              BlocProvider.of<OtpCubit>(context)
-              .registerPhoneControl
-              .text,
-              BlocProvider.of<OtpCubit>(context).registerPasswordControl.text,
-
-              //todo change it to sing up
-              'sing-up'
-            ],
-          );
+        if (state is VerifyPhoneIsFoundSuccess && !otpCubit.phoneIsFound) {
+          otpCubit.verifyPhoneNumber(
+              phoneNumber: otpCubit.registerPhoneControl.text,);
+         otpCubit.requestPhone(otpCubit.registerPhoneControl.text,'sign-up');
+         // Navigator.pushNamed(context,RouteConstant.otpRoute );
         } else if (state is VerifyPhoneIsFoundSuccess &&
-            otpCubit.phoneIsFound.data.isRegistered) {
+            otpCubit.phoneIsFound) {
           showToast(
             message: 'هذا الرقم مسجل بالفعل',
             state: ToastStates.warning,

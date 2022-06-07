@@ -71,15 +71,14 @@ class CreatePostScreen extends StatelessWidget {
                       roundedRectangleBorder: 8.0,
                       hintStyle: const TextStyle(fontSize: 12),
                     ),
-                    const SizedBox(height: 40.0),
-
-                    const TextClass(
-                        textAlign: TextAlign.start,
-                        text: 'اضافه صوره او اكثر',
-                        fontSize: 15,
-
-                    ),
                     const SizedBox(height: 20.0),
+                      const TextClass(
+                          textAlign: TextAlign.start,
+                          text: 'اضافه صوره او اكثر',
+                          fontSize: 15,
+
+                      ),
+                      const SizedBox(height: 10.0),
 
                     UploadPictures(),
                     const SizedBox(height: 100.0),

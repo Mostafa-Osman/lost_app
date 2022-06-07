@@ -58,7 +58,7 @@ class DeletePhotoDialog extends StatelessWidget {
               textColor: mainColor,
               onPressed: () {
                 addPersonDataCubit.deletePhoto(
-                  index: index - 1,
+                  index: index ,
                 );
                 Navigator.pop(context);
               },

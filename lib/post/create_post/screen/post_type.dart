@@ -34,14 +34,14 @@ class PostTypeScreen extends StatelessWidget {
               color: white,
               child: Column(
                 children: const [
-                  CardPostPage(
+                    CardPostPage(
                     image: 'assets/images/welcome_1.svg',
                     text: 'ابحث عن احد المفقودين',
                     size: 250,
                     optionText: 'مكان الفقدان',
                   ),
-                  SizedBox(height: 20),
-                  CardPostPage(
+                    SizedBox(height: 20),
+                    CardPostPage(
                     image: 'assets/images/lost_post.svg',
                     text: 'وجدت احد المفقودين',
                     size: 200,

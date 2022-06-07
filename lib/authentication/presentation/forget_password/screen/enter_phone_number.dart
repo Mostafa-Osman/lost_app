@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
+import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -21,23 +22,24 @@ class PhoneNumberScreen extends StatelessWidget {
       body: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
         listener: (context, state) {
           if (state is VerifyPhoneNumberSuccess) {
-            navigateTo(context, RouteConstant.resetPasswordRoute);
-            // if (resetPasswordCubit.isVerifyPhoneNumber.isRegistered) {
-            //   navigateWithArgument(
-            //     context,
-            //     RouteConstant.otpRoute,
-            //     [true, '', ''],
-            //   );
-            //   log('mostafa :${resetPasswordCubit.phoneNumberController.text}');
-            //   BlocProvider.of<OtpCubit>(context).sendOtp(
-            //     phoneNumber: resetPasswordCubit.phoneNumberController.text,
-            //   );
-            // } else {
-            //   showToast(
-            //     message: 'هذا الرقم ليس لديه حساب',
-            //     state: ToastStates.error,
-            //   );
-            // }
+            if (resetPasswordCubit.isVerifyPhoneNumber.data.isRegistered) {
+              navigateWithArgument(
+                context,
+                RouteConstant.otpRoute,
+                [ resetPasswordCubit
+                    .phoneNumberController.text, 'forget'],
+              );
+              log('mostafa :${resetPasswordCubit.phoneNumberController.text}');
+              BlocProvider.of<OtpCubit>(context).requestPhone(
+             resetPasswordCubit.phoneNumberController.text,
+                'forget',
+              );
+            } else {
+              showToast(
+                message: 'هذا الرقم ليس لديه حساب',
+                state: ToastStates.error,
+              );
+            }
           }
           else if (state is VerifyPhoneNumberError) {
             showToast(message: state.message, state: ToastStates.error);
@@ -47,8 +49,6 @@ class PhoneNumberScreen extends StatelessWidget {
           if (state is VerifyPhoneNumberLoading) {
             return const Center(
               child: CircularProgressIndicator(
-                color: Colors.blue,
-                strokeWidth: 20.0,
               ),
             );
           } else {
