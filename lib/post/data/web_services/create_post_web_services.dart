@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:lost_app/data/local/pref/user_pref.dart';
 
@@ -19,8 +20,8 @@ class CreatePostWebServices {
     String? addressDetails,
     required bool isLost,
     String? moreDetails,
-    required String mainPhoto,
-    required List<String> extraPhoto,
+     File? mainPhoto,
+    required List<File> extraPhoto,
   }) async {
     log('toke is${userPrefs.getUserToken()}');
     //todo remove it after upload backend to server

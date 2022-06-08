@@ -8,7 +8,7 @@ void showToast({required String message, required ToastStates state}) =>
       timeInSecForIosWeb: 5,
 
       backgroundColor: chooseToastColor(state),
-      textColor: Colors.black,
+      textColor: Colors.white,
       fontSize: 16.0,);
 enum ToastStates { success, error, warning }
 

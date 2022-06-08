@@ -48,7 +48,7 @@ class TextFormFieldClass extends StatelessWidget {
     this.textColor = const Color.fromRGBO(4, 15, 15, 1),
     this.backgroundColor = Colors.white,
     this.prefix,
-    this.roundedRectangleBorder = 15.0,
+    this.roundedRectangleBorder = 10.0,
     this.obscureText = false,
     this.autofocus=false,
     this.suffixIcon,

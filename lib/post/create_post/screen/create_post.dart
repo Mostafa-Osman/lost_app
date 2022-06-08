@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/post/create_post/widgets/add_main_photo.dart';
 import 'package:lost_app/post/create_post/widgets/bottom_nav_bar.dart';
 import 'package:lost_app/post/create_post/widgets/cities_sheet.dart';
 import 'package:lost_app/post/create_post/widgets/form_create_post.dart';
@@ -43,6 +44,16 @@ class CreatePostScreen extends StatelessWidget {
               SizedBox(
                 child: ListView(
                   children: [
+                    const SizedBox(height: 30),
+
+                    const TextClass(
+                      textAlign: TextAlign.start,
+                      text: 'اضافه صوره البحث',
+                      fontSize: 15,
+
+                    ),
+                    const SizedBox(height: 10),
+                    const  AddMainPhoto(),
                     const FormCreatePost(),
                     const SizedBox(height: 10),
                     const GenderSheet(),
@@ -74,7 +85,7 @@ class CreatePostScreen extends StatelessWidget {
                     const SizedBox(height: 20.0),
                       const TextClass(
                           textAlign: TextAlign.start,
-                          text: 'اضافه صوره او اكثر',
+                          text: 'اضافه المزيد من الصور',
                           fontSize: 15,
 
                       ),

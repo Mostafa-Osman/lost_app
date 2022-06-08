@@ -48,8 +48,8 @@ class LoginForm extends StatelessWidget {
                 suffixIcon: IconButton(
                   onPressed: () => loginCubit.loginVisibilityPassword(),
                   icon: loginCubit.isVisibility
-                      ? const Icon(Icons.visibility)
-                      : const Icon(Icons.visibility_off),
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility),
                 ),
                 obscureText: loginCubit.isVisibility,
                 validator: (value) =>

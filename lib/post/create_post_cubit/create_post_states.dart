@@ -1,29 +1,29 @@
 part of 'create_post_cubit.dart';
 
 @immutable
-abstract class CreatePostStates {}
+abstract class CreatePostState {}
 
-class PersonDataInitialState extends CreatePostStates {}
+class PersonDataInitialState extends CreatePostState {}
 
-class RefreshUi extends CreatePostStates {}
+class RefreshUi extends CreatePostState {}
 
-class GetCameraImageLoading extends CreatePostStates {}
+class GetCameraImageLoading extends CreatePostState {}
 
-class GetCameraImageSuccess extends CreatePostStates {}
+class GetCameraImageSuccess extends CreatePostState {}
 
-class GetCameraImageError extends CreatePostStates {}
+class GetCameraImageError extends CreatePostState {}
 
-class GetGalleryImageLoading extends CreatePostStates {}
+class GetGalleryImageLoading extends CreatePostState {}
 
-class GetGalleryImageSuccess extends CreatePostStates {}
+class GetGalleryImageSuccess extends CreatePostState {}
 
-class GetGalleryImageError extends CreatePostStates {}
+class GetGalleryImageError extends CreatePostState {}
 
-class CreatePostLoading extends CreatePostStates {}
+class CreatePostLoading extends CreatePostState {}
 
-class CreatePostSuccess extends CreatePostStates {}
+class CreatePostSuccess extends CreatePostState {}
 
-class CreatePostError extends CreatePostStates {
+class CreatePostError extends CreatePostState {
   final String message;
 
   CreatePostError(this.message);

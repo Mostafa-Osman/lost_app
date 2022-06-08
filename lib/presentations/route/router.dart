@@ -8,6 +8,7 @@ import 'package:lost_app/authentication/presentation/login/login_cubit/login_cub
 import 'package:lost_app/authentication/presentation/login/screen/login.dart';
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/screen/otp_screen.dart';
+import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/data/repositories/home/home_repistory.dart';
@@ -78,7 +79,7 @@ class AppRouter {
       case RouteConstant.registerRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => OtpCubit(authenticationRepository, userPrefs),
+            create: (_) => RegisterCubit(authenticationRepository),
             child: RegisterScreen(),
           ),
         );

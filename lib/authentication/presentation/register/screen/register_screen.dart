@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
-import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
-import 'package:lost_app/authentication/presentation/otp/widgets/otp_dialog.dart';
+import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/widgets/register_form.dart';
 import 'package:lost_app/authentication/presentation/register/widgets/submit_button.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
@@ -15,41 +13,37 @@ import 'package:lost_app/shared/styles/color.dart';
 class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final registerCubit = BlocProvider.of<OtpCubit>(context);
+    final registerCubit = BlocProvider.of<RegisterCubit>(context);
 
     return Scaffold(
-      body: BlocConsumer<OtpCubit, OtpStates>(
+      body: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
-          if (state is VerifyPhoneIsFoundError) {
-            showToast(state: ToastStates.error, message: state.message);
-          } else if (state is VerifyPhoneIsFoundSuccess) {
+         if (state is VerifyPhoneIsFoundSuccess) {
             navigateWithArgument(
               context,
               RouteConstant.otpRoute,
              [
-               registerCubit.registerNameControl.text,
                registerCubit.registerPhoneControl.text,
                registerCubit.registerPasswordControl.text,
-                'sign-up'
+               registerCubit.registerNameControl.text,
+                'sign-up',
+               registerCubit.registerEmailControl.text,
               ],
             );
-            BlocProvider.of<OtpCubit>(context).register();
           }
-          if (state is RegisterSuccess) {
-            BlocProvider.of<LoginCubit>(context).login(
-              password: registerCubit.registerPasswordControl.text,
-              phone: registerCubit.registerPhoneControl.text,
-            );
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => OtpDialog(),
-            );
-          } else if (state is RegisterError) {
-            showToast(message: state.message, state: ToastStates.error);
-          }
+         else   if (state is VerifyPhoneIsFoundError) {
+           showToast(state: ToastStates.error, message: state.message);
+         }
         },
         builder: (context, state) {
-          return SingleChildScrollView(
+          if(state is VerifyPhoneIsFoundLoading)
+          {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          else {
+            return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: SafeArea(
@@ -66,7 +60,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                     const RegisterForm(),
                     const SizedBox(height: 30),
-                    const SubmitButton(),
+                    const RegisterSubmitButton(),
                     const SizedBox(height: 10),
                     TextButtonClass(
                       onPressed: () => navigatorAndFinish(
@@ -81,6 +75,7 @@ class RegisterScreen extends StatelessWidget {
               ),
             ),
           );
+          }
         },
       ),
     );

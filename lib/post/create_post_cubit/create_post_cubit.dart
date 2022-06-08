@@ -10,10 +10,10 @@ import 'package:lost_app/shared/model/select_item.dart';
 
 part 'create_post_states.dart';
 
-class CreatePostCubit extends Cubit<CreatePostStates> {
+class CreatePostCubit extends Cubit<CreatePostState> {
   CreatePostCubit(this.createPostRepository) : super(PersonDataInitialState());
   final CreatePostRepository createPostRepository;
-   bool isLost = true;
+  bool isLost = true;
   TextEditingController personNameController = TextEditingController();
   TextEditingController personAgeController = TextEditingController();
   final nameFormKey = GlobalKey<FormState>();
@@ -24,26 +24,34 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
   SelectableItem? selectedCity;
   SelectableItem? selectedGovernorate;
   final imagePicker = ImagePicker();
+  File? mainImage;
   List<File> images = [];
   List<LostCity> filteredCities = [];
 
-  Future<void> getImageFromCamera() async {
+  Future<void> getImageFromCamera({required bool isMainImage}) async {
     emit(GetCameraImageLoading());
     try {
       final photo = await imagePicker.pickImage(source: ImageSource.camera);
-      images.add(File(photo!.path));
+      isMainImage
+          ? mainImage = File(photo!.path)
+          : images.add(File(photo!.path));
+
       emit(GetCameraImageSuccess());
     } catch (error) {
       emit(GetCameraImageError());
     }
   }
 
-  Future<void> getImageFromGallery() async {
+  Future<void> getImageFromGallery({required bool isMainImage}) async {
     final selectedImages = await imagePicker.pickMultiImage();
     emit(GetGalleryImageLoading());
     try {
-      for (final XFile image in selectedImages!) {
-        images.add(File(image.path));
+      if (isMainImage) {
+        mainImage = File(selectedImages![0].path);
+      } else {
+        for (final XFile image in selectedImages!) {
+          images.add(File(image.path));
+        }
       }
       emit(GetGalleryImageSuccess());
       log('length of list of photo ${images.length.toString()}');
@@ -71,8 +79,8 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
         addressDetails: moreAddressDetailsController.text,
         isLost: isLost,
         moreDetails: moreDetailsController.text,
-        mainPhoto: '',
-        extraPhoto: [''],
+        mainPhoto: mainImage,
+        extraPhoto: images,
       );
       emit(CreatePostSuccess());
     } catch (e, s) {
@@ -114,8 +122,8 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
       return 'يجب اختيار المحافظه';
     } else if (selectedCity == null) {
       return 'يجب اختيار المنطقه';
-    } else if (images.isEmpty) {
-      return 'يجب اختيار صوره واحده علي الاقل';
+    } else if (mainImage == null) {
+      return 'يجب اختيار صوره البحث';
     } else {
       return 'done';
     }
@@ -127,6 +135,7 @@ class CreatePostCubit extends Cubit<CreatePostStates> {
     selectedGender = null;
     filteredCities = [];
     images = [];
+    mainImage = null;
     personNameController.clear();
     personAgeController.clear();
     moreAddressDetailsController.clear();

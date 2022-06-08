@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
 
 class CreatePostRepository {
@@ -14,8 +16,8 @@ class CreatePostRepository {
     String? addressDetails,
     required bool isLost,
     String? moreDetails,
-    required String mainPhoto,
-    required List<String> extraPhoto,
+     File? mainPhoto,
+    required List<File> extraPhoto,
   }) async {
     await createPostWebServices.createPost(
       name: name,

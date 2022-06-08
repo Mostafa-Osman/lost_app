@@ -16,142 +16,143 @@ class ResetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resetPasswordCubit = BlocProvider.of<ResetPasswordCubit>(context);
-    return BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
-      listener: (context, state) {
-        if (state is ResetPasswordLoading) {
-          const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (state is ResetPasswordSuccess) {
-          BlocProvider.of<ResetPasswordCubit>(context)
-              .checkTimerCanceled(status: false);
-          showToast(message: state.message, state: ToastStates.success);
-
-          BlocProvider.of<LoginCubit>(context).login(
-            phone: resetPasswordCubit.resetPasswordControl.text,
-            password: resetPasswordCubit.phoneNumberController.text,
-          );
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => const ResetPasswordDialog(),
-          );
-        } else if (state is ResetPasswordError) {
-          showToast(state: ToastStates.error, message: state.message);
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                children: [
-                  // text
-
-                  TextClass(
-                    text:
-                        'مرحبا,${resetPasswordCubit.isVerifyPhoneNumber.data.username}',
-                    fontSize: 25,
-                  ),
-                  // sized box with height 50
-                  const SizedBox(height: 50),
-                  Form(
-                    key: resetPasswordCubit.resetPasswordFormKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //  text password
-                        const TextClass(
-                          text: 'كلمه المرور الجديده',
-                          fontSize: 20,
-                        ),
-                        // Text form field to enter password
-                        TextFormFieldClass(
-                          textHint: 'ادخل كلمه المرور الجديده',
-                          controller: resetPasswordCubit.resetPasswordControl,
-                          obscureText:
-                              resetPasswordCubit.resetPasswordVisibility,
-                          textInputAction: TextInputAction.next,
-                          suffixIcon: IconButton(
-                            onPressed: () =>
-                                resetPasswordCubit.changeResetVisibility(),
-                            icon: resetPasswordCubit.resetPasswordVisibility
-                                ? const Icon(Icons.visibility)
-                                : const Icon(Icons.visibility_off),
-                          ),
-                          validator: (value) => value!.isEmpty
-                              ? 'من فضلك ادخل كلمه المرور'
-                              : (value.length < 8)
-                                  ? 'كلمه المرور اقل من 8 احرف'
-                                  : null,
-                        ),
-                        // Sized Box with height 20
-                        const SizedBox(height: 20),
-                        //  Text to  confirm password
-                        const TextClass(
-                          text: 'تأكيد كلمه المرور الجديده',
-                          fontSize: 20,
-                        ),
-                        //  Text form field to confirm password
-                        TextFormFieldClass(
-                          textHint: ' اعد تأكيد ادخل كلمه المرور الجديده',
-                          controller:
-                              resetPasswordCubit.resetConfirmPasswordControl,
-                          obscureText:
-                              resetPasswordCubit.resetConfirmPasswordVisibility,
-                          suffixIcon: IconButton(
-                            onPressed: () => resetPasswordCubit
-                                .changeResetConfirmVisibility(),
-                            icon: resetPasswordCubit
-                                    .resetConfirmPasswordVisibility
-                                ? const Icon(Icons.visibility)
-                                : const Icon(Icons.visibility_off),
-                          ),
-                          validator: (value) => value!.isEmpty
-                              ? 'من فضلك اعد ادخال كلمه المرور'
-                              : (value !=
-                                      resetPasswordCubit
-                                          .resetPasswordControl.text)
-                                  ? 'كلمه المرور غير متطابق'
-                                  : null,
-                        ),
-                      ],
+    return Scaffold(
+      body: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
+        listener: (context, state) {
+          if (state is ResetPasswordSuccess) {
+            BlocProvider.of<ResetPasswordCubit>(context)
+                .checkTimerCanceled(status: false);
+            showToast(message: state.message, state: ToastStates.success);
+            BlocProvider.of<LoginCubit>(context).login(
+              phone: resetPasswordCubit.resetPasswordControl.text,
+              password: resetPasswordCubit.phoneNumberController.text,
+            );
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => const ResetPasswordDialog(),
+            );
+          } else if (state is ResetPasswordError) {
+            showToast(state: ToastStates.error, message: state.message);
+          }
+        },
+        builder: (context, state) {
+          if (state is ResetPasswordLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  children: [
+                    TextClass(
+                      text:
+                          'مرحبا,${resetPasswordCubit.isVerifyPhoneNumber.data.username}',
+                      fontSize: 25,
                     ),
-                  ),
-                  // Button to submit (show alert dialog)
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: CustomButton(
-                        text: 'التالي',
-                        onPressed: () {
-                          if (resetPasswordCubit
-                              .resetPasswordFormKey.currentState!
-                              .validate()) {
-                            resetPasswordCubit.resetPassword();
-                          }
-                        },
+                    // sized box with height 50
+                    const SizedBox(height: 50),
+                    Form(
+                      key: resetPasswordCubit.resetPasswordFormKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //  text password
+                          const TextClass(
+                            text: 'كلمه المرور الجديده',
+                            fontSize: 20,
+                          ),
+                          // Text form field to enter password
+                          TextFormFieldClass(
+                            textHint: 'ادخل كلمه المرور الجديده',
+                            controller: resetPasswordCubit.resetPasswordControl,
+                            obscureText:
+                                resetPasswordCubit.resetPasswordVisibility,
+                            textInputAction: TextInputAction.next,
+                            suffixIcon: IconButton(
+                              onPressed: () =>
+                                  resetPasswordCubit.changeResetVisibility(),
+                              icon: resetPasswordCubit.resetPasswordVisibility
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),
+                            ),
+                            validator: (value) => value!.isEmpty
+                                ? 'من فضلك ادخل كلمه المرور'
+                                : (value.length < 8)
+                                    ? 'كلمه المرور اقل من 8 احرف'
+                                    : null,
+                          ),
+                          // Sized Box with height 20
+                          const SizedBox(height: 20),
+                          //  Text to  confirm password
+                          const TextClass(
+                            text: 'تأكيد كلمه المرور الجديده',
+                            fontSize: 20,
+                          ),
+                          //  Text form field to confirm password
+                          TextFormFieldClass(
+                            textHint: ' اعد تأكيد ادخل كلمه المرور الجديده',
+                            controller:
+                                resetPasswordCubit.resetConfirmPasswordControl,
+                            obscureText: resetPasswordCubit
+                                .resetConfirmPasswordVisibility,
+                            suffixIcon: IconButton(
+                              onPressed: () => resetPasswordCubit
+                                  .changeResetConfirmVisibility(),
+                              icon: resetPasswordCubit
+                                      .resetConfirmPasswordVisibility
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),
+                            ),
+                            validator: (value) => value!.isEmpty
+                                ? 'من فضلك اعد ادخال كلمه المرور'
+                                : (value !=
+                                        resetPasswordCubit
+                                            .resetPasswordControl.text)
+                                    ? 'كلمه المرور غير متطابق'
+                                    : null,
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  // Sized Box with height 10
-                  const SizedBox(height: 10),
-                  //todo change it to user name of user
-                  TextButtonClass(
-                    text:
-                        'لست,${resetPasswordCubit.isVerifyPhoneNumber.data.username}',
-                    textColor: lightGrey,
-                    onPressed: () => navigatorAndFinish(
-                      context,
-                      RouteConstant.phoneNumberRoute,
+                    // Button to submit (show alert dialog)
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: CustomButton(
+                          text: 'التالي',
+                          onPressed: () {
+                            if (resetPasswordCubit
+                                .resetPasswordFormKey.currentState!
+                                .validate()) {
+                              resetPasswordCubit.resetPassword();
+                            }
+                          },
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    // Sized Box with height 10
+                    const SizedBox(height: 10),
+                    TextButtonClass(
+                      text:
+                          'لست,${resetPasswordCubit.isVerifyPhoneNumber.data.username}',
+                      textColor: lightGrey,
+                      onPressed: () {
+                        navigatorAndFinish(
+                          context,
+                          RouteConstant.phoneNumberRoute,
+                        );
+                        resetPasswordCubit.clearData();
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
-        );
-      },
+            );
+          }
+        },
+      ),
     );
   }
 }

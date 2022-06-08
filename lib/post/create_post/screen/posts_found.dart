@@ -24,7 +24,7 @@ class PostsFoundScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios_sharp, color: black),
         ),
       ),
-      body: BlocConsumer<CreatePostCubit, CreatePostStates>(
+      body: BlocConsumer<CreatePostCubit, CreatePostState>(
         listener: (context, state) {
           if (state is CreatePostError) {
             showToast(

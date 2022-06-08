@@ -7,7 +7,9 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class AddPhotoDialog extends StatelessWidget {
-  const AddPhotoDialog({Key? key}) : super(key: key);
+  final bool isMainPhoto;
+
+  const AddPhotoDialog({required this.isMainPhoto, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +38,8 @@ class AddPhotoDialog extends StatelessWidget {
                 textColor: mainColor,
               ),
               onTap: () {
-                addPersonDataCubit
-                    .getImageFromGallery();
+                addPersonDataCubit.getImageFromGallery(
+                    isMainImage: isMainPhoto,);
                 Navigator.pop(context);
               },
             ),
@@ -52,7 +54,7 @@ class AddPhotoDialog extends StatelessWidget {
                 textColor: mainColor,
               ),
               onTap: () {
-                addPersonDataCubit.getImageFromCamera();
+                addPersonDataCubit.getImageFromCamera(isMainImage: isMainPhoto);
                 Navigator.pop(context);
               },
             ),
