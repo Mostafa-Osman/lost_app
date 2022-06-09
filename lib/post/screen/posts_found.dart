@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/post/create_post/widgets/add_post_dialog.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/post/widgets/add_post_dialog.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
-import 'package:lost_app/shared/components/post_card.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/toast.dart';
@@ -19,8 +18,7 @@ class PostsFoundScreen extends StatelessWidget {
         backgroundColor: white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () =>
-              navigatorAndFinish(context, RouteConstant.homeLayoutRoute),
+          onPressed: () =>Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios_sharp, color: black),
         ),
       ),
@@ -28,7 +26,7 @@ class PostsFoundScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is CreatePostError) {
             showToast(
-              message: 'حدث خطأ ما حاول مجداً',
+              message: 'حدث خطأ ما حاول مجدداً',
               state: ToastStates.error,
             );
           } else if (state is CreatePostSuccess) {

@@ -44,7 +44,9 @@ class AddPostDialog extends StatelessWidget {
               fontSize: 18,
               textColor: lightGrey,
               onPressed: () {
-                //todo mostafa after mansour finish should navigate to (createPostScreen) with data to update form
+                Navigator.pop(context);
+                Navigator.pop(context);
+
               },
             ),
           ),

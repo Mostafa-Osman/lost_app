@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lost_app/data/local/pref/city_data.dart';
+import 'package:lost_app/post/data/models/scan_data_model.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/shared/model/select_item.dart';
 
@@ -86,6 +87,25 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     } catch (e, s) {
       log(e.toString(), stackTrace: s);
       emit(CreatePostError(e.toString()));
+    }
+  }
+
+  late ScanData scanData;
+
+  Future<void> scanPhoto({
+    required bool isLost,
+    required File? mainPhoto,
+  }) async {
+    emit(ScanPhotoLoading());
+    try {
+      scanData = await createPostRepository.scanPhoto(
+        isLost: isLost,
+        mainPhoto: mainPhoto,
+      );
+      emit(ScanPhotoSuccess());
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
+      emit(ScanPhotoError(e.toString()));
     }
   }
 

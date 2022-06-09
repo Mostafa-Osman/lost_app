@@ -8,9 +8,42 @@ import 'package:lost_app/shared/components/constant.dart';
 
 class CreatePostWebServices {
   final UserPrefs userPrefs;
+  Future<Map<String, dynamic>> scanPhoto({
+    required bool isLost,
+    File? mainPhoto,
+  }) async {
+    log('toke is${userPrefs.getUserToken()}');
+    //todo remove it after upload backend to server
+
+    await Future.delayed(const Duration(seconds: 3));
+
+    const String url = '${AppConst.baseUrl}search?start=0&limit=10';
+    final headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Authorization': userPrefs.getUserToken(),
+    };
+
+    final registerBody = {
+      'is_lost': isLost,
+      'main_photo': mainPhoto,
+    };
+    final response = await http.post(
+      Uri.parse(url),
+      body: const Utf8Encoder().convert(
+        jsonEncode(registerBody),
+      ),
+      headers: headers,
+    );
+    final data = json.decode(response.body) as Map<String, dynamic>;
+    if (data['status'] == 200) {
+      log(data.toString());
+      return data;
+    } else {
+      throw data['message'].toString();
+    }
+  }
 
   const CreatePostWebServices(this.userPrefs);
-
   Future<void> createPost({
     required String name,
     required int age,

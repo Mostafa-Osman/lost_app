@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/post/create_post/widgets/add_photo_dialog.dart';
-import 'package:lost_app/post/create_post/widgets/delete_photo_dialog.dart';
-import 'package:lost_app/post/create_post/widgets/display_photo_dialog.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/post/widgets/add_photo_dialog.dart';
+import 'package:lost_app/post/widgets/delete_photo_dialog.dart';
+import 'package:lost_app/post/widgets/display_photo_dialog.dart';
 
 class UploadPictures extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class UploadPictures extends StatelessWidget {
             InkWell(
               onTap: () => showDialog(
                 context: context,
-                builder: (BuildContext context) =>  AddPhotoDialog(isMainPhoto: false,),
+                builder: (BuildContext context) =>  const AddPhotoDialog(isMainPhoto: false,),
               ),
               child: Container(
                 width: 80,
@@ -45,7 +45,6 @@ class UploadPictures extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: createPostCubit.images.length,
                 itemBuilder: (context, index) {
-                  log(createPostCubit.images.length.toString());
                   return InkWell(
                     onTap: () {
                       showDialog(

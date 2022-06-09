@@ -28,3 +28,12 @@ class CreatePostError extends CreatePostState {
 
   CreatePostError(this.message);
 }
+class ScanPhotoLoading extends CreatePostState {}
+
+class ScanPhotoSuccess extends CreatePostState {}
+
+class ScanPhotoError extends CreatePostState {
+  final String error;
+
+  ScanPhotoError(this.error);
+}
