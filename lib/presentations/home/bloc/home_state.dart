@@ -14,6 +14,7 @@ class HomeSuccessState extends HomeState {}
 class HomeDeletePostSuccessState extends HomeState {}
 
 class HomeDeleteCommentSuccessState extends HomeState {}
+class HomeUpdateCommentSuccessState extends HomeState {}
 
 class HomeEmitEditCommentDialogState extends HomeState {
   final String comment;

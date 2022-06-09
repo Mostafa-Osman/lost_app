@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => OnBoardingCubit()),
         BlocProvider(create: (context) => SelectBottomSheetCubit()),
-        BlocProvider(create: (context) => HomeCubit(HomeRepository(HomeWebService()))..getHomeData()),
+        BlocProvider(create: (context) => HomeCubit(HomeRepository(HomeWebService()))..onRefresh()),
         BlocProvider(
           create: (context) =>
               LoginCubit(AuthenticationRepository(AuthenticationWebService())),

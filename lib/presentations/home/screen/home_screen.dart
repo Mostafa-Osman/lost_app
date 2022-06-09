@@ -16,37 +16,19 @@ class HomeScreen extends StatelessWidget {
           );
         } else {
           return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 40.0),
-              child: Align(
-                child: Container(
-                  width: 500,
-                  color: white,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: postCardCubit.homePosts.length,
-                    itemBuilder: (context, index) {
-                      final post = postCardCubit.homePosts[index];
-                      return PostCard(
-                        userPhoto: post.userPhoto,
-                        username: post.username,
-                        personName: post.personData!.personName,
-                        lostAge: post.personData!.age,
-                        lostGender: post.personData!.gender,
-                        lostAddressCity: post.personData!.address.city,
-                        lostAddressDistrict:
-                            post.personData!.address.district,
-                        lostMainPhoto: post.personData!.mainPhoto,
-                        isOwner: post.isOwner,
-                        postId: post.postId,
-                        isSaved: post.isSaved,
-                        userPhoneNumber: post.userPhoneNumber,
-                        postIndex: index,
-                      );
-                    },
+            child: Align(
+              child: Column(
+                children: [
+                  Container(
+                    width: 500,
+                    height: MediaQuery.of(context).size.height-220,
+                    color: white,
+                    child: PostCard(
+                      homePost: postCardCubit.homePosts,
+                    ),
                   ),
-                ),
+                  //const SizedBox(height: 100,),
+                ],
               ),
             ),
           );

@@ -10,6 +10,7 @@ import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dar
 import 'package:lost_app/authentication/presentation/otp/screen/otp_screen.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
+import 'package:lost_app/data/models/home/post_model.dart';
 import 'package:lost_app/data/repositories/home/home_repistory.dart';
 import 'package:lost_app/data/web_services/home_web_service.dart';
 import 'package:lost_app/post/create_post/screen/create_post.dart';
@@ -94,6 +95,9 @@ class AppRouter {
       case RouteConstant.resetPasswordRoute:
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
       case RouteConstant.homeLayoutRoute:
+        return MaterialPageRoute(
+          builder: (_) => HomeLayoutScreen(),
+        );
         if (userPrefs.isUserLoggedIn()) {
           return MaterialPageRoute(
             builder: (_) => HomeLayoutScreen(),
@@ -117,8 +121,9 @@ class AppRouter {
           builder: (_) {
             final arguments = settings.arguments! as List;
             return BlocProvider(
-              create: (context) =>
-                  HomeCubit(homeRepository)..getHomeData()..getPostData(arguments[1] as int),
+              create: (context) => HomeCubit(homeRepository)
+                ..getHomeData()
+                ..getPostData(arguments[1] as int),
               child: PostDetailsScreen(
                 autofocus: arguments[0] as bool,
                 postId: arguments[1] as int,
@@ -156,9 +161,14 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) {
-            final arguments = settings.arguments! as bool;
+            final arguments = settings.arguments! as Map;
             return ReplyCommentScreen(
-              autofocus: arguments,
+              autofocus: arguments['autofocus'] as bool,
+              postId: arguments['postId'] as int,
+              postIndex: arguments['postIndex'] as int,
+              commentIndex: arguments['commentIndex'] as int,
+              parentCommentId: arguments['parentCommentId'] as int,
+              parentCommentIndex: arguments['parentCommentIndex'] as int,
             );
           },
         );
