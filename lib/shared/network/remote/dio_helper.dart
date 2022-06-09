@@ -4,12 +4,15 @@ class DioHelper {
   static Dio? dio;
 
   static init() {
-    dio = Dio(BaseOptions(
+    dio = Dio(
+      BaseOptions(
         baseUrl: 'https://student.valuxapps.com/api/',
         receiveDataWhenStatusError: true,
         headers: {
           'Content-Type': 'application/json',
-        }));
+        },
+      ),
+    );
   }
 
   static Future<Response?>? getData({
@@ -23,7 +26,7 @@ class DioHelper {
       'lang': lang,
       'authorization': token ?? '',
     };
-    return await dio?.get(url, queryParameters: query);
+    return dio?.get(url, queryParameters: query);
   }
 
   static Future<Response?>? postData({

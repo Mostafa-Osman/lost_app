@@ -119,13 +119,8 @@ class PostDetailsScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final comment = homeCubit.post!.comments[index];
                             return CommentCard(
-                              userName: comment.username,
-                              userImage: comment.photo,
-                              date: comment.date,
-                              isOwner: comment.isOwner!,
-                              comment: comment.content,
-                              commentId: comment.commentId,
-                              replayNum: comment.replies!.length,
+                              reply: false,
+                              mainComment: comment,
                               postId: postId,
                               postIndex: postIndex,
                               commentIndex: index,

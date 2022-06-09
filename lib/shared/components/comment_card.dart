@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_app/data/models/home/post_model.dart';
 import 'package:lost_app/presentations/home/widgets/post_pop_up_menu.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -7,32 +8,24 @@ import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class CommentCard extends StatelessWidget {
+  Comments? mainComment;
+  Replies? replyComment;
   final bool reply;
-  final String userName;
-  final String date;
-  final bool isOwner;
-  final String userImage;
-  final String comment;
+  final bool replyButton;
   final int postId;
-  final int commentIndex;
   final int postIndex;
-  final int parentCommentId;
-  final int parentCommentIndex;
-  final int commentId;
-  final int replayNum;
+  final int commentIndex;
+  int parentCommentId;
+  int parentCommentIndex;
 
   CommentCard({
-    this.reply = false,
-    required this.userName,
-    required this.date,
-    required this.isOwner,
-    required this.userImage,
+    this.replyButton = true,
+    required this.reply,
+    this.mainComment,
+    this.replyComment,
     required this.postId,
     required this.postIndex,
-    required this.comment,
-    required this.commentId,
-    this.replayNum = 0,
-     required this.commentIndex,
+    required this.commentIndex,
     this.parentCommentId = 0,
     this.parentCommentIndex = -1,
   });
@@ -58,7 +51,7 @@ class CommentCard extends StatelessWidget {
                     height: size.width >= 500 ? 40 : size.width / 10,
                     child: ClipOval(
                       child: Image.network(
-                        userImage,
+                        reply? replyComment?.photo ?? '': mainComment?.photo ?? '',
                         width: size.width >= 500 ? 40 : size.width / 10,
                         fit: BoxFit.cover,
                       ),
@@ -66,35 +59,32 @@ class CommentCard extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 10.0),
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextClass(
-                            text: userName,
-                            textAlign: TextAlign.start,
-                          ),
-                          TextClass(
-                            text: date,
-                            fontSize: 12,
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextClass(
+                          text: reply? replyComment?.username ?? '': mainComment?.username ?? '',
+                          textAlign: TextAlign.start,
+                        ),
+                        TextClass(
+                          text: reply? replyComment?.date ?? '': mainComment?.date ?? '',
+                          fontSize: 12,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
                     ),
                   ),
                   const Spacer(),
-                  if (isOwner)
+                  if (reply? replyComment?.isOwner ?? false : mainComment?.isOwner ?? false)
                     PostPopUpMenu(
                       isPost: false,
                       postId: postId,
-                      postIndex: postId,
-                      commentId: commentId,
+                      postIndex: postIndex,
+                      commentId:  reply? replyComment?.commentId ?? 0: mainComment?.commentId ?? 0,
                       commentIndex: commentIndex,
                       parentCommentId: parentCommentId,
                       parentCommentIndex: parentCommentIndex,
-                      commentText: comment,
+                      commentText:  reply? replyComment?.content ?? '': mainComment?.content ?? '',
                     ),
                 ],
               ),
@@ -104,7 +94,7 @@ class CommentCard extends StatelessWidget {
                   const SizedBox(width: 50),
                   Expanded(
                     child: TextClass(
-                      text: comment,
+                      text: reply? replyComment?.content ?? '': mainComment?.content ?? '',
                       fontSize: size.width >= 500 ? 20 : size.width / 24,
                       overflow: TextOverflow.visible,
                       textAlign: TextAlign.start,
@@ -112,7 +102,7 @@ class CommentCard extends StatelessWidget {
                   ),
                 ],
               ),
-              if (!reply)
+              if (replyButton)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -122,20 +112,31 @@ class CommentCard extends StatelessWidget {
                       onPressed: () => reply
                           ? null
                           : navigateWithArgument(
-                              context,
-                              RouteConstant.replyCommentRoute,
-                              true,
-                            ),
+                              context, RouteConstant.replyCommentRoute, {
+                              'autofocus': true,
+                              'postId': postId,
+                              'commentIndex': commentIndex,
+                              'postIndex': postIndex,
+                              'parentCommentId': parentCommentId,
+                              'parentCommentIndex': parentCommentIndex,
+                            }),
                       fontSize: 12,
                     ),
                     TextButtonClass(
-                      text: 'الردود ($replayNum)',
+                      text: 'الردود (${mainComment!.replies!.length})',
                       onPressed: () => reply
                           ? null
                           : navigateWithArgument(
                               context,
                               RouteConstant.replyCommentRoute,
-                              false,
+                              {
+                                'autofocus': false,
+                                'postId': postId,
+                                'commentIndex': commentIndex,
+                                'postIndex': postIndex,
+                                'parentCommentId': parentCommentId,
+                                'parentCommentIndex': parentCommentIndex,
+                              },
                             ),
                       fontSize: 12,
                     ),

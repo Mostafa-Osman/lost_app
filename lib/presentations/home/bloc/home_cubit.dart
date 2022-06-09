@@ -9,17 +9,19 @@ import 'package:lost_app/data/models/home/home_model.dart';
 import 'package:lost_app/data/models/home/post_model.dart';
 import 'package:lost_app/data/repositories/home/home_repistory.dart';
 import 'package:meta/meta.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepository) : super(HomeInitial());
 
-  late List<HomePost> homePosts;
+  late List<HomePost> homePosts = [];
   Post? post;
   late Comments comment;
   HomeRepository homeRepository;
   int startLimit = 0;
+  final refreshController = RefreshController();
   int sliderCurrentImgIndex = 0;
   PageController sliderController = PageController();
 
@@ -29,15 +31,26 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> getHomeData() async {
-    emit(HomeLoadingState());
     try {
-      homePosts = await homeRepository.getHomePosts(startLimit);
-      startLimit += 10;
+      homePosts.addAll(await homeRepository.getHomePosts(startLimit));;
+      log('start limit = $startLimit');
       emit(HomeSuccessState());
     } catch (e, s) {
       log('error in getHomeData', error: e, stackTrace: s);
       emit(HomeErrorState(e.toString()));
     }
+  }
+  Future<void> onLoading() async {
+    startLimit = homePosts.length;
+    await getHomeData();
+    refreshController.loadComplete();
+  }
+
+  Future<void> onRefresh() async {
+    emit(HomeLoadingState());
+    startLimit = 0;
+    await getHomeData();
+    refreshController.refreshCompleted();
   }
 
   Future<void> getPostData(int postId) async {
@@ -77,14 +90,16 @@ class HomeCubit extends Cubit<HomeState> {
         commentId: commentId,
         parentCommentId: parentCommentId,
       );
-      log(parentCommentIndex.toString());
-      log(post!.comments.length.toString());
+
       if (parentCommentIndex == -1) {
         post!.comments.removeAt(commentIndex);
       } else {
         post!.comments[parentCommentIndex].replies!.removeAt(commentIndex);
       }
+      log(parentCommentIndex.toString());
+      log(commentIndex.toString());
       log(post!.comments.length.toString());
+      log(post!.comments[commentIndex].replies!.length.toString());
       emit(HomeDeleteCommentSuccessState());
     } catch (e, s) {
       log('error in deleteComment', error: e, stackTrace: s);
@@ -135,7 +150,7 @@ class HomeCubit extends Cubit<HomeState> {
             comment;
       }
       log(post!.comments.length.toString());
-      emit(HomeDeleteCommentSuccessState());
+      emit(HomeUpdateCommentSuccessState());
     } catch (e, s) {
       log('error in updateComment', error: e, stackTrace: s);
       emit(HomeErrorState(e.toString()));
