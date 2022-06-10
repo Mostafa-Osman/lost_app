@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/authentication/presentation/forget_password/reset_password_cubit/reset_password_cubit.dart';
+import 'package:lost_app/constant/constant.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -33,20 +34,25 @@ class ResetPasswordDialog extends StatelessWidget {
             onPressed: () {
               BlocProvider.of<ResetPasswordCubit>(context)
                   .checkTimerCanceled(status: true);
+              BlocProvider.of<ResetPasswordCubit>(context).clearData();
+
               navigatorAndFinish(context, RouteConstant.homeLayoutRoute);
             },
             text: 'الي الصفحه الرئيسيه',
             fontSize: 20,
             textColor: mainColor,
           ),
-          // Timer with 5 second to go home screen automatic
           TimerClass(
             seconds: 5,
             interval: const Duration(milliseconds: 1000),
             onFinished: () {
               BlocProvider.of<ResetPasswordCubit>(context)
                   .checkTimerCanceled(status: true);
-              navigatorAndFinish(context, RouteConstant.homeLayoutRoute);
+              if (userData!.token != null) {
+                navigatorAndFinish(context, RouteConstant.homeLayoutRoute);
+                BlocProvider.of<ResetPasswordCubit>(context).clearData();
+
+              }
             },
           ),
         ],

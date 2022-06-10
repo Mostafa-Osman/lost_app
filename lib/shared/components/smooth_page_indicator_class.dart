@@ -14,7 +14,6 @@ class SmoothPageIndicatorClass extends StatelessWidget {
       textDirection: TextDirection.ltr,
       controller: controller,
       effect: const WormEffect(
-        dotWidth: 20,
         activeDotColor: Color.fromRGBO(42, 185, 237, 1),
           dotColor:Color.fromRGBO(45, 199, 255, 0.2),
 

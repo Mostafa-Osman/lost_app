@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
               LoginCubit(AuthenticationRepository(AuthenticationWebService())),
         ),
 
+
         BlocProvider(
           create: (_) => OtpCubit(
             AuthenticationRepository(AuthenticationWebService()),

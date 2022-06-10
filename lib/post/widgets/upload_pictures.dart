@@ -3,24 +3,23 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lost_app/post/create_post/widgets/add_photo_dialog.dart';
-import 'package:lost_app/post/create_post/widgets/delete_photo_dialog.dart';
-import 'package:lost_app/post/create_post/widgets/display_photo_dialog.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/post/widgets/add_photo_dialog.dart';
+import 'package:lost_app/post/widgets/delete_photo_dialog.dart';
+import 'package:lost_app/post/widgets/display_photo_dialog.dart';
 
 class UploadPictures extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final createPostCubit = BlocProvider.of<CreatePostCubit>(context);
-    return BlocBuilder<CreatePostCubit, CreatePostStates>(
+    return BlocBuilder<CreatePostCubit, CreatePostState>(
       builder: (context, state) {
         return Row(
           children: [
             InkWell(
               onTap: () => showDialog(
                 context: context,
-                builder: (BuildContext context) => const AddPhotoDialog(),
+                builder: (BuildContext context) =>  const AddPhotoDialog(isMainPhoto: false,),
               ),
               child: Container(
                 width: 80,
@@ -46,7 +45,6 @@ class UploadPictures extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: createPostCubit.images.length,
                 itemBuilder: (context, index) {
-                  log(createPostCubit.images.length.toString());
                   return InkWell(
                     onTap: () {
                       showDialog(
@@ -78,17 +76,7 @@ class UploadPictures extends StatelessWidget {
                               },
                             );
                           },
-                          child:
-                              // SizedBox(
-                              //  height: 100.0,
-                              //   width: 80,
-                              //                 child:  SvgPicture.asset(
-                              //                   'assets/images/logo.svg',
-                              //                   fit: BoxFit.cover,
-                              //                 ),
-                              //               ),
-
-                              SizedBox(
+                          child: SizedBox(
                             height: 100.0,
                             width: 80,
                             child: Image.file(

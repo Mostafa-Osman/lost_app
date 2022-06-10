@@ -16,7 +16,7 @@ class OtpDialog extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          navigateTo(context, RouteConstant.homeLayoutRoute);
+          userData= state.userData;
         } else if (state is LoginError) {
           showToast(message: state.message, state: ToastStates.error);
         }
@@ -38,9 +38,9 @@ class OtpDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButtonClass(
-                onPressed: () => (userData.data.token != null)
-                    ? navigateTo(context, RouteConstant.homeLayoutRoute)
-                    : null,
+                onPressed: () =>
+                     navigateTo(context, RouteConstant.homeLayoutRoute),
+
                 text: 'الي الصفحه الرئيسيه',
                 fontSize: 20,
               ),
@@ -48,7 +48,7 @@ class OtpDialog extends StatelessWidget {
                 seconds: 5,
                 interval: const Duration(milliseconds: 1000),
                 onFinished: () {
-                  if (userData.data.token != null) {
+                  if (userData!.token != null) {
                     navigateTo(context, RouteConstant.homeLayoutRoute);
                   }
                 },

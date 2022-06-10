@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -23,8 +25,12 @@ class CardPostPage extends StatelessWidget {
       child: Card(
         elevation: 6,
         child: InkWell(
-          onTap: () => navigateWithArgument(
-            context, RouteConstant.createPostRoute, optionText,),
+          onTap: () {
+            BlocProvider.of<CreatePostCubit>(context).resetForm();
+
+            navigateWithArgument(
+            context, RouteConstant.createPostRoute, [optionText,'create-post'],);
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
