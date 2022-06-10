@@ -3,8 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/home/widgets/photo_slider.dart';
-import 'package:lost_app/presentations/home/widgets/post_pop_up_menu.dart';
+import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
+import 'package:lost_app/presentations/post_details/widgets/photo_slider.dart';
+import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
@@ -16,7 +17,7 @@ class PostDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final postDetailsCubit = BlocProvider.of<HomeCubit>(context);
+    final postDetailsCubit = BlocProvider.of<PostDetailsCubit>(context);
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
         // TODO: implement listener
@@ -86,10 +87,10 @@ class PostDetails extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 10.0),
-                        const FittedBox(
+                        FittedBox(
                           fit: BoxFit.fitWidth,
                           child: TextClass(
-                            text: 'مفقود منذ 3 ايام فى دار السلام',
+                            text: postDetailsCubit.post!.date,
                             textAlign: TextAlign.right,
                             fontSize: 15,
                             overflow: TextOverflow.ellipsis,
@@ -208,6 +209,10 @@ class PostDetails extends StatelessWidget {
                       ),
                       onTap: () {
                         log(postIndex.toString());
+                        BlocProvider.of<HomeCubit>(context).isSavedPost(
+                          postId: postDetailsCubit.post!.postId,
+                          postIndex: postIndex,
+                        );
                         postDetailsCubit.isSavedPost(
                           postId: postDetailsCubit.post!.postId,
                           postIndex: postIndex,

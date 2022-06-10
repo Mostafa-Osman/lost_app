@@ -12,7 +12,9 @@ import 'package:lost_app/authentication/presentation/register/screen/register_sc
 import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/data/models/home/post_model.dart';
 import 'package:lost_app/data/repositories/home/home_repistory.dart';
+import 'package:lost_app/data/repositories/post_details/post_details_repository.dart';
 import 'package:lost_app/data/web_services/home_web_service.dart';
+import 'package:lost_app/data/web_services/post_details/post_details_web_service.dart';
 import 'package:lost_app/post/create_post/screen/create_post.dart';
 import 'package:lost_app/post/create_post/screen/post_type.dart';
 import 'package:lost_app/post/create_post/screen/posts_found.dart';
@@ -21,8 +23,9 @@ import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/home/screen/post_details_screen.dart';
-import 'package:lost_app/presentations/home/screen/reply_comment_screen.dart';
+import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
+import 'package:lost_app/presentations/post_details/screen/post_details_screen.dart';
+import 'package:lost_app/presentations/post_details/screen/reply_comment_screen.dart';
 import 'package:lost_app/presentations/home_layout/ui/home_layout.dart';
 import 'package:lost_app/presentations/notification/ui/notification.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
@@ -44,7 +47,9 @@ class AppRouter {
 
   // home page
   late HomeRepository homeRepository;
+  late PostDetailsRepository postDetailsRepository;
   late HomeWebService homeWebService;
+  late PostDetailsWebService postDetailsWebService;
 
   void initAppSettings() {
     userPrefs = UserPrefs();
@@ -56,8 +61,13 @@ class AppRouter {
     );
 
     // home init
-    homeWebService = HomeWebService();
+    homeWebService = HomeWebService(userPrefs);
     homeRepository = HomeRepository(homeWebService);
+
+    // post details init
+    postDetailsWebService = PostDetailsWebService(userPrefs);
+    postDetailsRepository = PostDetailsRepository(postDetailsWebService);
+
     //create post init
     createPostWebServices = CreatePostWebServices(userPrefs);
     createPostRepository = CreatePostRepository(
@@ -96,7 +106,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
       case RouteConstant.homeLayoutRoute:
         return MaterialPageRoute(
-          builder: (_) => HomeLayoutScreen(),
+          builder: (_) {
+            return BlocProvider(
+              create: (context) => HomeCubit(homeRepository)..onRefresh(),
+              child: HomeLayoutScreen(),
+            );
+          },
         );
         if (userPrefs.isUserLoggedIn()) {
           return MaterialPageRoute(
@@ -121,9 +136,7 @@ class AppRouter {
           builder: (_) {
             final arguments = settings.arguments! as List;
             return BlocProvider(
-              create: (context) => HomeCubit(homeRepository)
-                ..getHomeData()
-                ..getPostData(arguments[1] as int),
+              create: (context) => PostDetailsCubit(postDetailsRepository)..getPostData(arguments[1] as int),
               child: PostDetailsScreen(
                 autofocus: arguments[0] as bool,
                 postId: arguments[1] as int,
@@ -162,13 +175,16 @@ class AppRouter {
           settings: settings,
           builder: (_) {
             final arguments = settings.arguments! as Map;
-            return ReplyCommentScreen(
-              autofocus: arguments['autofocus'] as bool,
-              postId: arguments['postId'] as int,
-              postIndex: arguments['postIndex'] as int,
-              commentIndex: arguments['commentIndex'] as int,
-              parentCommentId: arguments['parentCommentId'] as int,
-              parentCommentIndex: arguments['parentCommentIndex'] as int,
+            return BlocProvider(
+              create: (context) => PostDetailsCubit(postDetailsRepository),
+              child: ReplyCommentScreen(
+                autofocus: arguments['autofocus'] as bool,
+                postId: arguments['postId'] as int,
+                postIndex: arguments['postIndex'] as int,
+                commentIndex: arguments['commentIndex'] as int,
+                parentCommentId: arguments['parentCommentId'] as int,
+                parentCommentIndex: arguments['parentCommentIndex'] as int,
+              ),
             );
           },
         );

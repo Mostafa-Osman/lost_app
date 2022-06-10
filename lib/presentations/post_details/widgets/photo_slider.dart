@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
+import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PhotoSlider extends StatelessWidget {
@@ -12,17 +12,17 @@ class PhotoSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeCubit = BlocProvider.of<HomeCubit>(context);
-    return BlocBuilder<HomeCubit, HomeState>(
+    final postDetailsCubit = BlocProvider.of<PostDetailsCubit>(context);
+    return BlocBuilder<PostDetailsCubit, PostDetailsState>(
       builder: (BuildContext context, state) => Stack(
         alignment: Alignment.center,
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: PageView.builder(
-              controller: homeCubit.sliderController,
+              controller: postDetailsCubit.sliderController,
               itemCount: images.length,
-              onPageChanged: (index) => homeCubit.onSliderImageChange(index),
+              onPageChanged: (index) => postDetailsCubit.onSliderImageChange(index),
               itemBuilder: (c, index) => InkWell(
                 onTap: () {
                   // Navigator.of(context).pushNamed(
@@ -80,7 +80,7 @@ class PhotoSlider extends StatelessWidget {
           Positioned(
             bottom: 30,
             child: SmoothPageIndicator(
-              controller: homeCubit.sliderController,
+              controller: postDetailsCubit.sliderController,
               count: images.length,
               effect: WormEffect(
                 activeDotColor: Theme.of(context).primaryColor,

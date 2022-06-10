@@ -25,7 +25,7 @@ class CreatePostWebServices {
     log('toke is${userPrefs.getUserToken()}');
     //todo remove it after upload backend to server
 
-    await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 3));
 
     const String url = '${AppConst.baseUrl}create-post';
     final headers = {

@@ -96,10 +96,10 @@ class Replies {
     required this.photo,
     required this.username,
   });
-  late final String content;
+  late String content;
   late final int commentId;
   late final String date;
-  late final bool isOwner;
+  bool? isOwner;
   late final String photo;
   late final String username;
 
@@ -107,7 +107,7 @@ class Replies {
     content = json['Content'] as String;
     commentId = json['comment_id'] as int;
     date = json['date'] as String;
-    isOwner = json['is_owner'] as bool;
+    isOwner = json['is_owner'] as bool? ?? true;
     photo = json['photo'] as String;
     username = json['username'] as String;
   }

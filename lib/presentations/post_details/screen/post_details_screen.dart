@@ -3,8 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/home/widgets/post_details.dart';
+import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
+import 'package:lost_app/presentations/post_details/widgets/post_details.dart';
+import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/comment_card.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -14,7 +15,7 @@ class PostDetailsScreen extends StatelessWidget {
   final int postId;
   final int postIndex;
   TextEditingController commentController = TextEditingController();
-  TextEditingController editeCommentController = TextEditingController();
+  TextEditingController editCommentController = TextEditingController();
 
   final ScrollController _controller = ScrollController();
 
@@ -26,7 +27,7 @@ class PostDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeCubit = BlocProvider.of<HomeCubit>(context);
+    final postDetailsCubit = BlocProvider.of<PostDetailsCubit>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: white,
@@ -42,14 +43,14 @@ class PostDetailsScreen extends StatelessWidget {
           //change your color here
         ),
       ),
-      body: BlocConsumer<HomeCubit, HomeState>(
+      body: BlocConsumer<PostDetailsCubit, PostDetailsState>(
         listener: (context, state) {
-          if (state is HomeDeletePostSuccessState) {
+          if (state is PostDetailsDeletePostSuccessState) {
             Navigator.pop(context);
           }
           if (_controller.hasClients) {
             if (state is PostCommentLoadingState) {
-              SchedulerBinding.instance?.addPostFrameCallback((_) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
                 _controller.animateTo(
                   _controller.position.maxScrollExtent,
                   duration: const Duration(milliseconds: 500),
@@ -58,38 +59,37 @@ class PostDetailsScreen extends StatelessWidget {
               });
             }
           }
-          if (state is HomeEmitEditCommentDialogState) {
-            editeCommentController.text = state.comment;
+          if (state is PostDetailsEmitEditCommentDialogState) {
+            editCommentController.text = state.comment;
             showDialog(
               context: context,
               builder: (context) {
-                return AlertDialog(
-                  content: SizedBox(
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextField(
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                        ),
-                        controller: editeCommentController,
-                        keyboardType: TextInputType.text,
-                        maxLines: 5,
-                        style: const TextStyle(
-                          overflow: TextOverflow.visible,
-                        ),
-                        onSubmitted: (value) {
-                          homeCubit.updateComment(
-                            comment: value,
-                            postId: state.postId,
-                            commentId: state.commentId,
-                            commentIndex: state.commentIndex,
-                            parentCommentId: state.parentCommentId,
-                            parentCommentIndex: state.parentCommentIndex,
-                          );
-                          Navigator.pop(context);
-                        },
+                return AlertDialogClass(
+                  height: 200,
+                  isDoneIcon: false,
+                  widget: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
                       ),
+                      controller: editCommentController,
+                      keyboardType: TextInputType.text,
+                      maxLines: 5,
+                      style: const TextStyle(
+                        overflow: TextOverflow.visible,
+                      ),
+                      onSubmitted: (value) {
+                        postDetailsCubit.updateComment(
+                          comment: value,
+                          postId: state.postId,
+                          commentId: state.commentId,
+                          commentIndex: state.commentIndex,
+                          parentCommentId: state.parentCommentId,
+                          parentCommentIndex: state.parentCommentIndex,
+                        );
+                        Navigator.pop(context);
+                      },
                     ),
                   ),
                 );
@@ -98,7 +98,7 @@ class PostDetailsScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is HomeLoadingState) {
+          if (state is PostDetailsLoadingState) {
             return const Center(child: CircularProgressIndicator());
           } else {
             log(_controller.toString());
@@ -115,9 +115,10 @@ class PostDetailsScreen extends StatelessWidget {
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: homeCubit.post!.comments.length,
+                          itemCount: postDetailsCubit.post!.comments.length,
                           itemBuilder: (context, index) {
-                            final comment = homeCubit.post!.comments[index];
+                            final comment = postDetailsCubit.post!
+                                .comments[index];
                             return CommentCard(
                               reply: false,
                               mainComment: comment,
@@ -142,7 +143,7 @@ class PostDetailsScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: lightBlue,
                                   borderRadius: const BorderRadius.all(
-                                      Radius.circular(15),),
+                                    Radius.circular(15),),
                                 ),
                                 child: const Center(
                                   child: CircularProgressIndicator(),
@@ -194,7 +195,7 @@ class PostDetailsScreen extends StatelessWidget {
                                       color: bottomNavBarBlue,
                                       onPressed: () {
                                         if (commentController.text.isNotEmpty) {
-                                          homeCubit.createComment(
+                                          postDetailsCubit.createComment(
                                             postId: postId,
                                             parentCommentId: 0,
                                             content: commentController.text,

@@ -1,8 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/home/screen/edit_comment_screen.dart';
+import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class PostPopUpMenu extends StatelessWidget {
@@ -28,7 +27,6 @@ class PostPopUpMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeCubit = BlocProvider.of<HomeCubit>(context);
     return Container(
       width: 35,
       height: 35,
@@ -57,7 +55,7 @@ class PostPopUpMenu extends StatelessWidget {
               if (isPost) {
 
               }else{
-                homeCubit.emitEditComment(
+                BlocProvider.of<PostDetailsCubit>(context).emitEditComment(
                   comment: commentText,
                   postId: postId,
                   commentId: commentId,
@@ -91,9 +89,10 @@ class PostPopUpMenu extends StatelessWidget {
           PopupMenuItem(
             onTap: () {
               if (isPost) {
-                homeCubit.deletePost(postId: postId, postIndex: postIndex);
+                BlocProvider.of<HomeCubit>(context).deletePost(postId: postId, postIndex: postIndex);
+                BlocProvider.of<PostDetailsCubit>(context).emitDeletePost();
               } else {
-                homeCubit.deleteComment(
+                BlocProvider.of<PostDetailsCubit>(context).deleteComment(
                   postId: postId,
                   commentId: commentId,
                   commentIndex: commentIndex,

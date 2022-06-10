@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_app/data/models/home/post_model.dart';
-import 'package:lost_app/presentations/home/widgets/post_pop_up_menu.dart';
+import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
