@@ -9,7 +9,7 @@ class CreatePostRepository {
   CreatePostWebServices createPostWebServices;
   Future<ScanData> scanPhoto({
     required bool isLost,
-    required File? mainPhoto,
+    required File mainPhoto,
   }) async {
     return ScanData.fromJson(
       await createPostWebServices.scanPhoto(

@@ -55,7 +55,7 @@ class CreatePostButton extends StatelessWidget {
                             } else {
                               addPersonDataCubit.scanPhoto(
                                 isLost: addPersonDataCubit.isLost,
-                                mainPhoto: addPersonDataCubit.mainImage,
+                                mainPhoto: addPersonDataCubit.mainImage!,
                               );
                             }
                           } else {

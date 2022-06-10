@@ -94,11 +94,12 @@ class CreatePostCubit extends Cubit<CreatePostState> {
 
   Future<void> scanPhoto({
     required bool isLost,
-    required File? mainPhoto,
+    required File mainPhoto,
   }) async {
     emit(ScanPhotoLoading());
     try {
-      scanData = await createPostRepository.scanPhoto(
+      //scanData =
+      await createPostRepository.scanPhoto(
         isLost: isLost,
         mainPhoto: mainPhoto,
       );
