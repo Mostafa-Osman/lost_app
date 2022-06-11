@@ -11,8 +11,8 @@ class RoutingPrefs {
   static bool isOnBoardingSeen() =>
       SharedPrefs.instance.getBool("seen") ?? false;
 
-  static String getInitialRoute() => RouteConstant.homeLayoutRoute;
-      // isOnBoardingSeen() == true
-      // ? RouteConstant.homeLayoutRoute
-      // : RouteConstant.onBoardingRoute;
+  static String getInitialRoute() =>
+      isOnBoardingSeen() == true
+      ? RouteConstant.postType/*homeLayoutRoute*/
+      : RouteConstant.onBoardingRoute;
 }

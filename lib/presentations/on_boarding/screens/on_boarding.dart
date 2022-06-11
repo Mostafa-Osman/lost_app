@@ -98,9 +98,13 @@ Widget buildBoardingItem(
           const EdgeInsets.only(top: 80.0, right: 20, left: 20, bottom: 20),
       child: Column(
         children: [
-          SvgPicture.asset(
-            model.image,
-            fit: BoxFit.fitWidth,
+          SizedBox(
+            height:MediaQuery.of(context).size.height*0.3,
+
+            child: SvgPicture.asset(
+              model.image,
+              fit: BoxFit.fitWidth,
+            ),
           ),
           const SizedBox(height: 10),
           SmoothPageIndicatorClass(count: splashLength, controller: controller),

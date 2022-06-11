@@ -8,18 +8,17 @@ import 'package:lost_app/authentication/presentation/login/login_cubit/login_cub
 import 'package:lost_app/authentication/presentation/login/screen/login.dart';
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/screen/otp_screen.dart';
+import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/data/models/home/post_model.dart';
 import 'package:lost_app/data/repositories/home/home_repistory.dart';
 import 'package:lost_app/data/repositories/post_details/post_details_repository.dart';
 import 'package:lost_app/data/web_services/home_web_service.dart';
-import 'package:lost_app/data/web_services/post_details/post_details_web_service.dart';
-import 'package:lost_app/post/create_post/screen/create_post.dart';
-import 'package:lost_app/post/create_post/screen/post_type.dart';
-import 'package:lost_app/post/create_post/screen/posts_found.dart';
-import 'package:lost_app/post/create_post/screen/scan_data.dart';
-import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/post/screen/create_post.dart';
+import 'package:lost_app/post/screen/post_type.dart';
+import 'package:lost_app/post/screen/posts_found.dart';
+import 'package:lost_app/post/screen/scan_data.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
@@ -47,9 +46,7 @@ class AppRouter {
 
   // home page
   late HomeRepository homeRepository;
-  late PostDetailsRepository postDetailsRepository;
   late HomeWebService homeWebService;
-  late PostDetailsWebService postDetailsWebService;
 
   void initAppSettings() {
     userPrefs = UserPrefs();
@@ -89,7 +86,7 @@ class AppRouter {
       case RouteConstant.registerRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => OtpCubit(authenticationRepository, userPrefs),
+            create: (_) => RegisterCubit(authenticationRepository),
             child: RegisterScreen(),
           ),
         );

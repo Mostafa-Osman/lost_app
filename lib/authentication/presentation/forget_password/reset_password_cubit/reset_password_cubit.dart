@@ -18,9 +18,8 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   final resetPasswordFormKey = GlobalKey<FormState>();
   final phoneNumberFormKey = GlobalKey<FormState>();
   late ResetPasswordModel isVerifyPhoneNumber;
-
-  bool resetPasswordVisibility = true;
-  bool resetConfirmPasswordVisibility = true;
+  bool resetPasswordVisibility = false;
+  bool resetConfirmPasswordVisibility = false;
   bool isTimerFinished = true;
 
   Future<void> verifyPhoneNumber({required String phoneNumber}) async {
@@ -40,7 +39,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   Future<void> resetPassword() async {
     emit(ResetPasswordLoading());
     try {
-     final data= await loginRepository.resetPassword(
+      final data = await loginRepository.resetPassword(
         phone: phoneNumberController.text,
         password: resetPasswordControl.text,
       );
@@ -49,6 +48,15 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
       log(e.toString(), stackTrace: s);
       emit(ResetPasswordError(e.toString()));
     }
+  }
+
+  void clearData() {
+    phoneNumberController.clear();
+    resetPasswordControl.clear();
+    resetConfirmPasswordControl.clear();
+    resetPasswordVisibility = false;
+    resetPasswordVisibility = false;
+    emit(ResetPasswordRefreshUi());
   }
 
   void changeResetVisibility() {

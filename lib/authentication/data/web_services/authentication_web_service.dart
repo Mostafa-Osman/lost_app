@@ -197,14 +197,12 @@ class AuthenticationWebService {
   }) async {
     log('phone: $phone');
     log('password : $password');
-
     //todo remove it after upload backend to server
     await Future.delayed(const Duration(seconds: 3));
     const String url = '${AppConst.baseUrl}reset_password';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-
     final resetPasswordBody = {
       'phone_number': phone,
       'password': password,

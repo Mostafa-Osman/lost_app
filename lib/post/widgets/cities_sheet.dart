@@ -10,7 +10,7 @@ class CitiesSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final addPersonDataCubit = BlocProvider.of<CreatePostCubit>(context);
 
-    return BlocBuilder<CreatePostCubit, CreatePostStates>(
+    return BlocBuilder<CreatePostCubit, CreatePostState>(
       builder: (context, state) {
         return  CustomSelectSheet(
           hintTitle: "من فضلك اختر المنطقه",

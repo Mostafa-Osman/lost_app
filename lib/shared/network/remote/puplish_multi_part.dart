@@ -6,12 +6,12 @@ Future<Map<String, dynamic>> postMultiPartRequest({
   required String url,
   Map<String, String>? headers,
   Map<String, String>? fields,
-  required List<File> files,
+  required List<MultipartFile> files,
 }) async {
-  final parts = await getPartsFromFiles(files);
+
   final request = MultipartRequest('POST', Uri.parse(url));
   request.headers.addAll(headers ?? {});
-  request.files.addAll(parts);
+  request.files.addAll(files);
   request.fields.addAll(fields ?? {});
   final response = await request.send();
   final responseBytes = await response.stream.toBytes();
@@ -20,17 +20,26 @@ Future<Map<String, dynamic>> postMultiPartRequest({
   return data;
 }
 
-Future<List<MultipartFile>> getPartsFromFiles(List<File> images) async {
-  final List<MultipartFile> parts = [];
+Future<MultipartFile> getPartFromFile(
+  String fieldName,
+  File file,
+) async {
+  final fileName = file.path.split('/').last;
+  final multipartFile = await MultipartFile.fromPath(
+    fieldName,
+    file.path,
+    filename: fileName,
+  );
+  return multipartFile;
+}
+
+Future<List<MultipartFile>> getPartsFromFiles(
+  String fieldName,
+  List<File> images,
+) async {
+  final List<MultipartFile> filesAsParts = [];
   for (final image in images) {
-    final fileName = image.path.split('/').last;
-    parts.add(
-      await MultipartFile.fromPath(
-        'images',
-        image.path,
-        filename: fileName,
-      ),
-    );
+    filesAsParts.add(await getPartFromFile(fieldName,image));
   }
-  return parts;
+  return filesAsParts;
 }

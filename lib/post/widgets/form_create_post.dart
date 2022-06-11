@@ -17,7 +17,6 @@ class FormCreatePost extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 30),
           const TextClass(
             text: 'الاسم',
             fontSize: 15,
