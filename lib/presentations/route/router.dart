@@ -15,6 +15,7 @@ import 'package:lost_app/data/models/home/post_model.dart';
 import 'package:lost_app/data/repositories/home/home_repistory.dart';
 import 'package:lost_app/data/repositories/post_details/post_details_repository.dart';
 import 'package:lost_app/data/web_services/home_web_service.dart';
+import 'package:lost_app/data/web_services/post_details/post_details_web_service.dart';
 import 'package:lost_app/post/screen/create_post.dart';
 import 'package:lost_app/post/screen/post_type.dart';
 import 'package:lost_app/post/screen/posts_found.dart';
@@ -22,13 +23,13 @@ import 'package:lost_app/post/screen/scan_data.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
+import 'package:lost_app/presentations/on_boarding/screens/on_boarding.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
 import 'package:lost_app/presentations/post_details/screen/post_details_screen.dart';
 import 'package:lost_app/presentations/post_details/screen/reply_comment_screen.dart';
 import 'package:lost_app/presentations/home_layout/ui/home_layout.dart';
 import 'package:lost_app/presentations/notification/ui/notification.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
-import 'package:lost_app/presentations/on_boarding/ui/on_boarding.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/presentations/search/ui/search_screen.dart';
 import 'package:lost_app/profile/screen/edit_profile.dart';
@@ -47,6 +48,10 @@ class AppRouter {
   // home page
   late HomeRepository homeRepository;
   late HomeWebService homeWebService;
+
+  // post details
+  late PostDetailsRepository postDetailsRepository;
+  late PostDetailsWebService postDetailsWebService;
 
   void initAppSettings() {
     userPrefs = UserPrefs();
