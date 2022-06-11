@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Container(
                     width: 500,
-                    height: MediaQuery.of(context).size.height-220,
+                    height: MediaQuery.of(context).size.height-180,
                     color: white,
                     child: PostCard(
                       homePost: postCardCubit.homePosts,
