@@ -1,5 +1,5 @@
-import 'package:lost_app/data/models/home/home_model.dart';
-import 'package:lost_app/data/web_services/home_web_service.dart';
+import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
+import 'package:lost_app/presentations/home/data/home_web_services/home_web_service.dart';
 
 class HomeRepository {
   HomeWebService homeWebService;

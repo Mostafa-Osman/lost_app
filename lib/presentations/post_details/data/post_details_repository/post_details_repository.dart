@@ -1,5 +1,5 @@
-import 'package:lost_app/data/models/home/post_model.dart';
-import 'package:lost_app/data/web_services/post_details/post_details_web_service.dart';
+import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
+import 'package:lost_app/presentations/post_details/data/post_details_web_service/post_details_web_service.dart';
 
 class PostDetailsRepository{
   PostDetailsWebService postDetailsWebService;

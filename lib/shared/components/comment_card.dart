@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_app/data/models/home/post_model.dart';
+import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
 import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -51,7 +51,9 @@ class CommentCard extends StatelessWidget {
                     height: size.width >= 500 ? 40 : size.width / 10,
                     child: ClipOval(
                       child: Image.network(
-                        reply? replyComment?.photo ?? '': mainComment?.photo ?? '',
+                        reply
+                            ? replyComment?.photo ?? ''
+                            : mainComment?.photo ?? '',
                         width: size.width >= 500 ? 40 : size.width / 10,
                         fit: BoxFit.cover,
                       ),
@@ -63,11 +65,23 @@ class CommentCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextClass(
-                          text: reply? replyComment?.username ?? '': mainComment?.username ?? '',
+                          text: reply
+                              ? replyComment?.username ?? ''
+                              : mainComment?.username ?? '',
                           textAlign: TextAlign.start,
                         ),
                         TextClass(
-                          text: reply? replyComment?.date ?? '': mainComment?.date ?? '',
+                          text: reply
+                              ? replyComment?.date.substring(
+                                    0,
+                                    replyComment!.date.length - 7,
+                                  ) ??
+                                  ''
+                              : mainComment?.date.substring(
+                                    0,
+                                    mainComment!.date.length - 7,
+                                  ) ??
+                                  '',
                           fontSize: 12,
                           textAlign: TextAlign.start,
                         ),
@@ -75,16 +89,22 @@ class CommentCard extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  if (reply? replyComment?.isOwner ?? false : mainComment?.isOwner ?? false)
+                  if (reply
+                      ? replyComment?.isOwner ?? false
+                      : mainComment?.isOwner ?? false)
                     PostPopUpMenu(
                       isPost: false,
                       postId: postId,
                       postIndex: postIndex,
-                      commentId:  reply? replyComment?.commentId ?? 0: mainComment?.commentId ?? 0,
+                      commentId: reply
+                          ? replyComment?.commentId ?? 0
+                          : mainComment?.commentId ?? 0,
                       commentIndex: commentIndex,
                       parentCommentId: parentCommentId,
                       parentCommentIndex: parentCommentIndex,
-                      commentText:  reply? replyComment?.content ?? '': mainComment?.content ?? '',
+                      commentText: reply
+                          ? replyComment?.content ?? ''
+                          : mainComment?.content ?? '',
                     ),
                 ],
               ),
@@ -94,7 +114,9 @@ class CommentCard extends StatelessWidget {
                   const SizedBox(width: 50),
                   Expanded(
                     child: TextClass(
-                      text: reply? replyComment?.content ?? '': mainComment?.content ?? '',
+                      text: reply
+                          ? replyComment?.content ?? ''
+                          : mainComment?.content ?? '',
                       fontSize: size.width >= 500 ? 20 : size.width / 24,
                       overflow: TextOverflow.visible,
                       textAlign: TextAlign.start,

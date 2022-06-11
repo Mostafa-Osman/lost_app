@@ -1,20 +1,32 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/data/models/home/post_model.dart';
-import 'package:lost_app/data/repositories/post_details/post_details_repository.dart';
+import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
+import 'package:lost_app/presentations/post_details/data/post_details_repository/post_details_repository.dart';
 
 part 'post_details_state.dart';
 
 class PostDetailsCubit extends Cubit<PostDetailsState> {
   PostDetailsCubit(this.postDetailsRepository) : super(PostDetailsInitial());
   PostDetailsRepository postDetailsRepository;
+  bool pop = false;
   Post? post;
   late Comments comment;
   late Replies replyComment;
   int sliderCurrentImgIndex = 0;
   PageController sliderController = PageController();
 
+
+  // Future<void> emitLoading() async {
+  //   emit(PostDetailsLoadingState());
+  // }
+
+  void emitNavigatorPop({required bool pop}) {
+    log(pop.toString());
+    if(pop) {
+      emit(PostDetailsDeletePostSuccessState());
+    }
+  }
 
   void onSliderImageChange(int index) {
     sliderCurrentImgIndex = index;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/data/models/home/home_model.dart';
+import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
@@ -35,6 +35,7 @@ class PostCard extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             itemCount: homePost.length,
             itemBuilder: (_, index) {
+
               return Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
                 child: Column(
@@ -125,7 +126,7 @@ class PostCard extends StatelessWidget {
                                           FittedBox(
                                             fit: BoxFit.fitWidth,
                                             child: TextClass(
-                                              text: homePost[index].date,
+                                              text: 'مفقود  منذ ${homePost[index].date.substring(0, homePost[index].date.length-7)} فى ${homePost[index].personData!.address.city}',
                                               textAlign: TextAlign.right,
                                               fontSize: 15,
                                               overflow: TextOverflow.ellipsis,

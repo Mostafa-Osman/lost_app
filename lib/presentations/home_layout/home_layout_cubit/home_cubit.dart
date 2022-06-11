@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/presentations/home/screen/home_screen.dart';
+import 'package:lost_app/presentations/home/presentation/screen/home_screen.dart';
 import 'package:lost_app/profile/screen/profile.dart';
 import 'package:lost_app/shared/components/appbar_widget.dart';
 import 'package:lost_app/shared/styles/color.dart';

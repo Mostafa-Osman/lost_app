@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
-import 'package:lost_app/presentations/post_details/widgets/post_details.dart';
+import 'package:lost_app/presentations/post_details/presentation/widgets/post_details.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/comment_card.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';

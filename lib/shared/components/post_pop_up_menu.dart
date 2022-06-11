@@ -53,8 +53,7 @@ class PostPopUpMenu extends StatelessWidget {
           PopupMenuItem(
             onTap: () {
               if (isPost) {
-
-              }else{
+              } else {
                 BlocProvider.of<PostDetailsCubit>(context).emitEditComment(
                   comment: commentText,
                   postId: postId,
@@ -87,10 +86,15 @@ class PostPopUpMenu extends StatelessWidget {
             ),
           ),
           PopupMenuItem(
-            onTap: () {
+            onTap: () async {
               if (isPost) {
-                BlocProvider.of<HomeCubit>(context).deletePost(postId: postId, postIndex: postIndex);
-                BlocProvider.of<PostDetailsCubit>(context).emitDeletePost();
+                //BlocProvider.of<PostDetailsCubit>(context).emitLoading();
+                await BlocProvider.of<HomeCubit>(context)
+                    .deletePost(postId: postId, postIndex: postIndex)
+                    .then((value) {
+                    BlocProvider.of<PostDetailsCubit>(context)
+                        .emitNavigatorPop(pop: value);
+                });
               } else {
                 BlocProvider.of<PostDetailsCubit>(context).deleteComment(
                   postId: postId,

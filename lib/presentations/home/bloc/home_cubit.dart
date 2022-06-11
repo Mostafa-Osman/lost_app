@@ -5,9 +5,8 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/data/models/home/home_model.dart';
-import 'package:lost_app/data/models/home/post_model.dart';
-import 'package:lost_app/data/repositories/home/home_repistory.dart';
+import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
+import 'package:lost_app/presentations/home/data/home_repository/home_repistory.dart';
 import 'package:meta/meta.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -47,15 +46,17 @@ class HomeCubit extends Cubit<HomeState> {
 
 
 
-  Future<void> deletePost({required int postId, required int postIndex}) async {
+  Future<bool> deletePost({required int postId, required int postIndex}) async {
     emit(HomeLoadingState());
     try {
       await homeRepository.deletePost(postId);
       homePosts.removeAt(postIndex);
       emit(HomeDeletePostSuccessState());
+      return true;
     } catch (e, s) {
       log('error in deletePost', error: e, stackTrace: s);
       emit(HomeErrorState(e.toString()));
+      return false;
     }
   }
 

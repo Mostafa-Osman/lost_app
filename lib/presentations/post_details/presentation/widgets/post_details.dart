@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
-import 'package:lost_app/presentations/post_details/widgets/photo_slider.dart';
+import 'package:lost_app/presentations/post_details/presentation/widgets/photo_slider.dart';
 import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -90,7 +90,8 @@ class PostDetails extends StatelessWidget {
                         FittedBox(
                           fit: BoxFit.fitWidth,
                           child: TextClass(
-                            text: postDetailsCubit.post!.date,
+                            //text: postDetailsCubit.post!.date,
+                            text:  'مفقود  منذ ${postDetailsCubit.post!.date.substring(0,postDetailsCubit.post!.date.length-7)} فى ${postDetailsCubit.post!.personData.address.city}',
                             textAlign: TextAlign.right,
                             fontSize: 15,
                             overflow: TextOverflow.ellipsis,
