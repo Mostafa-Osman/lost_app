@@ -34,7 +34,7 @@ class HomePost {
   late bool isSaved;
   late final int userId;
   late final int postId;
-  late final String userPhoto;
+  late final String? userPhoto;
   late final String username;
   late final String userPhoneNumber;
 
@@ -47,7 +47,7 @@ class HomePost {
     isSaved = json['is_saved'] as bool;
     userId = json['user_id'] as int;
     postId = json['post_id'] as int;
-    userPhoto = json['user_photo'] as String;
+    userPhoto = json['user_photo'] as String?;
     username = json['username'] as String;
     userPhoneNumber = json['user_phone_number'] as String;
   }

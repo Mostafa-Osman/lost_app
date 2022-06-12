@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/data/local/pref/routing_pref.dart';
-import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
+import 'package:lost_app/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';

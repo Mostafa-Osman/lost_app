@@ -6,8 +6,8 @@ import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class AddPostDialog extends StatelessWidget {
-  const AddPostDialog({Key? key}) : super(key: key);
+class PostNotFoundDialog extends StatelessWidget {
+  const PostNotFoundDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,7 @@ class AddPostDialog extends StatelessWidget {
             ),
             child: TextClass(
               text:
-                  'سنقوم بحفظ البيانات المدخله في قاعدة البيانات وانشاء منشور',
-              fontSize: 20,
+              'لم يتم العثور على أي نتائج سنقوم بحفظ البيانات المدخله في قاعدة البيانات وانشاء منشور',
             ),
           ),
           Container(
@@ -44,7 +43,6 @@ class AddPostDialog extends StatelessWidget {
               fontSize: 18,
               textColor: lightGrey,
               onPressed: () {
-                Navigator.pop(context);
                 Navigator.pop(context);
 
               },

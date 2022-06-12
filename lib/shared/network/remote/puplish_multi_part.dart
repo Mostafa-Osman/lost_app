@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart';
 
@@ -13,9 +14,11 @@ Future<Map<String, dynamic>> postMultiPartRequest({
   request.headers.addAll(headers ?? {});
   request.files.addAll(files);
   request.fields.addAll(fields ?? {});
+
   final response = await request.send();
   final responseBytes = await response.stream.toBytes();
   final responseString = String.fromCharCodes(responseBytes);
+  log('request is ${responseString.toString()}');
   final data = jsonDecode(responseString) as Map<String, dynamic>;
   return data;
 }

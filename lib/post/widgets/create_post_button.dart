@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/screen/scan_data.dart';
+import 'package:lost_app/post/widgets/post_not_found_dialog.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/toast.dart';
+
+
 
 class CreatePostButton extends StatelessWidget {
   final bool isUpdatePost;
@@ -25,15 +28,37 @@ class CreatePostButton extends StatelessWidget {
             RouteConstant.postsFoundRoute,
           );
         } else if (state is ScanPhotoError) {
-          showToast(
-              message: 'حدث خطأ ما الرجاء المحاوله مره اخري',
-              state: ToastStates.error,);
+          if(state.error=="لم يتم العثور على أي نتائج")
+            {
+              showDialog(
+                context: context,
+                builder: (
+                    BuildContext context,
+                    ) =>
+                const PostNotFoundDialog(),
+              );
+            }
+          else {
+            showDialog(
+              context: context,
+              builder: (
+                  BuildContext context,
+                  ) =>
+              const PostNotFoundDialog(),
+            );
+            // showToast(
+            //   message:  'حدث خطأ ما الرجاء المحاوله مره اخري',
+            //   state: ToastStates.error,);
+          }
         }
       },
       builder: (context, state) {
         if (state is ScanPhotoLoading) {
           return ScanScreen();
-        } else {
+        } else  if(state is CreatePostLoading) {
+          return  const  Center(child:  CircularProgressIndicator());
+        }
+        else {
           return Positioned(
             bottom: 0.0,
             right: 0.0,
@@ -53,7 +78,7 @@ class CreatePostButton extends StatelessWidget {
                             if (isUpdatePost) {
                               return null;
                             } else {
-                              addPersonDataCubit.scanPhoto(
+                              addPersonDataCubit.scanMainPhoto(
                                 isLost: addPersonDataCubit.isLost,
                                 mainPhoto: addPersonDataCubit.mainImage!,
                               );

@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                                 Expanded(
                                   child: TextButtonClass(
                                     onPressed: () {
-                                      navigatorAndFinish(
+                                      navigateTo(
                                         context,
                                         RouteConstant.registerRoute,
                                       );

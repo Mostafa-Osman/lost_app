@@ -13,6 +13,6 @@ class RoutingPrefs {
 
   static String getInitialRoute() =>
       isOnBoardingSeen() == true
-      ? RouteConstant.postType/*homeLayoutRoute*/
+      ? RouteConstant.homeLayoutRoute/*homeLayoutRoute*/
       : RouteConstant.onBoardingRoute;
 }

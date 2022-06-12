@@ -15,7 +15,7 @@ import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
 import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
-import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
+import 'package:lost_app/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/presentations/search/search_cubit/search_cubit.dart';
 import 'package:lost_app/shared/bottom_sheet/cubit/select_bottom_sheet_cubit.dart';
@@ -86,7 +86,6 @@ class MyApp extends StatelessWidget {
           ],
           initialRoute: initialRoute,
         ),
-
       ),
     );
   }

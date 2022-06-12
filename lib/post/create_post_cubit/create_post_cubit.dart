@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lost_app/data/local/pref/city_data.dart';
+import 'package:lost_app/data/models/home/home_model.dart';
 import 'package:lost_app/post/data/models/scan_data_model.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/shared/model/select_item.dart';
@@ -24,10 +25,62 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   SelectableItem? selectedGender;
   SelectableItem? selectedCity;
   SelectableItem? selectedGovernorate;
+  List<HomePost>scanDataResults=[];
+  late HomePost createPostData;
   final imagePicker = ImagePicker();
   File? mainImage;
   List<File> images = [];
   List<LostCity> filteredCities = [];
+
+
+  Future<void> createPost() async {
+    emit(CreatePostLoading());
+    log('name=${personNameController.text}');
+    log('age=${personAgeController.text}');
+    log('gender=${selectedGender!.title}');
+    log('governorate=${selectedGovernorate!.title}');
+    log('city=${selectedCity!.title}');
+    log('addressDetails=${moreAddressDetailsController.text}');
+    log('moreDetails=${moreDetailsController.text}');
+    try {
+      createPostData= await createPostRepository.createPost(
+        name: personNameController.text,
+        age: int.parse(personAgeController.text),
+        gender: selectedGender!.title,
+        governorate: selectedGovernorate!.title,
+        city: selectedCity!.title,
+        addressDetails: moreAddressDetailsController.text,
+        isLost: isLost,
+        moreDetails: moreDetailsController.text,
+        mainPhoto: mainImage!,
+        extraPhoto: images,
+      );
+      emit(CreatePostSuccess());
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
+      emit(CreatePostError(e.toString()));
+    }
+  }
+
+  late ScanData resultOfScanData;
+
+  Future<void> scanMainPhoto({
+    required bool isLost,
+    required File mainPhoto,
+  }) async {
+    emit(ScanPhotoLoading());
+    try {
+      scanDataResults.addAll(await createPostRepository.scanMainPhoto(
+        isLost: isLost,
+        mainPhoto: mainPhoto,
+      ),);
+
+      emit(ScanPhotoSuccess());
+    } catch (e, s) {
+      log(e.toString(), stackTrace: s);
+      emit(ScanPhotoError(e.toString()));
+    }
+  }
 
   Future<void> getImageFromCamera({required bool isMainImage}) async {
     emit(GetCameraImageLoading());
@@ -61,54 +114,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     }
   }
 
-  Future<void> createPost() async {
-    emit(CreatePostLoading());
-    log('name=${personNameController.text}');
-    log('age=${personAgeController.text}');
-    log('gender=${selectedGender!.title}');
-    log('governorate=${selectedGovernorate!.title}');
-    log('city=${selectedCity!.title}');
-    log('addressDetails=${moreAddressDetailsController.text}');
-    log('moreDetails=${moreDetailsController.text}');
-    try {
-      await createPostRepository.createPost(
-        name: personNameController.text,
-        age: int.parse(personAgeController.text),
-        gender: selectedGender!.title,
-        governorate: selectedGovernorate!.title,
-        city: selectedCity!.title,
-        addressDetails: moreAddressDetailsController.text,
-        isLost: isLost,
-        moreDetails: moreDetailsController.text,
-        mainPhoto: mainImage,
-        extraPhoto: images,
-      );
-      emit(CreatePostSuccess());
-    } catch (e, s) {
-      log(e.toString(), stackTrace: s);
-      emit(CreatePostError(e.toString()));
-    }
-  }
-
-  late ScanData scanData;
-
-  Future<void> scanPhoto({
-    required bool isLost,
-    required File mainPhoto,
-  }) async {
-    emit(ScanPhotoLoading());
-    try {
-      //scanData =
-      await createPostRepository.scanPhoto(
-        isLost: isLost,
-        mainPhoto: mainPhoto,
-      );
-      emit(ScanPhotoSuccess());
-    } catch (e, s) {
-      log(e.toString(), stackTrace: s);
-      emit(ScanPhotoError(e.toString()));
-    }
-  }
 
   void setSelectedGender(SelectableItem vehicleBody) {
     selectedGender = vehicleBody;
