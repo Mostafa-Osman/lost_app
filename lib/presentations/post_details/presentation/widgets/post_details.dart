@@ -212,7 +212,6 @@ class PostDetails extends StatelessWidget {
                         log(postIndex.toString());
                         BlocProvider.of<HomeCubit>(context).isSavedPost(
                           postId: postDetailsCubit.post!.postId,
-                          postIndex: postIndex,
                         );
                         postDetailsCubit.isSavedPost(
                           postId: postDetailsCubit.post!.postId,
