@@ -30,6 +30,16 @@ List<LostCity> getCitiesByGovernorateId(int governorateId) {
   final allCities = cities.map((e) => LostCity.fromJson(e)).toList();
   return allCities.where((e) => e.governorateId == governorateId).toList();
 }
+int getCitiesByGovernorateName(String governorateName) {
+  final allCities = cities.map((e) => LostCity.fromJson(e)).toList();
+
+  for(int i = 0; i < allCities.length; ++i){
+    if(allCities[i].title == governorateName) {
+      return i;
+    }
+  }
+  return 0;
+}
 
 final cities = [
   {

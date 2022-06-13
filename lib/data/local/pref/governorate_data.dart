@@ -18,6 +18,16 @@ class LostGovernorate extends SelectableItem {
 List<LostGovernorate> getGovernorates() {
   return governorates.map((e) => LostGovernorate.fromJson(e)).toList();
 }
+int getGovernorateByName(String governorateName) {
+  final allCities = governorates.map((e) => LostGovernorate.fromJson(e)).toList();
+
+  for(int i = 0; i < allCities.length; ++i){
+    if(allCities[i].title == governorateName) {
+      return i;
+    }
+  }
+  return 0;
+}
 
 /// in local data file
 final governorates = [

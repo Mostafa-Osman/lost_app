@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
 import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
+import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class PostPopUpMenu extends StatelessWidget {
@@ -54,6 +59,21 @@ class PostPopUpMenu extends StatelessWidget {
           PopupMenuItem(
             onTap: () {
               if (isPost) {
+                log('hello');
+                BlocProvider.of<CreatePostCubit>(context)
+                    .setData(BlocProvider.of<PostDetailsCubit>(context).post!)
+                    .then(
+                      (value) => navigateWithArgument(
+                          context, RouteConstant.createPostRoute, [
+                        if (BlocProvider.of<PostDetailsCubit>(context)
+                            .post!
+                            .isLost)
+                          'مكان الفقدان'
+                        else
+                          'مكان العثور',
+                        'update-Post'
+                      ]),
+                    );
               } else {
                 BlocProvider.of<PostDetailsCubit>(context).emitEditComment(
                   comment: commentText,
@@ -87,15 +107,15 @@ class PostPopUpMenu extends StatelessWidget {
             ),
           ),
           PopupMenuItem(
-            onTap: ()  {
-              if (isPost)  {
-                 BlocProvider.of<HomeCubit>(context)
+            onTap: () {
+              if (isPost) {
+                BlocProvider.of<HomeCubit>(context)
                     .deletePost(postId: postId)
                     .then((value) {
-                    BlocProvider.of<PostDetailsCubit>(context)
-                        .emitNavigatorPop(pop: value);
+                  BlocProvider.of<PostDetailsCubit>(context)
+                      .emitNavigatorPop(pop: value);
                 });
-                 BlocProvider.of<ProfileCubit>(context).removePost(postId);
+                BlocProvider.of<ProfileCubit>(context).removePost(postId);
               } else {
                 BlocProvider.of<PostDetailsCubit>(context).deleteComment(
                   postId: postId,

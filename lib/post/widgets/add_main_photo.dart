@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/post/widgets/add_photo_dialog.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/post/widgets/add_photo_dialog.dart';
 
 class AddMainPhoto extends StatelessWidget {
   const AddMainPhoto({Key? key}) : super(key: key);

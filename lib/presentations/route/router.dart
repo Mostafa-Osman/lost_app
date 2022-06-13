@@ -107,15 +107,26 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => PhoneNumberScreen());
       case RouteConstant.resetPasswordRoute:
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
+
       case RouteConstant.homeLayoutRoute:
-        return MaterialPageRoute(
+        return  MaterialPageRoute(
+          settings: settings,
           builder: (_) {
-            return BlocProvider(
-              create: (context) => HomeCubit(homeRepository)..onRefresh(),
-              child: HomeLayoutScreen(),
-            );
+            return HomeLayoutScreen();
           },
         );
+
+        //   MaterialPageRoute(
+        //   builder: (_) {
+        //     return BlocProvider(
+        //       create: (context) => HomeCubit(homeRepository)..onRefresh(),
+        //       child: HomeLayoutScreen(),
+        //     );
+        //   },
+        // );
+
+
+
         if (userPrefs.isUserLoggedIn()) {
           return MaterialPageRoute(
             builder: (_) => HomeLayoutScreen(),
