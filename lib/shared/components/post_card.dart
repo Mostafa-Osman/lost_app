@@ -332,9 +332,7 @@ class PostCard extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: () => homeCubit.isSavedPost(
-                                          postId: homePost[index].postId,
-                                          postIndex: index,
-                                        ),
+                                          postId: homePost[index].postId,),
                                         splashColor: grey,
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
