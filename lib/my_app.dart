@@ -9,13 +9,13 @@ import 'package:lost_app/authentication/presentation/login/login_cubit/login_cub
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
+import 'package:lost_app/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/home/data/home_repository/home_repistory.dart';
 import 'package:lost_app/presentations/home/data/home_web_services/home_web_service.dart';
-import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
 import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/presentations/profile/data/profile_repository/profile_repository.dart';
 import 'package:lost_app/presentations/profile/data/profile_web_service/profile_web_service.dart';

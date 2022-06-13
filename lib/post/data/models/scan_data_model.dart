@@ -1,5 +1,6 @@
 
-import 'package:lost_app/data/models/home/home_model.dart';
+
+import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 
 class ScanModel {
   final ScanData data;

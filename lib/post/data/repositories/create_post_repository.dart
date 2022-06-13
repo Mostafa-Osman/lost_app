@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:lost_app/data/models/home/home_model.dart';
 import 'package:lost_app/post/data/models/create_post_dto.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
+import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 
 class CreatePostRepository {
   CreatePostRepository(this.createPostWebServices);

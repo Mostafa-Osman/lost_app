@@ -79,9 +79,9 @@ class PostsFoundScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 30),
-                  PostCard(
-                    homePost: createPostCubit.scanDataResults,
-                  ),
+                  // PostCard(
+                  //   homePost: createPostCubit.scanDataResults,
+                  // ),
                 ],
               ),
             ),

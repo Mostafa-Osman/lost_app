@@ -11,6 +11,8 @@ import 'package:lost_app/authentication/presentation/otp/screen/otp_screen.dart'
 import 'package:lost_app/authentication/presentation/register/register_cubit/register_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
+import 'package:lost_app/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
+import 'package:lost_app/on_boarding/screens/on_boarding.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
 import 'package:lost_app/post/screen/create_post.dart';
@@ -22,8 +24,6 @@ import 'package:lost_app/presentations/home/data/home_repository/home_repistory.
 import 'package:lost_app/presentations/home/data/home_web_services/home_web_service.dart';
 import 'package:lost_app/presentations/home_layout/presentation/screen/home_layout.dart';
 import 'package:lost_app/presentations/notification/ui/notification.dart';
-import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
-import 'package:lost_app/presentations/on_boarding/screens/on_boarding.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_repository/post_details_repository.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_web_service/post_details_web_service.dart';
