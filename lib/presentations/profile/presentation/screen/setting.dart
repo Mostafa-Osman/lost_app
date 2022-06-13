@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
-import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
+import 'package:lost_app/presentations/home_layout/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -32,10 +31,10 @@ class SettingScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const   Padding(
-                    padding:  EdgeInsets.only(right: 15.0, bottom: 10),
-                    child: TextClass(text: 'النظام', fontSize: 20),
-                  ),
+                  // const   Padding(
+                  //   padding:  EdgeInsets.only(right: 15.0, bottom: 10),
+                  //   child: TextClass(text: 'النظام', fontSize: 20),
+                  // ),
                   ListTile(
                     onTap: () => navigateTo(context, RouteConstant.notificationRoute),
                     title: TextClass(
@@ -46,41 +45,50 @@ class SettingScreen extends StatelessWidget {
                     trailing: const Icon(Icons.arrow_back_ios_new_outlined),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () => navigateTo(context, RouteConstant.savedPostsRoute),
                     title: TextClass(
-                        text: 'اللغه',
+                        text: 'المحفوظات',
                         textAlign: TextAlign.start,
                         fontSize: 20,
                         textColor: lightGrey,),
                     trailing: const Icon(Icons.arrow_back_ios_new_outlined),
                   ),
+                  // ListTile(
+                  //   onTap: () {},
+                  //   title: TextClass(
+                  //       text: 'اللغه',
+                  //       textAlign: TextAlign.start,
+                  //       fontSize: 20,
+                  //       textColor: lightGrey,),
+                  //   trailing: const Icon(Icons.arrow_back_ios_new_outlined),
+                  // ),
                   const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15.0),
-                        child: TextClass(
-                            text: 'الوضع الداكن',
-                            fontSize: 20,
-                            textColor: lightGrey,),
-                      ),
-
-                    const Spacer(),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 10.0, bottom: 10),
-                    //   child: FlutterSwitch(
-                    //     width: 50,
-                    //     height: 30,
-                    //     value: cubit.isDark,
-                    //     inactiveColor: HexColor('##E2E6ED'),
-                    //     activeColor: mainColor,
-                    //     onToggle: (_) {
-                    //       cubit.changeMode();
-                    //     },
-                    //   ),
-                    // ),
-                  ],
-                ),
+                //   Row(
+                //     children: [
+                //       Padding(
+                //         padding: const EdgeInsets.only(right: 15.0),
+                //         child: TextClass(
+                //             text: 'الوضع الداكن',
+                //             fontSize: 20,
+                //             textColor: lightGrey,),
+                //       ),
+                //
+                //     const Spacer(),
+                //     // Padding(
+                //     //   padding: const EdgeInsets.only(left: 10.0, bottom: 10),
+                //     //   child: FlutterSwitch(
+                //     //     width: 50,
+                //     //     height: 30,
+                //     //     value: cubit.isDark,
+                //     //     inactiveColor: HexColor('##E2E6ED'),
+                //     //     activeColor: mainColor,
+                //     //     onToggle: (_) {
+                //     //       cubit.changeMode();
+                //     //     },
+                //     //   ),
+                //     // ),
+                //   ],
+                // ),
                 DividerClass(color: HexColor('#D8D8D8'), thickness: 0.8),
                 const Padding(
                   padding: EdgeInsets.only(top: 5, right: 15.0, bottom: 5),

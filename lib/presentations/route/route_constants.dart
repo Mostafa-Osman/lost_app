@@ -14,6 +14,7 @@ class RouteConstant {
   static const String postsFoundRoute = '/postsFound';
   static const String scanDataRoute = '/scanDataRoute';
   static const String editProfileRoute = '/editProfile';
+  static const String savedPostsRoute = '/savedPostsRoute';
   static const String searchRoute = '/search';
   static const String settingRoute = '/setting';
   static const String otpRoute = '/otp';

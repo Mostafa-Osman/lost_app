@@ -7,7 +7,7 @@ import 'package:lost_app/shared/styles/color.dart';
 
 class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
   HomePageAppBar({Key? key})
-      : preferredSize = const Size.fromHeight(70),
+      : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
   final TextEditingController homeAppBarController = TextEditingController();
 
@@ -27,47 +27,49 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
         backgroundColor: white,
         elevation: 0.0,
         toolbarHeight: 55,
-        title: Container(
-            decoration: const BoxDecoration(
-              color: white,
-              //borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                height: 45,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  border: Border.all(
-
-                  ),
-                ),
-                child: Material(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
+        title: Center(
+          child: Container(
+              decoration: const BoxDecoration(
+                color: white,
+                //borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  height: 45,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
+                    border: Border.all(
+
+                    ),
                   ),
-                  child: InkWell(
-                    onTap: () => navigateTo(context, RouteConstant.searchRoute),
-                    child:const Padding(
-                      padding:  EdgeInsets.only(top: 5.0, right: 10),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: TextClass(
-                          text: 'البحث...',
-                          textColor: grey,
-                          overflow: TextOverflow.ellipsis,
+                  child: Material(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: () => navigateTo(context, RouteConstant.searchRoute),
+                      child:const Padding(
+                        padding:  EdgeInsets.only(top: 5.0, right: 10),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: TextClass(
+                            text: 'البحث...',
+                            textColor: grey,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),),
+              ),),
+        ),
         leading: Padding(
           padding: const EdgeInsets.only(right: 15.0),
           child: IconButton(
@@ -102,9 +104,11 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
       backgroundColor: white,
       elevation: 0.0,
       toolbarHeight: 55,
-      title:const TextClass(
-        text: 'الملف الشخصي',
-        fontSize: 20,
+      title: const Center(
+        child:  TextClass(
+          text: 'الملف الشخصي',
+          fontSize: 20,
+        ),
       ),
       leading: Padding(
         padding: const EdgeInsets.only(right: 15.0),

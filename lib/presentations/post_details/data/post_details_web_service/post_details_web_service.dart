@@ -54,7 +54,7 @@ class PostDetailsWebService {
     await Future.delayed(const Duration(seconds: 3));
     // todo: end of fake data
 
-    log(data.toString());
+    log("Profile data: ${data.toString()}");
     if (data['status'] == 200) {
       return data;
     } else {

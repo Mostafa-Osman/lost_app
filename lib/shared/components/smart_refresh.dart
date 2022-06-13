@@ -29,10 +29,13 @@ class SmartRefresh extends StatelessWidget {
       enablePullUp: footerEnabled ?? false,
       header: WaterDropHeader(
         waterDropColor: waterDropColor ?? Theme.of(context).primaryColor,
-        idleIcon: Icon(
-          Icons.autorenew,
-          size: 15,
-          color: idleIconColor ?? Colors.white,
+        idleIcon: Padding(
+          padding: const EdgeInsets.only(top: 70.0),
+          child: Icon(
+            Icons.autorenew,
+            size: 25,
+            color: idleIconColor ?? Colors.white,
+          ),
         ),
         complete: refreshStatue('refresh-complete', Icons.done),
         failed: refreshStatue('refresh-failed', Icons.close),

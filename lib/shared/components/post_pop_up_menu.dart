@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
+import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class PostPopUpMenu extends StatelessWidget {
@@ -86,15 +87,15 @@ class PostPopUpMenu extends StatelessWidget {
             ),
           ),
           PopupMenuItem(
-            onTap: () async {
-              if (isPost) {
-                //BlocProvider.of<PostDetailsCubit>(context).emitLoading();
-                await BlocProvider.of<HomeCubit>(context)
-                    .deletePost(postId: postId, postIndex: postIndex)
+            onTap: ()  {
+              if (isPost)  {
+                 BlocProvider.of<HomeCubit>(context)
+                    .deletePost(postId: postId)
                     .then((value) {
                     BlocProvider.of<PostDetailsCubit>(context)
                         .emitNavigatorPop(pop: value);
                 });
+                 BlocProvider.of<ProfileCubit>(context).removePost(postId);
               } else {
                 BlocProvider.of<PostDetailsCubit>(context).deleteComment(
                   postId: postId,

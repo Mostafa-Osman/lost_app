@@ -8,25 +8,27 @@ import 'package:lost_app/authentication/presentation/forget_password/reset_passw
 import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
 import 'package:lost_app/authentication/presentation/otp/otp_cubit/otp_cubit.dart';
 import 'package:lost_app/authentication/presentation/register/screen/register_screen.dart';
-import 'package:lost_app/presentations/home/data/home_repository/home_repistory.dart';
-import 'package:lost_app/presentations/home/data/home_web_services/home_web_service.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/post/data/web_services/create_post_web_services.dart';
-import 'package:lost_app/presentations/home_layout/home_layout_cubit/home_cubit.dart';
+import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
+import 'package:lost_app/presentations/home/data/home_repository/home_repistory.dart';
+import 'package:lost_app/presentations/home/data/home_web_services/home_web_service.dart';
 import 'package:lost_app/presentations/on_boarding/on_boarding_cubit/on_boarding_cubit.dart';
+import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
+import 'package:lost_app/presentations/profile/data/profile_repository/profile_repository.dart';
+import 'package:lost_app/presentations/profile/data/profile_web_service/profile_web_service.dart';
 import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/presentations/search/search_cubit/search_cubit.dart';
 import 'package:lost_app/shared/bottom_sheet/cubit/select_bottom_sheet_cubit.dart';
-import 'presentations/home/bloc/home_cubit.dart';
-import 'profile/profile_cubit/profile_cubit.dart';
+
+import 'presentations/home_layout/bloc/home_cubit.dart';
 
 class MyApp extends StatelessWidget {
   final AppRouter appRoutes;
   final String? initialRoute;
   final searchCubit = SearchCubit();
-  final profileCubit = ProfileCubit();
   final homeLayoutCubit = HomeLayoutCubit();
 
   MyApp({Key? key, required this.appRoutes, required this.initialRoute})
@@ -65,7 +67,7 @@ class MyApp extends StatelessWidget {
               ResetPasswordCubit(AuthenticationRepository(AuthenticationWebService())),
         ),
         BlocProvider(create: (context) => searchCubit),
-        BlocProvider(create: (context) => profileCubit),
+        BlocProvider(create: (context) => ProfileCubit(ProfileRepository(ProfileWebService(UserPrefs())))..onRefresh()),
         BlocProvider(create: (context) => homeLayoutCubit),
       ],
       child: GestureDetector(
