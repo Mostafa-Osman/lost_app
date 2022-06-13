@@ -103,8 +103,13 @@ class PostCard extends StatelessWidget {
                                             ? 40
                                             : size.width / 10,
                                         child: ClipOval(
-                                          child: Image.network(
-                                            homePost[index].userPhoto,
+                                          child: homePost[index].userPhoto != null
+                                              ? Image.network(
+                                            homePost[index].userPhoto!,
+                                            fit: BoxFit.cover,
+                                          )
+                                              : SvgPicture.asset(
+                                            'assets/images/person.svg',
                                             fit: BoxFit.cover,
                                           ),
                                         ),

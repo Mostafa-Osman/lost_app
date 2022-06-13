@@ -1,16 +1,19 @@
+
 class HomeModel {
   HomeModel({
     required this.posts,
     required this.status,
   });
+
   late final List<HomePost> posts;
   late final int status;
 
-  HomeModel.fromJson(Map<String, dynamic> json){
-    posts = List.from(json['posts'] as List<dynamic>).map((e)=>HomePost.fromJson(e as Map<String, dynamic>)).toList();
+  HomeModel.fromJson(Map<String, dynamic> json) {
+    posts = List.from(json['posts'] as List<dynamic>)
+        .map((e) => HomePost.fromJson(e as Map<String, dynamic>))
+        .toList();
     status = json['status'] as int;
   }
-
 }
 
 class HomePost {
@@ -26,32 +29,33 @@ class HomePost {
     required this.username,
     required this.userPhoneNumber,
   });
+
   late final String date;
   late final String details;
   late final PersonData? personData;
-  late final bool isLost;
+  late final dynamic isLost;
   late final bool isOwner;
   late bool isSaved;
   late final int userId;
   late final int postId;
-  late final String userPhoto;
+  late final String? userPhoto;
   late final String username;
   late final String userPhoneNumber;
 
-  HomePost.fromJson(Map<String, dynamic> json){
+  HomePost.fromJson(Map<String, dynamic> json) {
     date = json['date'] as String;
     details = json['details'] as String;
-    personData =  PersonData.fromJson(json['person_data'] as Map<String, dynamic>);
-    isLost = json['is_lost'] as bool;
+    personData =
+        PersonData.fromJson(json['person_data'] as Map<String, dynamic>);
+    isLost = json['is_lost'];
     isOwner = json['is_owner'] as bool;
     isSaved = json['is_saved'] as bool;
     userId = json['user_id'] as int;
     postId = json['post_id'] as int;
-    userPhoto = json['user_photo'] as String;
+    userPhoto = json['user_photo'] as String?;
     username = json['username'] as String;
     userPhoneNumber = json['user_phone_number'] as String;
   }
-
 }
 
 class PersonData {
@@ -62,13 +66,14 @@ class PersonData {
     required this.mainPhoto,
     required this.personName,
   });
+
   late final Address address;
   late final int age;
   late final String gender;
   late final String mainPhoto;
   late final String personName;
 
-  PersonData.fromJson(Map<String, dynamic> json){
+  PersonData.fromJson(Map<String, dynamic> json) {
     address = Address.fromJson(json['address'] as Map<String, dynamic>);
     age = json['age'] as int;
     gender = json['gender'] as String;
@@ -83,14 +88,14 @@ class Address {
     required this.city,
     required this.district,
   });
+
   late final String addressDetails;
   late final String city;
   late final String district;
 
-  Address.fromJson(Map<String, dynamic> json){
+  Address.fromJson(Map<String, dynamic> json) {
     addressDetails = json['address_details'] as String;
     city = json['city'] as String;
     district = json['district'] as String;
   }
-
 }

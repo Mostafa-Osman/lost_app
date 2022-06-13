@@ -95,4 +95,11 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
+
+  void addPostInList({
+    required HomePost post,
+  }) {
+    homePosts.insert(0, post);
+    emit(HomeRefreshUi());
+  }
 }
