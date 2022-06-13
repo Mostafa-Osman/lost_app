@@ -10,7 +10,6 @@ import 'package:lost_app/shared/styles/color.dart';
 
 class ProfileScreen extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -58,8 +57,8 @@ class ProfileScreen extends StatelessWidget {
                             child: FittedBox(
                               fit: BoxFit.fitWidth,
                               child: ClipOval(
-                                child: Image.asset(
-                                  profileCubit.image,
+                                child: Image.network(
+                                  profileCubit.profileModel!.photo!,
                                   height: 180,
                                   width: 180,
                                   fit: BoxFit.cover,
@@ -70,18 +69,18 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 30),
                           TextClass(
-                            text: profileCubit.name,
+                            text: profileCubit.profileModel!.username!,
                             fontSize: size.width >= 500 ? 22 : size.width / 18,
                             overflow: TextOverflow.clip,
                           ),
                           const SizedBox(height: 20),
                           ProfileTextField(
-                            text: profileCubit.number,
+                            text: profileCubit.profileModel!.phoneNumber!,
                             icon: Icons.phone,
                           ),
                           const SizedBox(height: 3),
                           ProfileTextField(
-                            text: profileCubit.email,
+                            text: profileCubit.profileModel!.email!,
                             icon: Icons.email,
                           ),
                           const SizedBox(height: 30),

@@ -45,22 +45,22 @@ class HomeCubit extends Cubit<HomeState> {
     refreshController.refreshCompleted();
   }
 
-  void removePost(int postId){
+
+  int getPostIndex(int postId){
     for(int i = 0; i < homePosts.length; i++){
       if(homePosts[i].postId == postId){
-        homePosts.removeAt(i);
-        emit(HomeDeletePostSuccessState());
-        break;
+        return i;
       }
     }
-    emit(HomeSuccessState());
+    return 0;
   }
 
   Future<bool> deletePost({required int postId}) async {
     emit(HomeLoadingState());
     try {
       await homeRepository.deletePost(postId);
-      removePost(postId);
+      final int index = getPostIndex(postId);
+      homePosts.removeAt(index);
       return true;
     } catch (e, s) {
       log('error in deletePost', error: e, stackTrace: s);
@@ -69,12 +69,10 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-
-
   Future<void> isSavedPost({
     required int postId,
-    required int postIndex,
   }) async {
+    final int postIndex = getPostIndex(postId);
     homePosts[postIndex].isSaved = !homePosts[postIndex].isSaved;
     emit(HomeSuccessState());
     if (!homePosts[postIndex].isSaved) {

@@ -29,9 +29,9 @@ import 'package:lost_app/presentations/post_details/data/post_details_repository
 import 'package:lost_app/presentations/post_details/data/post_details_web_service/post_details_web_service.dart';
 import 'package:lost_app/presentations/post_details/presentation/screen/post_details_screen.dart';
 import 'package:lost_app/presentations/post_details/presentation/screen/reply_comment_screen.dart';
-import 'package:lost_app/presentations/profile/presentation/screen/edit_profile.dart';
+import 'package:lost_app/presentations/profile/presentation/screen/edit_profile_screen.dart';
 import 'package:lost_app/presentations/profile/presentation/screen/saved_posts_screen.dart';
-import 'package:lost_app/presentations/profile/presentation/screen/setting.dart';
+import 'package:lost_app/presentations/profile/presentation/screen/setting_screen.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/presentations/search/ui/search_screen.dart';
 

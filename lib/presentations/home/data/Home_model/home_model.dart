@@ -10,7 +10,6 @@ class HomeModel {
     posts = List.from(json['posts'] as List<dynamic>).map((e)=>HomePost.fromJson(e as Map<String, dynamic>)).toList();
     status = json['status'] as int;
   }
-
 }
 
 class HomePost {

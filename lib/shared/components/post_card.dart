@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
+import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/post_pop_up_menu.dart';
@@ -45,7 +46,8 @@ class PostCard extends StatelessWidget {
             onLoading: onLoading,
             onRefresh: onRefresh,
             idleIconColor: mainColor,
-            waterDropColor: Colors.white,//mainColor,
+            waterDropColor: Colors.white,
+            //mainColor,
             child: ListView.builder(
               physics: scrollPhysics,
               itemCount: homePost.length,
@@ -295,10 +297,16 @@ class PostCard extends StatelessWidget {
                             if (!isProfile && !homePost[index].isOwner)
                               Expanded(
                                 child: InkWell(
-                                  onTap: () => homeCubit.isSavedPost(
-                                    postId: homePost[index].postId,
-                                    postIndex: index,
-                                  ),
+                                  onTap: () {
+                                    homeCubit.isSavedPost(
+                                      postId: homePost[index].postId,
+                                    );
+                                    BlocProvider.of<ProfileCubit>(
+                                      context,
+                                    ).unSavePost(
+                                      homePost[index].postId,
+                                    );
+                                  },
                                   splashColor: grey,
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),

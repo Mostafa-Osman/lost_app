@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/post/widgets/add_photo_dialog.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/shared/components/add_photo_dialog.dart';
 
 class AddMainPhoto extends StatelessWidget {
   const AddMainPhoto({Key? key}) : super(key: key);
@@ -14,60 +14,70 @@ class AddMainPhoto extends StatelessWidget {
     return BlocBuilder<CreatePostCubit, CreatePostState>(
       builder: (context, state) {
         return Center(
-          child: createPostCubit.mainImage == null ? InkWell(
-            onTap: () =>
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) =>
-                  const AddPhotoDialog(isMainPhoto: true,),
-                ),
-            child: Container(
-              height: 120.0,
-              width: 120,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.add,
-                size: 30.0,
-                color: Colors.grey[600],
-              ),
-            ),
-          ) : Stack(
-            children: [
-              FittedBox(
-                fit: BoxFit.fitWidth,
-                child: ClipOval(
-                  child: Image.file(
-                    createPostCubit.mainImage!,
-                    height: 120,
+          child: createPostCubit.mainImage == null
+              ? InkWell(
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AddPhotoDialog(
+                        onPressedGallery: () async {
+                          createPostCubit.getImageFromGallery(
+                            isMainImage: true,
+                          );
+                          Navigator.pop(context);
+                        },
+                    ),
+                  ),
+                  child: Container(
+                    height: 120.0,
                     width: 120,
-                    fit: BoxFit.cover,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      size: 30.0,
+                      color: Colors.grey[600],
+                    ),
                   ),
-                ),
-              ),
-              Positioned(
-                bottom: 0.0,
-                right: 0.0,
-                child: InkWell(
-                  onTap: () =>
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) =>
-                        const AddPhotoDialog(isMainPhoto: true,),
+                )
+              : Stack(
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: ClipOval(
+                        child: Image.file(
+                          createPostCubit.mainImage!,
+                          height: 120,
+                          width: 120,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                  child: SvgPicture.asset(
-                    'assets/icons/add_icon.svg',
-                    height: 30,
-                    width: 30,
-                    fit: BoxFit.cover,
-                  ),
+                    ),
+                    Positioned(
+                      bottom: 0.0,
+                      right: 0.0,
+                      child: InkWell(
+                        onTap: () => showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              AddPhotoDialog(
+                                onPressedCamera: () async {
+                                  createPostCubit.getImageFromCamera(isMainImage: true);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/icons/add_icon.svg',
+                          height: 30,
+                          width: 30,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-
-            ],
-          ),
         );
       },
     );

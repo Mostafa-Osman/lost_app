@@ -5,15 +5,16 @@ import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AddPhotoDialog extends StatelessWidget {
-  final bool isMainPhoto;
+  final VoidFutureCallBack? onPressedGallery;
+  final VoidFutureCallBack? onPressedCamera;
 
-  const AddPhotoDialog({required this.isMainPhoto, Key? key}) : super(key: key);
+  AddPhotoDialog({ this.onPressedGallery,  this.onPressedCamera, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final addPersonDataCubit = BlocProvider.of<CreatePostCubit>(context);
     return AlertDialogClass(
       isDoneIcon: false,
       height: 220.0,
@@ -37,11 +38,7 @@ class AddPhotoDialog extends StatelessWidget {
                 fontSize: 12,
                 textColor: mainColor,
               ),
-              onTap: () {
-                addPersonDataCubit.getImageFromGallery(
-                    isMainImage: isMainPhoto,);
-                Navigator.pop(context);
-              },
+              onTap: onPressedGallery,
             ),
             ListTile(
               leading: const Icon(
@@ -53,10 +50,7 @@ class AddPhotoDialog extends StatelessWidget {
                 fontSize: 12,
                 textColor: mainColor,
               ),
-              onTap: () {
-                addPersonDataCubit.getImageFromCamera(isMainImage: isMainPhoto);
-                Navigator.pop(context);
-              },
+              onTap: onPressedCamera,
             ),
           ],
         ),
