@@ -38,12 +38,12 @@ class PostsFoundScreen extends StatelessWidget {
           );
         }
       }, builder: (context, state) {
-        // if (state is CreatePostLoading) {
-        //   return const Center(
-        //     child: CircularProgressIndicator(),
-        //   );
-        // }
-        // else {
+        if (state is CreatePostLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        else {
         return SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -87,8 +87,8 @@ class PostsFoundScreen extends StatelessWidget {
             ),
           ),
         );
-      },
-          // },
+      }
+          },
           ),
     );
   }

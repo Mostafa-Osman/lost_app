@@ -6,6 +6,8 @@ abstract class HomeState {}
 class HomeInitial extends HomeState {}
 
 class HomeLoadingState extends HomeState {}
+class HomeRefreshUi extends HomeState {}
+
 
 class PostCommentLoadingState extends HomeState {}
 

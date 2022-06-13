@@ -32,7 +32,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getHomeData() async {
     try {
-      homePosts.addAll(await homeRepository.getHomePosts(startLimit));;
+      homePosts.addAll(await homeRepository.getHomePosts(startLimit));
+      ;
       log('start limit = $startLimit');
       emit(HomeSuccessState());
     } catch (e, s) {
@@ -40,6 +41,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeErrorState(e.toString()));
     }
   }
+
   Future<void> onLoading() async {
     startLimit = homePosts.length;
     await getHomeData();
@@ -207,5 +209,12 @@ class HomeCubit extends Cubit<HomeState> {
         emit(HomeErrorState(e.toString()));
       }
     }
+  }
+
+  void addPostInList({
+    required HomePost post,
+  }) {
+    homePosts.insert(0, post);
+    emit(HomeRefreshUi());
   }
 }

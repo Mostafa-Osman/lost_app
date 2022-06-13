@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lost_app/data/local/pref/city_data.dart';
 import 'package:lost_app/data/models/home/home_model.dart';
+import 'package:lost_app/post/data/models/create_post_dto.dart';
 import 'package:lost_app/post/data/models/scan_data_model.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/shared/model/select_item.dart';
@@ -35,25 +36,16 @@ class CreatePostCubit extends Cubit<CreatePostState> {
 
   Future<void> createPost() async {
     emit(CreatePostLoading());
-    log('name=${personNameController.text}');
-    log('age=${personAgeController.text}');
-    log('gender=${selectedGender!.title}');
-    log('governorate=${selectedGovernorate!.title}');
-    log('city=${selectedCity!.title}');
-    log('addressDetails=${moreAddressDetailsController.text}');
-    log('moreDetails=${moreDetailsController.text}');
+    // log('name=${personNameController.text}');
+    // log('age=${personAgeController.text}');
+    // log('gender=${selectedGender!.title}');
+    // log('governorate=${selectedGovernorate!.title}');
+    // log('city=${selectedCity!.title}');
+    // log('addressDetails=${moreAddressDetailsController.text}');
+    // log('moreDetails=${moreDetailsController.text}');
     try {
-      createPostData= await createPostRepository.createPost(
-        name: personNameController.text,
-        age: int.parse(personAgeController.text),
-        gender: selectedGender!.title,
-        governorate: selectedGovernorate!.title,
-        city: selectedCity!.title,
-        addressDetails: moreAddressDetailsController.text,
-        isLost: isLost,
-        moreDetails: moreDetailsController.text,
-        mainPhoto: mainImage!,
-        extraPhoto: images,
+      createPostData= await createPostRepository.createPost(createPostDto: getCreatePostDto(),
+
       );
       emit(CreatePostSuccess());
     } catch (e, s) {
@@ -80,6 +72,22 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       log(e.toString(), stackTrace: s);
       emit(ScanPhotoError(e.toString()));
     }
+  }
+
+
+  CreatePostDto getCreatePostDto() {
+    return CreatePostDto.copyWith(
+      name: personNameController.text,
+      age: int.parse(personAgeController.text),
+      gender: selectedGender!.title,
+      governorate: selectedGovernorate!.title,
+      city: selectedCity!.title,
+      addressDetails: moreAddressDetailsController.text,
+      isLost: isLost,
+      moreDetails: moreDetailsController.text,
+      mainPhoto: mainImage!,
+      extraPhoto: images,
+    );
   }
 
   Future<void> getImageFromCamera({required bool isMainImage}) async {
@@ -140,6 +148,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     filteredCities = getCitiesByGovernorateId(id);
     emit(RefreshUi());
   }
+
 
   String getErrorMessage() {
     if (selectedGender == null) {

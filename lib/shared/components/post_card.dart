@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -5,6 +8,7 @@ import 'package:lost_app/data/models/home/home_model.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/home/widgets/post_pop_up_menu.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/smart_refresh.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -86,13 +90,15 @@ class PostCard extends StatelessWidget {
                                           ? 40
                                           : size.width / 10,
                                       child: ClipOval(
-                                        child: homePost[index].userPhoto==null? Image.network(
-                                          homePost[index].userPhoto!,
-                                          fit: BoxFit.cover,
-                                        ): SvgPicture.asset(
-                                          'assets/images/person.svg',
-                                          fit: BoxFit.cover,
-                                        ),
+                                        child: homePost[index].userPhoto != null
+                                            ? Image.network(
+                                                homePost[index].userPhoto!,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : SvgPicture.asset(
+                                                'assets/images/person.svg',
+                                                fit: BoxFit.cover,
+                                              ),
                                       ),
                                     ),
                                     const SizedBox(width: 5.0),
