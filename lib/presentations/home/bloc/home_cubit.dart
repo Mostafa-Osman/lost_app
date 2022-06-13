@@ -96,8 +96,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   void addPostInList({
     required HomePost post,
-  }) {
+  }) async {
     homePosts.insert(0, post);
+    log("**********${homePosts[0].personData!.personName.toString()}");
     emit(HomeRefreshUi());
   }
 }

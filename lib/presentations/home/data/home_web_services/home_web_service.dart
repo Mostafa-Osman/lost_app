@@ -128,7 +128,7 @@ final homeFakeResponse = {
         "age": 8,
         "gender": "male",
         "main_photo":
-            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "photos/1462453423756.jpg",
         "person_name": "fouad ali"
       },
       "post_id": 9,
@@ -139,7 +139,7 @@ final homeFakeResponse = {
       "username": "Moamen Khaled"
     },
     {
-      "date": "Sat, 14 May 2022 22:48:28 GMT",
+      "date": "Sat, 15 May 2022 20:48:28 GMT",
       "details": "",
       "is_lost": true,
       "is_owner": true,
@@ -153,7 +153,7 @@ final homeFakeResponse = {
         "age": 16,
         "gender": "female",
         "main_photo":
-            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "photos/1462453423756.jpg",
         "person_name": "Mariam Ahmed"
       },
       "post_id": 10,
@@ -174,7 +174,7 @@ final homeFakeResponse = {
         "age": 12,
         "gender": "female",
         "main_photo":
-            "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "photos/1462453423756.jpg",
         "person_name": "Hala Ahmed"
       },
       "post_id": 11,

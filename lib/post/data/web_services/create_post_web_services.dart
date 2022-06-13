@@ -36,7 +36,7 @@ class CreatePostWebServices {
 
     if (data['status'] == 200) {
       log(data.toString());
-      return data['data']as Map<String,dynamic>;
+      return data;
     } else {
       throw data['message'].toString();
     }

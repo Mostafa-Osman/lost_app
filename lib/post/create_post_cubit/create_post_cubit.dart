@@ -5,11 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lost_app/data/local/pref/city_data.dart';
+import 'package:lost_app/data/local/pref/governorate_data.dart';
 import 'package:lost_app/post/data/models/create_post_dto.dart';
 import 'package:lost_app/post/data/models/scan_data_model.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
+import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
 import 'package:lost_app/shared/model/select_item.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 part 'create_post_states.dart';
 
@@ -17,6 +20,8 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   CreatePostCubit(this.createPostRepository) : super(PersonDataInitialState());
   final CreatePostRepository createPostRepository;
   bool isLost = true;
+  final fakeRefreshController = RefreshController();
+
   TextEditingController personNameController = TextEditingController();
   TextEditingController personAgeController = TextEditingController();
   final nameFormKey = GlobalKey<FormState>();
@@ -26,27 +31,24 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   SelectableItem? selectedGender;
   SelectableItem? selectedCity;
   SelectableItem? selectedGovernorate;
-  List<HomePost>scanDataResults=[];
+  List<HomePost> scanDataResults = [];
   late HomePost createPostData;
   final imagePicker = ImagePicker();
   File? mainImage;
   List<File> images = [];
   List<LostCity> filteredCities = [];
 
-
   Future<void> createPost() async {
-    emit(CreatePostLoading());
-    // log('name=${personNameController.text}');
-    // log('age=${personAgeController.text}');
-    // log('gender=${selectedGender!.title}');
-    // log('governorate=${selectedGovernorate!.title}');
-    // log('city=${selectedCity!.title}');
-    // log('addressDetails=${moreAddressDetailsController.text}');
-    // log('moreDetails=${moreDetailsController.text}');
-    try {
-      createPostData= await createPostRepository.createPost(createPostDto: getCreatePostDto(),
+    log('sdhnsedfkjhdfhsd${isLost.toString()}');
 
+    emit(CreatePostLoading());
+
+    try {
+      createPostData = await createPostRepository.createPost(
+        createPostDto: getCreatePostDto(),
       );
+      log('in cubit ${createPostData.personData!.personName}');
+
       emit(CreatePostSuccess());
     } catch (e, s) {
       log(e.toString(), stackTrace: s);
@@ -62,10 +64,12 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   }) async {
     emit(ScanPhotoLoading());
     try {
-      scanDataResults.addAll(await createPostRepository.scanMainPhoto(
-        isLost: isLost,
-        mainPhoto: mainPhoto,
-      ),);
+      scanDataResults.addAll(
+        await createPostRepository.scanMainPhoto(
+          isLost: isLost,
+          mainPhoto: mainPhoto,
+        ),
+      );
 
       emit(ScanPhotoSuccess());
     } catch (e, s) {
@@ -73,7 +77,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       emit(ScanPhotoError(e.toString()));
     }
   }
-
 
   CreatePostDto getCreatePostDto() {
     return CreatePostDto.copyWith(
@@ -122,7 +125,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     }
   }
 
-
   void setSelectedGender(SelectableItem vehicleBody) {
     selectedGender = vehicleBody;
     emit(RefreshUi());
@@ -149,7 +151,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(RefreshUi());
   }
 
-
   String getErrorMessage() {
     if (selectedGender == null) {
       return 'يجب اختيار النوع';
@@ -162,6 +163,39 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     } else {
       return 'done';
     }
+  }
+
+  Future<void> setData(Post post) async {
+    isLost = post.isLost;
+    mainImage = File(post.personData.mainPhoto);
+    personNameController.text = post.personData.personName;
+    personAgeController.text = post.personData.age.toString();
+    selectedGender = SelectableItem(
+      title: post.personData.gender,
+      id: post.personData.gender == 'male' || post.personData.gender == 'ذكر'
+          ? 0
+          : 1,
+    );
+    selectedCity = SelectableItem(
+      title: post.personData.address.district,
+      id: getCitiesByGovernorateName(post.personData.address.district),
+    );
+    selectedGovernorate = SelectableItem(
+      title: post.personData.address.city,
+      id: getGovernorateByName(post.personData.address.city),
+    );
+    moreAddressDetailsController.text = post.personData.address.addressDetails;
+    moreDetailsController.text = post.details;
+    images = post.personData.extraPhotos.map((e) => File(e)).toList();
+    emit(RefreshUi());
+  }
+  void setIsLost({required String  optionText}) {
+    if(  optionText=='مكان الفقدان') {
+      isLost=true;
+    } else {
+      isLost=false;
+    }
+    emit(RefreshUi());
   }
 
   void resetForm() {

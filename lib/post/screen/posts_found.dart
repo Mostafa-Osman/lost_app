@@ -27,69 +27,79 @@ class PostsFoundScreen extends StatelessWidget {
         ),
       ),
       body: BlocConsumer<CreatePostCubit, CreatePostState>(
-          listener: (context, state) {
-        if (state is CreatePostSuccess) {
-          homeCubit.homePosts.insert(0, createPostCubit.createPostData);
-          navigatorAndFinish(context, RouteConstant.homeLayoutRoute);
-        } else if (state is CreatePostError) {
-          showToast(
-            message: 'حدث خطأ ما حاول مجدداً',
-            state: ToastStates.error,
-          );
-        }
-      }, builder: (context, state) {
-        if (state is CreatePostLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        else {
-        return SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  const TextClass(text: 'تهانينا', fontSize: 25),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 10.0,
-                      left: 10.0,
-                      top: 20,
-                    ),
-                    child: TextClass(
-                      text:
-                          'لقد عثرنا علي(بعض/احد) المنشورات تتطابق مع البيانات التي ادحلتها',
-                      textColor: lightGrey,
-                      fontSize: 15,
-                    ),
+        listener: (context, state) {
+          if (state is CreatePostSuccess) {
+            homeCubit.addPostInList(post: createPostCubit.createPostData);
+            Navigator.pop(context);
+            Navigator.pop(context);
+          } else if (state is CreatePostError) {
+            showToast(
+              message: 'حدث خطأ ما حاول مجدداً',
+              state: ToastStates.error,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is CreatePostLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      const TextClass(text: 'تهانينا', fontSize: 25),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          right: 10.0,
+                          left: 10.0,
+                          top: 20,
+                        ),
+                        child: TextClass(
+                          text:
+                              'لقد عثرنا علي(بعض/احد) المنشورات تتطابق مع البيانات التي ادحلتها',
+                          textColor: lightGrey,
+                          fontSize: 15,
+                        ),
+                      ),
+                      TextButtonClass(
+                        text: 'اليس كذالك ؟',
+                        textColor: mainColor,
+                        fontSize: 18,
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (
+                              BuildContext context,
+                            ) =>
+                                const CreatePostDialog(),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 30),
+                      PostCard(
+                        homePost: createPostCubit.scanDataResults,
+                        onRefresh: () async {},
+                        onLoading: () async {},
+                        footerEnabled: false,
+                        scrollPhysics: const NeverScrollableScrollPhysics(),
+                        refreshController:
+                            createPostCubit.fakeRefreshController,
+                        isSearch: true,
+                      ),
+                    ],
                   ),
-                  TextButtonClass(
-                    text: 'اليس كذالك ؟',
-                    textColor: mainColor,
-                    fontSize: 18,
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (
-                          BuildContext context,
-                        ) =>
-                            const CreatePostDialog(),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  // PostCard(
-                  //   homePost: createPostCubit.scanDataResults,
-                  // ),
-                ],
+                ),
               ),
-            ),
-          ),
-        );
-      }
-          },
-          ),
+            );
+          }
+        },
+      ),
     );
   }
 }

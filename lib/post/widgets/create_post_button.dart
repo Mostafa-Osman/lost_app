@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
@@ -36,17 +38,18 @@ class CreatePostButton extends StatelessWidget {
             ) =>
                 const PostNotFoundDialog(),
           );
-        } else if (state is CreatePostSuccess) {
+        }
+        if (state is CreatePostSuccess) {
+          log('2${addPersonDataCubit.createPostData}');
           homeCubit.addPostInList(post: addPersonDataCubit.createPostData);
           Navigator.pop(context);
           Navigator.pop(context);
 
         } else if (state is CreatePostError || state is ScanPhotoError) {
-          //todo show toast
-          // showToast(
-          //   message: 'حدث خطأ ما حاول مجدداً',
-          //   state: ToastStates.error,
-          // );
+          showToast(
+            message: 'حدث خطأ ما حاول مجدداً',
+            state: ToastStates.error,
+          );
           //todo remove it
           showDialog(
               context: context,

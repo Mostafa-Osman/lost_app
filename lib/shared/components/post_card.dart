@@ -5,16 +5,20 @@ import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/shared/components/smart_refresh.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
+import 'package:lost_app/shared/units/date_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PostCard extends StatelessWidget {
   final bool isProfile;
   final bool footerEnabled;
+  final bool isSearch;
+
   final VoidFutureCallBack onLoading;
   final VoidFutureCallBack onRefresh;
   final RefreshController refreshController;
@@ -23,6 +27,7 @@ class PostCard extends StatelessWidget {
 
   const PostCard({
     this.isProfile = false,
+    this.isSearch = false,
     required this.footerEnabled,
     required this.homePost,
     required this.onLoading,
@@ -105,15 +110,16 @@ class PostCard extends StatelessWidget {
                                             ? 40
                                             : size.width / 10,
                                         child: ClipOval(
-                                          child: homePost[index].userPhoto != null
+                                          child: homePost[index].userPhoto !=
+                                                  null
                                               ? Image.network(
-                                            homePost[index].userPhoto!,
-                                            fit: BoxFit.cover,
-                                          )
+                                                  homePost[index].userPhoto!,
+                                                  fit: BoxFit.cover,
+                                                )
                                               : SvgPicture.asset(
-                                            'assets/images/person.svg',
-                                            fit: BoxFit.cover,
-                                          ),
+                                                  'assets/images/person.svg',
+                                                  fit: BoxFit.cover,
+                                                ),
                                         ),
                                       ),
                                       const SizedBox(width: 5.0),
@@ -224,9 +230,10 @@ class PostCard extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             child: Image.network(
-                                              homePost[index]
-                                                  .personData!
-                                                  .mainPhoto,
+                                              AppConst.imageUrl +
+                                                  homePost[index]
+                                                      .personData!
+                                                      .mainPhoto,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -244,113 +251,130 @@ class PostCard extends StatelessWidget {
                         height: 2,
                       ),
                       Container(
-                        height: 35,
+                        height:35,
                         width: double.infinity,
+                        padding: EdgeInsets.only(
+                          top: isSearch ? 5.0 : 0.0,
+                        ),
                         decoration: BoxDecoration(
-                          color: lightBlue,
+                          color: // isSearch?Colors.green:
+                              lightBlue,
                           borderRadius: const BorderRadius.only(
                             bottomRight: Radius.circular(15.0),
                             bottomLeft: Radius.circular(15.0),
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () => navigateWithArgument(
-                                  context,
-                                  RouteConstant.commentRoute,
-                                  [
-                                    true,
-                                    homePost[index].postId,
-                                    index,
-                                  ],
-                                ),
-                                //splashColor: grey,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const FittedBox(
-                                        fit: BoxFit.fitWidth,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(top: 5.0),
-                                          child: TextClass(
-                                            text: 'التعليق',
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 2.0),
-                                        child: SvgPicture.asset(
-                                          'assets/icons/comment_icon.svg',
-                                        ),
-                                      ),
-                                    ],
+                        child: isSearch
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  TextClass(
+                                    text: 'اتصل الان',
+                                    textColor: Colors.green,
                                   ),
-                                ),
-                              ),
-                            ),
-                            if (!isProfile && !homePost[index].isOwner)
-                              Container(width: 2, color: white),
-                            if (!isProfile && !homePost[index].isOwner)
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    homeCubit.isSavedPost(
-                                      postId: homePost[index].postId,
-                                    );
-                                    BlocProvider.of<ProfileCubit>(
-                                      context,
-                                    ).unSavePost(
-                                      homePost[index].postId,
-                                    );
-                                  },
-                                  splashColor: grey,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const FittedBox(
-                                          fit: BoxFit.fitWidth,
-                                          child: Padding(
-                                            padding: EdgeInsets.only(top: 5.0),
-                                            child: TextClass(
-                                              text: 'حفظ',
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            bottom: 2.0,
-                                          ),
-                                          child: homePost[index].isSaved
-                                              ? const Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.red,
-                                                )
-                                              : const Icon(
-                                                  Icons.favorite_border,
+                                  SizedBox(width: 5.0),
+                                  Icon(
+                                    Icons.call,
+                                    color: Colors.green,
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () => navigateWithArgument(
+                                        context,
+                                        RouteConstant.commentRoute,
+                                        [
+                                          true,
+                                          homePost[index].postId,
+                                          index,
+                                        ],
+                                      ),
+                                      //splashColor: grey,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const FittedBox(
+                                              fit: BoxFit.fitWidth,
+                                              child: Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 5.0),
+                                                child: TextClass(
+                                                  text: 'التعليق',
                                                 ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 2.0),
+                                              child: SvgPicture.asset(
+                                                'assets/icons/comment_icon.svg',
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              )
-                          ],
-                        ),
+                                  if (!isProfile && !homePost[index].isOwner)
+                                    Container(width: 2, color: white),
+                                  if (!isProfile && !homePost[index].isOwner)
+                                    Expanded(
+                                      child: InkWell(
+                                        onTap: () => homeCubit.isSavedPost(
+                                          postId: homePost[index].postId,
+                                          postIndex: index,
+                                        ),
+                                        splashColor: grey,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const FittedBox(
+                                                fit: BoxFit.fitWidth,
+                                                child: Padding(
+                                                  padding:
+                                                      EdgeInsets.only(top: 5.0),
+                                                  child: TextClass(
+                                                    text: 'حفظ',
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 2.0,
+                                                ),
+                                                child: homePost[index].isSaved
+                                                    ? const Icon(
+                                                        Icons.favorite,
+                                                        color: Colors.red,
+                                                      )
+                                                    : const Icon(
+                                                        Icons.favorite_border,
+                                                      ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                ],
+                              ),
                       ),
                     ],
                   ),

@@ -5,14 +5,19 @@ import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
+
 class CardPostPage extends StatelessWidget {
   final String image;
   final String text;
   final double? size;
   final String? optionText;
 
-  const CardPostPage(
-      {required this.image, required this.text, this.optionText, this.size,});
+  const CardPostPage({
+    required this.image,
+    required this.text,
+    this.optionText,
+    this.size,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +32,13 @@ class CardPostPage extends StatelessWidget {
         child: InkWell(
           onTap: () {
             BlocProvider.of<CreatePostCubit>(context).resetForm();
-
+            BlocProvider.of<CreatePostCubit>(context)
+                .setIsLost(optionText: optionText!);
             navigateWithArgument(
-            context, RouteConstant.createPostRoute, [optionText,'create-post'],);
+              context,
+              RouteConstant.createPostRoute,
+              [optionText, 'create-post'],
+            );
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
