@@ -155,7 +155,7 @@ class PostCard extends StatelessWidget {
                                               fit: BoxFit.fitWidth,
                                               child: TextClass(
                                                 text:
-                                                    'مفقود  منذ ${homePost[index].date.substring(0, homePost[index].date.length - 7)} فى ${homePost[index].personData!.address.city}',
+                                                    '${homePost[index].isLost as bool? "مفقود" : "تم العثور"} منذ ${homePost[index].date.substring(0, homePost[index].date.length - 7)} فى ${homePost[index].personData!.address.city}',
                                                 textAlign: TextAlign.right,
                                                 fontSize: 15,
                                                 overflow: TextOverflow.ellipsis,
