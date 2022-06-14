@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +12,7 @@ import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
 import 'package:lost_app/shared/model/select_item.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'create_post_states.dart';
 
@@ -21,7 +21,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   final CreatePostRepository createPostRepository;
   bool isLost = true;
   final fakeRefreshController = RefreshController();
-
   TextEditingController personNameController = TextEditingController();
   TextEditingController personAgeController = TextEditingController();
   final nameFormKey = GlobalKey<FormState>();
@@ -39,7 +38,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   List<LostCity> filteredCities = [];
 
   Future<void> createPost() async {
-    log('sdhnsedfkjhdfhsd${isLost.toString()}');
 
     emit(CreatePostLoading());
 
@@ -68,6 +66,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
         await createPostRepository.scanMainPhoto(
           isLost: isLost,
           mainPhoto: mainPhoto,
+
         ),
       );
 
@@ -211,4 +210,12 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     moreDetailsController.clear();
     emit(RefreshUi());
   }
+  Future<void> launchCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
 }

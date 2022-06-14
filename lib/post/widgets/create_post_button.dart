@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
-import 'package:lost_app/post/screen/scan_data.dart';
-import 'package:lost_app/post/widgets/post_not_found_dialog.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
@@ -24,45 +22,33 @@ class CreatePostButton extends StatelessWidget {
 
     return BlocConsumer<CreatePostCubit, CreatePostState>(
       listener: (context, state) {
-        if (state is ScanPhotoSuccess) {
-          navigateTo(
-            context,
-            RouteConstant.postsFoundRoute,
-          );
-        } else if (state is ScanPhotoError &&
-            state.error == "لم يتم العثور على أي نتائج") {
-          showDialog(
-            context: context,
-            builder: (
-              BuildContext context,
-            ) =>
-                const PostNotFoundDialog(),
-          );
+        if (state is ScanPhotoLoading) {
+           navigateTo(context, RouteConstant.scanDataRoute);
         }
         if (state is CreatePostSuccess) {
-          log('2${addPersonDataCubit.createPostData}');
           homeCubit.addPostInList(post: addPersonDataCubit.createPostData);
           Navigator.pop(context);
           Navigator.pop(context);
+          //todo if user in posts found should pop two more
+          showToast(
+            message: 'تم نشر المنشور بنجاحً',
+            state: ToastStates.success,
+          );
+
 
         } else if (state is CreatePostError || state is ScanPhotoError) {
           showToast(
             message: 'حدث خطأ ما حاول مجدداً',
             state: ToastStates.error,
           );
-          //todo remove it
-          showDialog(
-              context: context,
-              builder: (
-                BuildContext context,
-              ) =>
-                  const PostNotFoundDialog(),);
+          if(state is ScanPhotoError) {
+            Navigator.pop(context);
+          }
         }
+
       },
       builder: (context, state) {
-        if (state is ScanPhotoLoading) {
-          return ScanScreen();
-        } else if (state is CreatePostLoading) {
+        if (state is CreatePostLoading) {
           return const Center(child: CircularProgressIndicator());
         } else {
           return Positioned(

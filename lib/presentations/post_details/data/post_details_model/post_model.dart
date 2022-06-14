@@ -24,7 +24,7 @@ class Post {
     required this.postId,
     required this.userId,
     required this.userPhoneNumber,
-    required this.userPhoto,
+     this.userPhoto,
     required this.username,
   });
   late List<Comments> comments;
@@ -37,7 +37,7 @@ class Post {
   late final int postId;
   late final int userId;
   late final String userPhoneNumber;
-  late final String userPhoto;
+  String? userPhoto;
   late final String username;
 
   Post.fromJson(Map<String, dynamic> json){
@@ -51,7 +51,7 @@ class Post {
     postId = json['post_id'] as int;
     userId = json['user_id'] as int;
     userPhoneNumber = json['user_phone_number'] as String;
-    userPhoto = json['user_photo'] as String;
+    userPhoto = json['user_photo'] as String?;
     username = json['username']  as String;
   }
 
@@ -63,7 +63,7 @@ class Comments {
     required this.commentId,
     required this.date,
     this.isOwner,
-    required this.photo,
+     this.photo,
     this.replies,
     required this.username,
   });
@@ -71,16 +71,16 @@ class Comments {
   late final int commentId;
   late final String date;
   bool? isOwner;
-  late final String photo;
+    String? photo;
   List<Replies>? replies;
   late final String username;
 
   Comments.fromJson(Map<String, dynamic> json){
-    content = json['Content'] as String;
+    content = json['content'] as String;
     commentId = json['comment_id'] as int;
     date = json['date'] as String;
     isOwner = json['is_owner'] as bool? ?? true;
-    photo = json['photo'] as String;
+    photo = json['photo'] as String? ??'';
     replies = List.from(json['replies'] as Iterable<dynamic>? ??[]).map((e)=>Replies.fromJson(e as Map<String, dynamic>)).toList();
     username = json['username'] as String;
   }
@@ -100,15 +100,15 @@ class Replies {
   late final int commentId;
   late final String date;
   bool? isOwner;
-  late final String photo;
+    String? photo;
   late final String username;
 
   Replies.fromJson(Map<String, dynamic> json){
-    content = json['Content'] as String;
+    content = json['content'] as String;
     commentId = json['comment_id'] as int;
     date = json['date'] as String;
     isOwner = json['is_owner'] as bool? ?? true;
-    photo = json['photo'] as String;
+    photo = json['photo'] as String? ??'';
     username = json['username'] as String;
   }
 
@@ -133,7 +133,7 @@ class PersonData {
   PersonData.fromJson(Map<String, dynamic> json){
     address = Address.fromJson(json['address'] as Map<String, dynamic>);
     age = json['age'] as int;
-    extraPhotos = List.from(json['extra_photos'] as List<String>);
+    extraPhotos = List.from(json['extra_photos'] as List<dynamic>);
     gender = json['gender'] as String;
     mainPhoto = json['main_photo'] as String;
     personName = json['person_name'] as String;

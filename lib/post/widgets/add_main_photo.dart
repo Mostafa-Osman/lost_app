@@ -18,14 +18,21 @@ class AddMainPhoto extends StatelessWidget {
               ? InkWell(
                   onTap: () => showDialog(
                     context: context,
-                    builder: (BuildContext context) => AddPhotoDialog(
-                        onPressedGallery: () async {
-                          createPostCubit.getImageFromGallery(
-                            isMainImage: true,
-                          );
-                          Navigator.pop(context);
-                        },
-                    ),
+                    builder: (BuildContext context) =>
+                        AddPhotoDialog(
+                          onPressedCamera: () async {
+                            createPostCubit.getImageFromCamera(
+                              isMainImage: true,
+                            );
+                            Navigator.pop(context);
+                          },
+                          onPressedGallery: () async {
+                            createPostCubit.getImageFromGallery(
+                              isMainImage: true,
+                            );
+                            Navigator.pop(context);
+                          },
+                        ),
                   ),
                   child: Container(
                     height: 120.0,
@@ -63,7 +70,15 @@ class AddMainPhoto extends StatelessWidget {
                           builder: (BuildContext context) =>
                               AddPhotoDialog(
                                 onPressedCamera: () async {
-                                  createPostCubit.getImageFromCamera(isMainImage: true);
+                                  createPostCubit.getImageFromCamera(
+                                    isMainImage: true,
+                                  );
+                                  Navigator.pop(context);
+                                },
+                                onPressedGallery: () async {
+                                  createPostCubit.getImageFromGallery(
+                                    isMainImage: true,
+                                  );
                                   Navigator.pop(context);
                                 },
                               ),

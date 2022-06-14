@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -49,14 +51,50 @@ class CommentCard extends StatelessWidget {
                   SizedBox(
                     width: size.width >= 500 ? 40 : size.width / 10,
                     height: size.width >= 500 ? 40 : size.width / 10,
-                    child: ClipOval(
-                      child: Image.network(
-                        reply
-                            ? replyComment?.photo ?? ''
-                            : mainComment?.photo ?? '',
+                    /*
+
+                     ClipOval(
+                                          child: homePost[index].userPhoto !=
+                                                  null
+                                              ? Image.network(
+                                                  homePost[index].userPhoto!,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : SvgPicture.asset(
+                                                  'assets/images/person.svg',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                        ),
+                     */
+                    child:
+
+
+                    ClipOval(
+                      child:
+                      reply?
+                      replyComment?.photo ==''?SvgPicture.asset(
+                        'assets/images/person.svg',
+                        fit: BoxFit.cover,
+                      ): Image.network(
+                        AppConst.imageUrl+replyComment!.photo! ,
+                        width: size.width >= 500 ? 40 : size.width / 10,
+                        fit: BoxFit.cover,
+                      ):mainComment!.photo ==''?SvgPicture.asset(
+                        'assets/images/person.svg',
+                        fit: BoxFit.cover,
+                      ): Image.network(
+                        AppConst.imageUrl+mainComment!.photo! ,
                         width: size.width >= 500 ? 40 : size.width / 10,
                         fit: BoxFit.cover,
                       ),
+
+                      // Image.network(
+                      //   reply
+                      //       ? replyComment?.photo ?? ''
+                      //       : mainComment?.photo ?? '',
+                      //   width: size.width >= 500 ? 40 : size.width / 10,
+                      //   fit: BoxFit.cover,
+                      // ),
                     ),
                   ),
                   Padding(

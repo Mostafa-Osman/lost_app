@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/widgets/create_post_dialog.dart';
-import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/route/route_constants.dart';
-import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/post_card.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
-import 'package:lost_app/shared/components/toast.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class PostsFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final homeCubit = BlocProvider.of<HomeCubit>(context);
     final createPostCubit = BlocProvider.of<CreatePostCubit>(context);
     return Scaffold(
       backgroundColor: white,
@@ -22,23 +17,15 @@ class PostsFoundScreen extends StatelessWidget {
         backgroundColor: white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+
+          },
           icon: const Icon(Icons.arrow_back_ios_sharp, color: black),
         ),
       ),
-      body: BlocConsumer<CreatePostCubit, CreatePostState>(
-        listener: (context, state) {
-          if (state is CreatePostSuccess) {
-            homeCubit.addPostInList(post: createPostCubit.createPostData);
-            Navigator.pop(context);
-            Navigator.pop(context);
-          } else if (state is CreatePostError) {
-            showToast(
-              message: 'حدث خطأ ما حاول مجدداً',
-              state: ToastStates.error,
-            );
-          }
-        },
+      body: BlocBuilder<CreatePostCubit, CreatePostState>(
         builder: (context, state) {
           if (state is CreatePostLoading) {
             return const Center(
@@ -48,8 +35,6 @@ class PostsFoundScreen extends StatelessWidget {
             return SafeArea(
               child: SingleChildScrollView(
                 child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
@@ -84,8 +69,6 @@ class PostsFoundScreen extends StatelessWidget {
                       const SizedBox(height: 30),
                       PostCard(
                         homePost: createPostCubit.scanDataResults,
-                        onRefresh: () async {},
-                        onLoading: () async {},
                         footerEnabled: false,
                         scrollPhysics: const NeverScrollableScrollPhysics(),
                         refreshController:

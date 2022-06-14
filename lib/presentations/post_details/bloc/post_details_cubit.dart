@@ -152,10 +152,11 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           parentCommentId: parentCommentId,
           content: content,
         ) as Replies;
-        comment.isOwner = true;
+        //todo check mansour
+        // comment.isOwner = true;
         post!.comments[parentCommentIndex].replies?.add(replyComment);
       }
-      log(comment.toString());
+      // log(comment.toString());
       emit(PostDetailsSuccessState());
     } catch (e, s) {
       log('error in createComment', error: e, stackTrace: s);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
-import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/navigator.dart';
@@ -11,7 +11,6 @@ import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/shared/components/smart_refresh.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
-import 'package:lost_app/shared/units/date_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PostCard extends StatelessWidget {
@@ -19,8 +18,8 @@ class PostCard extends StatelessWidget {
   final bool footerEnabled;
   final bool isSearch;
 
-  final VoidFutureCallBack onLoading;
-  final VoidFutureCallBack onRefresh;
+  // final VoidFutureCallBack onLoading;
+  // final VoidFutureCallBack onRefresh;
   final RefreshController refreshController;
   final List<HomePost> homePost;
   final ScrollPhysics scrollPhysics;
@@ -30,8 +29,8 @@ class PostCard extends StatelessWidget {
     this.isSearch = false,
     required this.footerEnabled,
     required this.homePost,
-    required this.onLoading,
-    required this.onRefresh,
+    // required this.onLoading,
+    // required this.onRefresh,
     required this.refreshController,
     this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
   });
@@ -48,11 +47,10 @@ class PostCard extends StatelessWidget {
             footerEnabled: footerEnabled,
             listLength: homePost.length,
             controller: refreshController,
-            onLoading: onLoading,
-            onRefresh: onRefresh,
+            // onLoading: onLoading,
+            // onRefresh: onRefresh,
             idleIconColor: mainColor,
             waterDropColor: Colors.white,
-            //mainColor,
             child: ListView.builder(
               physics: scrollPhysics,
               itemCount: homePost.length,
@@ -251,7 +249,7 @@ class PostCard extends StatelessWidget {
                         height: 2,
                       ),
                       Container(
-                        height:35,
+                        height: 35,
                         width: double.infinity,
                         padding: EdgeInsets.only(
                           top: isSearch ? 5.0 : 0.0,
@@ -265,19 +263,27 @@ class PostCard extends StatelessWidget {
                           ),
                         ),
                         child: isSearch
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  TextClass(
-                                    text: 'اتصل الان',
-                                    textColor: Colors.green,
-                                  ),
-                                  SizedBox(width: 5.0),
-                                  Icon(
-                                    Icons.call,
-                                    color: Colors.green,
-                                  ),
-                                ],
+                            ? InkWell(
+                                onTap: () {
+                                  BlocProvider.of<CreatePostCubit>(context)
+                                      .launchCall(
+                                  BlocProvider.of<CreatePostCubit>(context).scanDataResults[index].userPhoneNumber,
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    TextClass(
+                                      text: 'اتصل الان',
+                                      textColor: Colors.green,
+                                    ),
+                                    SizedBox(width: 5.0),
+                                    Icon(
+                                      Icons.call,
+                                      color: Colors.green,
+                                    ),
+                                  ],
+                                ),
                               )
                             : Row(
                                 mainAxisAlignment:
@@ -316,7 +322,7 @@ class PostCard extends StatelessWidget {
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  bottom: 2.0),
+                                                  bottom: 2.0,),
                                               child: SvgPicture.asset(
                                                 'assets/icons/comment_icon.svg',
                                               ),
@@ -332,7 +338,8 @@ class PostCard extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: () => homeCubit.isSavedPost(
-                                          postId: homePost[index].postId,),
+                                          postId: homePost[index].postId,
+                                        ),
                                         splashColor: grey,
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
