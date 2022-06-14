@@ -7,11 +7,11 @@ class CreatePostRepository {
   CreatePostWebServices createPostWebServices;
   Future<List<HomePost>> scanMainPhoto({
     required bool isLost,
-    required File mainPhoto,
-  }) async{
+    required File mainPhoto,}) async{
     final data = await createPostWebServices.scanMainPhoto(
       isLost: isLost,
       mainPhoto: mainPhoto,
+
     );
     return (data['posts'] as List)
         .map((e)=> HomePost.fromJson(e as Map<String, dynamic>))

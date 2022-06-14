@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
 import 'package:lost_app/presentations/post_details/presentation/widgets/photo_slider.dart';
@@ -12,7 +13,7 @@ import 'package:lost_app/shared/styles/color.dart';
 class PostDetails extends StatelessWidget {
   final int postIndex;
 
-  PostDetails({required this.postIndex});
+    const PostDetails({required this.postIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +57,21 @@ class PostDetails extends StatelessWidget {
                             SizedBox(
                               width: size.width >= 500 ? 40 : size.width / 10,
                               height: size.width >= 500 ? 40 : size.width / 10,
-                              child: ClipOval(
-                                child: Image.network(
-                                  postDetailsCubit.post!.userPhoto,
+                              child:  ClipOval(
+                                child: postDetailsCubit.post!.userPhoto !=
+                                    null
+                                    ? Image.network(
+                                  postDetailsCubit.post!.userPhoto!,
                                   width:
-                                      size.width >= 500 ? 40 : size.width / 10,
+                                  size.width >= 500 ? 40 : size.width / 10,
+                                  fit: BoxFit.cover,
+                                )
+                                    : SvgPicture.asset(
+                                  'assets/images/person.svg',
                                   fit: BoxFit.cover,
                                 ),
                               ),
+
                             ),
                             const SizedBox(width: 10.0),
                             Padding(
@@ -171,6 +179,7 @@ class PostDetails extends StatelessWidget {
                             const SizedBox(height: 10),
                           ],
                         ),
+                        if(postDetailsCubit.post!.personData.extraPhotos.isNotEmpty)
                         Container(
                           alignment: Alignment.center,
                           width: double.infinity,

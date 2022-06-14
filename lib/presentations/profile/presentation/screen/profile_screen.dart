@@ -97,8 +97,6 @@ class ProfileScreen extends StatelessWidget {
                       child: PostCard(
                         isProfile: true,
                         footerEnabled: false,
-                        onLoading: () async {},
-                        onRefresh: () async {},
                         refreshController: profileCubit.fakeRefreshController,
                         scrollPhysics: const NeverScrollableScrollPhysics(),
                         homePost: profileCubit.profileModel!.posts,

@@ -106,54 +106,52 @@ class PostDetailsScreen extends StatelessWidget {
               color: white,
               child: Stack(
                 children: [
-                  Align(
-                    child: ListView(
-                      shrinkWrap: true,
-                      controller: _controller,
-                      children: [
-                        PostDetails(postIndex: postIndex),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: postDetailsCubit.post!.comments.length,
-                          itemBuilder: (context, index) {
-                            final comment = postDetailsCubit.post!
-                                .comments[index];
-                            return CommentCard(
-                              reply: false,
-                              mainComment: comment,
-                              postId: postId,
-                              postIndex: postIndex,
-                              commentIndex: index,
-                            );
-                          },
-                        ),
-                        if (state is PostCommentLoadingState)
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 20.0,
-                                right: 20.0,
-                                top: 20,
-                                bottom: 15,
+                  ListView(
+                    shrinkWrap: true,
+                    controller: _controller,
+                    children: [
+                      PostDetails(postIndex: postIndex),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: postDetailsCubit.post!.comments.length,
+                        itemBuilder: (context, index) {
+                          final comment = postDetailsCubit.post!
+                              .comments[index];
+                          return CommentCard(
+                            reply: false,
+                            mainComment: comment,
+                            postId: postId,
+                            postIndex: postIndex,
+                            commentIndex: index,
+                          );
+                        },
+                      ),
+                      if (state is PostCommentLoadingState)
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20.0,
+                              right: 20.0,
+                              top: 20,
+                              bottom: 15,
+                            ),
+                            child: Container(
+                              height: 130,
+                              decoration: BoxDecoration(
+                                color: lightBlue,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(15),),
                               ),
-                              child: Container(
-                                height: 130,
-                                decoration: BoxDecoration(
-                                  color: lightBlue,
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(15),),
-                                ),
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
+                              child: const Center(
+                                child: CircularProgressIndicator(),
                               ),
                             ),
                           ),
-                        const SizedBox(height: 200),
-                      ],
-                    ),
+                        ),
+                      const SizedBox(height: 200),
+                    ],
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
