@@ -20,7 +20,7 @@ class NotificationsService {
   Future<NotificationsService> init() async {
     //android icon init
     const initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_notify');
     //ios init for FLN
     final initializationSettingsIOS = IOSInitializationSettings(
       onDidReceiveLocalNotification:
