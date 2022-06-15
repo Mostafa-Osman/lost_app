@@ -36,8 +36,7 @@ class HomeScreen extends StatelessWidget {
                     child: PostCard(
                       footerEnabled: false,
                       scrollPhysics: const NeverScrollableScrollPhysics(),
-                      // onLoading: () async {},
-                      // onRefresh: () async {},
+                      isHome: true,
                       refreshController: homeCubit.fakeRefreshController,
                       homePost: homeCubit.homePosts,
                     ),

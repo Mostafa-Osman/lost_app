@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/shared/components/add_photo_dialog.dart';
+import 'package:lost_app/shared/components/constant.dart';
 
 class AddMainPhoto extends StatelessWidget {
   const AddMainPhoto({Key? key}) : super(key: key);
@@ -14,25 +15,28 @@ class AddMainPhoto extends StatelessWidget {
     return BlocBuilder<CreatePostCubit, CreatePostState>(
       builder: (context, state) {
         return Center(
-          child: createPostCubit.mainImage == null
+          child:
+          createPostCubit.mainImage == null &&
+                      !createPostCubit.isUpdatePost ||
+                  createPostCubit.updateMainPhoto == '' &&
+                      createPostCubit.isUpdatePost
               ? InkWell(
                   onTap: () => showDialog(
                     context: context,
-                    builder: (BuildContext context) =>
-                        AddPhotoDialog(
-                          onPressedCamera: () async {
-                            createPostCubit.getImageFromCamera(
-                              isMainImage: true,
-                            );
-                            Navigator.pop(context);
-                          },
-                          onPressedGallery: () async {
-                            createPostCubit.getImageFromGallery(
-                              isMainImage: true,
-                            );
-                            Navigator.pop(context);
-                          },
-                        ),
+                    builder: (BuildContext context) => AddPhotoDialog(
+                      onPressedCamera: () async {
+                        createPostCubit.getImageFromCamera(
+                          isMainImage: true,
+                        );
+                        Navigator.pop(context);
+                      },
+                      onPressedGallery: () async {
+                        createPostCubit.getImageFromGallery(
+                          isMainImage: true,
+                        );
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
                   child: Container(
                     height: 120.0,
@@ -53,12 +57,20 @@ class AddMainPhoto extends StatelessWidget {
                     FittedBox(
                       fit: BoxFit.fitWidth,
                       child: ClipOval(
-                        child: Image.file(
-                          createPostCubit.mainImage!,
-                          height: 120,
-                          width: 120,
-                          fit: BoxFit.cover,
-                        ),
+                        child: (createPostCubit.mainImage == null)
+                            ? Image.network(
+                                AppConst.imageUrl +
+                                    createPostCubit.updateMainPhoto,
+                                fit: BoxFit.cover,
+                                height: 120,
+                                width: 120,
+                              )
+                            : Image.file(
+                                createPostCubit.mainImage!,
+                                fit: BoxFit.cover,
+                                height: 120,
+                                width: 120,
+                              ),
                       ),
                     ),
                     Positioned(
@@ -67,21 +79,20 @@ class AddMainPhoto extends StatelessWidget {
                       child: InkWell(
                         onTap: () => showDialog(
                           context: context,
-                          builder: (BuildContext context) =>
-                              AddPhotoDialog(
-                                onPressedCamera: () async {
-                                  createPostCubit.getImageFromCamera(
-                                    isMainImage: true,
-                                  );
-                                  Navigator.pop(context);
-                                },
-                                onPressedGallery: () async {
-                                  createPostCubit.getImageFromGallery(
-                                    isMainImage: true,
-                                  );
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          builder: (BuildContext context) => AddPhotoDialog(
+                            onPressedCamera: () async {
+                              createPostCubit.getImageFromCamera(
+                                isMainImage: true,
+                              );
+                              Navigator.pop(context);
+                            },
+                            onPressedGallery: () async {
+                              createPostCubit.getImageFromGallery(
+                                isMainImage: true,
+                              );
+                              Navigator.pop(context);
+                            },
+                          ),
                         ),
                         child: SvgPicture.asset(
                           'assets/icons/add_icon.svg',

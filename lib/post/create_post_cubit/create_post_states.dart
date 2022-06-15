@@ -19,14 +19,20 @@ class GetGalleryImageSuccess extends CreatePostState {}
 
 class GetGalleryImageError extends CreatePostState {}
 
-class CreatePostLoading extends CreatePostState {}
+class SetPostLoading extends CreatePostState {}
 
-class CreatePostSuccess extends CreatePostState {}
-
-class CreatePostError extends CreatePostState {
+class SetPostSuccess extends CreatePostState {}
+class UpdatePostSuccess extends CreatePostState {
   final String message;
 
-  CreatePostError(this.message);
+  UpdatePostSuccess(this.message);
+}
+
+
+class SetPostError extends CreatePostState {
+  final String message;
+
+  SetPostError(this.message);
 }
 class ScanPhotoLoading extends CreatePostState {}
 

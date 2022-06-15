@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/presentations/profile/bloc/profile_states.dart';
 import 'package:lost_app/presentations/profile/presentation/widgets/profile_text_field.dart';
@@ -14,10 +15,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final profileCubit = BlocProvider.of<ProfileCubit>(context);
-    return BlocConsumer<ProfileCubit, ProfileState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         if (state is ProfileLoadingState) {
           return const Center(
@@ -56,13 +54,19 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             child: FittedBox(
                               fit: BoxFit.fitWidth,
-                              child: ClipOval(
-                                child: Image.network(
-                                  profileCubit.profileModel!.photo!,
-                                  height: 180,
-                                  width: 180,
-                                  fit: BoxFit.cover,
-                                  //color: Colors.white,
+                              child: SizedBox(
+                                height: 180,
+                                width: 180,
+                                child: ClipOval(
+                                  child:   profileCubit.profileModel!.photo!=''
+                                      ? Image.network(
+                                    profileCubit.profileModel!.photo!,
+                                    fit: BoxFit.cover,
+                                  )
+                                      : SvgPicture.asset(
+                                    'assets/images/person.svg',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -79,8 +83,9 @@ class ProfileScreen extends StatelessWidget {
                             icon: Icons.phone,
                           ),
                           const SizedBox(height: 3),
+                          if(profileCubit.profileModel!.email !='')
                           ProfileTextField(
-                            text: profileCubit.profileModel!.email!,
+                            text: profileCubit.profileModel!.email,
                             icon: Icons.email,
                           ),
                           const SizedBox(height: 30),

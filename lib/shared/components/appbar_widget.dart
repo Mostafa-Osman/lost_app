@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
+import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -77,7 +81,8 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
             icon: SvgPicture.asset(
               'assets/icons/notification.svg',
             ),
-            onPressed: () => navigateTo(context, RouteConstant.notificationRoute),
+            onPressed: () =>
+                navigateTo(context, RouteConstant.notificationRoute),
           ),
         ),
       ),
@@ -105,7 +110,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
       elevation: 0.0,
       toolbarHeight: 55,
       title: const Center(
-        child:  TextClass(
+        child: TextClass(
           text: 'الملف الشخصي',
           fontSize: 20,
         ),
@@ -130,7 +135,8 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
             iconSize: 28,
             color: black,
             icon: SvgPicture.asset('assets/icons/profile_acc_ic.svg'),
-            onPressed: () => navigateTo(context, RouteConstant.editProfileRoute),
+            onPressed: () =>
+                navigateTo(context, RouteConstant.editProfileRoute),
           ),
         ),
       ],

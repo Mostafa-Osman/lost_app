@@ -7,6 +7,7 @@ import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/widgets/delete_photo_dialog.dart';
 import 'package:lost_app/post/widgets/display_photo_dialog.dart';
 import 'package:lost_app/shared/components/add_photo_dialog.dart';
+import 'package:lost_app/shared/components/constant.dart';
 
 class UploadPictures extends StatelessWidget {
   @override
@@ -56,7 +57,9 @@ class UploadPictures extends StatelessWidget {
               height: 150.0,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: createPostCubit.images.length,
+                itemCount: createPostCubit.updateExtraImages.isEmpty
+                    ? createPostCubit.extraImages.length
+                    : createPostCubit.updateExtraImages.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
@@ -92,10 +95,14 @@ class UploadPictures extends StatelessWidget {
                           child: SizedBox(
                             height: 100.0,
                             width: 80,
-                            child: Image.file(
+                            child: createPostCubit.updateExtraImages.isEmpty?
+                            Image.file(
                               File(
-                                createPostCubit.images[index].path,
+                                createPostCubit.extraImages[index].path,
                               ),
+                              fit: BoxFit.cover,
+                            ):Image.network(
+                             AppConst.imageUrl+ createPostCubit.updateExtraImages[index],
                               fit: BoxFit.cover,
                             ),
                           ),

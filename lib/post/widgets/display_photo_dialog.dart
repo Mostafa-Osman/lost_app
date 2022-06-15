@@ -14,7 +14,7 @@ class DisplayPhotoDialog extends StatelessWidget {
     return SizedBox(
       child: Image.file(
         File(
-          createPostCubit.images[index].path,
+          createPostCubit.extraImages[index].path,
         ),
         fit: BoxFit.cover,
       ),
