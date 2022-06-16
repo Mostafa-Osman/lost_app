@@ -138,7 +138,7 @@ class PostCard extends StatelessWidget {
                                       if (homePost[index].isOwner && !isHome)
                                         PostPopUpMenu(
                                           isPost: true,
-                                          postId: homePost[index].postId,
+                                          postId: homePost[index].postId!,
                                           postIndex: index,
                                         ),
                                     ],
@@ -340,7 +340,7 @@ class PostCard extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: () => homeCubit.isSavedPost(
-                                          postId: homePost[index].postId,
+                                          postId: homePost[index].postId!,
                                         ),
                                         splashColor: grey,
                                         child: Padding(

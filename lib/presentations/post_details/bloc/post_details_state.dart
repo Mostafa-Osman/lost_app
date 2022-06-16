@@ -4,6 +4,7 @@ part of 'post_details_cubit.dart';
 abstract class PostDetailsState {}
 
 class PostDetailsInitial extends PostDetailsState {}
+class RefreshUi extends PostDetailsState {}
 
 class PostDetailsLoadingState extends PostDetailsState {}
 

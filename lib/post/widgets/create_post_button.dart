@@ -23,7 +23,7 @@ class CreatePostButton extends StatelessWidget {
     final homeCubit = BlocProvider.of<HomeCubit>(context);
 
     return BlocConsumer<CreatePostCubit, CreatePostState>(
-      listener: (context, state) {
+      listener: (context, state)  {
         if (state is ScanPhotoLoading) {
           navigateTo(context, RouteConstant.scanDataRoute);
         }
@@ -41,17 +41,19 @@ class CreatePostButton extends StatelessWidget {
             message: state.message,
             state: ToastStates.success,
           );
+          Navigator.pop(context,state.homePost);
+           BlocProvider.of<PostDetailsCubit>(context).setUpdateData(addPersonDataCubit.createPostData);
+           // BlocProvider.of<PostDetailsCubit>(context)
+           //    .getPostData(addPersonDataCubit.createPostData.postId!);
+
           addPersonDataCubit.resetForm();
-          BlocProvider.of<PostDetailsCubit>(context)
-              .getPostData(addPersonDataCubit.postId);
-          addPersonDataCubit.resetForm();
-          Navigator.pop(context);
+          // await BlocProvider.of<PostDetailsCubit>(context)
+          //     .getPostData(addPersonDataCubit.createPostData.postId);
         } else if (state is SetPostError) {
           showToast(
             message: 'حدث خطأ ما حاول مجدداً',
             state: ToastStates.error,
           );
-
         }
         // if (state is ScanPhotoError &&
         //     state.error == "لم يتم العثور على أي نتائج") {
@@ -80,12 +82,12 @@ class CreatePostButton extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (addPersonDataCubit.nameFormKey.currentState!
                             .validate()) {
                           if (addPersonDataCubit.getErrorMessage() == 'done') {
                             if (isUpdatePost) {
-                              addPersonDataCubit.setPost();
+                              await addPersonDataCubit.setPost();
                             } else {
                               addPersonDataCubit.scanMainPhoto(
                                 isLost: addPersonDataCubit.isLost,

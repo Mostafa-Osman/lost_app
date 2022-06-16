@@ -24,8 +24,9 @@ class SetPostLoading extends CreatePostState {}
 class SetPostSuccess extends CreatePostState {}
 class UpdatePostSuccess extends CreatePostState {
   final String message;
+  final HomePost homePost;
 
-  UpdatePostSuccess(this.message);
+  UpdatePostSuccess(this.message,this.homePost);
 }
 
 

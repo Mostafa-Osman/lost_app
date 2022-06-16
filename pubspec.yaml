@@ -25,6 +25,7 @@ dependencies:
   countries_utils: ^1.0.1
   flutter:
     sdk: flutter
+  path_provider: ^2.0.11
 
   flutter_bloc:
   firebase_auth: ^3.3.18

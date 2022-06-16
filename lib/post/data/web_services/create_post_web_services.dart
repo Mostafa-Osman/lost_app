@@ -57,7 +57,6 @@ class CreatePostWebServices {
      String url = isUpdatePost
         ? '${AppConst.baseUrl}update-post?post_id=$postId'
         : '${AppConst.baseUrl}create-post';
-
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       'Authorization': userPrefs.getUserToken(),
@@ -65,26 +64,25 @@ class CreatePostWebServices {
     final body = createPostDto.toMap();
     final fields = {'data': jsonEncode(body)};
     final files = <MultipartFile>[];
-    files.add(await getPartFromFile('main_photo', createPostDto.mainPhoto));
+    files.add(
+      await getPartFromFile('main_photo', createPostDto.mainPhoto),
+    );
     if (createPostDto.extraPhoto.isNotEmpty) {
-      files.addAll(
-
- 
-
-          await getPartsFromFiles('extra_photos', createPostDto.extraPhoto,));
-
+      files.addAll(await getPartsFromFiles(
+        'extra_photos',
+        createPostDto.extraPhoto,
+      ));
     }
     final data = await postMultiPartRequest(
       url: url,
       fields: fields,
       files: files,
       headers: headers,
-      method:isUpdatePost?'PUT':'POST',
-
+      method: isUpdatePost ? 'PUT' : 'POST',
     );
     if (data['status'] == 200) {
       log(data.toString());
-      if (isUpdatePost) return data['message'] as Map<String, dynamic>;
+      //
       return data['data'] as Map<String, dynamic>;
     } else {
       throw data['message'].toString();
