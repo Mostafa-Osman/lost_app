@@ -13,7 +13,6 @@ class ProfileWebService {
 
   ProfileWebService(this.userPrefs);
 
-
   Future<Map<String, dynamic>> getProfileData(int startLimit) async {
     final String url = '${AppConst.baseUrl}profile?start=$startLimit&limit=10';
     final headers = {
@@ -25,7 +24,6 @@ class ProfileWebService {
       headers: headers,
     );
     final data = json.decode(response.body) as Map<String, dynamic>;
-
 
     // // todo: fake data
     // final data = profileFakeResponse;
@@ -40,7 +38,8 @@ class ProfileWebService {
   }
 
   Future<Map<String, dynamic>> getSavedPosts(int startLimit) async {
-    final String url = '${AppConst.baseUrl}get-saved-posts?start=$startLimit&limit=10';
+    final String url =
+        '${AppConst.baseUrl}get-saved-posts?start=$startLimit&limit=10';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       'Authorization': userPrefs.getUserToken(),
@@ -50,7 +49,6 @@ class ProfileWebService {
       headers: headers,
     );
     final data = json.decode(response.body) as Map<String, dynamic>;
-
 
     // // todo: fake data
     // final data = savedFakeResponse;
@@ -70,17 +68,17 @@ class ProfileWebService {
     required String email,
     required File photo,
   }) async {
-    const String url = '${AppConst.baseUrl}update-profile';
+    String url = '${AppConst.baseUrl}update-profile';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       'Authorization': userPrefs.getUserToken(),
     };
-    final body =  {
-        'username': userName,
-        'phone_number': phoneNumber,
-        'email': email,
-        //'profile_photo': photo,
-      };
+    final body = {
+      'username': userName,
+      'phone_number': phoneNumber,
+      'email': email,
+      //'profile_photo': photo,
+    };
     final fields = {'data': jsonEncode(body)};
     final files = <MultipartFile>[];
     files.add(await getPartFromFile('profile_photo', photo));
@@ -89,7 +87,7 @@ class ProfileWebService {
       fields: fields,
       files: files,
       headers: headers,
-        method: 'PUT',
+      method: 'PUT',
     );
     //
     // // todo: fake data
