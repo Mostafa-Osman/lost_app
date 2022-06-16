@@ -19,10 +19,7 @@ class PostDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final postDetailsCubit = BlocProvider.of<PostDetailsCubit>(context);
-    return BlocConsumer<HomeCubit, HomeState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return Container(
           color: white,
@@ -99,7 +96,7 @@ class PostDetails extends StatelessWidget {
                           fit: BoxFit.fitWidth,
                           child: TextClass(
                             //text: postDetailsCubit.post!.date,
-                            text:  'مفقود  منذ ${postDetailsCubit.post!.date.substring(0,postDetailsCubit.post!.date.length-7)} فى ${postDetailsCubit.post!.personData.address.city}',
+                            text:  '${postDetailsCubit.post!.isLost? "مفقود" : "تم العثور"}  منذ ${postDetailsCubit.post!.date.substring(0,postDetailsCubit.post!.date.length-7)} فى ${postDetailsCubit.post!.personData.address.city}',
                             textAlign: TextAlign.right,
                             fontSize: 15,
                             overflow: TextOverflow.ellipsis,

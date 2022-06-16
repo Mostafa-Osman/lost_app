@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
@@ -16,6 +18,7 @@ class HomeScreen extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else {
+          //log(homeCubit.homePosts[0].postId.toString());
           return SmartRefresh(
             footerEnabled: true,
             listLength: homeCubit.homePosts.length,
@@ -36,8 +39,7 @@ class HomeScreen extends StatelessWidget {
                     child: PostCard(
                       footerEnabled: false,
                       scrollPhysics: const NeverScrollableScrollPhysics(),
-                      // onLoading: () async {},
-                      // onRefresh: () async {},
+                      isHome: true,
                       refreshController: homeCubit.fakeRefreshController,
                       homePost: homeCubit.homePosts,
                     ),

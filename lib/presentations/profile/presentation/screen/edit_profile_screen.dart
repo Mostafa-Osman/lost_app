@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/presentations/profile/bloc/profile_states.dart';
 import 'package:lost_app/shared/components/add_photo_dialog.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/custom_button.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/components/text_form_field_class.dart';
@@ -55,41 +56,50 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                         child: FittedBox(
                           fit: BoxFit.fitWidth,
-                          child: GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    AddPhotoDialog(
-                                  onPressedCamera: () async {
-                                    profileCubit.getImageFromCamera();
-                                    Navigator.pop(context);
-                                  },
-                                  onPressedGallery: () async {
-                                    profileCubit.getImageFromGallery();
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              );
-                            },
-                            child: ClipOval(
+                          child: ClipOval(
+                            child:
+
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AddPhotoDialog(
+                                        onPressedCamera: () async {
+                                          profileCubit.getImageFromCamera();
+                                          Navigator.pop(context);
+                                        },
+                                        onPressedGallery: () async {
+                                          profileCubit.getImageFromGallery();
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                );
+                              },
                               child: Stack(
                                 children: [
                                   Container(
+                                    height: 180,
+                                    width: 180,
                                     alignment: Alignment.center,
                                     child: profileCubit.mainImage == null
-                                        ? Image.network(
-                                            profileCubit.profileModel!.photo
-                                                .toString(),
-                                            height: 180,
-                                            width: 180,
-                                            fit: BoxFit.cover,
-                                            //color: Colors.white,
-                                          )
+                                        ? profileCubit.profileModel!.photo != ""
+                                            ? Image.network(
+                                                AppConst.imageUrl +
+                                                    profileCubit
+                                                        .profileModel!.photo
+                                                        .toString(),
+
+                                                fit: BoxFit.cover,
+                                                //color: Colors.white,
+                                              )
+                                            : SvgPicture.asset(
+                                                'assets/images/person.svg',
+                                                fit: BoxFit.cover,
+                                              )
                                         : Image.file(
                                             profileCubit.mainImage!,
-                                            height: 180,
-                                            width: 180,
+
                                             fit: BoxFit.cover,
                                             //color: Colors.white,
                                           ),

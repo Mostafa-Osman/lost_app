@@ -20,14 +20,13 @@ class PostsFoundScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
             Navigator.pop(context);
-
           },
           icon: const Icon(Icons.arrow_back_ios_sharp, color: black),
         ),
       ),
       body: BlocBuilder<CreatePostCubit, CreatePostState>(
         builder: (context, state) {
-          if (state is CreatePostLoading) {
+          if (state is SetPostLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );

@@ -20,6 +20,8 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   CreatePostCubit(this.createPostRepository) : super(PersonDataInitialState());
   final CreatePostRepository createPostRepository;
   bool isLost = true;
+  bool isUpdatePost = false;
+  int postId = 0;
   final fakeRefreshController = RefreshController();
   TextEditingController personNameController = TextEditingController();
   TextEditingController personAgeController = TextEditingController();
@@ -34,23 +36,31 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   late HomePost createPostData;
   final imagePicker = ImagePicker();
   File? mainImage;
-  List<File> images = [];
+  String updateMainPhoto = '';
+  List<String> updateExtraImages = [];
+
+  List<File> extraImages = [];
   List<LostCity> filteredCities = [];
 
-  Future<void> createPost() async {
-
-    emit(CreatePostLoading());
+  Future<void> setPost() async {
+    emit(SetPostLoading());
 
     try {
-      createPostData = await createPostRepository.createPost(
+      final data = await createPostRepository.setPost(
         createPostDto: getCreatePostDto(),
+        isUpdatePost: isUpdatePost,
+        postId: postId,
       );
+      if (isUpdatePost) {
+        emit(UpdatePostSuccess(data.toString()));
+      } else {
+        createPostData = data as HomePost;
+        emit(SetPostSuccess());
+      }
       log('in cubit ${createPostData.personData!.personName}');
-
-      emit(CreatePostSuccess());
     } catch (e, s) {
       log(e.toString(), stackTrace: s);
-      emit(CreatePostError(e.toString()));
+      emit(SetPostError(e.toString()));
     }
   }
 
@@ -66,7 +76,6 @@ class CreatePostCubit extends Cubit<CreatePostState> {
         await createPostRepository.scanMainPhoto(
           isLost: isLost,
           mainPhoto: mainPhoto,
-
         ),
       );
 
@@ -88,7 +97,8 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       isLost: isLost,
       moreDetails: moreDetailsController.text,
       mainPhoto: mainImage!,
-      extraPhoto: images,
+      extraPhoto: extraImages,
+
     );
   }
 
@@ -98,7 +108,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       final photo = await imagePicker.pickImage(source: ImageSource.camera);
       isMainImage
           ? mainImage = File(photo!.path)
-          : images.add(File(photo!.path));
+          : extraImages.add(File(photo!.path));
 
       emit(GetCameraImageSuccess());
     } catch (error) {
@@ -114,11 +124,11 @@ class CreatePostCubit extends Cubit<CreatePostState> {
         mainImage = File(selectedImages![0].path);
       } else {
         for (final XFile image in selectedImages!) {
-          images.add(File(image.path));
+          extraImages.add(File(image.path));
         }
       }
       emit(GetGalleryImageSuccess());
-      log('length of list of photo ${images.length.toString()}');
+      log('length of list of photo ${extraImages.length.toString()}');
     } catch (error) {
       emit(GetGalleryImageError());
     }
@@ -141,7 +151,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   }
 
   void deletePhoto({required int index}) {
-    images.removeAt(index);
+    extraImages.removeAt(index);
     emit(RefreshUi());
   }
 
@@ -164,11 +174,13 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     }
   }
 
-  Future<void> setData(Post post) async {
+  Future<void> setUpdateData(Post post) async {
     isLost = post.isLost;
-    mainImage = File(post.personData.mainPhoto);
+    isUpdatePost = true;
+    updateMainPhoto = post.personData.mainPhoto;
     personNameController.text = post.personData.personName;
     personAgeController.text = post.personData.age.toString();
+    postId=post.postId;
     selectedGender = SelectableItem(
       title: post.personData.gender,
       id: post.personData.gender == 'male' || post.personData.gender == 'ذكر'
@@ -185,14 +197,16 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     );
     moreAddressDetailsController.text = post.personData.address.addressDetails;
     moreDetailsController.text = post.details;
-    images = post.personData.extraPhotos.map((e) => File(e)).toList();
+    updateExtraImages.addAll(post.personData.extraPhotos);
+
     emit(RefreshUi());
   }
-  void setIsLost({required String  optionText}) {
-    if(  optionText=='مكان الفقدان') {
-      isLost=true;
+
+  void setIsLost({required String optionText}) {
+    if (optionText == 'مكان الفقدان') {
+      isLost = true;
     } else {
-      isLost=false;
+      isLost = false;
     }
     emit(RefreshUi());
   }
@@ -202,7 +216,9 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     selectedGovernorate = null;
     selectedGender = null;
     filteredCities = [];
-    images = [];
+    extraImages = [];
+    updateMainPhoto = '';
+    updateExtraImages = [];
     mainImage = null;
     personNameController.clear();
     personAgeController.clear();
@@ -210,6 +226,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     moreDetailsController.clear();
     emit(RefreshUi());
   }
+
   Future<void> launchCall(String phoneNumber) async {
     final Uri launchUri = Uri(
       scheme: 'tel',
@@ -217,5 +234,4 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     );
     await launchUrl(launchUri);
   }
-
 }

@@ -21,7 +21,6 @@ class HomeWebService {
       ),
     );
     final data = response.data as Map<String, dynamic>;
-
     //
     // // todo: fake data
     // final data = homeFakeResponse;

@@ -15,6 +15,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PostCard extends StatelessWidget {
   final bool isProfile;
+  final bool isHome;
   final bool footerEnabled;
   final bool isSearch;
 
@@ -26,6 +27,7 @@ class PostCard extends StatelessWidget {
 
   const PostCard({
     this.isProfile = false,
+    this.isHome = false,
     this.isSearch = false,
     required this.footerEnabled,
     required this.homePost,
@@ -133,7 +135,7 @@ class PostCard extends StatelessWidget {
                                         ),
                                       ),
                                       const Spacer(),
-                                      if (homePost[index].isOwner)
+                                      if (homePost[index].isOwner && !isHome)
                                         PostPopUpMenu(
                                           isPost: true,
                                           postId: homePost[index].postId,

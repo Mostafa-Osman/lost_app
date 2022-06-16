@@ -152,8 +152,7 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
           parentCommentId: parentCommentId,
           content: content,
         ) as Replies;
-        //todo check mansour
-        // comment.isOwner = true;
+         comment.isOwner = true;
         post!.comments[parentCommentIndex].replies?.add(replyComment);
       }
       // log(comment.toString());

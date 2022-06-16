@@ -61,7 +61,7 @@ class PostPopUpMenu extends StatelessWidget {
               if (isPost) {
                 log('hello');
                 BlocProvider.of<CreatePostCubit>(context)
-                    .setData(BlocProvider.of<PostDetailsCubit>(context).post!)
+                    .setUpdateData(BlocProvider.of<PostDetailsCubit>(context).post!)
                     .then(
                       (value) => navigateWithArgument(
                           context, RouteConstant.createPostRoute, [

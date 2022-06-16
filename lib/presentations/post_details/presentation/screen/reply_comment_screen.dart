@@ -147,7 +147,7 @@ class ReplyCommentScreen extends StatelessWidget {
                                   postId: postId,
                                   postIndex: postIndex,
                                   commentIndex: index,
-                                  parentCommentId: BlocProvider.of<PostDetailsCubit>(context).post!.comments[commentIndex].commentId,
+                                  parentCommentId: BlocProvider.of<PostDetailsCubit>(context).post!.comments[commentIndex].commentId!,
                                   parentCommentIndex: commentIndex,
                                 );
                               },
