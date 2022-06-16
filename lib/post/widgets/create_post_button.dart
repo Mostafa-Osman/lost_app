@@ -29,9 +29,22 @@ class CreatePostButton extends StatelessWidget {
         }
         if (state is SetPostSuccess) {
           homeCubit.addPostInList(post: addPersonDataCubit.createPostData);
-          Navigator.pop(context);
-          Navigator.pop(context);
-          //todo if user in posts found should pop two more
+          if(BlocProvider.of<CreatePostCubit>(context).navigate){
+            Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pop(context);
+
+
+          }
+          else
+            {
+              Navigator.pop(context);
+              Navigator.pop(context);
+
+
+            }
+
           showToast(
             message: 'تم نشر المنشور بنجاحً',
             state: ToastStates.success,

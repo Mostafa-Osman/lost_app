@@ -20,10 +20,13 @@ class ScanScreen extends StatelessWidget {
               context,
               RouteConstant.postsFoundRoute,
             );
+            BlocProvider.of<CreatePostCubit>(context).refreshUi(change: true);
+
           }
          else if (state is ScanPhotoError &&
               state.error == "لم يتم العثور على أي نتائج") {
             Navigator.pop(context);
+            BlocProvider.of<CreatePostCubit>(context).refreshUi(change: false);
 
             showDialog(
               context: context,

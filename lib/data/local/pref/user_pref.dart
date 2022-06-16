@@ -38,6 +38,6 @@ class UserPrefs {
   bool isUserLoggedIn() {
     final token = prefs.getString("token");
     log(token.toString());
-    return token != null;
+    return token != '';
   }
 }

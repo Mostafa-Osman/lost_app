@@ -9,5 +9,5 @@ void navigateTo(BuildContext context, String route) => Navigator.pushNamed(
 void navigatorAndFinish(BuildContext context,String route) => Navigator.of(context)
     .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
 
-Future<Object?> navigateWithArgument(BuildContext context,String route,Object? argument) =>
+void navigateWithArgument(BuildContext context,String route,Object? argument) =>
     Navigator.pushNamed(context, route, arguments: argument);

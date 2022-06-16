@@ -66,27 +66,30 @@ class CommentCard extends StatelessWidget {
                                                 ),
                                         ),
                      */
-                    child:
-
-
-                    ClipOval(
-                      child:
-                      reply?
-                      replyComment?.photo ==''?SvgPicture.asset(
-                        'assets/images/person.svg',
-                        fit: BoxFit.cover,
-                      ): Image.network(
-                        AppConst.imageUrl+replyComment!.photo! ,
-                        width: size.width >= 500 ? 40 : size.width / 10,
-                        fit: BoxFit.cover,
-                      ):mainComment!.photo ==''?SvgPicture.asset(
-                        'assets/images/person.svg',
-                        fit: BoxFit.cover,
-                      ): Image.network(
-                        AppConst.imageUrl+mainComment!.photo! ,
-                        width: size.width >= 500 ? 40 : size.width / 10,
-                        fit: BoxFit.cover,
-                      ),
+                    child: ClipOval(
+                      child: reply
+                          ? replyComment?.photo == ''
+                              ? SvgPicture.asset(
+                                  'assets/images/person.svg',
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  AppConst.imageUrl + replyComment!.photo!,
+                                  width:
+                                      size.width >= 500 ? 40 : size.width / 10,
+                                  fit: BoxFit.cover,
+                                )
+                          : mainComment!.photo == ''
+                              ? SvgPicture.asset(
+                                  'assets/images/person.svg',
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  AppConst.imageUrl + mainComment!.photo!,
+                                  width:
+                                      size.width >= 500 ? 40 : size.width / 10,
+                                  fit: BoxFit.cover,
+                                ),
 
                       // Image.network(
                       //   reply
@@ -182,24 +185,24 @@ class CommentCard extends StatelessWidget {
                             }),
                       fontSize: 12,
                     ),
-                    TextButtonClass(
-                      text: 'الردود (${mainComment!.replies!.length})',
-                      onPressed: () => reply
-                          ? null
-                          : navigateWithArgument(
-                              context,
-                              RouteConstant.replyCommentRoute,
-                              {
-                                'autofocus': false,
-                                'postId': postId,
-                                'commentIndex': commentIndex,
-                                'postIndex': postIndex,
-                                'parentCommentId': parentCommentId,
-                                'parentCommentIndex': parentCommentIndex,
-                              },
-                            ),
-                      fontSize: 12,
-                    ),
+                    // TextButtonClass(
+                    //   text: 'الردود (${mainComment!.replies!.length})',
+                    //   onPressed: () => reply
+                    //       ? null
+                    //       : navigateWithArgument(
+                    //           context,
+                    //           RouteConstant.replyCommentRoute,
+                    //           {
+                    //             'autofocus': false,
+                    //             'postId': postId,
+                    //             'commentIndex': commentIndex,
+                    //             'postIndex': postIndex,
+                    //             'parentCommentId': parentCommentId,
+                    //             'parentCommentIndex': parentCommentIndex,
+                    //           },
+                    //         ),
+                    //   fontSize: 12,
+                    // ),
                   ],
                 )
               else

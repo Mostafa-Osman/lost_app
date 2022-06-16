@@ -137,21 +137,21 @@ class PostDetails extends StatelessWidget {
                               fontSize: 15,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            if (postDetailsCubit
-                                    .post!.personData.address.addressDetails !=
-                                '')
-                              Column(
-                                children: [
-                                  const SizedBox(height: 2),
-                                  TextClass(
-                                    text:
-                                        'تفاصيل العنوان : ${"${postDetailsCubit.post!.personData.address.city} - ${postDetailsCubit.post!.personData.address.district}"}',
-                                    textAlign: TextAlign.right,
-                                    fontSize: 15,
-                                    overflow: TextOverflow.visible,
-                                  ),
-                                ],
-                              ),
+                            // if (postDetailsCubit
+                            //         .post!.personData.address.addressDetails !=
+                            //     '')
+                            //   Column(
+                            //     children: [
+                            //       const SizedBox(height: 2),
+                            //       TextClass(
+                            //         text:
+                            //             'تفاصيل العنوان : ${postDetailsCubit.post!.personData.address.addressDetails}',
+                            //         textAlign: TextAlign.right,
+                            //         fontSize: 15,
+                            //         overflow: TextOverflow.visible,
+                            //       ),
+                            //     ],
+                            //   ),
                             const SizedBox(height: 2),
                             TextClass(
                               text:
