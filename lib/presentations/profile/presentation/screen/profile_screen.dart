@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
             listLength: profileCubit.profileModel!.posts.length,
             controller: profileCubit.refreshController,
             onLoading: () async {
-              await profileCubit.onLoading.call();
+              // await profileCubit.onLoading.call();
             },
             onRefresh: () async {
               await profileCubit.onRefresh.call();
@@ -39,7 +39,9 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    const SizedBox(height: 70.0,),
+                    const SizedBox(
+                      height: 70.0,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
@@ -58,15 +60,15 @@ class ProfileScreen extends StatelessWidget {
                                 height: 180,
                                 width: 180,
                                 child: ClipOval(
-                                  child:   profileCubit.profileModel!.photo!=''
+                                  child: profileCubit.profileModel!.photo != ''
                                       ? Image.network(
-                                    profileCubit.profileModel!.photo!,
-                                    fit: BoxFit.cover,
-                                  )
+                                          profileCubit.profileModel!.photo!,
+                                          fit: BoxFit.cover,
+                                        )
                                       : SvgPicture.asset(
-                                    'assets/images/person.svg',
-                                    fit: BoxFit.cover,
-                                  ),
+                                          'assets/images/person.svg',
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                             ),
@@ -83,17 +85,19 @@ class ProfileScreen extends StatelessWidget {
                             icon: Icons.phone,
                           ),
                           const SizedBox(height: 3),
-                          if(profileCubit.profileModel!.email !='')
-                          ProfileTextField(
-                            text: profileCubit.profileModel!.email,
-                            icon: Icons.email,
-                          ),
+                          if (profileCubit.profileModel!.email != '')
+                            ProfileTextField(
+                              text: profileCubit.profileModel!.email,
+                              icon: Icons.email,
+                            ),
                           const SizedBox(height: 30),
-                          TextClass(
-                            text: 'المنشورات',
-                            fontSize: size.width >= 500 ? 30 : size.width / 13,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          if (profileCubit.profileModel!.posts.isNotEmpty)
+                            TextClass(
+                              text: 'المنشورات',
+                              fontSize:
+                                  size.width >= 500 ? 30 : size.width / 13,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                         ],
                       ),
                     ),

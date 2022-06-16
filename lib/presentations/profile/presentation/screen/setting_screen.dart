@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lost_app/authentication/data/web_services/authentication_web_service.dart';
 import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/presentations/home_layout/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
@@ -111,10 +112,11 @@ class SettingScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                onTap: () {
+                onTap: () async {
                   BlocProvider.of<HomeLayoutCubit>(context)
                       .changeBottomNavBarIndexAndColor(0);
                   UserPrefs().deleteUserToken();
+                  await AuthenticationWebService().updateFcmToken('');
                   navigateTo(context, RouteConstant.loginRoute);
                 },
                 title: const TextClass(

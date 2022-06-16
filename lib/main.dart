@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/authentication/data/web_services/authentication_web_service.dart';
 import 'package:lost_app/data/local/pref/pref_setup.dart';
 import 'package:lost_app/data/local/pref/routing_pref.dart';
 import 'package:lost_app/my_app.dart';
@@ -21,7 +22,8 @@ Future<void> main() async {
   FirebaseMessaging.onBackgroundMessage(
     NotificationsService.firebaseMessagingNotificationHandler,
   );
-  NotificationsService().init();
+  await NotificationsService().init();
+
   SystemChrome.setPreferredOrientations(
     <DeviceOrientation>[DeviceOrientation.portraitUp],
   );

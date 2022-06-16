@@ -4,17 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/authentication/data/web_services/authentication_web_service.dart';
 import 'package:lost_app/presentations/home_layout/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/home_layout/presentation/widgets/home_layout_bottom_nav_bar.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/services/notification_service.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
-class HomeLayoutScreen extends StatelessWidget {
+class HomeLayoutScreen extends StatefulWidget {
+  @override
+  State<HomeLayoutScreen> createState() => _HomeLayoutScreenState();
+}
+
+class _HomeLayoutScreenState extends State<HomeLayoutScreen> {
   PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
+    // AuthenticationWebService().updateFcmToken(NotificationsService().pushToken);
     return BlocConsumer<HomeLayoutCubit, HomeLayoutState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -25,7 +33,8 @@ class HomeLayoutScreen extends StatelessWidget {
               if (scrollNotification.direction == ScrollDirection.forward) {
                 homeCubit.scrollDirection(scroll: false);
               } else if (scrollNotification.direction ==
-                  ScrollDirection.reverse && scrollNotification.metrics.pixels >= 0) {
+                      ScrollDirection.reverse &&
+                  scrollNotification.metrics.pixels >= 0) {
                 homeCubit.scrollDirection(scroll: true);
               }
             }
