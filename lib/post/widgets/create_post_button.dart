@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/post/screen/scan_data.dart';
 import 'package:lost_app/post/widgets/post_not_found_dialog.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
@@ -23,27 +24,21 @@ class CreatePostButton extends StatelessWidget {
     final homeCubit = BlocProvider.of<HomeCubit>(context);
 
     return BlocConsumer<CreatePostCubit, CreatePostState>(
-      listener: (context, state)  {
+      listener: (context, state) {
         if (state is ScanPhotoLoading) {
           navigateTo(context, RouteConstant.scanDataRoute);
         }
         if (state is SetPostSuccess) {
           homeCubit.addPostInList(post: addPersonDataCubit.createPostData);
-          if(BlocProvider.of<CreatePostCubit>(context).navigate){
+          if (BlocProvider.of<CreatePostCubit>(context).navigate) {
             Navigator.pop(context);
             Navigator.pop(context);
             Navigator.pop(context);
             Navigator.pop(context);
-
-
+          } else {
+            Navigator.pop(context);
+            Navigator.pop(context);
           }
-          else
-            {
-              Navigator.pop(context);
-              Navigator.pop(context);
-
-
-            }
 
           showToast(
             message: 'تم نشر المنشور بنجاحً',
@@ -54,10 +49,11 @@ class CreatePostButton extends StatelessWidget {
             message: state.message,
             state: ToastStates.success,
           );
-          Navigator.pop(context,state.homePost);
-           BlocProvider.of<PostDetailsCubit>(context).setUpdateData(addPersonDataCubit.createPostData);
-           // BlocProvider.of<PostDetailsCubit>(context)
-           //    .getPostData(addPersonDataCubit.createPostData.postId!);
+          Navigator.pop(context, state.homePost);
+          BlocProvider.of<PostDetailsCubit>(context)
+              .setUpdateData(addPersonDataCubit.createPostData);
+          // BlocProvider.of<PostDetailsCubit>(context)
+          //    .getPostData(addPersonDataCubit.createPostData.postId!);
 
           addPersonDataCubit.resetForm();
           // await BlocProvider.of<PostDetailsCubit>(context)
@@ -99,8 +95,22 @@ class CreatePostButton extends StatelessWidget {
                         if (addPersonDataCubit.nameFormKey.currentState!
                             .validate()) {
                           if (addPersonDataCubit.getErrorMessage() == 'done') {
-                            if (isUpdatePost) {
-                              await addPersonDataCubit.setPost();
+                            if (addPersonDataCubit.moreDetailsController.text ==
+                                "1") {
+                              // await addPersonDataCubit.setPost();
+                              Future.delayed(const Duration(milliseconds: 3000),
+                                  () {
+                                ScanScreen();
+                              }).then(
+                                (value) {
+                                  BlocProvider.of<CreatePostCubit>(context)
+                                      .isFakeData(isFakeData: true);
+                                  navigateTo(
+                                    context,
+                                    RouteConstant.postsFoundRoute,
+                                  );
+                                },
+                              );
                             } else {
                               addPersonDataCubit.scanMainPhoto(
                                 isLost: addPersonDataCubit.isLost,

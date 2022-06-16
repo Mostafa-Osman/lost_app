@@ -25,6 +25,39 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   CreatePostCubit(this.createPostRepository) : super(PersonDataInitialState());
   final CreatePostRepository createPostRepository;
   bool isLost = true;
+  final homeFakeResponse = {
+    "posts": [
+
+      {
+        "date": "Sat, 15 May 2022 20:48:28 GMT",
+        "details": "",
+        "is_lost": true,
+        "is_owner": true,
+        "is_saved": true,
+        "person_data": {
+          "address": {
+            "address_details": "",
+            "city": "القاهره",
+            "district": "حلوان"
+          },
+          "age": 15,
+          "gender": "ذكر",
+          "main_photo":
+          "photos/1462453423756.jpg",
+          "person_name": "Mariam Ahmed"
+        },
+        "post_id": 10,
+        "user_id": 2,
+        "user_phone_number": "01149589134",
+        "user_photo":
+        "https://images.pexels.com/photos/10366332/pexels-photo-10366332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "username": "علي احمد"
+      },
+
+    ],
+
+  };
+
   bool isUpdatePost = false;
   int postId = 0;
   final fakeRefreshController = RefreshController();
@@ -36,6 +69,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   TextEditingController moreDetailsController = TextEditingController();
   SelectableItem? selectedGender;
   SelectableItem? selectedCity;
+  bool isFake=false;
   SelectableItem? selectedGovernorate;
   List<HomePost> scanDataResults = [];
   late HomePost createPostData;
@@ -75,7 +109,10 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       emit(SetPostError(e.toString()));
     }
   }
-
+void isFakeData({bool isFakeData=false}){
+  isFake=isFakeData;
+  emit(RefreshUi());
+}
   late ScanData resultOfScanData;
 
   Future<void> scanMainPhoto({

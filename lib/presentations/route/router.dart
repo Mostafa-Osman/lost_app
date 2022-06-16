@@ -21,6 +21,7 @@ import 'package:lost_app/post/screen/post_type.dart';
 import 'package:lost_app/post/screen/posts_found.dart';
 import 'package:lost_app/post/screen/scan_data.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
+import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 import 'package:lost_app/presentations/home/data/home_repository/home_repistory.dart';
 import 'package:lost_app/presentations/home/data/home_web_services/home_web_service.dart';
 import 'package:lost_app/presentations/home_layout/presentation/screen/home_layout.dart';

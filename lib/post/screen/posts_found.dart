@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/post/widgets/create_post_dialog.dart';
+import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
+import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 import 'package:lost_app/shared/components/post_card.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
 class PostsFoundScreen extends StatelessWidget {
+
+  PostsFoundScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final createPostCubit = BlocProvider.of<CreatePostCubit>(context);
@@ -67,7 +72,7 @@ class PostsFoundScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 30),
                       PostCard(
-                        homePost: createPostCubit.scanDataResults,
+                        homePost:createPostCubit.isFake? BlocProvider.of<HomeCubit>(context).homePosts: createPostCubit.scanDataResults,
                         footerEnabled: false,
                         scrollPhysics: const NeverScrollableScrollPhysics(),
                         refreshController:

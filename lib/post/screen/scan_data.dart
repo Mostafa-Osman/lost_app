@@ -19,7 +19,10 @@ class ScanScreen extends StatelessWidget {
             navigateTo(
               context,
               RouteConstant.postsFoundRoute,
+
             );
+            BlocProvider.of<CreatePostCubit>(context)
+                .isFakeData(isFakeData: true);
             BlocProvider.of<CreatePostCubit>(context).refreshUi(change: true);
 
           }

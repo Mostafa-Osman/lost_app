@@ -58,61 +58,61 @@ class PostPopUpMenu extends StatelessWidget {
           Navigator.of(context).pop();
         },
         itemBuilder: (ctx) => [
-          PopupMenuItem(
-            onTap: () {
-              if (isPost) {
-                log('hello');
-                BlocProvider.of<CreatePostCubit>(context)
-                    .setUpdateData(BlocProvider.of<PostDetailsCubit>(context).post!)
-                    .then(
-                      (value) async {
-                       /* final postDetails= */ navigateWithArgument(
-                          context, RouteConstant.createPostRoute, [
-                        if (BlocProvider.of<PostDetailsCubit>(context)
-                            .post!
-                            .isLost)
-                          'مكان الفقدان'
-                        else
-                          'مكان العثور',
-                        'update-Post'
-                      ])/* as HomePost?*/ ;
-                       /* if(postDetails!=null){
-                          BlocProvider.of<PostDetailsCubit>(context).setUpdateData(postDetails);
-                        }*/
-                      },
-                    );
-              } else {
-                BlocProvider.of<PostDetailsCubit>(context).emitEditComment(
-                  comment: commentText,
-                  postId: postId,
-                  commentId: commentId,
-                  commentIndex: commentIndex,
-                  parentCommentId: parentCommentId,
-                  parentCommentIndex: parentCommentIndex,
-                );
-              }
-            },
-            child: Row(
-              children: const [
-                Icon(
-                  Icons.edit,
-                  color: Colors.grey,
-                  size: 18,
-                ),
-                SizedBox(
-                  width: 9.0,
-                ),
-                Text(
-                  'تعديل',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // PopupMenuItem(
+          //   onTap: () {
+          //     if (isPost) {
+          //       log('hello');
+          //       BlocProvider.of<CreatePostCubit>(context)
+          //           .setUpdateData(BlocProvider.of<PostDetailsCubit>(context).post!)
+          //           .then(
+          //             (value) async {
+          //              /* final postDetails= */ navigateWithArgument(
+          //                 context, RouteConstant.createPostRoute, [
+          //               if (BlocProvider.of<PostDetailsCubit>(context)
+          //                   .post!
+          //                   .isLost)
+          //                 'مكان الفقدان'
+          //               else
+          //                 'مكان العثور',
+          //               'update-Post'
+          //             ])/* as HomePost?*/ ;
+          //              /* if(postDetails!=null){
+          //                 BlocProvider.of<PostDetailsCubit>(context).setUpdateData(postDetails);
+          //               }*/
+          //             },
+          //           );
+          //     } else {
+          //       BlocProvider.of<PostDetailsCubit>(context).emitEditComment(
+          //         comment: commentText,
+          //         postId: postId,
+          //         commentId: commentId,
+          //         commentIndex: commentIndex,
+          //         parentCommentId: parentCommentId,
+          //         parentCommentIndex: parentCommentIndex,
+          //       );
+          //     }
+          //   },
+          //   child: Row(
+          //     children: const [
+          //       Icon(
+          //         Icons.edit,
+          //         color: Colors.grey,
+          //         size: 18,
+          //       ),
+          //       SizedBox(
+          //         width: 9.0,
+          //       ),
+          //       Text(
+          //         'تعديل',
+          //         style: TextStyle(
+          //           fontSize: 15,
+          //           fontWeight: FontWeight.bold,
+          //           color: Colors.grey,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           PopupMenuItem(
             onTap: () {
               if (isPost) {

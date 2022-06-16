@@ -60,9 +60,9 @@ class ProfileScreen extends StatelessWidget {
                                 height: 180,
                                 width: 180,
                                 child: ClipOval(
-                                  child: profileCubit.profileModel!.photo != ''
-                                      ? Image.network(
-                                          profileCubit.profileModel!.photo!,
+                                  child: profileCubit.mainImage != null
+                                      ? Image.file(
+                                          profileCubit.mainImage!,
                                           fit: BoxFit.cover,
                                         )
                                       : SvgPicture.asset(

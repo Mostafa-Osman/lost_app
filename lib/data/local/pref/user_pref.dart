@@ -22,7 +22,7 @@ class UserPrefs {
 
   Future<void> deleteUserToken() async => prefs.remove(userToken);
 
-  String getBaseUrl() => prefs.getString('url') ?? 'http://192.168.1.4/';
+  String getBaseUrl() => prefs.getString('url') ?? 'http://192.168.43.26';
   Future<void> setBaseUrl(String newUrl) => prefs.setString('url', newUrl);
   // Future<void> saveAccountChanges({
   //   required String name,
@@ -36,8 +36,8 @@ class UserPrefs {
   // }
 
   bool isUserLoggedIn() {
-    final token = prefs.getString("token");
-    log(token.toString());
+    final token = getUserToken();
+    log(token);
     return token != '';
   }
 }

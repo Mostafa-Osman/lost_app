@@ -233,7 +233,7 @@ class PostCard extends StatelessWidget {
                                               AppConst.imageUrl +
                                                   homePost[index]
                                                       .personData!
-                                                      .mainPhoto,
+                                                      .mainPhoto.replaceAll('\\', '/'),
                                               fit: BoxFit.cover,
                                             ),
                                           ),
