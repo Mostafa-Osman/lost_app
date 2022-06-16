@@ -62,8 +62,8 @@ class CreatePostDialog extends StatelessWidget {
               fontSize: 18,
               textColor: mainColor,
               onPressed: () {
-                addPersonDataCubit.createPost();
-                Navigator.pop(context);
+                addPersonDataCubit.setPost();
+               Navigator.pop(context);
               },
             ),
           )

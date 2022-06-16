@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PhotoSlider extends StatelessWidget {
@@ -38,7 +39,7 @@ class PhotoSlider extends StatelessWidget {
                     ),
                   ),
                   child: Image.network(
-                    images[index],
+                    AppConst.imageUrl+images[index],
                     fit: BoxFit.cover,
                   ),
                 ),

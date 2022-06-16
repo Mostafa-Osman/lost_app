@@ -34,6 +34,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> onLoading() async {
     startLimit = homePosts.length;
+
     await getHomeData();
     refreshController.loadComplete();
   }
@@ -41,6 +42,7 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> onRefresh() async {
     emit(HomeLoadingState());
     startLimit = 0;
+    homePosts.clear();
     await getHomeData();
     refreshController.refreshCompleted();
   }

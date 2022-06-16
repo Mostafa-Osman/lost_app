@@ -58,7 +58,7 @@ class PostNotFoundDialog extends StatelessWidget {
               fontSize: 18,
               textColor: mainColor,
               onPressed: () {
-                addPersonDataCubit.createPost();
+                addPersonDataCubit.setPost();
                 Navigator.pop(context);
               },
             ),

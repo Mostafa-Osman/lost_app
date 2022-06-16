@@ -68,7 +68,7 @@ class Comments {
     required this.username,
   });
   late String content;
-  late final int commentId;
+  int? commentId;
   late final String date;
   bool? isOwner;
     String? photo;
@@ -77,7 +77,7 @@ class Comments {
 
   Comments.fromJson(Map<String, dynamic> json){
     content = json['content'] as String;
-    commentId = json['comment_id'] as int;
+    commentId = json['comment_id'] as int? ?? -1;
     date = json['date'] as String;
     isOwner = json['is_owner'] as bool? ?? true;
     photo = json['photo'] as String? ??'';

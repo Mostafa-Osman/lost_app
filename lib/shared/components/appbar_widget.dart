@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
+import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -21,55 +25,68 @@ class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _HomePageAppBarState extends State<HomePageAppBar> {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: AppBar(
         backgroundColor: white,
         elevation: 0.0,
         toolbarHeight: 55,
-        title: Center(
-          child: Container(
-              decoration: const BoxDecoration(
-                color: white,
-                //borderRadius: BorderRadius.circular(15),
+        title:  SizedBox(
+          width: double.infinity,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 50.0),
+              child: SvgPicture.asset(
+                'assets/images/home_logo.svg',
+                height: 65,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  height: 45,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    border: Border.all(
-
-                    ),
-                  ),
-                  child: Material(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: InkWell(
-                      onTap: () => navigateTo(context, RouteConstant.searchRoute),
-                      child:const Padding(
-                        padding:  EdgeInsets.only(top: 5.0, right: 10),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: TextClass(
-                            text: 'البحث...',
-                            textColor: grey,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),),
+            ),
+          ),
         ),
+        // Center(0
+        //   child: Container(
+        //       decoration: const BoxDecoration(
+        //         color: white,
+        //         //borderRadius: BorderRadius.circular(15),
+        //       ),
+        //       child: Padding(
+        //         padding: const EdgeInsets.all(5.0),
+        //         child: Container(
+        //           height: 45,
+        //           width: double.infinity,
+        //           decoration: BoxDecoration(
+        //             borderRadius: const BorderRadius.all(
+        //               Radius.circular(10),
+        //             ),
+        //             border: Border.all(
+        //
+        //             ),
+        //           ),
+        //           child: Material(
+        //             shape: const RoundedRectangleBorder(
+        //               borderRadius: BorderRadius.all(
+        //                 Radius.circular(10),
+        //               ),
+        //             ),
+        //             child: InkWell(
+        //               onTap: () => navigateTo(context, RouteConstant.searchRoute),
+        //               child:const Padding(
+        //                 padding:  EdgeInsets.only(top: 5.0, right: 10),
+        //                 child: Align(
+        //                   alignment: Alignment.centerRight,
+        //                   child: TextClass(
+        //                     text: 'البحث...',
+        //                     textColor: grey,
+        //                     overflow: TextOverflow.ellipsis,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),),
+        // ),
         leading: Padding(
           padding: const EdgeInsets.only(right: 15.0),
           child: IconButton(
@@ -77,7 +94,8 @@ class _HomePageAppBarState extends State<HomePageAppBar> {
             icon: SvgPicture.asset(
               'assets/icons/notification.svg',
             ),
-            onPressed: () => navigateTo(context, RouteConstant.notificationRoute),
+            onPressed: () =>
+                navigateTo(context, RouteConstant.notificationRoute),
           ),
         ),
       ),
@@ -105,7 +123,7 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
       elevation: 0.0,
       toolbarHeight: 55,
       title: const Center(
-        child:  TextClass(
+        child: TextClass(
           text: 'الملف الشخصي',
           fontSize: 20,
         ),
@@ -130,7 +148,8 @@ class _AccountPageAppBarState extends State<AccountPageAppBar> {
             iconSize: 28,
             color: black,
             icon: SvgPicture.asset('assets/icons/profile_acc_ic.svg'),
-            onPressed: () => navigateTo(context, RouteConstant.editProfileRoute),
+            onPressed: () =>
+                navigateTo(context, RouteConstant.editProfileRoute),
           ),
         ),
       ],

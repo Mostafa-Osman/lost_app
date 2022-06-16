@@ -20,23 +20,18 @@ class ScanScreen extends StatelessWidget {
               context,
               RouteConstant.postsFoundRoute,
             );
-          } else if (state is ScanPhotoError &&
+          }
+         else if (state is ScanPhotoError &&
               state.error == "لم يتم العثور على أي نتائج") {
+            Navigator.pop(context);
+
             showDialog(
               context: context,
               builder: (
-                BuildContext context,
-              ) =>
-                  const PostNotFoundDialog(),
+                  BuildContext context,
+                  ) =>
+              const PostNotFoundDialog(),
             );
-            Navigator.pop(context);
-          }
-          else  if (state is ScanPhotoError){
-            showToast(
-              message: 'حدث خطأ ما حاول مجدداً',
-              state: ToastStates.error,
-            );
-            Navigator.pop(context);
           }
         },
         builder: (context, state) {

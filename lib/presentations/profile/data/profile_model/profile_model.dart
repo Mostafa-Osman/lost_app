@@ -9,7 +9,7 @@ class ProfileModel {
     required this.username,
   });
 
-  String? email;
+  late final String email;
   String? phoneNumber;
   String? photo;
   late final List<HomePost> posts;
@@ -18,7 +18,7 @@ class ProfileModel {
   ProfileModel.fromJson(Map<String, dynamic> json) {
     email = json['email'] as String;
     phoneNumber = json['phone_number'] as String;
-    photo = json['photo'] as String;
+    photo = json['photo'] as String? ?? '';
     posts = List.from(json['posts'] as List<dynamic>)
         .map((e) => HomePost.fromJson(e as Map<String, dynamic>))
         .toList();

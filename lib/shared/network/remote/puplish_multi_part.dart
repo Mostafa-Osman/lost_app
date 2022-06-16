@@ -8,9 +8,10 @@ Future<Map<String, dynamic>> postMultiPartRequest({
   Map<String, String>? headers,
   Map<String, String>? fields,
   required List<MultipartFile> files,
+  String method = 'POST',
 }) async {
 
-  final request = MultipartRequest('POST', Uri.parse(url));
+  final request = MultipartRequest(method, Uri.parse(url));
   request.headers.addAll(headers ?? {});
   request.files.addAll(files);
   request.fields.addAll(fields ?? {});

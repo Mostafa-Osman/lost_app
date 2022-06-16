@@ -16,7 +16,9 @@ class CreatePostWebServices {
     required File mainPhoto,
   }) async {
     log('toke is${userPrefs.getUserToken()}');
+
     String url = '${AppConst.baseUrl}search?start=0&limit=1000000';
+
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       'Authorization': userPrefs.getUserToken(),
@@ -30,6 +32,7 @@ class CreatePostWebServices {
       fields: fields,
       files: files,
       headers: headers,
+
     );
 
     if (data['status'] == 200) {
@@ -42,12 +45,19 @@ class CreatePostWebServices {
 
   const CreatePostWebServices(this.userPrefs);
 
-  Future<Map<String, dynamic>> createPost({
+  Future<Map<String, dynamic>> setPost({
     required CreatePostDto createPostDto,
+    bool isUpdatePost = false,
+    int postId = 0,
   }) async {
     //todo remove it after upload backend to server
     await Future.delayed(const Duration(seconds: 3));
-    String url = '${AppConst.baseUrl}create-post';
+
+
+     String url = isUpdatePost
+        ? '${AppConst.baseUrl}update-post?post_id=$postId'
+        : '${AppConst.baseUrl}create-post';
+
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       'Authorization': userPrefs.getUserToken(),
@@ -58,16 +68,23 @@ class CreatePostWebServices {
     files.add(await getPartFromFile('main_photo', createPostDto.mainPhoto));
     if (createPostDto.extraPhoto.isNotEmpty) {
       files.addAll(
-          await getPartsFromFiles('extra_photo', createPostDto.extraPhoto));
+
+ 
+
+          await getPartsFromFiles('extra_photos', createPostDto.extraPhoto,));
+
     }
     final data = await postMultiPartRequest(
       url: url,
       fields: fields,
       files: files,
       headers: headers,
+      method:isUpdatePost?'PUT':'POST',
+
     );
     if (data['status'] == 200) {
       log(data.toString());
+      if (isUpdatePost) return data['message'] as Map<String, dynamic>;
       return data['data'] as Map<String, dynamic>;
     } else {
       throw data['message'].toString();
