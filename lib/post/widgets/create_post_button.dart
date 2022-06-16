@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/post/widgets/post_not_found_dialog.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
@@ -45,15 +46,24 @@ class CreatePostButton extends StatelessWidget {
               .getPostData(addPersonDataCubit.postId);
           addPersonDataCubit.resetForm();
           Navigator.pop(context);
-        } else if (state is SetPostError || state is ScanPhotoError) {
+        } else if (state is SetPostError) {
           showToast(
             message: 'حدث خطأ ما حاول مجدداً',
             state: ToastStates.error,
           );
-          if (state is ScanPhotoError) {
-            Navigator.pop(context);
-          }
+
         }
+        // if (state is ScanPhotoError &&
+        //     state.error == "لم يتم العثور على أي نتائج") {
+        //   showDialog(
+        //     context: context,
+        //     builder: (
+        //         BuildContext context,
+        //         ) =>
+        //     const PostNotFoundDialog(),
+        //   );
+        //   Navigator.pop(context);
+        // }
       },
       builder: (context, state) {
         if (state is SetPostLoading) {

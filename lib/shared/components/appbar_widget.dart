@@ -25,55 +25,68 @@ class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _HomePageAppBarState extends State<HomePageAppBar> {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: AppBar(
         backgroundColor: white,
         elevation: 0.0,
         toolbarHeight: 55,
-        title: Center(
-          child: Container(
-              decoration: const BoxDecoration(
-                color: white,
-                //borderRadius: BorderRadius.circular(15),
+        title:  SizedBox(
+          width: double.infinity,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 50.0),
+              child: SvgPicture.asset(
+                'assets/images/home_logo.svg',
+                height: 65,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  height: 45,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    border: Border.all(
-
-                    ),
-                  ),
-                  child: Material(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: InkWell(
-                      onTap: () => navigateTo(context, RouteConstant.searchRoute),
-                      child:const Padding(
-                        padding:  EdgeInsets.only(top: 5.0, right: 10),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: TextClass(
-                            text: 'البحث...',
-                            textColor: grey,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),),
+            ),
+          ),
         ),
+        // Center(0
+        //   child: Container(
+        //       decoration: const BoxDecoration(
+        //         color: white,
+        //         //borderRadius: BorderRadius.circular(15),
+        //       ),
+        //       child: Padding(
+        //         padding: const EdgeInsets.all(5.0),
+        //         child: Container(
+        //           height: 45,
+        //           width: double.infinity,
+        //           decoration: BoxDecoration(
+        //             borderRadius: const BorderRadius.all(
+        //               Radius.circular(10),
+        //             ),
+        //             border: Border.all(
+        //
+        //             ),
+        //           ),
+        //           child: Material(
+        //             shape: const RoundedRectangleBorder(
+        //               borderRadius: BorderRadius.all(
+        //                 Radius.circular(10),
+        //               ),
+        //             ),
+        //             child: InkWell(
+        //               onTap: () => navigateTo(context, RouteConstant.searchRoute),
+        //               child:const Padding(
+        //                 padding:  EdgeInsets.only(top: 5.0, right: 10),
+        //                 child: Align(
+        //                   alignment: Alignment.centerRight,
+        //                   child: TextClass(
+        //                     text: 'البحث...',
+        //                     textColor: grey,
+        //                     overflow: TextOverflow.ellipsis,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),),
+        // ),
         leading: Padding(
           padding: const EdgeInsets.only(right: 15.0),
           child: IconButton(
