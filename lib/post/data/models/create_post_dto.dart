@@ -12,6 +12,7 @@ class CreatePostDto {
   File mainPhoto;
   List<File> extraPhoto;
   bool isTemp;
+  int? postId;
 
   CreatePostDto({
     required this.name,
@@ -20,11 +21,12 @@ class CreatePostDto {
     required this.governorate,
     required this.city,
     this.addressDetails,
+    this.postId,
     required this.isLost,
     this.moreDetails,
     required this.mainPhoto,
     required this.extraPhoto,
-    this.isTemp=false,
+    this.isTemp = false,
   });
 
   // create copy with
@@ -39,6 +41,7 @@ class CreatePostDto {
     String? moreDetails = '',
     required File mainPhoto,
     required List<File> extraPhoto,
+    int? postId,
     bool? isTemp,
   }) {
     return CreatePostDto(
@@ -52,9 +55,11 @@ class CreatePostDto {
       moreDetails: moreDetails ?? '',
       mainPhoto: mainPhoto,
       extraPhoto: extraPhoto,
-      isTemp: isTemp?? false,
+      isTemp: isTemp ?? false,
+      postId: postId,
     );
   }
+
   Map<String, String> toMap() {
     final map = <String, String>{
       'name': name,
@@ -65,7 +70,8 @@ class CreatePostDto {
       'address_details': moreDetails ?? '',
       'is_lost': isLost.toString(),
       'more_details': moreDetails ?? '',
-      'isTemp':isTemp.toString(),
+      'isTemp': isTemp.toString(),
+      'post_id': postId.toString(),
     };
     return map;
   }

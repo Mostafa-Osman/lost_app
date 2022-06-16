@@ -54,7 +54,7 @@ class CreatePostWebServices {
     await Future.delayed(const Duration(seconds: 3));
 
 
-     String url = isUpdatePost
+     final String url = isUpdatePost
         ? '${AppConst.baseUrl}update-post?post_id=$postId'
         : '${AppConst.baseUrl}create-post';
     final headers = {

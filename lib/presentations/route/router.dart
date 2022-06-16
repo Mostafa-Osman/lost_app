@@ -110,12 +110,13 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
 
       case RouteConstant.homeLayoutRoute:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) {
-            return HomeLayoutScreen();
-          },
-        );
+        //return
+        //   MaterialPageRoute(
+        //   settings: settings,
+        //   builder: (_) {
+        //     return HomeLayoutScreen();
+        //   },
+        // );
 
         //   MaterialPageRoute(
         //   builder: (_) {

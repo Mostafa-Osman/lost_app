@@ -10,6 +10,6 @@ class RoutingPrefs {
       SharedPrefs.instance.getBool("seen") ?? false;
 
   static String getInitialRoute() => isOnBoardingSeen() == true
-      ? RouteConstant.loginRoute //homeLayoutRoute
+      ? RouteConstant.homeLayoutRoute
       : RouteConstant.onBoardingRoute;
 }

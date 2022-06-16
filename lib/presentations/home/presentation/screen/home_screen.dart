@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/data/local/pref/user_pref.dart';
 import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/shared/components/post_card.dart';
 import 'package:lost_app/shared/components/smart_refresh.dart';
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeCubit = BlocProvider.of<HomeCubit>(context);
+    log('userToken'+UserPrefs().getUserToken());
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is HomeLoadingState) {

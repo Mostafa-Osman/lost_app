@@ -46,13 +46,18 @@ class CreatePostCubit extends Cubit<CreatePostState> {
    late final HomePost updatePostData;
   List<File> extraImages = [];
   List<LostCity> filteredCities = [];
+  bool navigate = false;
 
-  Future<void> setPost() async {
+  void refreshUi({required bool change}){
+    navigate = change;
+    emit(RefreshUi());
+  }
+  Future<void> setPost({bool isTemp = false, int? postTempId}) async {
     emit(SetPostLoading());
 
     try {
       final data = await createPostRepository.setPost(
-        createPostDto: await getCreatePostDto(),
+        createPostDto: await getCreatePostDto(isTemp: true, postTempId:  postTempId),
         isUpdatePost: isUpdatePost,
         postId: postId,
       );
@@ -93,7 +98,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     }
   }
 
-  Future<CreatePostDto> getCreatePostDto()async {
+  Future<CreatePostDto> getCreatePostDto({bool isTemp = false, int? postTempId})async {
     return  CreatePostDto.copyWith(
       name: personNameController.text,
       age: int.parse(personAgeController.text),
@@ -105,6 +110,8 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       moreDetails: moreDetailsController.text,
       mainPhoto: isUpdatePost ? await getImageAsFile(updateMainPhoto) : mainImage!,
       extraPhoto: extraImages,
+      postId: postTempId,
+      isTemp: isTemp,
     );
   }
 
@@ -218,7 +225,10 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     moreAddressDetailsController.text = post.personData.address.addressDetails;
     moreDetailsController.text = post.details;
     updateExtraImages.addAll(post.personData.extraPhotos);
-
+    for(int i = 0; i < updateExtraImages.length; ++i){
+      extraImages.add(await getImageAsFile(updateExtraImages[i]));
+    }
+    updateExtraImages.clear();
     emit(RefreshUi());
   }
 

@@ -267,6 +267,7 @@ class PostCard extends StatelessWidget {
                         child: isSearch
                             ? InkWell(
                                 onTap: () {
+                                  BlocProvider.of<CreatePostCubit>(context).setPost(isTemp: true, postTempId:  homePost[index].postId);
                                   BlocProvider.of<CreatePostCubit>(context)
                                       .launchCall(
                                   BlocProvider.of<CreatePostCubit>(context).scanDataResults[index].userPhoneNumber,

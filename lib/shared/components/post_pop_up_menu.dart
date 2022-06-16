@@ -66,7 +66,7 @@ class PostPopUpMenu extends StatelessWidget {
                     .setUpdateData(BlocProvider.of<PostDetailsCubit>(context).post!)
                     .then(
                       (value) async {
-                        final postDetails=  navigateWithArgument(
+                       /* final postDetails= */ navigateWithArgument(
                           context, RouteConstant.createPostRoute, [
                         if (BlocProvider.of<PostDetailsCubit>(context)
                             .post!
@@ -75,10 +75,10 @@ class PostPopUpMenu extends StatelessWidget {
                         else
                           'مكان العثور',
                         'update-Post'
-                      ]) as HomePost? ;
-                        if(postDetails!=null){
+                      ])/* as HomePost?*/ ;
+                       /* if(postDetails!=null){
                           BlocProvider.of<PostDetailsCubit>(context).setUpdateData(postDetails);
-                        }
+                        }*/
                       },
                     );
               } else {
