@@ -1,7 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:lost_app/data/local/pref/city_data.dart';
 import 'package:lost_app/data/local/pref/governorate_data.dart';
@@ -10,7 +13,9 @@ import 'package:lost_app/post/data/models/scan_data_model.dart';
 import 'package:lost_app/post/data/repositories/create_post_repository.dart';
 import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
+import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/model/select_item.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,7 +43,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   File? mainImage;
   String updateMainPhoto = '';
   List<String> updateExtraImages = [];
-
+   late final HomePost updatePostData;
   List<File> extraImages = [];
   List<LostCity> filteredCities = [];
 
@@ -47,12 +52,14 @@ class CreatePostCubit extends Cubit<CreatePostState> {
 
     try {
       final data = await createPostRepository.setPost(
-        createPostDto: getCreatePostDto(),
+        createPostDto: await getCreatePostDto(),
         isUpdatePost: isUpdatePost,
         postId: postId,
       );
       if (isUpdatePost) {
-        emit(UpdatePostSuccess(data.toString()));
+        createPostData = data as HomePost;
+        emit(UpdatePostSuccess('تم تحديث المنشور بنجاح',createPostData));
+
       } else {
         createPostData = data as HomePost;
         emit(SetPostSuccess());
@@ -86,8 +93,8 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     }
   }
 
-  CreatePostDto getCreatePostDto() {
-    return CreatePostDto.copyWith(
+  Future<CreatePostDto> getCreatePostDto()async {
+    return  CreatePostDto.copyWith(
       name: personNameController.text,
       age: int.parse(personAgeController.text),
       gender: selectedGender!.title,
@@ -96,10 +103,20 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       addressDetails: moreAddressDetailsController.text,
       isLost: isLost,
       moreDetails: moreDetailsController.text,
-      mainPhoto: mainImage!,
+      mainPhoto: isUpdatePost ? await getImageAsFile(updateMainPhoto) : mainImage!,
       extraPhoto: extraImages,
-
     );
+  }
+
+  Future<File> getImageAsFile(String imageUrl) async {
+    final url = AppConst.imageUrl + imageUrl;
+    final http.Response responseData = await http.get(Uri.parse(url));
+    final uint8list = responseData.bodyBytes;
+    final buffer = uint8list.buffer;
+    final byteData = ByteData.view(buffer);
+    final tempDir = await getTemporaryDirectory();
+    return File('${tempDir.path}/img').writeAsBytes(
+        buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
   }
 
   Future<void> getImageFromCamera({required bool isMainImage}) async {
@@ -167,12 +184,15 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       return 'يجب اختيار المحافظه';
     } else if (selectedCity == null) {
       return 'يجب اختيار المنطقه';
-    } else if (mainImage == null) {
+    } else if (mainImage == null && !isUpdatePost) {
+      return 'يجب اختيار صوره البحث';
+    } else if (updateMainPhoto == '' && isUpdatePost) {
       return 'يجب اختيار صوره البحث';
     } else {
       return 'done';
     }
   }
+
 
   Future<void> setUpdateData(Post post) async {
     isLost = post.isLost;
@@ -180,7 +200,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     updateMainPhoto = post.personData.mainPhoto;
     personNameController.text = post.personData.personName;
     personAgeController.text = post.personData.age.toString();
-    postId=post.postId;
+    postId = post.postId;
     selectedGender = SelectableItem(
       title: post.personData.gender,
       id: post.personData.gender == 'male' || post.personData.gender == 'ذكر'

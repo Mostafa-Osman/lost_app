@@ -10,6 +10,8 @@ import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/styles/color.dart';
 
+import '../../presentations/home/data/Home_model/home_model.dart';
+
 class PostPopUpMenu extends StatelessWidget {
   final bool isPost;
   final int postId;
@@ -63,7 +65,8 @@ class PostPopUpMenu extends StatelessWidget {
                 BlocProvider.of<CreatePostCubit>(context)
                     .setUpdateData(BlocProvider.of<PostDetailsCubit>(context).post!)
                     .then(
-                      (value) => navigateWithArgument(
+                      (value) async {
+                        final postDetails=  navigateWithArgument(
                           context, RouteConstant.createPostRoute, [
                         if (BlocProvider.of<PostDetailsCubit>(context)
                             .post!
@@ -72,7 +75,11 @@ class PostPopUpMenu extends StatelessWidget {
                         else
                           'مكان العثور',
                         'update-Post'
-                      ]),
+                      ]) as HomePost? ;
+                        if(postDetails!=null){
+                          BlocProvider.of<PostDetailsCubit>(context).setUpdateData(postDetails);
+                        }
+                      },
                     );
               } else {
                 BlocProvider.of<PostDetailsCubit>(context).emitEditComment(
