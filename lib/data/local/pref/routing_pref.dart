@@ -1,5 +1,3 @@
-
-
 import 'package:lost_app/data/local/pref/pref_setup.dart';
 import 'package:lost_app/presentations/route/route_constants.dart';
 
@@ -11,8 +9,7 @@ class RoutingPrefs {
   static bool isOnBoardingSeen() =>
       SharedPrefs.instance.getBool("seen") ?? false;
 
-  static String getInitialRoute() =>
-      isOnBoardingSeen() == true
-      ? RouteConstant.homeLayoutRoute
+  static String getInitialRoute() => isOnBoardingSeen() == true
+      ? RouteConstant.loginRoute //homeLayoutRoute
       : RouteConstant.onBoardingRoute;
 }

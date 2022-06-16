@@ -2,8 +2,6 @@ import 'dart:developer';
 import 'package:lost_app/constant/constant.dart';
 import 'package:lost_app/data/local/pref/pref_setup.dart';
 
-
-
 class UserPrefs {
   final prefs = SharedPrefs.instance;
 
@@ -24,6 +22,8 @@ class UserPrefs {
 
   Future<void> deleteUserToken() async => prefs.remove(userToken);
 
+  String getBaseUrl() => prefs.getString('url') ?? 'http://192.168.1.4/';
+  Future<void> setBaseUrl(String newUrl) => prefs.setString('url', newUrl);
   // Future<void> saveAccountChanges({
   //   required String name,
   //   required String birthdate,

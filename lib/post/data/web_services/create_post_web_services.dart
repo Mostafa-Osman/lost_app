@@ -16,7 +16,7 @@ class CreatePostWebServices {
     required File mainPhoto,
   }) async {
     log('toke is${userPrefs.getUserToken()}');
-     const String url = '${AppConst.baseUrl}search?start=0&limit=1000000';
+    String url = '${AppConst.baseUrl}search?start=0&limit=1000000';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       'Authorization': userPrefs.getUserToken(),
@@ -47,17 +47,18 @@ class CreatePostWebServices {
   }) async {
     //todo remove it after upload backend to server
     await Future.delayed(const Duration(seconds: 3));
-    const String url = '${AppConst.baseUrl}create-post';
+    String url = '${AppConst.baseUrl}create-post';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       'Authorization': userPrefs.getUserToken(),
     };
-    final body =createPostDto.toMap();
+    final body = createPostDto.toMap();
     final fields = {'data': jsonEncode(body)};
     final files = <MultipartFile>[];
     files.add(await getPartFromFile('main_photo', createPostDto.mainPhoto));
     if (createPostDto.extraPhoto.isNotEmpty) {
-      files.addAll(await getPartsFromFiles('extra_photo', createPostDto.extraPhoto));
+      files.addAll(
+          await getPartsFromFiles('extra_photo', createPostDto.extraPhoto));
     }
     final data = await postMultiPartRequest(
       url: url,

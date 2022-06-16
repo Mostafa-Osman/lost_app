@@ -29,12 +29,13 @@ class AuthenticationWebService {
       log('initFirebase error', error: e, stackTrace: s);
     }
   }
+
   Future<void> requestVerify({
     String? mobile,
     String? type,
     Function()? callSuccess,
-    Function(String )? callSend,
-    Function(String )? codeAutoRetrievalTimeout,
+    Function(String)? callSend,
+    Function(String)? codeAutoRetrievalTimeout,
     Function(FirebaseAuthException e)? callError,
   }) async {
     log('+2$mobile');
@@ -68,15 +69,16 @@ class AuthenticationWebService {
       log("Auth:Send OTP Error ", error: e, stackTrace: s);
     }
   }
+
   Future<void> verifyOtp({
-   required String verificationId,
-   required String smsCode,
+    required String verificationId,
+    required String smsCode,
     Function(FirebaseAuthException e)? callError,
   }) async {
     try {
       log("Auth:Verify $verificationId");
       final PhoneAuthCredential phoneAuthCredential =
-      PhoneAuthProvider.credential(
+          PhoneAuthProvider.credential(
         verificationId: verificationId,
         smsCode: smsCode,
       );
@@ -86,7 +88,6 @@ class AuthenticationWebService {
       callError!.call(e);
     }
   }
-
 
   Future<Map<String, dynamic>> register({
     required String username,
@@ -98,7 +99,7 @@ class AuthenticationWebService {
 
     await Future.delayed(const Duration(seconds: 3));
 
-    const String url = '${AppConst.baseUrl}register';
+    String url = '${AppConst.baseUrl}register';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
@@ -135,7 +136,7 @@ class AuthenticationWebService {
 
     //todo remove it after upload backend to server
     await Future.delayed(const Duration(seconds: 3));
-    const String url = '${AppConst.baseUrl}login';
+    String url = '${AppConst.baseUrl}login';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
@@ -167,7 +168,7 @@ class AuthenticationWebService {
 
     //todo remove it after upload backend to server
     await Future.delayed(const Duration(seconds: 3));
-    const String url = '${AppConst.baseUrl}forgot_password';
+    String url = '${AppConst.baseUrl}forgot_password';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
@@ -199,7 +200,7 @@ class AuthenticationWebService {
     log('password : $password');
     //todo remove it after upload backend to server
     await Future.delayed(const Duration(seconds: 3));
-    const String url = '${AppConst.baseUrl}reset_password';
+    String url = '${AppConst.baseUrl}reset_password';
     final headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
