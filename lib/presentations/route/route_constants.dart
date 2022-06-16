@@ -19,4 +19,5 @@ class RouteConstant {
   static const String settingRoute = '/setting';
   static const String otpRoute = '/otp';
   static const String replyCommentRoute = '/replyComment';
+  static const String changePort = '/changePort';
 }

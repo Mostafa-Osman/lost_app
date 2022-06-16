@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_app/authentication/data/repository/authentication_repository.dart';
 import 'package:lost_app/authentication/data/web_services/authentication_web_service.dart';
+import 'package:lost_app/authentication/presentation/change_port/change_port.dart';
 import 'package:lost_app/authentication/presentation/forget_password/screen/enter_phone_number.dart';
 import 'package:lost_app/authentication/presentation/forget_password/screen/reset_password.dart';
 import 'package:lost_app/authentication/presentation/login/login_cubit/login_cubit.dart';
@@ -109,7 +110,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
 
       case RouteConstant.homeLayoutRoute:
-        return  MaterialPageRoute(
+        return MaterialPageRoute(
           settings: settings,
           builder: (_) {
             return HomeLayoutScreen();
@@ -124,8 +125,6 @@ class AppRouter {
         //     );
         //   },
         // );
-
-
 
         if (userPrefs.isUserLoggedIn()) {
           return MaterialPageRoute(
@@ -150,7 +149,8 @@ class AppRouter {
           builder: (_) {
             final arguments = settings.arguments! as List;
             return BlocProvider(
-              create: (context) => PostDetailsCubit(postDetailsRepository)..getPostData(arguments[1] as int),
+              create: (context) => PostDetailsCubit(postDetailsRepository)
+                ..getPostData(arguments[1] as int),
               child: PostDetailsScreen(
                 autofocus: arguments[0] as bool,
                 postId: arguments[1] as int,
@@ -170,9 +170,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ScanScreen());
       case RouteConstant.editProfileRoute:
         return MaterialPageRoute(builder: (_) => EditProfileScreen());
-        case RouteConstant.settingRoute:
+      case RouteConstant.settingRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
-        case RouteConstant.savedPostsRoute:
+      case RouteConstant.savedPostsRoute:
         return MaterialPageRoute(builder: (_) => SavedPostsScreen());
       case RouteConstant.searchRoute:
         return MaterialPageRoute(builder: (_) => SearchScreen());
@@ -206,7 +206,11 @@ class AppRouter {
             );
           },
         );
-
+      case RouteConstant.changePort:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => ChangePortScreen(),
+        );
       default:
         return null;
     }

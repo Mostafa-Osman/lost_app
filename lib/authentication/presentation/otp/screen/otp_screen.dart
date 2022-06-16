@@ -46,7 +46,9 @@ class _OtpScreenState extends State<OtpScreen> {
         listener: (BuildContext context, state) {
           if (state is OtpError) {
             showToast(
-                message: 'رمز التاكيد غير صحيح', state: ToastStates.error,);
+              message: 'رمز التاكيد غير صحيح',
+              state: ToastStates.error,
+            );
           }
           if (state is OtpSignUp) {
             otpCubit.register();
@@ -91,7 +93,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       const SizedBox(height: 10),
                       TextClass(
                         text:
-                            'تاكد من حصولك على رساله نصيه على رقم 010******55 تحتوي على رمز التاكيد',
+                            'تاكد من حصولك على رساله نصيه تحتوي على رمز التاكيد',
                         textColor: lightGrey,
                       ),
                       const SizedBox(height: 50),
@@ -193,7 +195,8 @@ class _OtpScreenState extends State<OtpScreen> {
                               seconds: 59,
                               interval: const Duration(milliseconds: 1000),
                               onFinished: () => otpCubit.changeFlatButtonText(
-                                  changeText: false,),
+                                changeText: false,
+                              ),
                             ),
                         ],
                       ),

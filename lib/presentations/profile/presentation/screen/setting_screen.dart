@@ -26,7 +26,15 @@ class SettingScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.arrow_back_ios_sharp, color: black),
           ),
-          title: const TextClass(text: 'الاعدادات', fontSize: 25),
+          title: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                RouteConstant.changePort,
+              );
+            },
+            child: const TextClass(text: 'الاعدادات', fontSize: 25),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
