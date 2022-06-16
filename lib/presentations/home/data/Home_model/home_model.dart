@@ -1,4 +1,3 @@
-
 class HomeModel {
   HomeModel({
     required this.posts,
@@ -37,7 +36,7 @@ class HomePost {
   late final bool isOwner;
   late bool isSaved;
   late final int userId;
-  late final int postId;
+  int? postId;
   late final String? userPhoto;
   late final String username;
   late final String userPhoneNumber;
@@ -51,7 +50,7 @@ class HomePost {
     isOwner = json['is_owner'] as bool;
     isSaved = json['is_saved'] as bool;
     userId = json['user_id'] as int;
-    postId = json['post_id'] as int;
+    postId = json['post_id'] as int? ?? 0;
     userPhoto = json['user_photo'] as String?;
     username = json['username'] as String;
     userPhoneNumber = json['user_phone_number'] as String;

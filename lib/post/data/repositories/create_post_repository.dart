@@ -31,9 +31,9 @@ class CreatePostRepository {
       isUpdatePost: isUpdatePost,
       postId: postId,
     );
-    if (isUpdatePost) {
-      return data  ;
-    }
+    // if (isUpdatePost) {
+    //   return data  ;
+    // }
 
     return HomePost.fromJson(
       data ,

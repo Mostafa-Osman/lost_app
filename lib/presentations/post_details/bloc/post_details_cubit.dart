@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_repository/post_details_repository.dart';
 
@@ -16,14 +17,13 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
   int sliderCurrentImgIndex = 0;
   PageController sliderController = PageController();
 
-
   // Future<void> emitLoading() async {
   //   emit(PostDetailsLoadingState());
   // }
 
   void emitNavigatorPop({required bool pop}) {
     log(pop.toString());
-    if(pop) {
+    if (pop) {
       emit(PostDetailsDeletePostSuccessState());
     }
   }
@@ -62,7 +62,6 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       if (parentCommentIndex == -1) {
         post!.comments.removeAt(commentIndex);
         emit(PostDetailsDeleteCommentSuccessState());
-
       } else {
         post!.comments[parentCommentIndex].replies!.removeAt(commentIndex);
         emit(PostDetailsSuccessState());
@@ -136,7 +135,7 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
   }) async {
     emit(PostCommentLoadingState());
     try {
-      if(!reply) {
+      if (!reply) {
         comment = await postDetailsRepository.createComment(
           reply: reply,
           postId: postId,
@@ -145,14 +144,14 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
         ) as Comments;
         comment.isOwner = true;
         post!.comments.add(comment);
-      }else {
+      } else {
         replyComment = await postDetailsRepository.createComment(
           reply: reply,
           postId: postId,
           parentCommentId: parentCommentId,
           content: content,
         ) as Replies;
-         comment.isOwner = true;
+        comment.isOwner = true;
         post!.comments[parentCommentIndex].replies?.add(replyComment);
       }
       // log(comment.toString());
@@ -162,7 +161,8 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       emit(PostDetailsErrorState(e.toString()));
     }
   }
-  void emitDeletePost(){
+
+  void emitDeletePost() {
     emit(PostDetailsDeletePostSuccessState());
   }
 
@@ -178,4 +178,17 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     emit(PostDetailsSuccessState());
   }
 
+  Future<void> setUpdateData(HomePost updatePost) async {
+    post!.isLost = updatePost.isLost as bool;
+    post!.personData.personName = updatePost.personData!.personName;
+    post!.personData.age = updatePost.personData!.age;
+    post!.personData.gender = updatePost.personData!.gender;
+    post!.personData.address.city = updatePost.personData!.address.city;
+    post!.personData.address.district = updatePost.personData!.address.district;
+    post!.personData.address.addressDetails =
+        updatePost.personData!.address.addressDetails;
+    // post.personData.extraPhotos.addAll(post.personData.extraPhotos);
+
+    emit(RefreshUi());
+  }
 }
