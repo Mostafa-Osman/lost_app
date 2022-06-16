@@ -18,7 +18,7 @@ class UserPrefs {
 
   Future<void> setUserToken(String token) => prefs.setString(userToken, token);
 
-  String getUserToken() => prefs.getString(userToken) ?? 'error token';
+  String getUserToken() => prefs.getString(userToken) ?? '';
 
   Future<void> deleteUserToken() async => prefs.remove(userToken);
 

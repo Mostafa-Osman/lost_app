@@ -24,7 +24,7 @@ import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
 import 'package:lost_app/presentations/home/data/home_repository/home_repistory.dart';
 import 'package:lost_app/presentations/home/data/home_web_services/home_web_service.dart';
 import 'package:lost_app/presentations/home_layout/presentation/screen/home_layout.dart';
-import 'package:lost_app/presentations/notification/ui/notification.dart';
+import 'package:lost_app/presentations/notification/ui/notification_screen.dart';
 import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_repository/post_details_repository.dart';
 import 'package:lost_app/presentations/post_details/data/post_details_web_service/post_details_web_service.dart';

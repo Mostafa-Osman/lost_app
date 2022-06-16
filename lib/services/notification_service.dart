@@ -15,7 +15,7 @@ class NotificationsService {
   final _navigationService = locator<NavigationService>();
   final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  String? pushToken;
+  String pushToken = '';
 
   Future<NotificationsService> init() async {
     //android icon init
@@ -59,7 +59,7 @@ class NotificationsService {
     if (kDebugMode) {
       await firebaseMessaging.subscribeToTopic('test');
     }
-    pushToken = await firebaseMessaging.getToken();
+    pushToken = await firebaseMessaging.getToken() ?? '';
     FirebaseMessaging.instance.getInitialMessage().then((event) async {
       if (event != null) {
         await onSelectNotification(event.data['actionID'] as String?);

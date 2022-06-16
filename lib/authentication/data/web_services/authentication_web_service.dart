@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:lost_app/shared/components/constant.dart';
 
+import '../../../data/local/pref/user_pref.dart';
+
 class AuthenticationWebService {
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -44,7 +46,7 @@ class AuthenticationWebService {
       await auth.verifyPhoneNumber(
         phoneNumber: '+2$mobile',
         // ignore: prefer_const_constructors
-        timeout: Duration(seconds: 60),
+        timeout: Duration(seconds: 120),
         verificationCompleted: (credential) async {
           log("Auth:Mobile verified automatically");
           callSuccess!.call();
@@ -221,6 +223,32 @@ class AuthenticationWebService {
       return data;
     } else {
       throw data['message'].toString();
+    }
+  }
+
+  Future<Map<String, dynamic>> updateFcmToken(String fcmToken) async {
+    final headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Authorization': UserPrefs().getUserToken(),
+    };
+
+    String url = '${AppConst.baseUrl}update-fcm-token';
+
+    final resetPasswordBody = {"fcm_token": fcmToken};
+    final response = await http.post(
+      Uri.parse(url),
+      body: const Utf8Encoder().convert(
+        jsonEncode(resetPasswordBody),
+      ),
+      headers: headers,
+    );
+    final data = json.decode(response.body) as Map<String, dynamic>;
+
+    log(data.toString());
+    if (data['status'] == 200) {
+      return data;
+    } else {
+      throw 'notification server error';
     }
   }
 }
