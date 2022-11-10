@@ -2,16 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
-import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/post_details/bloc/post_details_cubit.dart';
-import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
-import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/app/modules/home/bloc/home_cubit.dart';
+import 'package:lost_app/app/modules/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/app/modules/post_details/bloc/post_details_cubit.dart';
+import 'package:lost_app/app/modules/profile/bloc/profile_cubit.dart';
+import 'package:lost_app/app/router/route_names.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/styles/color.dart';
-
-import '../../presentations/home/data/Home_model/home_model.dart';
-
 class PostPopUpMenu extends StatelessWidget {
   final bool isPost;
   final int postId;

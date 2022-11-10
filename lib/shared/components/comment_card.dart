@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lost_app/presentations/post_details/data/post_details_model/post_model.dart';
+import 'package:lost_app/app/modules/post_details/data/post_details_model/post_model.dart';
+import 'package:lost_app/app/router/route_names.dart';
 import 'package:lost_app/shared/components/constant.dart';
-import 'package:lost_app/shared/components/post_pop_up_menu.dart';
-import 'package:lost_app/presentations/route/route_constants.dart';
 import 'package:lost_app/shared/components/navigator.dart';
+import 'package:lost_app/shared/components/post_pop_up_menu.dart';
 import 'package:lost_app/shared/components/text_button_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -37,7 +37,7 @@ class CommentCard extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: lightBlue,
           borderRadius: const BorderRadius.all(Radius.circular(15)),

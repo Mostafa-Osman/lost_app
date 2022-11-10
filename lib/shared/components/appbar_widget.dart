@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/profile/bloc/profile_cubit.dart';
-import 'package:lost_app/presentations/route/route_constants.dart';
-import 'package:lost_app/shared/components/constant.dart';
+import 'package:lost_app/app/router/route_names.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/text_class.dart';
 import 'package:lost_app/shared/styles/color.dart';
@@ -25,7 +21,6 @@ class HomePageAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _HomePageAppBarState extends State<HomePageAppBar> {
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: AppBar(

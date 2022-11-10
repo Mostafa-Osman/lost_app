@@ -83,7 +83,6 @@ class TextFormFieldClass extends StatelessWidget {
       strutStyle: structStyle,
       decoration: InputDecoration(
         hintText: textHint,
-
         filled: true,
         fillColor: backgroundColor,
         labelText: label,

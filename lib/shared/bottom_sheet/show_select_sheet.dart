@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lost_app/app/common/widgets/bottom_sheet/selectable_item.dart';
 import 'package:lost_app/shared/bottom_sheet/cubit/select_bottom_sheet_cubit.dart';
 import 'package:lost_app/shared/bottom_sheet/custom_text_field.dart';
-import 'package:lost_app/shared/model/select_item.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
 Future showSelectBottomSheet(BuildContext context, {

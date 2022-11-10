@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
-import 'package:lost_app/presentations/home/bloc/home_cubit.dart';
-import 'package:lost_app/presentations/home/data/Home_model/home_model.dart';
-import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/app/modules/home/bloc/home_cubit.dart';
+import 'package:lost_app/app/modules/home/data/Home_model/home_model.dart';
+import 'package:lost_app/app/modules/post/create_post_cubit/create_post_cubit.dart';
+import 'package:lost_app/app/router/route_names.dart';
 import 'package:lost_app/shared/components/constant.dart';
 import 'package:lost_app/shared/components/navigator.dart';
 import 'package:lost_app/shared/components/post_pop_up_menu.dart';
@@ -267,10 +267,10 @@ class PostCard extends StatelessWidget {
                         child: isSearch
                             ? InkWell(
                                 onTap: () {
-                                  BlocProvider.of<CreatePostCubit>(context).setPost(isTemp: true, postTempId:  homePost[index].postId);
+                                //  BlocProvider.of<CreatePostCubit>(context).setPost(isTemp: true, postTempId:  homePost[index].postId);
                                   BlocProvider.of<CreatePostCubit>(context)
                                       .launchCall(
-                                  BlocProvider.of<CreatePostCubit>(context).scanDataResults[index].userPhoneNumber,
+                                '01149589134',//  BlocProvider.of<CreatePostCubit>(context).scanDataResults[index].userPhoneNumber,
                                   );
                                 },
                                 child: Row(

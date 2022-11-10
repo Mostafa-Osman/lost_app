@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_app/app/common/widgets/bottom_sheet/selectable_item.dart';
 import 'package:lost_app/shared/bottom_sheet/cubit/select_bottom_sheet_cubit.dart';
 import 'package:lost_app/shared/bottom_sheet/show_select_sheet.dart';
 import 'package:lost_app/shared/components/toast.dart';
-import 'package:lost_app/shared/model/select_item.dart';
 import 'package:lost_app/shared/units/number_units.dart';
 
 class CustomSelectSheet extends StatelessWidget {
@@ -81,7 +81,8 @@ class CustomSelectSheet extends StatelessWidget {
                         context,
                         title: hintTitle,
                         list: items,
-                        onSelectItem: (v) => onSelectItem(v),
+                        //todo handle it
+                        onSelectItem: (v) {},// onSelectItem<>(v),
                         searchHint: searchHint,
                         selectedItem: selectedItem,
                       );

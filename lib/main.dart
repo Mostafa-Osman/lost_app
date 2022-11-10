@@ -3,12 +3,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/authentication/data/web_services/authentication_web_service.dart';
-import 'package:lost_app/data/local/pref/pref_setup.dart';
-import 'package:lost_app/data/local/pref/routing_pref.dart';
+import 'package:lost_app/app/common/data/local/pref/pref_setup.dart';
+import 'package:lost_app/app/common/data/local/pref/routing_pref.dart';
+import 'package:lost_app/app/router/router_imports.dart';
 import 'package:lost_app/my_app.dart';
 import 'package:lost_app/my_bloc_observer.dart';
-import 'package:lost_app/presentations/route/router.dart';
 import 'package:lost_app/services/navigation_services.dart';
 import 'package:lost_app/services/notification_service.dart';
 
