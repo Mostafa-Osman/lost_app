@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:lost_app/data/local/pref/routing_pref.dart';
-import 'package:lost_app/presentations/route/route_constants.dart';
+import 'package:lost_app/app/common/data/local/pref/routing_pref.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -18,7 +17,7 @@ class NavigationService {
   }
 
   Future openApp() async {
-    bool isSuccess = false;
+    final bool isSuccess = false;
     // navigatorKey!.currentState!.popUntil((route) {
     //   if (route.settings.name == Routes.BOTTOM_NAVIGATION) {
     //     isSuccess = true;

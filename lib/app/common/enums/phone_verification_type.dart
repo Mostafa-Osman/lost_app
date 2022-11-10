@@ -1,0 +1,1 @@
+enum PhoneVerificationType { register, resetPass }

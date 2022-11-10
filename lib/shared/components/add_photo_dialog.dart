@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/post/create_post_cubit/create_post_cubit.dart';
 import 'package:lost_app/shared/components/alert_dialog_class.dart';
 import 'package:lost_app/shared/components/divider_class.dart';
 import 'package:lost_app/shared/components/text_class.dart';
@@ -11,7 +9,7 @@ class AddPhotoDialog extends StatelessWidget {
   final VoidFutureCallBack? onPressedGallery;
   final VoidFutureCallBack? onPressedCamera;
 
-  AddPhotoDialog({ this.onPressedGallery,  this.onPressedCamera, Key? key}) : super(key: key);
+  const AddPhotoDialog({ this.onPressedGallery,  this.onPressedCamera, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

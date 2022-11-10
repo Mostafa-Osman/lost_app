@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_app/shared/model/select_item.dart';
+import 'package:lost_app/app/common/widgets/bottom_sheet/selectable_item.dart';
 
 part 'select_bottom_sheet_state.dart';
 

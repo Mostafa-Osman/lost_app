@@ -1,0 +1,1 @@
+enum SendCode { viaSms, viaEmail }
